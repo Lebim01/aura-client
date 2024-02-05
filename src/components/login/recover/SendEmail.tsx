@@ -24,7 +24,7 @@ const SendEmail = () => {
       <div className="flex flex-col gap-y-[16px]">
         <InputReturn
           icon="/login/icons/mail"
-          placeholder="INGRESA TU CORREO ELECTRÓNICO"
+          placeholder="CORREO ELECTRÓNICO"
           type="text"
           name="mail"
           value={email}

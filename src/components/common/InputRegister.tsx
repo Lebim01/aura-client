@@ -1,32 +1,42 @@
 "use client";
-import React, { ChangeEvent, useEffect, useState } from "react";
+import React, { ChangeEvent, useState } from "react";
 import Image from "next/image";
 import useUserRegistrationStore from "@/store/userRegistrationStore";
-import { TextField } from "@mui/material";
 import { classNamesCustom } from "@/utils/classes";
+
+interface UserData {
+  mail: "";
+  pass: "";
+  confirm_pass: "";
+  day: "";
+  month: "";
+  year: "";
+  username: "";
+}
+
 interface Props {
   icon: string;
   placeholder: string;
   type?: string;
-  name: string;
-  onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
-  value: string;
+  name: keyof UserData;
+  onChange?: () => void;
 }
-const InputReturn = ({
-  icon,
-  placeholder,
-  type,
-  name,
-  value,
-  onChange,
-}: Props) => {
+const InputRegister = ({ icon, placeholder, type, name }: Props) => {
+  const { userData, setUserField } = useUserRegistrationStore();
+  const [value, setValue] = useState<string>("");
+  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = event.target;
+    setUserField(name, value);
+    setValue(value);
+  };
+
   return (
     <div className="relative  w-full max-h-[51px]  min-h-[51px]">
       <span className="absolute inset-y-6 left-0 flex items-center pl-[16px]">
         <Image src={`${icon}.svg`} width={16} height={16} alt="" />
       </span>
       <div className="pl-10 flex flex-col bg-inputs rounded-[8px] py-[8px] max-h-[51px] min-h-[51px] justify-center">
-        {value && (
+        {value !== "" && (
           <label className="text-[10px] font-[700] opacity-50 text-left">
             {placeholder}
           </label>
@@ -38,8 +48,8 @@ const InputReturn = ({
             { "md:text-[12px]": !value }
           )}
           placeholder={placeholder}
-          value={value}
-          onChange={onChange}
+          value={userData[name]}
+          onChange={handleChange}
           type={type || "text"}
           name={name}
         />
@@ -48,4 +58,4 @@ const InputReturn = ({
   );
 };
 
-export default InputReturn;
+export default InputRegister;

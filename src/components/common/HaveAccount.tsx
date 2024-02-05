@@ -1,13 +1,16 @@
 "use client";
 import React from "react";
 import { useRouter } from "next/router";
+import Link from "next/link";
 
 interface Props {
   question: string;
+  sub_question: string;
+  url: string;
   hide_question: boolean;
 }
 
-const HaveAccount = ({ question, hide_question }: Props) => {
+const HaveAccount = ({ question, hide_question, sub_question, url }: Props) => {
   const router = useRouter();
   return (
     <div className="flex flex-col gap-y-[16px] items-center justify-center leading-[120%] text-[14px]">
@@ -21,7 +24,9 @@ const HaveAccount = ({ question, hide_question }: Props) => {
       )}
       <div className="flex gap-x-[5px]">
         <span>{question}</span>{" "}
-        <span className="underline">Registrate aquí</span>
+        <Link href={url} className="underline w-fit">
+          {sub_question}
+        </Link>
       </div>
     </div>
   );

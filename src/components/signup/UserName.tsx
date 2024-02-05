@@ -1,6 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import Input from "../common/Input";
+import Input from "../common/InputRegister";
 import Separator from "../common/Separator";
 import ButtonCommon from "../common/ButtonCommon";
 import HaveAccount from "../common/HaveAccount";

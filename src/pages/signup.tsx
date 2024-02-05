@@ -34,6 +34,8 @@ export default function Signup() {
               <HaveAccount
                 question="¿Ya tienes una cuenta?"
                 hide_question={false}
+                sub_question="Ingresa aquí"
+                url="/login"
               />
             )}
           </div>
