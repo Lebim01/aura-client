@@ -2,6 +2,7 @@
 import React from "react";
 import Image from "next/image";
 import ButtonCommon from "../common/ButtonCommon";
+
 const Success = () => {
   return (
     <div className="flex flex-col gap-y-[32px] justify-center items-center text-center">

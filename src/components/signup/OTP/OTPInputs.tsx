@@ -107,7 +107,7 @@ export default function OTPInputs({
 
     const previousElementSibling: HTMLElement | null = document.querySelector(
       `input[tabindex="${idx - 1}"]`
-    ); /* target.nextElementSibling as HTMLInputElement | null; */
+    );
 
     if (previousElementSibling) {
       previousElementSibling.focus();

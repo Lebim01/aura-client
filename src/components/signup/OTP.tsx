@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import OTPInputs from "./OTP/OTPInputs";
 import ButtonCommon from "../common/ButtonCommon";
 import { useRouter } from "next/router";
+
 const OTP = () => {
   const [otp, setOtp] = useState("");
   const [disabled, setDisabled] = useState<boolean>(true);

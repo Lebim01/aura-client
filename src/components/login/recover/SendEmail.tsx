@@ -3,6 +3,7 @@ import React, { useState, ChangeEvent, useEffect } from "react";
 import ButtonCommon from "@/components/common/ButtonCommon";
 import InputReturn from "../../common/InputReturn";
 import { useRouter } from "next/router";
+
 const SendEmail = () => {
   const [email, setEmail] = useState("");
   const [disabled, setDisabled] = useState(true);

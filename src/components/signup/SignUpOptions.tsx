@@ -1,10 +1,10 @@
 "use client";
 import React from "react";
-
 import SocialButton from "../common/SocialButton";
 import Separator from "../common/Separator";
 import ButtonCommon from "../common/ButtonCommon";
 import { useRouter } from "next/router";
+
 const SignUpOptions = () => {
   const router = useRouter();
   return (

@@ -8,7 +8,6 @@ import CheckEmail from "@/components/login/recover/CheckEmail";
 import NewPass from "@/components/login/recover/NewPass";
 import PassChanged from "@/components/login/recover/PassChanged";
 import Options from "@/components/login/Options";
-import HaveAccount from "@/components/common/HaveAccount";
 
 export default function Login() {
   const router = useRouter();

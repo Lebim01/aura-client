@@ -38,7 +38,7 @@ const ImageViewer = () => {
             <div
               className="image-slide bg-bg-gradient-discover"
               style={{
-                backgroundImage: `linear-gradient(to top, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0) 30%), url(${image})`,
+                backgroundImage: `linear-gradient(to top, rgba(0, 0, 0, 0.7) 15%, rgba(0, 0, 0, 0) 30%), url(${image})`,
                 transform: `translateY(${(i - index) * 100}%)`,
               }}
             />

@@ -2,6 +2,7 @@
 import React from "react";
 import Image from "next/image";
 import ButtonCommon from "../common/ButtonCommon";
+
 const Welcome = () => {
   return (
     <div className="flex flex-col bg-brown-aura py-[40px] px-[16px] gap-y-[32px] w-full items-center rounded-[16px] backdrop-blur-md border border-border-container">

@@ -1,7 +1,5 @@
 "use client";
 import { useState } from "react";
-import Image from "next/image";
-import Link from "next/link";
 import ItemSections from "./components/Sections/ItemSections";
 import MostComponent from "./components/Sections/MostComponent";
 

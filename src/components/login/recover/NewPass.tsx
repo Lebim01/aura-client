@@ -2,7 +2,6 @@ import React, { useState, ChangeEvent, useEffect } from "react";
 import InputReturn from "@/components/common/InputReturn";
 import ButtonCommon from "@/components/common/ButtonCommon";
 import { useRouter } from "next/router";
-
 interface UserData {
   pass: string;
   confirm_pass: string;
@@ -16,7 +15,7 @@ const UserDataINIT = {
 const NewPass = () => {
   const [data, setData] = useState<UserData>(UserDataINIT);
   const [disabled, setDisabled] = useState(true);
-  const [showError, setShowError] = useState(false); // Estado para controlar la visibilidad del mensaje de error
+  const [showError, setShowError] = useState(false);
   const router = useRouter();
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -25,7 +24,7 @@ const NewPass = () => {
       ...prevState,
       [name]: value,
     }));
-    setShowError(false); // Oculta el mensaje de error al comenzar a escribir en los campos de contraseña
+    setShowError(false);
   };
 
   useEffect(() => {
@@ -35,11 +34,11 @@ const NewPass = () => {
         new Set(Object.values(data)).size === 1;
       setDisabled(!areValuesValid);
       if (data.pass !== data.confirm_pass) {
-        setShowError(true); // Muestra el mensaje de error si las contraseñas no coinciden después del debounce
+        setShowError(true);
       }
-    }, 500); // Debounce de 500 milisegundos
+    }, 500);
 
-    return () => clearTimeout(timeoutId); // Limpia el timeout en cada cambio de data
+    return () => clearTimeout(timeoutId);
   }, [data]);
 
   return (
@@ -62,7 +61,7 @@ const NewPass = () => {
             type="password"
             onChange={handleChange}
           />
-          {showError && ( // Mostrar el mensaje de error solo cuando showError es true
+          {showError && (
             <span className="leading-[100%] text-[12px] text-red-400">
               Las contraseñas no coinciden
             </span>

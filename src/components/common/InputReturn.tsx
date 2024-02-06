@@ -1,8 +1,6 @@
 "use client";
-import React, { ChangeEvent, useEffect, useState } from "react";
+import React, { ChangeEvent } from "react";
 import Image from "next/image";
-import useUserRegistrationStore from "@/store/userRegistrationStore";
-import { TextField } from "@mui/material";
 import { classNamesCustom } from "@/utils/classes";
 interface Props {
   icon: string;
