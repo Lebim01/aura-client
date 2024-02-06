@@ -19,6 +19,10 @@ const config: Config = {
         "border-container": "rgba(255, 255, 255, 0.10)",
         "border-otp": "rgba(255, 255, 255, 0.13)",
         otpback: "#1C1C1C",
+        "black-3A": "#3A3A3A",
+        "black-0D": "#0D0D0D",
+        "footer-dash": "rgba(38, 38, 38, 0.70)",
+        "footer-dash-border": "rgba(255, 255, 255, 0.10)",
       },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
@@ -26,6 +30,8 @@ const config: Config = {
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
         aura: "url('/bgaura.png')",
         auradesktop: "url('/bgauradesktop.png')",
+        "bg-gradient-discover":
+          "linear-gradient(to top, white, rgba(255, 255, 255, 0))",
       },
     },
   },
