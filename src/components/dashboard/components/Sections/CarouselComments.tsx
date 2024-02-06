@@ -16,7 +16,7 @@ const CarouselComments = () => {
             alt=""
             className="absolute inset-0 w-full h-full object-cover"
           />
-          <div className="flex flex-col w-full h-full relative z-10">
+          <div className="flex flex-col w-full h-full relative">
             <div className="w-full pt-4 pb-2 px-4">
               <span className="text-[10px] font-[600] leading-[130%]">
                 Reseña por Carlos Martínez

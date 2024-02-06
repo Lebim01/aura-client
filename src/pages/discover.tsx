@@ -7,6 +7,12 @@ import { useRouter } from "next/router";
 
 const images = ["/bgaura.png", "/no-photo.png", "/pexels-photo-268533.webp"];
 
+const videos = [
+  "https://pub-bf9da7896edf4ee98e6d6dd8e72340c7.r2.dev/videos%2Fssstik.io_1707192444675.mp4",
+  "https://pub-bf9da7896edf4ee98e6d6dd8e72340c7.r2.dev/videos%2Fssstik.io_1707192444675.mp4",
+  "https://pub-bf9da7896edf4ee98e6d6dd8e72340c7.r2.dev/videos%2Fssstik.io_1707192444675.mp4",
+];
+
 const ImageViewer = () => {
   const [index, setIndex] = useState(0);
   const router = useRouter();
@@ -33,15 +39,25 @@ const ImageViewer = () => {
         <div style={{ width: 24, height: 24 }} />
       </div>
       <div {...handlers} className="image-viewer">
-        {images.map((image, i) => (
-          <div key={i}>
-            <div
-              className="image-slide bg-bg-gradient-discover"
-              style={{
-                backgroundImage: `linear-gradient(to top, rgba(0, 0, 0, 0.7) 15%, rgba(0, 0, 0, 0) 30%), url(${image})`,
-                transform: `translateY(${(i - index) * 100}%)`,
-              }}
-            />
+        {videos.map((video, i) => (
+          <div
+            key={i}
+            className="image-slide bg-bg-gradient-discover"
+            style={{
+              backgroundImage: `linear-gradient(to top, rgba(0, 0, 0, 0.7) 15%, rgba(0, 0, 0, 0) 30%)`,
+              transform: `translateY(${(i - index) * 100}%)`,
+            }}
+          >
+            <video
+              autoPlay
+              loop
+              muted
+              playsInline
+              className="object-cover h-full"
+            >
+              <source src={video} type="video/mp4" />
+              Tu navegador no soporta vídeos HTML5.
+            </video>
             <InfoReview />
           </div>
         ))}

@@ -1,27 +1,35 @@
 "use client";
 import Image from "next/image";
-
+import { useState } from "react";
+import Comments from "./Comments";
 const Reactions = () => {
+  const [showComments, setShowComments] = useState(false);
   return (
-    <div className="flex flex-col gap-y-[24px]">
-      <div className="flex flex-col w-full items-center gap-y-[4px]">
-        <div className="w-[24px]">
-          <Image width={24} height={24} src="/icons/hearth.svg" alt="" />
+    <>
+      {showComments && <Comments />}
+      <div className="flex flex-col gap-y-[24px]">
+        <div className="flex flex-col w-full items-center gap-y-[4px]">
+          <div className="w-[24px]">
+            <Image width={24} height={24} src="/icons/hearth.svg" alt="" />
+          </div>
+          <span className="text-[10px] leading-[130%]">222</span>
         </div>
-        <span className="text-[10px] leading-[130%]">222</span>
-      </div>
-      <div className="flex flex-col w-full items-center gap-y-[4px]">
-        <div className="w-[24px]">
-          <Image width={24} height={24} src="/icons/globe.svg" alt="" />
+        <div
+          className="flex flex-col w-full items-center gap-y-[4px]"
+          onClick={() => setShowComments(true)}
+        >
+          <div className="w-[24px]">
+            <Image width={24} height={24} src="/icons/globe.svg" alt="" />
+          </div>
+          <span className="text-[10px] leading-[130%]">222</span>
         </div>
-        <span className="text-[10px] leading-[130%]">222</span>
-      </div>
-      <div className="flex flex-col w-full items-center gap-y-[4px]">
-        <div className="w-[24px]">
-          <Image width={24} height={24} src="/icons/share.svg" alt="" />
+        <div className="flex flex-col w-full items-center gap-y-[4px]">
+          <div className="w-[24px]">
+            <Image width={24} height={24} src="/icons/share.svg" alt="" />
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 
