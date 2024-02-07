@@ -1,18 +1,27 @@
 "use client";
+
 import Image from "next/image";
 import Reactions from "./Reactions";
 import PreviewReview from "../common/PreviewReview";
 import Comments from "./Comments";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import useShowHideFooterStore from "@/store/showHideFooterStore";
 
-const InfoReview = () => {
+interface Props {
+  index: number;
+}
+
+const InfoReview = ({ index }: Props) => {
   const [showComments, setShowComments] = useState(false);
-
+  /*   const { toggleFooter } = useShowHideFooterStore();
+   */
   return (
     <>
-      {showComments && <Comments />}
-      <div className="absolute inset-0 flex h-custom-screen-footer px-[16px] flex-col">
-        <div className="flex pt-[16px] gap-x-[16px] items-center">
+      {showComments && (
+        <Comments show={showComments} setShow={setShowComments} index={index} />
+      )}
+      <div className="absolute inset-0 flex h-fit px-[16px] flex-col justify-end transform translateinfo">
+        {/*    <div className="flex pt-[16px] gap-x-[16px] items-center">
           <Image
             width={32}
             height={32}
@@ -23,7 +32,7 @@ const InfoReview = () => {
           <span className="text-[12px] leading-[150%]">
             Monica Martínez • 1h
           </span>
-        </div>
+        </div> */}
         <div className="flex gap-x-[16px] items-end flex-1">
           <div className="flex flex-col gap-y-[8px] flex-1">
             <PreviewReview />
@@ -37,7 +46,10 @@ const InfoReview = () => {
             </div>
             <div
               className="flex flex-col w-full items-center gap-y-[4px]"
-              onClick={() => setShowComments(true)}
+              onClick={() => {
+                setShowComments(true);
+                /*  toggleFooter(); */
+              }}
             >
               <div className="w-[24px]">
                 <Image width={24} height={24} src="/icons/globe.svg" alt="" />

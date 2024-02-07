@@ -23,6 +23,7 @@ const config: Config = {
         "black-0D": "#0D0D0D",
         "footer-dash": "rgba(38, 38, 38, 0.70)",
         "footer-dash-border": "rgba(255, 255, 255, 0.10)",
+        "border-comment-input": "rgba(255, 255, 255, 0.23)",
       },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",

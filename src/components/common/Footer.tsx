@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { classNamesCustom } from "@/utils/classes";
+import useShowHideFooterStore from "@/store/showHideFooterStore";
 
 const items = [
   {
@@ -30,8 +31,15 @@ const items = [
 ];
 const Footer = () => {
   const router = useRouter();
+  /*   const { showHideFooter, toggleFooter } = useShowHideFooterStore();
+   */
   return (
-    <div className="w-full p-[16px] sticky bottom-0 z-[50]">
+    <div
+      className={classNamesCustom("w-full p-[16px] sticky bottom-0 z-[50]", {
+        /*         hidden: showHideFooter,
+         */
+      })}
+    >
       <div className="w-full bg-footer-dash px-[40px] py-[8px] rounded-[100px] flex items-center justify-between border border-footer-dash-border">
         {items.map((item: any, index: number) => {
           return (

@@ -18,7 +18,7 @@ const UserName = () => {
   return (
     <div className="flex flex-col gap-y-[32px]">
       <Input
-        icon="/login/icons/happy"
+        icon="/icons/happy"
         placeholder="INGRESA TU NOMBRE DE USUARIO"
         name="username"
       />

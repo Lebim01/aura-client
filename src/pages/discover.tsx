@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useSwipeable } from "react-swipeable";
 import Image from "next/image";
 import Footer from "@/components/common/Footer";
@@ -15,6 +15,7 @@ const videos = [
 
 const ImageViewer = () => {
   const [index, setIndex] = useState(0);
+  const [muted, setMuted] = useState(true);
   const router = useRouter();
   const handlers = useSwipeable({
     onSwipedUp: () =>
@@ -24,8 +25,22 @@ const ImageViewer = () => {
     trackMouse: true,
   });
 
+  useEffect(() => {
+    const originalStyle = window.getComputedStyle(document.body).overflow;
+
+    if (index > 0) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = originalStyle;
+    }
+
+    return () => {
+      document.body.style.overflow = originalStyle;
+    };
+  }, [index]);
+
   return (
-    <div className="fixed w-full">
+    <div className="fixed w-full ">
       <div className="flex items-center justify-between p-[16px] bg-black-0D">
         <div onClick={() => router.back()}>
           <Image
@@ -51,14 +66,31 @@ const ImageViewer = () => {
             <video
               autoPlay
               loop
-              muted
+              muted={muted}
               playsInline
-              className="object-cover h-full"
+              className="object-cover h-custom-screen"
+              onClick={() => {
+                setMuted((m) => !m);
+              }}
             >
               <source src={video} type="video/mp4" />
               Tu navegador no soporta vídeos HTML5.
             </video>
-            <InfoReview />
+            <div className="absolute inset-0 flex h-fit px-[16px]">
+              <div className="flex pt-[16px] gap-x-[16px] items-center">
+                <Image
+                  width={32}
+                  height={32}
+                  src=""
+                  alt=""
+                  className="rounded-full bg-white"
+                />
+                <span className="text-[12px] leading-[150%]">
+                  Monica Martínez • 1h
+                </span>
+              </div>
+            </div>
+            <InfoReview index={index} />
           </div>
         ))}
       </div>

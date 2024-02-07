@@ -6,7 +6,6 @@ const Reactions = () => {
   const [showComments, setShowComments] = useState(false);
   return (
     <>
-      {showComments && <Comments />}
       <div className="flex flex-col gap-y-[24px]">
         <div className="flex flex-col w-full items-center gap-y-[4px]">
           <div className="w-[24px]">
