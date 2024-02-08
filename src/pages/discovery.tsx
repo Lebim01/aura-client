@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useSwipeable } from "react-swipeable";
 import Image from "next/image";
 import Footer from "@/components/common/Footer";
-import InfoReview from "@/components/discover/InfoReview";
+import InfoReview from "@/components/discovery/InfoReview";
 import { useRouter } from "next/router";
 
 const images = ["/bgaura.png", "/no-photo.png", "/pexels-photo-268533.webp"];
@@ -57,7 +57,7 @@ const ImageViewer = () => {
         {videos.map((video, i) => (
           <div
             key={i}
-            className="image-slide bg-bg-gradient-discover"
+            className="image-slide bg-bg-gradient-discovery"
             style={{
               backgroundImage: `linear-gradient(to top, rgba(0, 0, 0, 0.7) 15%, rgba(0, 0, 0, 0) 30%)`,
               transform: `translateY(${(i - index) * 100}%)`,

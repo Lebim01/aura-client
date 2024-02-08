@@ -3,7 +3,10 @@ import { useState } from "react";
 import ItemSections from "./components/Sections/ItemSections";
 import MostComponent from "./components/Sections/MostComponent";
 
-const Sections = () => {
+interface Props {
+  text: string;
+}
+const Sections = ({ text }: Props) => {
   const [showLeftPadding, setShowLeftPadding] = useState<any>(true);
   const [showRightPadding, setShowRightPadding] = useState(false);
 
@@ -17,7 +20,7 @@ const Sections = () => {
 
   return (
     <div className="flex flex-col gap-y-[12px] w-full">
-      <MostComponent />
+      <MostComponent text={text} />
       <div
         className="flex gap-x-[16px]  overflow-x-auto hidescroll"
         style={{

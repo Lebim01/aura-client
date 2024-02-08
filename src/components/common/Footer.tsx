@@ -22,10 +22,10 @@ const items = [
     size: 20,
   },
   {
-    url: "/discover",
+    url: "/discovery",
     title: "Descubrir",
-    icon: "/icons/discover.svg",
-    iconactive: "/icons/discover-active.svg",
+    icon: "/icons/discovery.svg",
+    iconactive: "/icons/discovery-active.svg",
     size: 14,
   },
 ];

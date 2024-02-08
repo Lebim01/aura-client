@@ -24,6 +24,8 @@ const config: Config = {
         "footer-dash": "rgba(38, 38, 38, 0.70)",
         "footer-dash-border": "rgba(255, 255, 255, 0.10)",
         "border-comment-input": "rgba(255, 255, 255, 0.23)",
+        "black-18": "#181818",
+        "black-29": "#292929",
       },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
@@ -31,9 +33,12 @@ const config: Config = {
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
         aura: "url('/bgaura.png')",
         auradesktop: "url('/bgauradesktop.png')",
-        "bg-gradient-discover":
+        "bg-gradient-discovery":
           "linear-gradient(to top, white, rgba(255, 255, 255, 0))",
       },
+    },
+    fontFamily: {
+      jakarta: ["var(--font-jakarta)"],
     },
   },
   plugins: [],

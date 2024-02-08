@@ -91,9 +91,9 @@ const Comments = ({ show, setShow, index }: Props) => {
       ></div>
       <div
         className={classNamesCustom(
-          "w-full  bg-[#343434] rounded-t-[16px] px-[16px] py-[24px] flex flex-col gap-y-[24px] items-center",
+          "w-full bg-black-0D rounded-t-[16px] px-[16px] py-[24px] flex flex-col gap-y-[24px] items-center",
           { "h-full transition-all duration-500 rounded-t-none": h },
-          { "h-[387px] transition-all duration-500": !h }
+          { "h-[437px] transition-all duration-500": !h }
         )}
         {...handlers}
       >

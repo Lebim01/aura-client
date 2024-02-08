@@ -2,11 +2,14 @@
 import Image from "next/image";
 import MostComponent from "./MostComponent";
 import PreviewReview from "@/components/common/PreviewReview";
+interface Props {
+  text: string;
+}
 
-const CarouselComments = () => {
+const CarouselComments = ({ text }: Props) => {
   return (
     <div className="flex flex-col  gap-y-[12px]">
-      <MostComponent />
+      <MostComponent text={text} />
       <div className="flex flex-col w-full px-[16px] relative">
         <div className="w-full rounded-lg bg-gray-400 relative overflow-hidden min-h-[518px]">
           <Image
