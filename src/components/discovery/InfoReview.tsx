@@ -13,8 +13,8 @@ interface Props {
 
 const InfoReview = ({ index }: Props) => {
   const [showComments, setShowComments] = useState(false);
-  /*   const { toggleFooter } = useShowHideFooterStore();
-   */
+  const { toggleFooter } = useShowHideFooterStore();
+
   return (
     <>
       {showComments && (
@@ -48,7 +48,7 @@ const InfoReview = ({ index }: Props) => {
               className="flex flex-col w-full items-center gap-y-[4px]"
               onClick={() => {
                 setShowComments(true);
-                /*  toggleFooter(); */
+                toggleFooter();
               }}
             >
               <div className="w-[24px]">

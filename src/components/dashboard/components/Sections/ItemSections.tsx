@@ -3,12 +3,12 @@
 import Image from "next/image";
 import Link from "next/link";
 
-const ItemSections = () => {
+const ItemSections = ({ props }: any) => {
   return (
-    <div className="flex flex-col gap-y-[8px]">
+    <div className="flex flex-col gap-y-[8px] max-w-[146px] min-w-[146px]">
       <Link href={"#"}>
         <Image
-          src={""}
+          src={props.poster_path}
           width={146}
           height={223}
           alt=""
@@ -16,11 +16,12 @@ const ItemSections = () => {
         />
       </Link>
       <div className="flex flex-col">
-        <span className="font-[600] leading-[150%] text-[14px]">
-          Nombre de la entrega
+        <span className="font-[600] leading-[150%] text-[14px] truncate max-w-[100px]">
+          {props.title}
         </span>
-        <span className="text-[12px] font-[600] leading-[150%] opacity-60">
-          Tipo de genero
+        <span className="text-[12px] font-[600] leading-[150%] opacity-60 truncate max-w-[100px]">
+          {props.genres.map((genre: any) => genre.name).join(", ")}
+          {/* {props.genres[0].name} */}
         </span>
       </div>
     </div>

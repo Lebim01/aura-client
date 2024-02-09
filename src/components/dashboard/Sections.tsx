@@ -1,15 +1,17 @@
-"use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import ItemSections from "./components/Sections/ItemSections";
 import MostComponent from "./components/Sections/MostComponent";
-
+import { api } from "@/hooks/axios";
+import { useEffectOnce } from "usehooks-ts";
 interface Props {
   text: string;
+  endpoint: string;
 }
-const Sections = ({ text }: Props) => {
+const Sections = ({ text, endpoint }: Props) => {
   const [showLeftPadding, setShowLeftPadding] = useState<any>(true);
   const [showRightPadding, setShowRightPadding] = useState(false);
-
+  const [movies, setMovies] = useState<any>([]);
+  const [loading, setLoading] = useState<boolean>(true);
   const handleScroll = (event: any) => {
     const scrollLeft = event.target.scrollLeft;
     const scrollWidth = event.target.scrollWidth;
@@ -17,6 +19,22 @@ const Sections = ({ text }: Props) => {
     setShowLeftPadding(scrollLeft === 0);
     setShowRightPadding(scrollLeft + clientWidth === scrollWidth);
   };
+
+  const getMovies = async () => {
+    try {
+      const movies_result = await api.get(
+        `/dashboard/${endpoint}?page=1&limit=10`
+      );
+      setMovies(movies_result.data);
+      setLoading(false);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  useEffectOnce(() => {
+    getMovies();
+  });
 
   return (
     <div className="flex flex-col gap-y-[12px] w-full">
@@ -31,16 +49,25 @@ const Sections = ({ text }: Props) => {
         }}
         onScroll={handleScroll}
       >
-        <ItemSections />
-        <ItemSections />
-        <ItemSections />
-        <ItemSections />
-        <ItemSections />
-        <ItemSections />
-        <ItemSections />
-        <ItemSections />
-        <ItemSections />
-        <ItemSections />
+        {loading &&
+          Array(3)
+            .fill(null)
+            .map((_: any, index: number) => (
+              <div
+                key={index}
+                className="flex flex-col gap-y-[8px] max-w-[146px] min-w-[146px] animate-pulse"
+              >
+                <div className="bg-gray-300 rounded-[8px] w-[146px] h-[223px]"></div>
+                <div className="flex flex-col gap-y-[4px]">
+                  <div className="bg-gray-300 rounded h-[20px] w-[100px]"></div>
+                  <div className="bg-gray-300 rounded h-[16px] w-[80px]"></div>
+                </div>
+              </div>
+            ))}
+
+        {movies.map((item: any, index: number) => {
+          return <ItemSections key={index} props={item} />;
+        })}
       </div>
     </div>
   );

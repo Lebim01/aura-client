@@ -3,7 +3,7 @@ import Image from "next/image";
 import { useEffect, useState, useRef, Dispatch, SetStateAction } from "react";
 import { useSwipeable } from "react-swipeable";
 import { classNamesCustom } from "@/utils/classes";
-
+import useShowHideFooterStore from "@/store/showHideFooterStore";
 interface Props {
   show: boolean;
   setShow: Dispatch<SetStateAction<boolean>>;
@@ -15,6 +15,7 @@ const Comments = ({ show, setShow, index }: Props) => {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const [rows, setRows] = useState(1);
   const [text, setText] = useState("");
+  const { showHideFooter, toggleFooter } = useShowHideFooterStore();
 
   useEffect(() => {
     const originalStyle = window.getComputedStyle(document.body).overflow;
@@ -86,7 +87,10 @@ const Comments = ({ show, setShow, index }: Props) => {
       {/* div transparente para ocultar comentarios */}
       <div
         className="w-full flex-1"
-        onClick={() => setShow(false)}
+        onClick={() => {
+          setShow(false);
+          toggleFooter();
+        }}
         {...handlersComments}
       ></div>
       <div
@@ -114,7 +118,11 @@ const Comments = ({ show, setShow, index }: Props) => {
                 width={20}
                 height={20}
                 className=""
-                onClick={() => setShow(false)}
+                onClick={() => {
+                  setShow(false);
+
+                  toggleFooter();
+                }}
               />
             </div>
           </div>

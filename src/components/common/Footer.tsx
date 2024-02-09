@@ -31,13 +31,12 @@ const items = [
 ];
 const Footer = () => {
   const router = useRouter();
-  /*   const { showHideFooter, toggleFooter } = useShowHideFooterStore();
-   */
+  const { showHideFooter, toggleFooter } = useShowHideFooterStore();
+
   return (
     <div
       className={classNamesCustom("w-full p-[16px] sticky bottom-0 z-[50]", {
-        /*         hidden: showHideFooter,
-         */
+        hidden: showHideFooter,
       })}
     >
       <div className="w-full bg-footer-dash px-[40px] py-[8px] rounded-[100px] flex items-center justify-between border border-footer-dash-border">

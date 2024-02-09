@@ -4,7 +4,8 @@ import type { AppProps } from "next/app";
 import React, { useEffect } from "react";
 import { Plus_Jakarta_Sans } from "next/font/google";
 import Head from "next/head";
-
+import "@api";
+import "@/hooks/axios";
 const jakarta = Plus_Jakarta_Sans({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700", "800"],

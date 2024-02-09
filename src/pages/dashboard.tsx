@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useEffect } from "react";
 import HeaderDashboard from "@/components/dashboard/HeaderDashboard";
 import Sections from "@/components/dashboard/Sections";
 import Footer from "@/components/common/Footer";
@@ -16,9 +16,9 @@ export default function Dashboard() {
         <CategoryFilters />
       </div>
       <div className="flex flex-col gap-y-[24px] ">
-        <Sections text="Lo más visto en México" />
-        <Sections text="Basados en tu Aura" />
-        <Sections text="Reseñas" />
+        <Sections text="Lo más visto en México" endpoint={"top-mexico"} />
+        <Sections text="Basados en tu Aura" endpoint="top-mexico" />
+        <Sections text="Reseñas" endpoint="top-mexico" />
         <CarouselComments text="Lo más comentado" />
         <Footer />
       </div>
