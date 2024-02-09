@@ -42,6 +42,11 @@ body {
   height: calc(var(--vh, 1vh) * 100);
 }
 
+.h-custom-screen-min {
+  min-height: 100vh;
+  min-height: calc(var(--vh, 1vh) * 100);
+}
+
 .h-custom-screen-footer {
   height: 100vh;
   height: calc(var(--vh, 1vh) * 100 - 156px);

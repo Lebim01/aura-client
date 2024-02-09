@@ -1,5 +1,5 @@
 "use client";
-import React, { ChangeEvent, useState } from "react";
+import React, { ChangeEvent, useState, useEffect } from "react";
 import Image from "next/image";
 import useUserRegistrationStore from "@/store/userRegistrationStore";
 import { classNamesCustom } from "@/utils/classes";
@@ -29,6 +29,10 @@ const InputRegister = ({ icon, placeholder, type, name }: Props) => {
     setUserField(name, value);
     setValue(value);
   };
+
+  useEffect(() => {
+    console.log(userData);
+  }, [userData]);
 
   return (
     <div className="relative  w-full max-h-[51px]  min-h-[51px]">

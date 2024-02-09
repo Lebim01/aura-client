@@ -16,8 +16,8 @@ export default function Dashboard() {
         <CategoryFilters />
       </div>
       <div className="flex flex-col gap-y-[24px] ">
-        <Sections text="Lo más visto en México" endpoint={"top-mexico"} />
-        <Sections text="Basados en tu Aura" endpoint="top-mexico" />
+        <Sections text="Lo más visto en México" endpoint="top-mexico" />
+        <Sections text="Basados en tu Aura" endpoint="aura" />
         <Sections text="Reseñas" endpoint="top-mexico" />
         <CarouselComments text="Lo más comentado" />
         <Footer />

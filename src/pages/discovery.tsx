@@ -68,7 +68,7 @@ const ImageViewer = () => {
               loop
               muted={muted}
               playsInline
-              className="object-cover h-custom-screen"
+              className="object-cover h-custom-screen w-full"
               onClick={() => {
                 setMuted((m) => !m);
               }}
