@@ -42,8 +42,8 @@ export default function Sinopsis({props}:any) {
             width={0}
             height={0}
             sizes="100vw"
-            style={{ width: "fit-content", height: "48px" }}
-            src={item.logo_url}
+            style={{ width: "48px", height: "48px" }}
+            src={item?.logo_url || ""}
             alt=""
           /> 
           
