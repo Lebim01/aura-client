@@ -35,14 +35,22 @@ export default function Sinopsis({props}:any) {
         <span className="text-[12px] font-[300] leading-[140%]">
             Lo sentimos. No contamos con esta información.
           </span> :
-           <Image
+          <div className="flex gap-x-[12px] flex-wrap gap-y-[12px]">
+          {props.platforms.map((item:any, index:number)=>{
+            return <Image
+            key={index}
             width={0}
             height={0}
             sizes="100vw"
             style={{ width: "fit-content", height: "48px" }}
-            src="/icons/netflix.svg"
+            src={item.logo_url}
             alt=""
-          />}
+          /> 
+          
+          })}
+          </div>
+
+           }
       </div>
     </div>
   );

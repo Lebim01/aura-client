@@ -11,11 +11,13 @@ export default function Cast({props}:any) {
      {props?.actors && props?.actors.map((item:any, index:number)=>{
       return  <div className="flex gap-x-[8px] items-center" key={index}>
                 <Image
-                  width={40}
-                  height={40}
-                  src=""
+                  width={0}
+                  height={0}
+                  sizes="100vw"
+                  style={{ width: "40px", height: "40px" }}
+                  src={item?.image || "/no-photo.png"}
                   alt=""
-                  className="bg-gray-400 rounded-full"
+                  className="bg-gray-400 rounded-full object-cover"
                 />
                 <div className="flex flex-col gap-y-[3px]">
                   <span className="text-[12px] font-[600]">{item.name}</span>
