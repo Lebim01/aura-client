@@ -2,10 +2,12 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/router";
 
 const ItemSections = ({ props }: any) => {
+  const router = useRouter()
   return (
-    <div className="flex flex-col gap-y-[8px] max-w-[146px] min-w-[146px]">
+    <div className="flex flex-col gap-y-[8px] max-w-[146px] min-w-[146px]" onClick={()=>router.push(`/detail/${props.slug}`)}>
       <Link href={"#"}>
         <Image
           src={props.poster_path}
