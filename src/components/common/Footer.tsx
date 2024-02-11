@@ -35,9 +35,12 @@ const Footer = () => {
 
   return (
     <div
-      className={classNamesCustom("w-full p-[16px] sticky bottom-0 z-[50]", {
-        hidden: showHideFooter,
-      })}
+      className={classNamesCustom(
+        "md:hidden w-full p-[16px] fixed bottom-0 z-[50]",
+        {
+          hidden: showHideFooter,
+        }
+      )}
     >
       <div className="w-full bg-footer-dash px-[40px] py-[8px] rounded-[100px] flex items-center justify-between border border-footer-dash-border">
         {items.map((item: any, index: number) => {
