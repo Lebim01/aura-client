@@ -9,7 +9,7 @@ const PreviewReview = () => {
         <Image
           width={53}
           height={81}
-          src=""
+          src="https://image.tmdb.org/t/p/original/3deZVzUhCjnLp95mkuM7A0s2M9k.jpg"
           alt=""
           className="rounded-[8px] bg-white"
         />

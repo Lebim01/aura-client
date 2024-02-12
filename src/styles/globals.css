@@ -34,7 +34,7 @@ body {
 }
 
 .translateinfo {
-  transform: translateY(calc(var(--vh, 1vh) * 100 - 300px));
+  transform: translateY(calc(var(--vh, 1vh) * 100 - 320px));
 }
 
 .h-custom-screen {

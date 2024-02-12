@@ -28,27 +28,19 @@ const InfoReview = ({ index, className }: Props) => {
           className
         )}
       >
-        {/*    <div className="flex pt-[16px] gap-x-[16px] items-center">
-          <Image
-            width={32}
-            height={32}
-            src=""
-            alt=""
-            className="rounded-full bg-white"
-          />
-          <span className="text-[12px] leading-[150%]">
-            Monica Martínez • 1h
-          </span>
-        </div> */}
         <div className="flex gap-x-[16px] items-end flex-1">
           <div className="flex flex-col gap-y-[8px] flex-1">
             <PreviewReview />
           </div>
           <div className="flex flex-col gap-y-[24px]">
             <div className="flex flex-col w-full items-center gap-y-[4px]">
-              <div className="w-[24px]">
-                <Image width={24} height={24} src="/icons/hearth.svg" alt="" />
-              </div>
+              <Image
+                className="w-[30px] hover:cursor-pointer"
+                width={30}
+                height={30}
+                src="/icons/hearth.svg"
+                alt=""
+              />
               <span className="text-[10px] leading-[130%]">222</span>
             </div>
             <div
@@ -58,14 +50,18 @@ const InfoReview = ({ index, className }: Props) => {
                 toggleFooter();
               }}
             >
-              <div className="w-[24px]">
-                <Image width={24} height={24} src="/icons/globe.svg" alt="" />
-              </div>
+              <Image
+                className="w-[30px] hover:cursor-pointer"
+                width={30}
+                height={30}
+                src="/icons/globe.svg"
+                alt=""
+              />
               <span className="text-[10px] leading-[130%]">222</span>
             </div>
             <div className="flex flex-col w-full items-center gap-y-[4px]">
-              <div className="w-[24px]">
-                <Image width={24} height={24} src="/icons/share.svg" alt="" />
+              <div className="w-[30px]">
+                <Image width={30} height={30} src="/icons/share.svg" alt="" />
               </div>
             </div>
           </div>

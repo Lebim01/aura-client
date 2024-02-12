@@ -1,10 +1,11 @@
 import useSwipeVideos from "@/store/useSwipeVideos";
-import { useEffect } from "react";
+import { Fragment, useEffect } from "react";
 import { useSwipeable } from "react-swipeable";
 import VideoMobile from "./VideoMobile";
 import Footer from "../common/Footer";
 import { useRouter } from "next/router";
 import Image from "next/image";
+import VideoController from "./VideoController";
 
 const videos = [
   "https://pub-bf9da7896edf4ee98e6d6dd8e72340c7.r2.dev/videos%2Fssstik.io_1707192444675.mp4",
@@ -53,9 +54,14 @@ const VerticalSliderVideos = () => {
       </div>
       <div {...handlers} className={"overflow-hidden relative w-full h-screen"}>
         {videos.map((video, i) => (
-          <>
-            <VideoMobile video_url={video} videoIndex={i} key={i} />
-          </>
+          <Fragment key={i}>
+            <VideoController
+              Component={VideoMobile}
+              videoUrl={video}
+              videoIndex={i}
+              layout="mobile"
+            />
+          </Fragment>
         ))}
       </div>
       <Footer />

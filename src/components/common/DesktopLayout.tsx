@@ -11,7 +11,7 @@ type Props = {
 
 const DesktopLayout: FC<Props> = ({ children, forceDisplay }) => {
   return (
-    <div className="flex flex-col lg:flex-row gap-y-[16px] w-screen bg-black-0D overflow-y-auto hidescroll max-w-screen mix-w-screen max-w-screen overflow-x-hidden">
+    <div className="flex flex-col md:flex-row gap-y-[16px] w-screen bg-black-0D overflow-y-auto hidescroll max-w-screen mix-w-screen md:pr-[16px] overflow-x-hidden">
       <div
         className={classNames("md:flex flex-col gap-y-[16px]", {
           hidden: !forceDisplay,
