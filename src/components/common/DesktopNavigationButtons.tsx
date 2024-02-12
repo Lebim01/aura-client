@@ -7,7 +7,7 @@ import { usePathname } from "next/navigation";
 const DesktopNavigationButtons = () => {
   const pathname = usePathname();
   return (
-    <div className="flex flex-col rounded-[12px] overflow-hidden">
+    <div className="hidden md:flex flex-col rounded-[12px] overflow-hidden">
       {navigationOptions.map((item, index) => (
         <Link
           href={item.url}
@@ -22,13 +22,10 @@ const DesktopNavigationButtons = () => {
               height={item.size}
             />
             <span
-              className={classNames(
-                "font-[500] leading-[150%]",
-                {
-                  "text-yellow-aura-accent ": pathname === item.url,
-                  "text-white ": !(pathname === item.url),
-                }
-              )}
+              className={classNames("font-[500] leading-[150%]", {
+                "text-yellow-aura-accent ": pathname === item.url,
+                "text-white ": !(pathname === item.url),
+              })}
             >
               {item.title}
             </span>
