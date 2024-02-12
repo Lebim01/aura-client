@@ -75,9 +75,11 @@ export const getStaticProps = (async (context: GetStaticPropsContext) => {
   return {
     props: {
       movie: movie_result.data.movie,
-      genres: movie_result.data.genres,
-      platforms: movie_result.data.platforms,
-      actors: movie_result.data.actors,
+      genres: movie_result.data?.genres || [],
+      platforms: movie_result.data?.platforms || [],
+      actors: movie_result.data?.actors || [],
+      languages: movie_result.data?.languages || [],
+      videos: movie_result.data?.videos || [],
     },
   };
 }) satisfies GetStaticProps<Props>;

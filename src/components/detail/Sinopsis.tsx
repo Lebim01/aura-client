@@ -28,7 +28,7 @@ export default function Sinopsis({ movie, actors, platforms }: Props) {
       <div className="flex flex-col gap-y-[8px]">
         <span className="text-[12px] font-[700]">Reparto principal</span>
         <span className="text-[12px] font-[300] leading-[140%]">
-          {actors && actors.map((genre: any) => genre.name).join(", ")}
+          {actors?.map((actor) => actor.name).join(", ")}
         </span>
       </div>
 
@@ -42,7 +42,7 @@ export default function Sinopsis({ movie, actors, platforms }: Props) {
           </span>
         ) : (
           <div className="flex gap-x-[12px] flex-wrap gap-y-[12px]">
-            {platforms.map((item: any, index: number) => {
+            {platforms?.map((item, index: number) => {
               return (
                 <Image
                   key={index}

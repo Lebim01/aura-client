@@ -43,8 +43,7 @@ export default function Middle({ movie, genres }: Props) {
                       {movie?.original_title}
                     </span>
                     <span className="text-[12px] font-[600] leading-[150%] opacity-60">
-                      {genres &&
-                        genres.map((genre: any) => genre.name).join(", ")}
+                      {genres?.map((genre) => genre.name).join(", ")}
                     </span>
                   </div>
                 </div>
