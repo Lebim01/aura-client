@@ -1,6 +1,7 @@
 import useSwipeVideos from "@/store/useSwipeVideos";
 import { FC, Ref, useCallback, useEffect, useRef } from "react";
 import { useIntersectionObserver } from "@uidotdev/usehooks";
+import useUserInteraction from "@/hooks/useUserInteraction";
 
 export type VideoProps = {
   videoUrl: string;
@@ -15,7 +16,13 @@ type Props = {
   layout: "desktop" | "mobile";
 };
 
-const VideoController: FC<Props> = ({ Component, videoIndex, videoUrl }) => {
+const VideoController: FC<Props> = ({
+  Component,
+  videoIndex,
+  videoUrl,
+  layout,
+}) => {
+  const interacted = useUserInteraction();
   const {
     setSwipeIndex,
     position: { swipeIndex },
@@ -28,8 +35,10 @@ const VideoController: FC<Props> = ({ Component, videoIndex, videoUrl }) => {
   });
 
   useEffect(() => {
-    if (entry?.intersectionRatio == 1) {
-      checkVideoIsInViewport();
+    if (layout == "desktop") {
+      if (entry?.intersectionRatio == 1) {
+        checkVideoIsInViewport();
+      }
     }
   }, [entry?.intersectionRatio]);
 
@@ -38,13 +47,17 @@ const VideoController: FC<Props> = ({ Component, videoIndex, videoUrl }) => {
   };
 
   const playVideoIndex = () => {
-    if (videoEl.current) {
-      if (swipeIndex !== videoIndex) {
-        videoEl.current.pause();
+    try {
+      if (videoEl.current && interacted) {
+        if (swipeIndex !== videoIndex) {
+          videoEl.current.pause();
+        }
+        if (swipeIndex === videoIndex) {
+          videoEl.current.play();
+        }
       }
-      if (swipeIndex === videoIndex) {
-        videoEl.current.play();
-      }
+    } catch (err) {
+      console.error("permission error");
     }
   };
 
@@ -54,7 +67,7 @@ const VideoController: FC<Props> = ({ Component, videoIndex, videoUrl }) => {
 
   useEffect(() => {
     playVideoIndex();
-  }, [swipeIndex]);
+  }, [swipeIndex, videoIndex, interacted]);
 
   return (
     <div ref={ref}>
