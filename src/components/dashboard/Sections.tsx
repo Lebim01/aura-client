@@ -2,7 +2,8 @@ import { useState, useEffect } from "react";
 import ItemSections from "./components/Sections/ItemSections";
 import MostComponent from "./components/Sections/MostComponent";
 import { api } from "@/hooks/axios";
-import { useEffectOnce } from "usehooks-ts";
+import classNames from "classnames";
+
 interface Props {
   text: string;
   endpoint: string;
@@ -32,9 +33,9 @@ const Sections = ({ text, endpoint }: Props) => {
     }
   };
 
-  useEffectOnce(() => {
+  useEffect(() => {
     getMovies();
-  });
+  }, []);
 
   return (
     <div className="flex flex-col gap-y-[12px] w-full">
@@ -50,14 +51,19 @@ const Sections = ({ text, endpoint }: Props) => {
         onScroll={handleScroll}
       >
         {loading &&
-          Array(3)
+          Array(15)
             .fill(null)
             .map((_: any, index: number) => (
               <div
                 key={index}
-                className="flex flex-col gap-y-[8px] max-w-[146px] min-w-[146px] animate-pulse"
+                className={classNames(
+                  "flex flex-col gap-y-[8px] max-w-[146px] min-w-[146px] md:max-w-[166px] md:min-w-[166px] animate-pulse",
+                  {
+                    "hidden md:flex": index > 3,
+                  }
+                )}
               >
-                <div className="bg-gray-300 rounded-[8px] w-[146px] h-[223px]"></div>
+                <div className="bg-gray-300 rounded-[8px] w-[146px] h-[223px] md:w-[166px] md:h-[250px]"></div>
                 <div className="flex flex-col gap-y-[4px]">
                   <div className="bg-gray-300 rounded h-[20px] w-[100px]"></div>
                   <div className="bg-gray-300 rounded h-[16px] w-[80px]"></div>

@@ -1,12 +1,11 @@
 "use client";
-
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { classNamesCustom } from "@/utils/classes";
 import useShowHideFooterStore from "@/store/showHideFooterStore";
 
-const items = [
+export const navigationOptions = [
   {
     url: "/dashboard",
     title: "Inicio",
@@ -43,7 +42,7 @@ const Footer = () => {
       )}
     >
       <div className="w-full bg-footer-dash px-[40px] py-[8px] rounded-[100px] flex items-center justify-between border border-footer-dash-border">
-        {items.map((item: any, index: number) => {
+        {navigationOptions.map((item: any, index: number) => {
           return (
             <Link
               href={item.url}

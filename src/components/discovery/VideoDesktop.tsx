@@ -12,7 +12,7 @@ const VideoDesktop = forwardRef(
     const { muted, toggleMute } = useVideoMute();
 
     return (
-      <div className="relative rounded-lg overflow-hidden w-[500px] h-50vh">
+      <div className="relative rounded-lg overflow-hidden w-[500px] min-h-[60vh] aspect-tiktok">
         <VideoHeader />
         <video
           ref={ref}

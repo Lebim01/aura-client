@@ -1,7 +1,4 @@
-"use client";
-import React, { useState, Dispatch, SetStateAction } from "react";
-import { useRouter } from "next/router";
-import { classNamesCustom } from "@/utils/classes";
+import React from "react";
 import Image from "next/image";
 
 export default function Reviews() {

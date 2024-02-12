@@ -1,32 +1,28 @@
-"use client";
-
 import Image from "next/image";
 import Link from "next/link";
-import { useRouter } from "next/router";
 
 const ItemSections = ({ props }: any) => {
-  const router = useRouter()
   return (
-    <div className="flex flex-col gap-y-[8px] max-w-[146px] min-w-[146px]" onClick={()=>router.push(`/detail/${props.slug}`)}>
-      <Link href={"#"}>
+    <Link href={"/detail/[slug]"} as={`/detail/${props.slug}`}>
+      <div className="flex flex-col gap-y-[8px] min-w-[146px] md:min-w-[166px]">
         <Image
           src={props.poster_path}
-          width={146}
-          height={223}
+          width={166}
+          height={250}
           alt=""
-          className="bg-gray-400 rounded-[8px]"
+          className="bg-gray-400 rounded-[8px] w-[146px] h-[223px] md:w-[166px] md:h-[250px]"
         />
-      </Link>
-      <div className="flex flex-col">
-        <span className="font-[600] leading-[150%] text-[14px] truncate max-w-[100px]">
-          {props.title}
-        </span>
-        <span className="text-[12px] font-[600] leading-[150%] opacity-60 truncate max-w-[100px]">
-          {props.genres.map((genre: any) => genre.name).join(", ")}
-          {/* {props.genres[0].name} */}
-        </span>
+
+        <div className="flex flex-col">
+          <span className="font-[600] leading-[150%] text-[14px] truncate max-w-[100px]">
+            {props.title}
+          </span>
+          <span className="text-[12px] font-[600] leading-[150%] opacity-60 truncate max-w-[100px]">
+            {props.genres.map((genre: any) => genre.name).join(", ")}
+          </span>
+        </div>
       </div>
-    </div>
+    </Link>
   );
 };
 

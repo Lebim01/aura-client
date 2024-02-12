@@ -36,6 +36,9 @@ const config: Config = {
         "bg-gradient-discovery":
           "linear-gradient(to top, white, rgba(255, 255, 255, 0))",
       },
+      aspectRatio: {
+        'tiktok': '9/16',
+      },
     },
     fontFamily: {
       jakarta: ["var(--font-jakarta)"],
