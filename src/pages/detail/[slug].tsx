@@ -25,7 +25,7 @@ export default function Detail({ movie, genres, platforms, actors }: Props) {
 
   return (
     <DesktopLayout>
-      <div className="flex flex-col h-custom-screen-min w-screen h-fit bg-black-0D gap-y-[32px] hidescroll">
+      <div className="flex flex-col h-custom-screen-min w-screen h-fit bg-black-0D gap-y-[32px] hidescroll pb-[90px]">
         <div className="flex flex-col gap-y-[32px] flex-1">
           {/* Cards */}
           {tab === "credits" && <Large movie={movie} genres={genres} />}

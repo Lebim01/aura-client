@@ -17,6 +17,10 @@
   }
 }
 
+html {
+  @apply bg-black-0D;
+}
+
 body {
   color: rgb(var(--foreground-rgb));
   background: linear-gradient(
@@ -34,7 +38,7 @@ body {
 }
 
 .translateinfo {
-  transform: translateY(calc(var(--vh, 1vh) * 100 - 320px));
+  transform: translateY(calc(var(--vh, 1vh) * 100 - 250px));
 }
 
 .h-custom-screen {
