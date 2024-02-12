@@ -1,33 +1,37 @@
 import Image from "next/image";
 import InfoReview from "./InfoReview";
 import { FC } from "react";
+import useVideoMute from "@/store/useVideoMute";
+import useSwipeVideos from "@/store/useSwipeVideos";
 
 type Props = {
-  muted: boolean;
-  toggleMute: () => void;
   video_url: string;
-  swapIndex: number;
   videoIndex: number;
 };
 
-const Video: FC<Props> = (props) => {
+const VideoMobile: FC<Props> = ({ video_url, videoIndex }) => {
+  const {
+    position: { swipeIndex },
+  } = useSwipeVideos();
+  const { muted, toggleMute } = useVideoMute();
+
   return (
     <div
-      className="image-slide bg-bg-gradient-discovery"
+      className="image-slide bg-bg-gradient-discovery relative md:h-auto md:relative"
       style={{
         backgroundImage: `linear-gradient(to top, rgba(0, 0, 0, 0.7) 15%, rgba(0, 0, 0, 0) 30%)`,
-        transform: `translateY(${(props.videoIndex - props.swapIndex) * 100}%)`,
+        transform: `translateY(${(videoIndex - swipeIndex) * 100}%)`,
       }}
     >
       <video
         autoPlay
         loop
-        muted={props.muted}
+        muted={muted}
         playsInline
-        className="object-cover h-custom-screen w-full min-w-[300px]"
-        onClick={props.toggleMute}
+        className="object-cover h-custom-screen w-full min-w-[300px] min-h-[500px] md:h-auto"
+        onClick={toggleMute}
       >
-        <source src={props.video_url} type="video/mp4" />
+        <source src={video_url} type="video/mp4" />
         Tu navegador no soporta vídeos HTML5.
       </video>
       <div className="absolute inset-0 flex h-fit px-[16px]">
@@ -44,9 +48,9 @@ const Video: FC<Props> = (props) => {
           </span>
         </div>
       </div>
-      <InfoReview index={props.videoIndex} />
+      <InfoReview className="translateinfo inset-0" index={videoIndex} />
     </div>
   );
 };
 
-export default Video;
+export default VideoMobile;

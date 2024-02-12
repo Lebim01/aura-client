@@ -4,14 +4,16 @@ import Image from "next/image";
 import Reactions from "./Reactions";
 import PreviewReview from "../common/PreviewReview";
 import Comments from "./Comments";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import useShowHideFooterStore from "@/store/showHideFooterStore";
+import classNames from "classnames";
 
 interface Props {
+  className?: string;
   index: number;
 }
 
-const InfoReview = ({ index }: Props) => {
+const InfoReview = ({ index, className }: Props) => {
   const [showComments, setShowComments] = useState(false);
   const { toggleFooter } = useShowHideFooterStore();
 
@@ -20,7 +22,12 @@ const InfoReview = ({ index }: Props) => {
       {showComments && (
         <Comments show={showComments} setShow={setShowComments} index={index} />
       )}
-      <div className="absolute inset-0 flex h-fit px-[16px] flex-col justify-end transform translateinfo">
+      <div
+        className={classNames(
+          "absolute flex h-fit px-[16px] flex-col justify-end transform",
+          className
+        )}
+      >
         {/*    <div className="flex pt-[16px] gap-x-[16px] items-center">
           <Image
             width={32}
