@@ -65,6 +65,13 @@ export default function Detail({
 }
 
 export const getStaticPaths = (async () => {
+  if (process.env.SKIP_BUILD_STATIC_GENERATION) {
+    return {
+      paths: [],
+      fallback: "blocking",
+    };
+  }
+
   const res = await api.get(`/movies/all-slugs`);
   return {
     paths: res.data.map((slug: string) => ({
