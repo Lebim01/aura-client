@@ -47,7 +47,7 @@ const InfoReview = ({ index, className }: Props) => {
               className="flex flex-col w-full items-center gap-y-[4px]"
               onClick={() => {
                 setShowComments(true);
-                toggleFooter();
+                toggleFooter(true);
               }}
             >
               <Image
