@@ -31,7 +31,7 @@ export default function Reviews() {
           Lorem ipsum dolor sit amet consectetur. Diam elementum et eu felis
           bibendum proin nulla id. Purus malesuada odio donec vel ut
           pellentesque neque neque. Tortor nunc amet urna scelerisque facilisis.
-          Urna in nullam vestibulum
+          Urna in nullam vestibulu
         </span>
         <div className="flex gap-x-[2px] items-center">
           <span className="text-[12px] font-[700]">Ver más</span>
