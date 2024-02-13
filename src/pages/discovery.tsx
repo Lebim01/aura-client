@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import DesktopLayout from "@/components/common/DesktopLayout";
 import VerticalMobileVideos from "@/components/discovery/VerticalMobileVideos";
@@ -6,7 +7,6 @@ import { useWindowSize } from "@uidotdev/usehooks";
 
 const ImageViewer = () => {
   const { width } = useWindowSize();
-  const isMobile = width ?? 0 < 768;
 
   return (
     <DesktopLayout>
@@ -14,12 +14,12 @@ const ImageViewer = () => {
         id="discovery-container"
         className="fixed md:relative w-full max-h-screen md:overflow-y-auto"
       >
-        {isMobile && (
+        {(width || 0) < 768 && (
           <div className="md:hidden">
             <VerticalMobileVideos />
           </div>
         )}
-        {!isMobile && (
+        {(width || 0) >= 768 && (
           <div className="hidden md:block">
             <VerticalDesktopVideos />
           </div>
