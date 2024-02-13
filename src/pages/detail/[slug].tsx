@@ -48,14 +48,19 @@ export default function Detail({
           />}
           {loading && <ButtonSkeleton/>}
         </div> */}
+          {tab === "credits" && (
+            <div className="flex flex-col md:flex-row gap-y-[32px]">
+              <Sinopsis movie={movie} actors={actors} platforms={platforms} />
+              <div className="flex flex-col gap-y-[16px] md:pt-[32px]">
+                <span className="text-[12px] font-[700] px-[16px] md:hidden">
+                  Reparto
+                </span>
 
-          {tab === "credits" && (
-            <Sinopsis movie={movie} actors={actors} platforms={platforms} />
+                <Cast actors={actors} />
+              </div>
+            </div>
           )}
-          {tab === "credits" && (
-            <span className="text-[12px] font-[700] px-[16px]">Reparto</span>
-          )}
-          {tab === "credits" && <Cast actors={actors} />}
+
           {tab === "reviews" && <Reviews />}
         </div>
         <Footer />

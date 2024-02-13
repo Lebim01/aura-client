@@ -19,7 +19,7 @@ export default function App({ Component, pageProps }: AppProps) {
   }, []);
 
   return (
-    <main className={`${jakarta.variable} font-jakarta`}>
+    <main className={`${jakarta.variable} font-jakarta md:bg-black-0D`}>
       <Head>
         <meta
           name="viewport"

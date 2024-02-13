@@ -3,7 +3,7 @@ import Image from "next/image";
 
 const ReviewVideo = () => {
   return (
-    <div className="w-full rounded-lg bg-gray-400 relative overflow-hidden min-h-[518px] flex flex-col">
+    <div className=" rounded-lg bg-gray-400 relative overflow-hidden min-h-[518px] flex flex-col md:min-w-[358px]">
       <div className="flex flex-col w-full h-full relative flex-1">
         <div className="w-full pt-4 pb-2 px-4">
           <span className="text-[10px] font-[600] leading-[130%]">
