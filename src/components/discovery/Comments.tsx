@@ -1,6 +1,13 @@
 "use client";
 import Image from "next/image";
-import { useEffect, useState, useRef, Dispatch, SetStateAction } from "react";
+import {
+  useEffect,
+  useState,
+  useRef,
+  Dispatch,
+  SetStateAction,
+  useCallback,
+} from "react";
 import { useSwipeable } from "react-swipeable";
 import { classNamesCustom } from "@/utils/classes";
 import useShowHideFooterStore from "@/store/showHideFooterStore";
@@ -41,26 +48,21 @@ const Comments = ({ show, setShow, index }: Props) => {
   const handlersComments = useSwipeable({
     onSwipedUp: (eventData) => {
       eventData.event.stopPropagation();
-
-      const element = scrollContainerRef.current;
-      if (element) {
-        const bottomReached =
-          element.scrollHeight - element.scrollTop <= element.clientHeight;
-        if (bottomReached) {
-          setH(true);
-        }
-      }
     },
     onSwipedDown: (eventData) => {
       eventData.event.stopPropagation();
+    },
+    trackMouse: true,
+  });
 
-      const element = scrollContainerRef.current;
-      if (element) {
-        const topReached = element.scrollTop === 0;
-        if (topReached) {
-          setH(false);
-        }
-      }
+  const handlersMain = useSwipeable({
+    onSwipedUp: (eventData) => {
+      eventData.event.stopPropagation();
+      /* setShow(false); */
+    },
+    onSwipedDown: (eventData) => {
+      eventData.event.stopPropagation();
+      /*  setShow(false); */
     },
     trackMouse: true,
   });
@@ -73,29 +75,41 @@ const Comments = ({ show, setShow, index }: Props) => {
     setRows(newRows);
   };
 
+  const handleScroll = useCallback((e: any) => {
+    const target = e.target;
+
+    if (target.scrollHeight - target.scrollTop === target.clientHeight) {
+      setH(true);
+    }
+
+    if (target.scrollTop === 0) {
+      setH((state) => !state);
+      console.log("Llegamos al principio del scroll");
+    }
+  }, []);
+
   return (
     <div
       className={classNamesCustom(
         " items-end justify-end w-screen flex flex-col top-0 bg-[#1A1A1A] bg-opacity-10 z-50",
         {
-          "h-custom-screen-comments transition-all duration-500 absolute": show,
+          "h-custom-screen transition-all duration-500 absolute": show,
         },
         { "transition-all duration-500 hidden": !show }
       )}
-      {...handlersComments}
+      {...handlersMain}
     >
-      {/* div transparente para ocultar comentarios */}
       <div
         className="w-full flex-1"
         onClick={() => {
           setShow(false);
-          toggleFooter();
+          toggleFooter(false);
         }}
         {...handlersComments}
       ></div>
       <div
         className={classNamesCustom(
-          "w-full bg-black-0D rounded-t-[16px] px-[16px] py-[24px] flex flex-col gap-y-[24px] items-center",
+          "w-full bg-black-0D rounded-t-[16px] px-[16px] py-[24px] flex flex-col gap-y-[24px] items-center swipe-up",
           { "h-full transition-all duration-500 rounded-t-none": h },
           { "h-[437px] transition-all duration-500": !h }
         )}
@@ -121,7 +135,7 @@ const Comments = ({ show, setShow, index }: Props) => {
                 onClick={() => {
                   setShow(false);
 
-                  toggleFooter();
+                  toggleFooter(false);
                 }}
               />
             </div>
@@ -134,8 +148,9 @@ const Comments = ({ show, setShow, index }: Props) => {
           </span>
         </div>
         <div
-          className="flex flex-col gap-y-[21px] justify-start w-full overflow-y-auto hidescroll flex-1"
+          className="flex flex-col gap-y-[21px] justify-start w-full overflow-y-auto hidescroll flex-1 z-50"
           {...handlersComments}
+          onScroll={handleScroll}
         >
           <div className="flex gap-x-[8px] items-start">
             <Image

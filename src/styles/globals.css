@@ -62,27 +62,74 @@ body {
 }
 
 .hidescroll::-webkit-scrollbar {
-  width: 0px; /* Ajusta el ancho del scrollbar */
+  width: 0px;
   display: none;
 }
 
 .hidescroll::-webkit-scrollbar-thumb {
-  background-color: transparent; /* Color del "pulgarcito" (la parte que puedes arrastrar) */
+  background-color: transparent;
 }
 
 .image-viewer {
   overflow: hidden;
   position: relative;
   width: 100%;
-  height: 100vh; /* Ajusta la altura según necesites */
+  height: 100vh;
 }
 
 .image-slide {
   background-size: cover;
   background-position: center;
   width: 100%;
-  height: 100vh; /* Asegúrate de que coincida con la altura del contenedor */
+  height: 100vh;
   position: absolute;
   will-change: transform;
-  transition: transform 0.5s ease; /* Ajusta para controlar la velocidad de la animación */
+  transition: transform 0.5s ease;
+}
+
+@keyframes swipe-up {
+  0% {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.swipe-up {
+  animation: swipe-up 0.5s ease-out forwards;
+}
+
+@keyframes swipe-down {
+  from {
+    transform: translateY(100);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+.swipe-down {
+  animation: swipeDown 0.5s forwards;
+}
+
+.icon-fade-in-out {
+  animation: fadeInOut 2s forwards;
+}
+
+@keyframes fadeInOut {
+  0% {
+    opacity: 0;
+  }
+  25% {
+    opacity: 1;
+  }
+  75% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
 }
