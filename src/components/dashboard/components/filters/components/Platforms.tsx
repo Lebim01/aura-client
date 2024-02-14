@@ -8,7 +8,7 @@ interface Props {
 const Platforms = ({ icon, value }: Props) => {
   return (
     <div className="w-[50px] h-[50px] bg-black-18 flex justify-center rounded-[6px]">
-      <Image src={icon} width={32} height={32} alt="" />
+      <Image src={icon} width={42} height={42} alt="" />
     </div>
   );
 };

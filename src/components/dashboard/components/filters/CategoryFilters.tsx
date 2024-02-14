@@ -27,8 +27,8 @@ const platforms = [
 const CategoryFilters = () => {
   return (
     <div className="w-full">
-      <div className="flex flex-col p-[16px] gap-y-[12px] rounded-[12px] bg-black-29 md:w-max">
-        <div className="flex flex-col gap-y-[12px]">
+      <div className="flex flex-col p-[16px] gap-y-[12px] md:gap-y-[16px] rounded-[12px] bg-black-29 md:w-max">
+        <div className="flex flex-col gap-y-[12px] md:gap-y-[16px]">
           <span className="font-[600] leading-[150%] text-[14px]">
             ¿Qué quieres ver hoy?
           </span>
