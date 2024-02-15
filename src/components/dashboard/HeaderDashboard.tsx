@@ -4,12 +4,12 @@ import Image from "next/image";
 
 const HeaderDashboard = () => {
   return (
-    <div className="flex pt-[16px] justify-between items-center w-ful">
+    <div className="flex pt-[16px] justify-between items-center w-full md:p-[14px] md:bg-black-29 md:rounded-[16px]">
       <label className="text-[16px] leading-[130%] font-[700]">
         Bienvenido, Marcos
       </label>
       <div className="flex gap-x-[8px]">
-        <div className="rounded-full bg-yellow-aura-accent flex items-center justify-center w-[40px] h-[40px]">
+        <div className="rounded-full bg-yellow-aura-accent flex items-center justify-center w-[40px] h-[40px] md:hidden">
           <Image
             src={"/icons/filter.svg"}
             className="rounded-full"

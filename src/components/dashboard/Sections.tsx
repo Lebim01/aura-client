@@ -38,10 +38,10 @@ const Sections = ({ text, endpoint }: Props) => {
   }, []);
 
   return (
-    <div className="flex flex-col gap-y-[12px] w-full">
+    <div className="flex flex-col gap-y-[12px] w-full h-auto">
       <MostComponent text={text} />
       <div
-        className="flex gap-x-[16px]  overflow-x-auto hidescroll"
+        className="flex gap-x-[16px] overflow-x-auto hidescroll"
         style={{
           overflowX: "scroll",
           whiteSpace: "nowrap",

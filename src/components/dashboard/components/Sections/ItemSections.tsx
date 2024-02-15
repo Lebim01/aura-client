@@ -10,7 +10,7 @@ const ItemSections = ({ props }: any) => {
           width={166}
           height={250}
           alt=""
-          className="bg-gray-400 rounded-[8px] w-[146px] h-[223px] md:w-[166px] md:h-[250px]"
+          className="bg-gray-400 rounded-[8px] w-[146px] h-[223px] md:w-[166px] md:h-[250px] hover:scale-110 transition-transform duration-200 ease-in-out"
         />
 
         <div className="flex flex-col">

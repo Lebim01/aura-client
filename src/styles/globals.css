@@ -133,3 +133,7 @@ body {
     opacity: 0;
   }
 }
+
+.last-item-gradient {
+  background-image: linear-gradient(to left, transparent, black);
+}

@@ -19,6 +19,7 @@ export const navigationOptions = [
     icon: "/icons/search.svg",
     iconactive: "/icons/search-active.svg",
     size: 20,
+    type: "button",
   },
   {
     url: "/discovery",

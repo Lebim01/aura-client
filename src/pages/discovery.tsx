@@ -12,7 +12,7 @@ const ImageViewer = () => {
     <DesktopLayout>
       <div
         id="discovery-container"
-        className="fixed md:relative w-full max-h-screen md:overflow-y-auto"
+        className="fixed md:relative w-full max-h-screen md:overflow-y-auto hidescroll"
       >
         {(width || 0) < 768 && (
           <div className="md:hidden">

@@ -35,9 +35,11 @@ const config: Config = {
         auradesktop: "url('/bgauradesktop.png')",
         "bg-gradient-discovery":
           "linear-gradient(to top, white, rgba(255, 255, 255, 0))",
+        "bg-gradient-discovery-left":
+          "linear-gradient(270deg, #0D0D0D 0%, #0D0D0D 0.01%, rgba(13, 13, 13, 0.00) 15.9%)",
       },
       aspectRatio: {
-        'tiktok': '9/16',
+        tiktok: "9/16",
       },
     },
     fontFamily: {

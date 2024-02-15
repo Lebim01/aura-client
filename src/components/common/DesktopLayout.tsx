@@ -4,6 +4,7 @@ import CategoryFilters from "../dashboard/components/filters/CategoryFilters";
 import SearchInput from "../dashboard/components/filters/SearchInput";
 import classNames from "classnames";
 import DesktopNavigationButtons from "./DesktopNavigationButtons";
+import ButtonLogout from "./ButtonLogout";
 
 type Props = {
   forceDisplay?: boolean;
@@ -12,17 +13,21 @@ type Props = {
 
 const DesktopLayout: FC<Props> = ({ children, forceDisplay }) => {
   return (
-    <div className="flex flex-col md:flex-row gap-y-[16px] w-screen bg-black-0D overflow-y-auto hidescroll max-w-screen md:pr-[16px] overflow-x-hidden">
+    <div className="flex flex-col md:flex-row gap-y-[16px] w-screen bg-black-0D overflow-y-auto hidescroll max-w-screen md:pr-[16px] overflow-x-hidden md:max-w-[1440px] md:justify-center md:mx-auto">
       <div
-        className={classNames("md:flex flex-col gap-y-[16px] px-[16px]", {
-          hidden: !forceDisplay,
-          flex: forceDisplay,
-        })}
+        className={classNames(
+          "md:flex flex-col gap-y-[16px] px-[16px] md:py-[24px]",
+          {
+            hidden: !forceDisplay,
+            flex: forceDisplay,
+          }
+        )}
       >
         <HeaderDashboard />
         <SearchInput />
         <DesktopNavigationButtons />
         <CategoryFilters />
+        <ButtonLogout />
       </div>
       {children}
     </div>

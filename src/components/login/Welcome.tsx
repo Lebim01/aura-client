@@ -9,7 +9,7 @@ const Welcome = () => {
       <div className="flex flex-col gap-y-[24px] items-center">
         <Image src={"/logo_white.svg"} width={110} height={28} alt="" />
         <span className="text-[20px] leading-[120%] text-white font-[700]">
-          Bienvenido Marcos Guapo
+          Bienvenido Marcos
         </span>
       </div>
       <ButtonCommon text="CONTINUAR" disabled={false} onClick={() => {}} />
