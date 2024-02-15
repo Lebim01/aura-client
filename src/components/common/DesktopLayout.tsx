@@ -5,7 +5,7 @@ import SearchInput from "../dashboard/components/filters/SearchInput";
 import classNames from "classnames";
 import DesktopNavigationButtons from "./DesktopNavigationButtons";
 import ButtonLogout from "./ButtonLogout";
-
+import Image from "next/image";
 type Props = {
   forceDisplay?: boolean;
   children: ReactNode;
@@ -23,6 +23,14 @@ const DesktopLayout: FC<Props> = ({ children, forceDisplay }) => {
           }
         )}
       >
+        <Image
+          src={"/logo_opaque.svg"}
+          width={88}
+          height={17}
+          alt=""
+          className="py-[16px]"
+        />
+
         <HeaderDashboard />
         <SearchInput />
         <DesktopNavigationButtons />
