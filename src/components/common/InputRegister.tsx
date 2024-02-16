@@ -30,10 +30,6 @@ const InputRegister = ({ icon, placeholder, type, name }: Props) => {
     setValue(value);
   };
 
-  useEffect(() => {
-    console.log(userData);
-  }, [userData]);
-
   return (
     <div className="relative  w-full max-h-[51px]  min-h-[51px]">
       <span className="absolute inset-y-6 left-0 flex items-center pl-[16px]">

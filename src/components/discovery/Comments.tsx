@@ -84,7 +84,6 @@ const Comments = ({ show, setShow, index }: Props) => {
 
     if (target.scrollTop === 0) {
       setH((state) => !state);
-      console.log("Llegamos al principio del scroll");
     }
   }, []);
 

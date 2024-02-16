@@ -1,29 +1,25 @@
 import { useState, useEffect } from "react";
-import ItemSections from "./components/Sections/ItemSections";
-import MostComponent from "./components/Sections/MostComponent";
+import MostComponent from "../dashboard/components/Sections/MostComponent";
 import { api } from "@/hooks/axios";
 import classNames from "classnames";
+import useFilters from "@/store/useFilters";
+import useIsMobile from "@/hooks/useIsMobile";
+import { classNamesCustom } from "@/utils/classes";
+import ItemSections from "./ItemSections";
 
 interface Props {
   text: string;
   endpoint: string;
 }
 const Sections = ({ text, endpoint }: Props) => {
-  const [showLeftPadding, setShowLeftPadding] = useState<any>(true);
-  const [showRightPadding, setShowRightPadding] = useState(false);
   const [movies, setMovies] = useState<any>([]);
   const [loading, setLoading] = useState<boolean>(true);
-  const handleScroll = (event: any) => {
-    const scrollLeft = event.target.scrollLeft;
-    const scrollWidth = event.target.scrollWidth;
-    const clientWidth = event.target.clientWidth;
-    setShowLeftPadding(scrollLeft === 0);
-    setShowRightPadding(scrollLeft + clientWidth === scrollWidth);
-  };
+  const { filters } = useFilters();
+  const isMobile = useIsMobile();
 
   const getMovies = async () => {
     try {
-      const movies_result = await api.get(`${endpoint}?page=1&limit=10`);
+      const movies_result = await api.get(`${endpoint}?q=${filters}`);
       setMovies(movies_result.data);
       setLoading(false);
     } catch (e) {
@@ -33,20 +29,23 @@ const Sections = ({ text, endpoint }: Props) => {
 
   useEffect(() => {
     getMovies();
-  }, []);
+  }, [filters]);
 
   return (
-    <div className="flex flex-col gap-y-[12px] w-full h-auto">
+    <div className="grid auto-flow-dense grid-layout w-auto">
       <MostComponent text={text} />
       <div
-        className="flex gap-x-[16px] overflow-x-auto hidescroll"
-        style={{
-          overflowX: "scroll",
-          whiteSpace: "nowrap",
-          paddingLeft: showLeftPadding ? "16px" : "0",
-          paddingRight: showRightPadding ? "16px" : "0",
-        }}
-        onScroll={handleScroll}
+        className={classNamesCustom(
+          ``,
+          {
+            "grid grid-cols-2 gap-x-[32px] gap-y-[16px] px-[16px] py-[12px] hidescroll w-fit mx-auto":
+              isMobile,
+          },
+          {
+            "grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-x-[32px] gap-y-[16px] hidescroll w-fit mx-auto py-[16px] max-w-[1440px] overflow-x-hidden":
+              !isMobile,
+          }
+        )}
       >
         {loading &&
           Array(15)

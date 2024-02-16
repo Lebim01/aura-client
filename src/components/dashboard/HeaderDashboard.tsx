@@ -4,7 +4,7 @@ import Image from "next/image";
 
 const HeaderDashboard = () => {
   return (
-    <div className="flex pt-[16px] justify-between items-center w-full md:p-[14px] md:bg-black-29 md:rounded-[16px]">
+    <div className="flex md:pt-[16px] justify-between items-center w-full md:p-[14px] md:bg-black-29 md:rounded-[16px]">
       <label className="text-[16px] leading-[130%] font-[700]">
         Bienvenido, Marcos
       </label>
