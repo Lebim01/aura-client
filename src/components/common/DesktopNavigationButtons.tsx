@@ -4,6 +4,7 @@ import Image from "next/image";
 import classNames from "classnames";
 import { usePathname } from "next/navigation";
 import InputSearch from "./InputSearch";
+import { Fragment } from "react";
 
 const DesktopNavigationButtons = () => {
   const pathname = usePathname();
@@ -12,7 +13,7 @@ const DesktopNavigationButtons = () => {
     <div className="hidden md:flex flex-col gap-y-[24px] rounded-[12px] overflow-hidden bg-black-29 p-[16px]">
       {navigationOptions.map((item, index) => {
         return (
-          <>
+          <Fragment key={index}>
             {item.type === "button" && pathname === "/search" ? (
               <InputSearch
                 icon={item.icon}
@@ -44,7 +45,7 @@ const DesktopNavigationButtons = () => {
                 </div>
               </Link>
             )}
-          </>
+          </Fragment>
         );
       })}
     </div>
