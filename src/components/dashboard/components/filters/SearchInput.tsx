@@ -10,7 +10,7 @@ const SearchInput = () => {
     <div
       className="w-full flex md:hidden"
       onClick={() => {
-        router.push("/search");
+        router.push("/search", undefined, { shallow: true });
       }}
     >
       <div

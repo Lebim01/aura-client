@@ -43,17 +43,13 @@ const DesktopLayout: FC<Props> = ({ children, forceDisplay }) => {
         />
 
         <HeaderDashboard />
-        {pathname !== "/search" && isMobile ? (
-          <SearchInput />
-        ) : (
-          isMobile && (
-            <InputSearch
-              icon={"/icons/search.svg"}
-              iconactive={"/icons/search-active.svg"}
-              url={"/search"}
-              size={20}
-            />
-          )
+        {isMobile && pathname === "/search" && (
+          <InputSearch
+            icon={"/icons/search.svg"}
+            iconactive={"/icons/search-active.svg"}
+            url={"/search"}
+            size={20}
+          />
         )}
 
         <DesktopNavigationButtons />
