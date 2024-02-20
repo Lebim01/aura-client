@@ -17,7 +17,7 @@ interface Props {
   index: number;
 }
 
-const Comments = ({ show, setShow, index }: Props) => {
+const Menu = ({ show, setShow, index }: Props) => {
   const [h, setH] = useState<boolean>(false);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const [rows, setRows] = useState(1);
@@ -90,7 +90,7 @@ const Comments = ({ show, setShow, index }: Props) => {
   return (
     <div
       className={classNamesCustom(
-        " items-end justify-end w-screen flex flex-col top-0 bg-black-1A bg-opacity-10 z-50",
+        " items-end justify-end w-screen flex flex-col top-0 bg-black-1D backdrop-blur-sm bg-opacity-10 z-50",
         {
           "h-custom-screen transition-all duration-500 absolute": show,
         },
@@ -110,7 +110,7 @@ const Comments = ({ show, setShow, index }: Props) => {
         className={classNamesCustom(
           "w-full bg-black-0D rounded-t-[16px] px-[16px] py-[24px] flex flex-col gap-y-[24px] items-center swipe-up",
           { "h-full transition-all duration-500 rounded-t-none": h },
-          { "h-[437px] transition-all duration-500": !h }
+          { "h-[241px] transition-all duration-500": !h }
         )}
         {...handlers}
       >
@@ -143,68 +143,47 @@ const Comments = ({ show, setShow, index }: Props) => {
             className="text-[14px] font-[500] leading-[130%] w-full text-center"
             {...handlers}
           >
-            Comentarios
+            Cambia tu foto perfil
           </span>
         </div>
-        <div
-          className="flex flex-col gap-y-[21px] justify-start w-full overflow-y-auto hidescroll flex-1 z-50"
-          {...handlersComments}
-          onScroll={handleScroll}
-        >
-          <div className="flex gap-x-[8px] items-start">
+        <div className="flex flex-col gap-y-[16px] justify-start w-full overflow-y-auto hidescroll flex-1 z-50">
+          <div className="flex gap-x-[8px] items-center">
             <Image
-              src={""}
+              src={"/icons/gallery-green.svg"}
               alt=""
-              width={24}
-              height={24}
-              className="bg-gray-400 rounded-full min-w-[24px] min-h-[24px]"
+              width={20}
+              height={20}
+              className=""
             />
-            <div className="flex flex-col gap-y-[8px]">
-              <div className="flex flex-col">
-                <div className="flex gap-x-[4px]">
-                  <span>Carlos Martínez</span>
-                  <span>•</span>
-                  <span>1d</span>
-                </div>
-                <span
-                  className="text-[12px] leading-[130%] overflow-hidden block text-ellipsis max-h-[calc(2*1.3*12px)]"
-                  style={{
-                    display: "-webkit-box",
-                    WebkitLineClamp: "2",
-                    WebkitBoxOrient: "vertical",
-                  }}
-                >
-                  Lorem ipsum dolor sit amet consectetur. Maecenas sit nisi a ac
-                  in amet nullam. Morbi aliquam cras sit quis pharetra integer.
-                  Lacus auctor suscipit in nulla.
-                </span>
-              </div>
-              <span className="font-[700] text-[12px] leading-[120%]">
-                Responder
-              </span>
-            </div>
+            <span className="text-[12px] font-[600] leading-[150%] capitalize">
+              Subir foto
+            </span>
           </div>
-        </div>
-        <div className="w-full flex items-center gap-x-[8px]">
-          <div className="w-[32px] h-[32px]">
+
+          <div className="flex gap-x-[8px] items-center">
             <Image
-              src={""}
+              src={"/icons/camera-green.svg"}
               alt=""
-              width={32}
-              height={32}
-              className="bg-gray-400 rounded-full min-w-[24px] min-h-[24px]"
+              width={20}
+              height={20}
+              className=""
             />
+            <span className="text-[12px] font-[600] leading-[150%] capitalize">
+              Tomar foto
+            </span>
           </div>
-          <div className="flex w-full px-[16px] py-[12px] border border-border-comment-input rounded-[6px] ">
-            <textarea
-              placeholder="Escribe algo..."
-              rows={rows}
-              className="w-full bg-transparent focus:ring-transparent focus:outline-none h-auto "
-              value={text}
-              onChange={handleChange}
-              style={{ resize: "none" }}
+
+          <div className="flex gap-x-[8px] items-center">
+            <Image
+              src={"/icons/trash-red.svg"}
+              alt=""
+              width={20}
+              height={20}
+              className=""
             />
-            <Image src={"/icons/happy.svg"} alt="" width={16} height={16} />
+            <span className="text-[12px] font-[600] leading-[150%] capitalize">
+              Eliminar foto de perfil
+            </span>
           </div>
         </div>
       </div>
@@ -212,4 +191,4 @@ const Comments = ({ show, setShow, index }: Props) => {
   );
 };
 
-export default Comments;
+export default Menu;

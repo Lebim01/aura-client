@@ -26,6 +26,8 @@ const config: Config = {
         "border-comment-input": "rgba(255, 255, 255, 0.23)",
         "black-18": "#181818",
         "black-29": "#292929",
+        "black-1D": "#1D1D1DCC",
+        "black-1A": "#1A1A1A",
       },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
