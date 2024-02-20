@@ -19,7 +19,7 @@ const InputSearch = ({ url, iconactive, icon, size }: Props) => {
   const pathname = usePathname();
   const isMobile = useIsMobile();
   const [search, setSearch] = useState("");
-  const { setFilters } = useFilters();
+  const { filters, setFilters } = useFilters();
 
   const setFocuseable = () => {
     ref.current?.focus();
@@ -46,6 +46,13 @@ const InputSearch = ({ url, iconactive, icon, size }: Props) => {
 
     return () => clearTimeout(timer);
   }, [search]);
+
+  useEffect(() => {
+    if (filters) {
+      setSearch(filters);
+      console.log(filters);
+    }
+  }, [filters]);
 
   return (
     <div
