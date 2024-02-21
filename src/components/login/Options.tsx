@@ -64,7 +64,7 @@ const Options = () => {
           background="bg-white"
         />
 
-        <SocialButton
+        {/*         <SocialButton
           icon="/login/icons/facebook.svg"
           textcolor="text-white"
           text="Continue with Facebook"
@@ -76,7 +76,7 @@ const Options = () => {
           textcolor="text-white"
           text="Continue with Apple"
           background="bg-black"
-        />
+        /> */}
       </div>
       <HaveAccount
         question="¿Aún no tienes cuenta?"
