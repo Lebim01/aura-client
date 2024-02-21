@@ -2,7 +2,7 @@
 
 import Checkbox from "./components/Checkbox";
 import Platforms from "./components/Platforms";
-import ButtonCommon from "@/components/common/ButtonCommon";
+import ButtonCommonGreen from "@/components/common/ButtonCommonGreen";
 
 const options = [
   { label: "Acción", value: "", img: "/categories/accion.png" },
@@ -68,7 +68,7 @@ const CategoryFilters = () => {
               })}
             </div>
           </div>
-          <ButtonCommon text="BUSCAR" disabled={true} onClick={() => {}} />
+          <ButtonCommonGreen text="BUSCAR" disabled={true} onClick={() => {}} />
         </div>
       </div>
     </div>

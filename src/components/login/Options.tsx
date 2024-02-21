@@ -5,7 +5,8 @@ import HaveAccount from "@/components/common/HaveAccount";
 import SocialButton from "@/components/common/SocialButton";
 import Separator from "@/components/common/Separator";
 import ButtonCommon from "@/components/common/ButtonCommon";
-
+import { useRouter } from "next/router";
+import useFakeLogin from "@/store/useFakeLogin";
 interface UserData {
   mail: string;
   pass: string;
@@ -19,6 +20,9 @@ const UserDataINIT = {
 const Options = () => {
   const [data, setData] = useState<UserData>(UserDataINIT);
   const [disabled, setDisabled] = useState(true);
+  const router = useRouter();
+  const { login } = useFakeLogin();
+
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setData((prevState) => ({
@@ -53,7 +57,14 @@ const Options = () => {
           onChange={handleChange}
         />
 
-        <ButtonCommon text="INGRESAR" disabled={disabled} onClick={() => {}} />
+        <ButtonCommon
+          text="INGRESAR"
+          disabled={disabled}
+          onClick={() => {
+            login();
+            router.push("/dashboard");
+          }}
+        />
 
         <Separator />
 

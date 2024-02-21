@@ -1,15 +1,22 @@
 "use client";
 
+import useFakeLogin from "@/store/useFakeLogin";
 import Image from "next/image";
 import { useRouter } from "next/router";
 
 const HeaderDashboard = () => {
   const router = useRouter();
+  const { isLoggedIn } = useFakeLogin();
 
   return (
-    <div className="flex md:pt-[16px] justify-between items-center w-full md:p-[14px] md:bg-black-29 md:rounded-[16px]">
+    <div
+      className="flex md:pt-[16px] justify-between items-center w-full md:p-[14px] md:bg-black-29 md:rounded-[16px]"
+      onClick={() => {
+        router.push(isLoggedIn ? "/profile" : "/login");
+      }}
+    >
       <label className="text-[16px] leading-[130%] font-[700]">
-        Bienvenido, Marcos
+        {isLoggedIn ? " Bienvenido, Marcos" : "Inicia sesión"}
       </label>
       <div className="flex gap-x-[8px]">
         {router.pathname !== "/search" && (
@@ -26,7 +33,7 @@ const HeaderDashboard = () => {
         <div
           className="w-fit border border-yellow-aura-accent rounded-full p-[4px] shadow-[0px_0px_0px_3px_rgba(251,188,5,0.20)]"
           onClick={() => {
-            router.push("/profile");
+            router.push(isLoggedIn ? "/profile" : "/login");
           }}
         >
           <Image

@@ -35,7 +35,7 @@ export default function Dashboard() {
           title="Lo que nadie te dice de..."
           id="1"
         />
-        <VideoCaroussel videos={tres_series} title="Tres series" id="2" />
+        {/* <VideoCaroussel videos={tres_series} title="Tres series" id="2" /> */}
         <VideoCaroussel videos={resenias} title="Reseñas" id="3" />
       </div>
       <Footer />
