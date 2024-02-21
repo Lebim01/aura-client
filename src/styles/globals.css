@@ -70,6 +70,24 @@ body {
   background-color: transparent;
 }
 
+.scrollnice::-webkit-scrollbar {
+  height: 8px;
+}
+
+.scrollnice::-webkit-scrollbar-track {
+  background: rgba(38, 38, 38, 0.7);
+  border-radius: 10px;
+}
+
+.scrollnice::-webkit-scrollbar-thumb {
+  background: rgba(38, 38, 38, 0.7);
+  border-radius: 10px;
+}
+
+.scrollnice::-webkit-scrollbar-thumb:hover {
+  background: rgba(38, 38, 38, 0.7);
+}
+
 .image-viewer {
   overflow: hidden;
   position: relative;
