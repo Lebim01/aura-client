@@ -39,6 +39,11 @@ const config: Config = {
           "linear-gradient(to top, white, rgba(255, 255, 255, 0))",
         "bg-gradient-discovery-left":
           "linear-gradient(270deg, #0D0D0D 0%, #0D0D0D 0.01%, rgba(13, 13, 13, 0.00) 15.9%)",
+        "bg-green-button":
+          "linear-gradient(91deg, #BFE06C -1.08%, #4FCF76 100%)",
+      },
+      boxShadow: {
+        "custom-green": "0px 0px 8px 0px rgba(183, 244, 106, 0.20)",
       },
       aspectRatio: {
         tiktok: "9/16",

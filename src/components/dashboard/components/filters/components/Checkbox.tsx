@@ -4,18 +4,18 @@ import Image from "next/image";
 interface Props {
   label: string;
   value: string;
+  image: string;
 }
-const Checkbox = ({ label, value }: Props) => {
+const Checkbox = ({ label, value, image }: Props) => {
   return (
-    <div className="flex gap-x-[4px] items-center">
-      <Image
-        src={"/icons/checkbox_unchecked.svg"}
-        width={16}
-        height={16}
-        alt=""
-      />
-      <span className="text-[12px] font-[500] leading-[12px]">{label}</span>
-    </div>
+    <Image
+      src={image}
+      width={0}
+      height={0}
+      sizes="100vw"
+      style={{ width: "100%", height: "auto" }}
+      alt=""
+    />
   );
 };
 

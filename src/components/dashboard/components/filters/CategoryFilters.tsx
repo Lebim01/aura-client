@@ -5,15 +5,23 @@ import Platforms from "./components/Platforms";
 import ButtonCommon from "@/components/common/ButtonCommon";
 
 const options = [
-  { label: "Acción", value: "" },
-  { label: "Aventura", value: "" },
-  { label: "Ciencia Ficción", value: "" },
-  { label: "Comedia", value: "" },
-  { label: "Documentales", value: "" },
-  { label: "Drama", value: "" },
-  { label: "Fantasía", value: "" },
-  { label: "Suspenso", value: "" },
-  { label: "Terror", value: "" },
+  { label: "Acción", value: "", img: "/categories/accion.png" },
+  { label: "Aventura", value: "", img: "/categories/aventura.png" },
+  {
+    label: "Ciencia Ficción",
+    value: "",
+    img: "/categories/cienciaficcion.png",
+  },
+  { label: "Comedia", value: "", img: "/categories/comedia.png" },
+  {
+    label: "Documentales",
+    value: "",
+    img: "/categories/documentales.png",
+  },
+  { label: "Drama", value: "", img: "/categories/drama.png" },
+  { label: "Fantasía", value: "", img: "/categories/fantasia.png" },
+  { label: "Suspenso", value: "", img: "/categories/suspenso.png" },
+  { label: "Terror", value: "", img: "/categories/terror.png" },
 ];
 
 const platforms = [
@@ -33,10 +41,15 @@ const CategoryFilters = () => {
             ¿Qué quieres ver hoy?
           </span>
           <div className="w-full flex justify-between">
-            <div className="grid grid-cols-3 gap-4">
+            <div className="grid grid-cols-3 gap-[8px] w-full">
               {options.map((item: any, index: number) => {
                 return (
-                  <Checkbox label={item.label} value={item.value} key={index} />
+                  <Checkbox
+                    label={item.label}
+                    value={item.value}
+                    image={item.img}
+                    key={index}
+                  />
                 );
               })}
             </div>
@@ -46,13 +59,14 @@ const CategoryFilters = () => {
           <span className="font-[600] leading-[150%] text-[14px]">
             Plataformas
           </span>
-
-          <div className="flex justify-between">
-            {platforms.map((item: any, index: number) => {
-              return (
-                <Platforms icon={item.icon} value={item.value} key={index} />
-              );
-            })}
+          <div className="flex justify-center items-center">
+            <div className="grid grid-cols-3 gap-[8px] justify-center items-center">
+              {platforms.map((item: any, index: number) => {
+                return (
+                  <Platforms icon={item.icon} value={item.value} key={index} />
+                );
+              })}
+            </div>
           </div>
           <ButtonCommon text="BUSCAR" disabled={true} onClick={() => {}} />
         </div>
