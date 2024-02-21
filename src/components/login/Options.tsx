@@ -1,4 +1,3 @@
-"use client";
 import React, { useState, ChangeEvent, useEffect } from "react";
 import InputReturn from "@/components/common/InputReturn";
 import HaveAccount from "@/components/common/HaveAccount";

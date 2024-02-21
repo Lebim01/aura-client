@@ -4,6 +4,7 @@ import { VideoProps } from "../discovery/VideoControllerDashboard";
 import VideoHeader from "../discovery/VideoHeader";
 import InfoReview from "../discovery/InfoReview";
 import { IoVolumeHighSharp, IoVolumeMute } from "react-icons/io5";
+import useIsMobile from "@/hooks/useIsMobile";
 
 const Video = forwardRef(
   (
@@ -21,7 +22,7 @@ const Video = forwardRef(
     const [showIcon, setShowIcon] = useState(false);
     const [iconKey, setIconKey] = useState(0);
     const showIconTimeoutRef = useRef<NodeJS.Timeout | null>(null);
-
+    const isMobile = useIsMobile();
     useEffect(() => {
       setShowIcon(true);
       setIconKey((prevKey) => prevKey + 1);
@@ -40,6 +41,12 @@ const Video = forwardRef(
       };
     }, [muted]);
 
+    /*     useEffect(() => {
+      if (isMobile) {
+        toggleMute();
+      }
+    }, [isMobile]);
+ */
     return (
       <div className="rounded-lg  relative overflow-hidden min-h-[518px] flex flex-col md:min-w-[358px]">
         {/* <VideoHeader /> */}
