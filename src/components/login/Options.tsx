@@ -5,7 +5,8 @@ import SocialButton from "@/components/common/SocialButton";
 import Separator from "@/components/common/Separator";
 import ButtonCommon from "@/components/common/ButtonCommon";
 import { useRouter } from "next/router";
-import useFakeLogin from "@/store/useFakeLogin";
+import { signIn } from "next-auth/react";
+
 interface UserData {
   mail: string;
   pass: string;
@@ -20,7 +21,13 @@ const Options = () => {
   const [data, setData] = useState<UserData>(UserDataINIT);
   const [disabled, setDisabled] = useState(true);
   const router = useRouter();
-  const { login } = useFakeLogin();
+
+  const login = (username: string, password: string) => {
+    signIn("credentials", {
+      username,
+      password,
+    });
+  };
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -60,8 +67,7 @@ const Options = () => {
           text="INGRESAR"
           disabled={disabled}
           onClick={() => {
-            login();
-            router.push("/dashboard");
+            login(data.mail, data.pass);
           }}
         />
 
@@ -72,6 +78,9 @@ const Options = () => {
           textcolor="text-black text-opacity-50"
           text="Continue with Google"
           background="bg-white"
+          onClick={() => {
+            signIn("google");
+          }}
         />
 
         {/*         <SocialButton
