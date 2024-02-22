@@ -10,7 +10,7 @@ interface VideosMutedStore {
 }
 
 const useVideoMute = create<VideosMutedStore>((set) => ({
-  muted: true,
+  muted: false,
   indexVideo: null,
   sectionId: "",
   toggleMute: () =>

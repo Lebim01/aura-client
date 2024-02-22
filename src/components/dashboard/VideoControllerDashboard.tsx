@@ -8,7 +8,7 @@ export type VideoProps = {
   videoUrl: string;
   videoIndex: number;
   ref: Ref<HTMLVideoElement>;
-  id: string;
+  sectionId: string;
 };
 
 type Props = {
@@ -16,22 +16,22 @@ type Props = {
   videoIndex: number;
   Component: FC<VideoProps>;
   layout: "desktop" | "mobile";
-  id: string;
+  sectionId: string;
 };
 
 const VideoControllerDashboard: FC<Props> = ({
   Component,
   videoIndex,
   videoUrl,
-  layout,
-  id,
+  sectionId,
 }) => {
   const interacted = useUserInteraction();
   const {
-    setSwipeIndex,
-    position: { swipeIndex },
-  } = useSwipeVideos();
-  const { muted, toggleMute, indexVideo, sectionId } = useVideoMute();
+    muted,
+    toggleMute,
+    indexVideo: indexVideoZustand,
+    sectionId: sectionIdZustand,
+  } = useVideoMute();
   const isMobile = useIsMobile();
   const videoEl = useRef<null | HTMLVideoElement>(null);
   const [ref, entry] = useIntersectionObserver({
@@ -57,7 +57,10 @@ const VideoControllerDashboard: FC<Props> = ({
     } else {
       try {
         if (videoEl.current && interacted) {
-          if (!muted && indexVideo === videoIndex && id === sectionId) {
+          if (
+            indexVideoZustand === videoIndex &&
+            sectionId === sectionIdZustand
+          ) {
             videoEl.current.play();
           } else {
             videoEl.current.pause();
@@ -75,7 +78,13 @@ const VideoControllerDashboard: FC<Props> = ({
 
   useEffect(() => {
     playVideoIndex();
-  }, [swipeIndex, videoIndex, interacted, entry?.intersectionRatio, muted]);
+  }, [
+    indexVideoZustand,
+    sectionIdZustand,
+    interacted,
+    entry?.intersectionRatio,
+    muted,
+  ]);
 
   return (
     <div ref={ref}>
@@ -83,7 +92,7 @@ const VideoControllerDashboard: FC<Props> = ({
         ref={onRenderVideo}
         videoUrl={videoUrl}
         videoIndex={videoIndex}
-        id={id}
+        sectionId={sectionId}
       />
     </div>
   );

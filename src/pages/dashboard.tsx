@@ -3,14 +3,12 @@ import React from "react";
 import Footer from "@/components/common/Footer";
 import DesktopLayout from "@/components/common/DesktopLayout";
 import VideoCaroussel from "@/components/dashboard/components/Sections/VideoCaroussel";
+import useIsMobile from "@/hooks/useIsMobile";
 
 const lo_que_nadie_te_dice = [
-  "https://pub-bf9da7896edf4ee98e6d6dd8e72340c7.r2.dev/videos%2Flo_que_nadie_te_dice_de%2FGaby%20Meza.mov",
-  "https://pub-bf9da7896edf4ee98e6d6dd8e72340c7.r2.dev/videos%2Flo_que_nadie_te_dice_de%2FHiromi%20Kamata.mov",
-  "https://pub-bf9da7896edf4ee98e6d6dd8e72340c7.r2.dev/videos%2Flo_que_nadie_te_dice_de%2FDiana%20Su.mov",
-  "https://pub-bf9da7896edf4ee98e6d6dd8e72340c7.r2.dev/videos%2Flo_que_nadie_te_dice_de%2FBilly%20Rovzar.mov",
-  "https://pub-bf9da7896edf4ee98e6d6dd8e72340c7.r2.dev/videos%2Flo_que_nadie_te_dice_de%2FJesus%20Iglesias.mov",
-  "https://pub-bf9da7896edf4ee98e6d6dd8e72340c7.r2.dev/videos%2Flo_que_nadie_te_dice_de%2FJavier%20Ibarreche.mov",
+  "https://pub-bf9da7896edf4ee98e6d6dd8e72340c7.r2.dev/videos%2Flo_que_nadie_te_dice_de%2FGaby%20Meza.mp4",
+  "https://pub-bf9da7896edf4ee98e6d6dd8e72340c7.r2.dev/videos%2Flo_que_nadie_te_dice_de%2FHiromi%20Kamata.mp4",
+  "https://pub-bf9da7896edf4ee98e6d6dd8e72340c7.r2.dev/videos%2Flo_que_nadie_te_dice_de%2FDiana%20Su.mp4",
 ];
 
 const tres_series = [
@@ -23,20 +21,28 @@ const resenias = [
   "https://pub-bf9da7896edf4ee98e6d6dd8e72340c7.r2.dev/videos%2Frese%C3%B1as%2Fssstik.io_1708378327086.mp4",
   "https://pub-bf9da7896edf4ee98e6d6dd8e72340c7.r2.dev/videos%2Frese%C3%B1as%2F7aea3551-69c3-4a48-a7ba-9a5c2e0eac44.MP4",
   "https://pub-bf9da7896edf4ee98e6d6dd8e72340c7.r2.dev/videos%2Frese%C3%B1as%2F9a3b3dda-e4a0-45cd-83c2-5a06abb49b41.MP4",
-  "https://pub-bf9da7896edf4ee98e6d6dd8e72340c7.r2.dev/videos%2Frese%C3%B1as%2Fedc5d3c6-3038-4ea4-8f2c-59dfc5e6c128.MP4",
 ];
 
 export default function Dashboard() {
+  const isMobile = useIsMobile();
   return (
     <DesktopLayout forceDisplay>
       <div className="flex flex-col gap-y-[16px] overflow-auto w-auto pb-[99px] md:py-[32px] relative">
         <VideoCaroussel
-          videos={lo_que_nadie_te_dice}
+          videos={lo_que_nadie_te_dice.slice(0, isMobile ? 2 : 3)}
           title="Lo que nadie te dice de..."
-          id="1"
+          sectionId="lo-que-nadie-te-dice-de"
         />
-        {/* <VideoCaroussel videos={tres_series} title="Tres series" id="2" /> */}
-        <VideoCaroussel videos={resenias} title="Reseñas" id="3" />
+        <VideoCaroussel
+          videos={tres_series}
+          title="Tres series"
+          sectionId="tres-series"
+        />
+        <VideoCaroussel
+          videos={resenias.slice(0, isMobile ? 2 : 3)}
+          title="Reseñas"
+          sectionId="resenas"
+        />
       </div>
       <Footer />
     </DesktopLayout>

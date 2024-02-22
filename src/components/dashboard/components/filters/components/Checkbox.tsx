@@ -10,8 +10,8 @@ const Checkbox = ({ label, value, image }: Props) => {
   return (
     <Image
       src={image}
-      width={0}
-      height={0}
+      width={150}
+      height={120}
       sizes="100vw"
       style={{ width: "100%", height: "auto" }}
       alt=""
