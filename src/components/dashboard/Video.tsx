@@ -19,7 +19,7 @@ const Video = forwardRef(
     const [showIcon, setShowIcon] = useState(false);
     const [iconKey, setIconKey] = useState(0);
     const showIconTimeoutRef = useRef<NodeJS.Timeout | null>(null);
-    
+
     useEffect(() => {
       setShowIcon(true);
       setIconKey((prevKey) => prevKey + 1);
@@ -38,7 +38,7 @@ const Video = forwardRef(
       };
     }, [muted]);
 
-    console.log({muted})
+    console.log({ muted });
 
     return (
       <div className="rounded-lg  relative overflow-hidden min-h-[518px] flex flex-col md:min-w-[358px]">
@@ -49,7 +49,11 @@ const Video = forwardRef(
           playsInline
           className="object-cover min-w-[300px] min-h-50vh"
           onClick={() => {
-            if(videoIndex == indexVideoZustand && sectionId == sectionIdZustand || (muted)){
+            if (
+              (videoIndex == indexVideoZustand &&
+                sectionId == sectionIdZustand) ||
+              muted
+            ) {
               toggleMute();
             }
             setIndexVideo(videoIndex);
@@ -65,12 +69,12 @@ const Video = forwardRef(
             className="icon-fade-in-out absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-[80px]"
             key={iconKey}
           >
-            {muted && indexVideoZustand === videoIndex && sectionId === sectionIdZustand && (
-              <IoVolumeMute />
-            )}
-            {!muted && indexVideoZustand === videoIndex && sectionId === sectionIdZustand && (
-              <IoVolumeHighSharp />
-            )}
+            {muted &&
+              indexVideoZustand === videoIndex &&
+              sectionId === sectionIdZustand && <IoVolumeMute />}
+            {!muted &&
+              indexVideoZustand === videoIndex &&
+              sectionId === sectionIdZustand && <IoVolumeHighSharp />}
           </div>
         )}
       </div>
