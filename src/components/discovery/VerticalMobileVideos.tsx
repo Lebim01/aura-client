@@ -72,7 +72,7 @@ const VerticalSliderVideos = () => {
   });
 
   useEffect(() => {
-    if (position.swipeIndex >= 0 && videos) {
+    if (position.swipeIndex >= 0 && videos && videos[position.swipeIndex]?.id) {
       markWatched(videos[position.swipeIndex]?.id);
     }
     if (position.swipeIndex === videos.length - 1) {
