@@ -6,9 +6,9 @@ import VideoCaroussel from "@/components/dashboard/components/Sections/VideoCaro
 import useIsMobile from "@/hooks/useIsMobile";
 
 const lo_que_nadie_te_dice = [
-  "https://pub-bf9da7896edf4ee98e6d6dd8e72340c7.r2.dev/videos%2Flo_que_nadie_te_dice_de%2FGaby%20Meza.mov",
-  "https://pub-bf9da7896edf4ee98e6d6dd8e72340c7.r2.dev/videos%2Flo_que_nadie_te_dice_de%2FHiromi%20Kamata.mov",
-  "https://pub-bf9da7896edf4ee98e6d6dd8e72340c7.r2.dev/videos%2Flo_que_nadie_te_dice_de%2FDiana%20Su.mov",
+  "https://pub-bf9da7896edf4ee98e6d6dd8e72340c7.r2.dev/videos%2Flo_que_nadie_te_dice_de%2FGaby%20Meza.mp4",
+  "https://pub-bf9da7896edf4ee98e6d6dd8e72340c7.r2.dev/videos%2Flo_que_nadie_te_dice_de%2FHiromi%20Kamata.mp4",
+  "https://pub-bf9da7896edf4ee98e6d6dd8e72340c7.r2.dev/videos%2Flo_que_nadie_te_dice_de%2FDiana%20Su.mp4",
 ];
 
 const tres_series = [
