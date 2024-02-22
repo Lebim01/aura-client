@@ -38,6 +38,8 @@ const Video = forwardRef(
       };
     }, [muted]);
 
+    console.log({muted})
+
     return (
       <div className="rounded-lg  relative overflow-hidden min-h-[518px] flex flex-col md:min-w-[358px]">
         <video
@@ -47,7 +49,7 @@ const Video = forwardRef(
           playsInline
           className="object-cover min-w-[300px] min-h-50vh"
           onClick={() => {
-            if(videoIndex == indexVideoZustand && sectionId == sectionIdZustand){
+            if(videoIndex == indexVideoZustand && sectionId == sectionIdZustand || (muted)){
               toggleMute();
             }
             setIndexVideo(videoIndex);
