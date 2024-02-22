@@ -1,5 +1,5 @@
 import useSwipeVideos from "@/store/useSwipeVideos";
-import { Fragment, useEffect, useState } from "react";
+import { FC, Fragment, useEffect, useState } from "react";
 import { useSwipeable } from "react-swipeable";
 import VideoMobile from "./VideoMobile";
 import Footer from "../common/Footer";
@@ -7,11 +7,7 @@ import Image from "next/image";
 import VideoController from "./VideoController";
 import { useRouter } from "next/navigation";
 import { api } from "@/hooks/axios";
-/* const videos = [
-  "https://pub-bf9da7896edf4ee98e6d6dd8e72340c7.r2.dev/videos%2Fssstik.io_1707711428317.mp4",
-  "https://pub-bf9da7896edf4ee98e6d6dd8e72340c7.r2.dev/videos%2Fssstik.io_1707712602563.mp4",
-  "https://pub-bf9da7896edf4ee98e6d6dd8e72340c7.r2.dev/videos%2Fssstik.io_1707713022169.mp4",
-]; */
+import useVideos from "../common/hooks/useVideos";
 
 const HeaderMobile = () => {
   const { back } = useRouter();
@@ -31,21 +27,13 @@ const HeaderMobile = () => {
   );
 };
 
-const VerticalSliderVideos = () => {
-  const router = useRouter();
-  const { position, setSwipeIndex } = useSwipeVideos();
-  const [videos, setVideos] = useState<any>([]);
+type Props = {
+  apiUrl: string;
+};
 
-  const getVideos = async () => {
-    try {
-      const videos_result = await api.get(`/dashboard/discovery`);
-      setVideos((prevVideos: any) => {
-        return [...prevVideos, ...videos_result.data];
-      });
-    } catch (e) {
-      console.log(e);
-    }
-  };
+const VerticalSliderVideos: FC<Props> = (props) => {
+  const { position, setSwipeIndex } = useSwipeVideos();
+  const { videos, fetchMore } = useVideos(props.apiUrl);
 
   const markWatched = async (id: string) => {
     const videoIndex = videos.findIndex((video: any) => video.id === id);
@@ -57,19 +45,10 @@ const VerticalSliderVideos = () => {
       await api.post(`/dashboard/discovery-watched`, {
         id_video: id,
       });
-      setVideos((prevVideos: any) =>
-        prevVideos.map((video: any, index: number) =>
-          index === videoIndex ? { ...video, watched: true } : video
-        )
-      );
     } catch (e) {
       console.log(e);
     }
   };
-
-  useEffect(() => {
-    getVideos();
-  }, []);
 
   const handlers = useSwipeable({
     onSwipedUp: () =>
@@ -86,7 +65,7 @@ const VerticalSliderVideos = () => {
 
   useEffect(() => {
     if (position.swipeIndex === videos.length - 1) {
-      getVideos();
+      fetchMore();
     }
 
     const originalStyle = window.getComputedStyle(document.body).overflow;
