@@ -71,7 +71,7 @@ body {
 }
 
 .scrollnice::-webkit-scrollbar {
-  height: 8px;
+  height: 6px;
 }
 
 .scrollnice::-webkit-scrollbar-track {
@@ -80,7 +80,7 @@ body {
 }
 
 .scrollnice::-webkit-scrollbar-thumb {
-  background: rgba(38, 38, 38, 0.7);
+  background: rgba(45, 45, 45, 1);
   border-radius: 10px;
 }
 

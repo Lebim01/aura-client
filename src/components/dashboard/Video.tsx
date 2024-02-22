@@ -1,28 +1,25 @@
 import { ForwardedRef, forwardRef, useEffect, useState, useRef } from "react";
 import useVideoMute from "@/store/useVideoMute";
-import { VideoProps } from "../discovery/VideoControllerDashboard";
-import VideoHeader from "../discovery/VideoHeader";
-import InfoReview from "../discovery/InfoReview";
+import { VideoProps } from "./VideoControllerDashboard";
 import { IoVolumeHighSharp, IoVolumeMute } from "react-icons/io5";
-import useIsMobile from "@/hooks/useIsMobile";
 
 const Video = forwardRef(
   (
-    { videoUrl, videoIndex, id }: VideoProps,
+    { videoUrl, videoIndex, sectionId }: VideoProps,
     ref: ForwardedRef<HTMLVideoElement>
   ) => {
     const {
       muted,
       toggleMute,
       setIndexVideo,
-      indexVideo,
+      indexVideo: indexVideoZustand,
       setSectionId,
-      sectionId,
+      sectionId: sectionIdZustand,
     } = useVideoMute();
     const [showIcon, setShowIcon] = useState(false);
     const [iconKey, setIconKey] = useState(0);
     const showIconTimeoutRef = useRef<NodeJS.Timeout | null>(null);
-    const isMobile = useIsMobile();
+    
     useEffect(() => {
       setShowIcon(true);
       setIconKey((prevKey) => prevKey + 1);
@@ -41,15 +38,8 @@ const Video = forwardRef(
       };
     }, [muted]);
 
-    /*     useEffect(() => {
-      if (isMobile) {
-        toggleMute();
-      }
-    }, [isMobile]);
- */
     return (
       <div className="rounded-lg  relative overflow-hidden min-h-[518px] flex flex-col md:min-w-[358px]">
-        {/* <VideoHeader /> */}
         <video
           ref={ref}
           loop
@@ -57,9 +47,11 @@ const Video = forwardRef(
           playsInline
           className="object-cover min-w-[300px] min-h-50vh"
           onClick={() => {
-            toggleMute();
+            if(videoIndex == indexVideoZustand && sectionId == sectionIdZustand){
+              toggleMute();
+            }
             setIndexVideo(videoIndex);
-            setSectionId(id);
+            setSectionId(sectionId);
           }}
           preload="metadata"
         >
@@ -71,10 +63,10 @@ const Video = forwardRef(
             className="icon-fade-in-out absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-[80px]"
             key={iconKey}
           >
-            {muted && indexVideo === videoIndex && id === sectionId && (
+            {muted && indexVideoZustand === videoIndex && sectionId === sectionIdZustand && (
               <IoVolumeMute />
             )}
-            {!muted && indexVideo === videoIndex && id === sectionId && (
+            {!muted && indexVideoZustand === videoIndex && sectionId === sectionIdZustand && (
               <IoVolumeHighSharp />
             )}
           </div>

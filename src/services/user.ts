@@ -1,4 +1,4 @@
-import axios from "axios";
+import axiosInstance from ".";
 
 export type Profile = {
   id: string;
@@ -24,7 +24,7 @@ export type SignUp = {
 };
 
 export const login = async (email: string, password: string) => {
-  return axios
+  return axiosInstance
     .post("/auth/login", {
       email,
       password,
@@ -33,7 +33,7 @@ export const login = async (email: string, password: string) => {
 };
 
 export const signUp = async (profile: SignUp) => {
-  return axios
+  return axiosInstance
     .post("/auth/register", {
       email: profile.email,
       password: profile.password,
