@@ -5,6 +5,7 @@ export const lo_que_nadie_te_dice = [
   "https://pub-bf9da7896edf4ee98e6d6dd8e72340c7.r2.dev/videos%2Flo_que_nadie_te_dice_de%2FBilly%20Rovzar.mp4",
   "https://pub-bf9da7896edf4ee98e6d6dd8e72340c7.r2.dev/videos%2Flo_que_nadie_te_dice_de%2FJavier%20Ibarreche.mp4",
   "https://pub-bf9da7896edf4ee98e6d6dd8e72340c7.r2.dev/videos%2Flo_que_nadie_te_dice_de%2FJesus%20Iglesias.mp4",
+  "https://pub-bf9da7896edf4ee98e6d6dd8e72340c7.r2.dev/videos%2Flo_que_nadie_te_dice_de%2FJuan%20Pablo%20Medina.mp4",
 ];
 
 export const tres_series = [
