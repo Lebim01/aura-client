@@ -48,13 +48,20 @@ const VerticalSliderVideos = () => {
   };
 
   const markWatched = async (id: string) => {
+    const videoIndex = videos.findIndex((video: any) => video.id === id);
+    if (videoIndex !== -1 && videos[videoIndex].watched) {
+      return;
+    }
+
     try {
-      const videos_result = await api.post(`/dashboard/discovery-watched`, {
+      await api.post(`/dashboard/discovery-watched`, {
         id_video: id,
       });
-      setVideos((prevVideos: any) => {
-        return [...prevVideos, ...videos_result.data];
-      });
+      setVideos((prevVideos: any) =>
+        prevVideos.map((video: any, index: number) =>
+          index === videoIndex ? { ...video, watched: true } : video
+        )
+      );
     } catch (e) {
       console.log(e);
     }
@@ -75,6 +82,9 @@ const VerticalSliderVideos = () => {
     if (position.swipeIndex >= 0 && videos && videos[position.swipeIndex]?.id) {
       markWatched(videos[position.swipeIndex]?.id);
     }
+  }, [position.swipeIndex, videos]);
+
+  useEffect(() => {
     if (position.swipeIndex === videos.length - 1) {
       getVideos();
     }
