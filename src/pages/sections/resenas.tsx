@@ -16,12 +16,12 @@ const ImageViewer = () => {
       >
         {(width || 0) < 768 && (
           <div className="md:hidden">
-            <VerticalMobileVideos apiUrl="/dashboard/resenas" />
+            <VerticalMobileVideos apiUrl="/dashboard/section/resenas" />
           </div>
         )}
         {(width || 0) >= 768 && (
           <div className="hidden md:block">
-            <VerticalDesktopVideos apiUrl="/dashboard/resenas" />
+            <VerticalDesktopVideos apiUrl="/dashboard/section/resenas" />
           </div>
         )}
       </div>
