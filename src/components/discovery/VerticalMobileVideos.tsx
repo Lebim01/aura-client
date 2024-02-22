@@ -81,6 +81,8 @@ const VerticalSliderVideos: FC<Props> = (props) => {
     };
   }, [position.swipeIndex]);
 
+  console.log(videos)
+
   return (
     <>
       {/*<HeaderMobile />*/}

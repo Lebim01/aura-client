@@ -14,7 +14,7 @@ const VerticalDesktopVideos: FC<Props> = (props) => {
       {videos.map((video, i) => (
         <Fragment key={i}>
           <VideoController
-            videoUrl={video}
+            videoUrl={video.url}
             videoIndex={i}
             Component={VideoDesktop}
             layout="desktop"
