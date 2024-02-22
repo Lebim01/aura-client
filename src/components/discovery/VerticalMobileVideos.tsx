@@ -1,17 +1,17 @@
 import useSwipeVideos from "@/store/useSwipeVideos";
-import { Fragment, useEffect } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { useSwipeable } from "react-swipeable";
 import VideoMobile from "./VideoMobile";
 import Footer from "../common/Footer";
 import Image from "next/image";
 import VideoController from "./VideoController";
 import { useRouter } from "next/navigation";
-
-const videos = [
+import { api } from "@/hooks/axios";
+/* const videos = [
   "https://pub-bf9da7896edf4ee98e6d6dd8e72340c7.r2.dev/videos%2Fssstik.io_1707711428317.mp4",
   "https://pub-bf9da7896edf4ee98e6d6dd8e72340c7.r2.dev/videos%2Fssstik.io_1707712602563.mp4",
   "https://pub-bf9da7896edf4ee98e6d6dd8e72340c7.r2.dev/videos%2Fssstik.io_1707713022169.mp4",
-];
+]; */
 
 const HeaderMobile = () => {
   const { back } = useRouter();
@@ -34,15 +34,51 @@ const HeaderMobile = () => {
 const VerticalSliderVideos = () => {
   const router = useRouter();
   const { position, setSwipeIndex } = useSwipeVideos();
+  const [videos, setVideos] = useState<any>([]);
+
+  const getVideos = async () => {
+    try {
+      const videos_result = await api.get(`/dashboard/discovery`);
+      setVideos((prevVideos: any) => {
+        return [...prevVideos, ...videos_result.data];
+      });
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  const markWatched = async (id: string) => {
+    try {
+      const videos_result = await api.post(`/dashboard/discovery-watched`, {
+        id_video: id,
+      });
+      setVideos((prevVideos: any) => {
+        return [...prevVideos, ...videos_result.data];
+      });
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  useEffect(() => {
+    getVideos();
+  }, []);
 
   const handlers = useSwipeable({
     onSwipedUp: () =>
-      setSwipeIndex(Math.min(position.swipeIndex + 1, ["", "", ""].length - 1)),
+      setSwipeIndex(Math.min(position.swipeIndex + 1, videos.length - 1)),
     onSwipedDown: () => setSwipeIndex(Math.max(position.swipeIndex - 1, 0)),
     trackMouse: true,
   });
 
   useEffect(() => {
+    if (position.swipeIndex >= 0 && videos) {
+      markWatched(videos[position.swipeIndex]?.id);
+    }
+    if (position.swipeIndex === videos.length - 1) {
+      getVideos();
+    }
+
     const originalStyle = window.getComputedStyle(document.body).overflow;
 
     if (position.swipeIndex > 0) {
@@ -60,11 +96,11 @@ const VerticalSliderVideos = () => {
     <>
       {/*<HeaderMobile />*/}
       <div {...handlers} className={"overflow-hidden relative w-full h-screen"}>
-        {videos.map((video, i) => (
+        {videos.map((video: any, i: number) => (
           <Fragment key={i}>
             <VideoController
               Component={VideoMobile}
-              videoUrl={video}
+              videoUrl={video.url}
               videoIndex={i}
               layout="mobile"
             />

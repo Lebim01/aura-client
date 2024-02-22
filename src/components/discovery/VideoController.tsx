@@ -50,6 +50,7 @@ const VideoController: FC<Props> = ({
     try {
       if (videoEl.current && interacted) {
         if (swipeIndex !== videoIndex) {
+          videoEl.current.currentTime = 0;
           videoEl.current.pause();
         }
         if (swipeIndex === videoIndex) {
