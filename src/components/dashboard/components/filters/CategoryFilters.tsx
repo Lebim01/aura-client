@@ -39,7 +39,9 @@ const CategoryFilters = () => {
   const [showRecommended, setShowRecommended] = useState(false);
   return (
     <>
-      {showRecommended && <Recommended setShow={setShowRecommended} />}
+      {showRecommended && (
+        <Recommended setShow={setShowRecommended} show={showRecommended} />
+      )}
 
       <div className="flex flex-col p-[16px] gap-y-[12px] md:gap-y-[16px] rounded-[12px] bg-menus md:w-full">
         <div className="flex flex-col gap-y-[12px] md:gap-y-[16px]">

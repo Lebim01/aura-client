@@ -29,9 +29,10 @@ const data = [
 
 interface Props {
   setShow: Dispatch<SetStateAction<boolean>>;
+  show: boolean;
 }
 
-const Recommended = ({ setShow }: Props) => {
+const Recommended = ({ setShow, show }: Props) => {
   const [index, setIndex] = useState(0);
   const { imgSrc, title, description } = data[index];
 
@@ -51,7 +52,11 @@ const Recommended = ({ setShow }: Props) => {
   });
 
   return (
-    <div className="fixed top-0 left-0 w-screen h-custom-screen bg-black-29 bg-opacity-80 flex justify-center items-center backdrop-blur-md z-[999999999]">
+    <div
+      className={`fixed top-0 left-0 w-screen h-custom-screen bg-black-29 bg-opacity-80 flex justify-center items-center backdrop-blur-md z-[999999999] ${
+        show ? "animate-fadeAndScale" : ""
+      }`}
+    >
       <div
         className="bg-black-0D rounded-[16px] relative transition-opacity duration-300"
         {...handlers}
