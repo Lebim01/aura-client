@@ -7,6 +7,9 @@ export type VideoProps = {
   videoUrl: string;
   videoIndex: number;
   ref: Ref<HTMLVideoElement>;
+  likes: number;
+  like_me: boolean;
+  id_video: string;
 };
 
 type Props = {
@@ -14,6 +17,9 @@ type Props = {
   videoIndex: number;
   Component: FC<VideoProps>;
   layout: "desktop" | "mobile";
+  likes: number;
+  like_me: boolean;
+  id_video: string;
 };
 
 const VideoController: FC<Props> = ({
@@ -21,6 +27,9 @@ const VideoController: FC<Props> = ({
   videoIndex,
   videoUrl,
   layout,
+  likes,
+  like_me,
+  id_video,
 }) => {
   const interacted = useUserInteraction();
   const {
@@ -76,6 +85,9 @@ const VideoController: FC<Props> = ({
         ref={onRenderVideo}
         videoUrl={videoUrl}
         videoIndex={videoIndex}
+        likes={likes}
+        like_me={like_me}
+        id_video={id_video}
       />
     </div>
   );

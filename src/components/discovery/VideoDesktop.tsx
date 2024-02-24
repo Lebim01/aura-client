@@ -7,7 +7,7 @@ import { IoVolumeHighSharp, IoVolumeMute } from "react-icons/io5";
 
 const VideoDesktop = forwardRef(
   (
-    { videoUrl, videoIndex }: VideoProps,
+    { videoUrl, videoIndex, likes, like_me, id_video }: VideoProps,
     ref: ForwardedRef<HTMLVideoElement>
   ) => {
     const { muted, toggleMute } = useVideoMute();
@@ -56,7 +56,13 @@ const VideoDesktop = forwardRef(
             {muted ? <IoVolumeMute /> : <IoVolumeHighSharp />}
           </div>
         )}
-        <InfoReview className="bottom-4" index={videoIndex} />
+        <InfoReview
+          className="bottom-4"
+          index={videoIndex}
+          likes={likes}
+          like_me={like_me}
+          id_video={id_video}
+        />
       </div>
     );
   }

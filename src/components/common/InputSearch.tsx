@@ -50,7 +50,6 @@ const InputSearch = ({ url, iconactive, icon, size }: Props) => {
   useEffect(() => {
     if (filters) {
       setSearch(filters);
-      console.log(filters);
     }
   }, [filters]);
 

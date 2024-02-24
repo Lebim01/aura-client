@@ -27,10 +27,26 @@ const useVideos = (apiUrl: string) => {
     getVideos();
   }, [apiUrl]);
 
+  const likeVideo = async (id: string, index: number) => {
+    try {
+      setVideos((prevVideos: any) => {
+        let _videos = prevVideos;
+        _videos[index].like_me = true;
+        return _videos;
+      });
+
+      const like_result = await api.get(`/likes/video/${id}`);
+    } catch (e) {
+      console.log(e);
+    } finally {
+    }
+  };
+
   return {
     videos,
     isLoading,
     fetchMore,
+    likeVideo,
   };
 };
 

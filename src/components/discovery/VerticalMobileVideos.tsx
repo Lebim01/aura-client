@@ -7,7 +7,7 @@ import Image from "next/image";
 import VideoController from "./VideoController";
 import { useRouter } from "next/navigation";
 import { api } from "@/hooks/axios";
-import useVideos from "../common/hooks/useVideos";
+import useVideos from "../../hooks/useVideos";
 
 const HeaderMobile = () => {
   const { back } = useRouter();
@@ -33,7 +33,7 @@ type Props = {
 
 const VerticalSliderVideos: FC<Props> = (props) => {
   const { position, setSwipeIndex } = useSwipeVideos();
-  const { videos, fetchMore } = useVideos(props.apiUrl);
+  const { videos, fetchMore } = useVideos();
 
   const markWatched = async (id: string) => {
     const videoIndex = videos.findIndex((video: any) => video.id === id);
@@ -50,6 +50,10 @@ const VerticalSliderVideos: FC<Props> = (props) => {
     }
   };
 
+  useEffect(() => {
+    fetchMore(props.apiUrl);
+  }, []);
+
   const handlers = useSwipeable({
     onSwipedUp: () =>
       setSwipeIndex(Math.min(position.swipeIndex + 1, videos.length - 1)),
@@ -65,7 +69,7 @@ const VerticalSliderVideos: FC<Props> = (props) => {
 
   useEffect(() => {
     if (position.swipeIndex === videos.length - 1) {
-      fetchMore();
+      fetchMore(props.apiUrl);
     }
 
     const originalStyle = window.getComputedStyle(document.body).overflow;
@@ -81,8 +85,6 @@ const VerticalSliderVideos: FC<Props> = (props) => {
     };
   }, [position.swipeIndex]);
 
-  console.log(videos)
-
   return (
     <>
       {/*<HeaderMobile />*/}
@@ -94,6 +96,9 @@ const VerticalSliderVideos: FC<Props> = (props) => {
               videoUrl={video.url}
               videoIndex={i}
               layout="mobile"
+              likes={video.likes}
+              like_me={video.like_me}
+              id_video={video.id}
             />
           </Fragment>
         ))}

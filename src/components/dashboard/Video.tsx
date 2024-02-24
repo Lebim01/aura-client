@@ -38,8 +38,6 @@ const Video = forwardRef(
       };
     }, [muted]);
 
-    console.log({ muted });
-
     return (
       <div className="rounded-lg  relative overflow-hidden min-h-[518px] flex flex-col md:min-w-[358px]">
         <video
