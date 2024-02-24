@@ -100,7 +100,7 @@ const Options = () => {
       <HaveAccount
         question="¿Aún no tienes cuenta?"
         hide_question={true}
-        sub_question="Registrate aquí"
+        sub_question="Regístrate aquí"
         url="/signup"
       />
     </div>

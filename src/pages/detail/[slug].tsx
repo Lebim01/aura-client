@@ -11,6 +11,7 @@ import { GetStaticPropsContext, GetStaticProps, GetStaticPaths } from "next";
 import { Actor, Genre, Movie, Platform } from "@/types/movies";
 import DesktopLayout from "@/components/common/DesktopLayout";
 import { getMovieBySlug } from "@/utils/neo4j";
+import Separator from "@/components/common/Separator";
 
 type Tabs = "credits" | "reviews" | "video";
 
@@ -32,12 +33,14 @@ export default function Detail({
 
   return (
     <DesktopLayout>
-      <div className="flex flex-col h-custom-screen-min w-screen h-fit bg-black-0D gap-y-[32px] hidescroll pb-[90px]">
+      <div className="flex flex-col h-screen w-screen gap-y-[32px] hidescroll pb-[90px] overflow-y-auto">
         <div className="flex flex-col gap-y-[32px] flex-1">
           {/* Cards */}
           {tab === "credits" && <Large movie={movie} genres={genres} />}
           {tab === "reviews" && <Middle movie={movie} genres={genres} />}
-
+          <div className="px-[16px]">
+            <Separator />
+          </div>
           {/*  {!loading && <Tabs option={tab} setTab={setTab} />}
         {loading && <TabsSkeleton/>}
         <div className="px-[16px]">

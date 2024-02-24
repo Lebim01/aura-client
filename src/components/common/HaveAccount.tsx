@@ -24,7 +24,7 @@ const HaveAccount = ({ question, hide_question, sub_question, url }: Props) => {
       )}
       <div className="flex gap-x-[5px]">
         <span>{question}</span>{" "}
-        <Link href={url} className="underline w-fit">
+        <Link href={url} className="underline w-fit text-green-enlaces">
           {sub_question}
         </Link>
       </div>

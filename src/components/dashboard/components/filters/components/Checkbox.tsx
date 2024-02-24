@@ -10,11 +10,12 @@ const Checkbox = ({ label, value, image }: Props) => {
   return (
     <Image
       src={image}
-      width={150}
-      height={120}
+      width={0}
+      height={0}
       sizes="100vw"
       style={{ width: "100%", height: "auto" }}
       alt=""
+      className="hover:scale-105 transition-transform duration-200 ease-in-out cursor-pointer "
     />
   );
 };

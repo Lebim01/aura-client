@@ -155,3 +155,13 @@ body {
 .last-item-gradient {
   background-image: linear-gradient(to left, transparent, black);
 }
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  -webkit-box-shadow: none !important;
+  -webkit-text-fill-color: white !important;
+  font: inherit !important;
+  transition: background-color 5000s ease-in-out 0s;
+}

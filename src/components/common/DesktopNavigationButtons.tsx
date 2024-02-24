@@ -10,7 +10,7 @@ const DesktopNavigationButtons = () => {
   const pathname = usePathname();
 
   return (
-    <div className="hidden md:flex flex-col gap-y-[24px] rounded-[12px] overflow-hidden bg-black-29 p-[16px]">
+    <div className="hidden md:flex flex-col gap-y-[24px] rounded-[12px]  bg-menus p-[16px]">
       {navigationOptions.map((item, index) => {
         return (
           <Fragment key={index}>
@@ -24,7 +24,7 @@ const DesktopNavigationButtons = () => {
             ) : (
               <Link
                 href={item.url}
-                className="text-[12px] hover:bg-black-29/50"
+                className="text-[12px] hover:scale-105 transition-transform duration-200 ease-in-out cursor-pointer "
                 key={index}
               >
                 <div className="flex space-x-[16px] md:space-x-[8px] items-center">

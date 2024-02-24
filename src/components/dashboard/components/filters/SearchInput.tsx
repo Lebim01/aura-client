@@ -56,7 +56,7 @@ const SearchInput = () => {
               focused,
           },
           {
-            "flex border-transparent w-full bg-black-18 border  rounded-[8px] py-[8px] max-h-[46px] min-h-[46px] items-center pl-[16px] shadow-[0px_0px_0px_3px_rgba(0,0,0,0.0)]":
+            "flex border-border-search w-full bg-black-18 border  rounded-[8px] py-[8px] max-h-[46px] min-h-[46px] items-center pl-[16px] shadow-[0px_0px_0px_3px_rgba(0,0,0,0.0)]":
               !focused && isMobile,
           }
         )}
@@ -73,7 +73,7 @@ const SearchInput = () => {
             { "h-fit": !focused },
             { "placeholder:text-yellow-aura-accent": focused }
           )}
-          placeholder={"¿Qué serie o película estás buscando?"}
+          placeholder={"¿Qué serie  estás buscando?"}
           ref={ref}
           value={filters}
           onChange={(e) => {

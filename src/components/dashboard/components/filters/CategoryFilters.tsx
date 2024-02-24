@@ -1,8 +1,11 @@
 "use client";
 
+import Image from "next/image";
 import Checkbox from "./components/Checkbox";
 import Platforms from "./components/Platforms";
-import ButtonCommonGreen from "@/components/common/ButtonCommonGreen";
+import ButtonCommon from "@/components/common/ButtonCommon";
+import Recommended from "./components/Recommended";
+import { useState } from "react";
 
 const options = [
   { label: "Acción", value: "", img: "/categories/accion.png" },
@@ -33,9 +36,12 @@ const platforms = [
   { icon: "/icons/hbo.svg", value: "" },
 ];
 const CategoryFilters = () => {
+  const [showRecommended, setShowRecommended] = useState(false);
   return (
-    <div className="w-full">
-      <div className="flex flex-col p-[16px] gap-y-[12px] md:gap-y-[16px] rounded-[12px] bg-black-29 md:w-full">
+    <>
+      {showRecommended && <Recommended setShow={setShowRecommended} />}
+
+      <div className="flex flex-col p-[16px] gap-y-[12px] md:gap-y-[16px] rounded-[12px] bg-menus md:w-full">
         <div className="flex flex-col gap-y-[12px] md:gap-y-[16px]">
           <span className="font-[600] leading-[150%] text-[14px]">
             ¿Qué quieres ver hoy?
@@ -68,10 +74,16 @@ const CategoryFilters = () => {
               })}
             </div>
           </div>
-          <ButtonCommonGreen text="BUSCAR" disabled={true} onClick={() => {}} />
+          <ButtonCommon
+            text="RECOMENDAR"
+            disabled={false}
+            onClick={() => {
+              setShowRecommended(true);
+            }}
+          />
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

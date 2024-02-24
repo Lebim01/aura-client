@@ -79,7 +79,7 @@ const InputSearch = ({ url, iconactive, icon, size }: Props) => {
           "border h-[48px] rounded-[6px] focus:outline-none bg-transparent  text-white border-none w-full flex items-center  placeholder:text-yellow-aura-accent placeholder:font-[500] placeholder:text-[12px] placeholder:leading-[12px] text-[12px]",
           { "h-fit": !focused }
         )}
-        placeholder={"¿Qué serie o película estás buscando?"}
+        placeholder={"¿Qué serie estás buscando?"}
         ref={ref}
         value={search}
         onChange={(e) => {

@@ -13,7 +13,10 @@ const jakarta = Plus_Jakarta_Sans({
   variable: "--font-jakarta",
 });
 
-export default function App({ Component, pageProps: { session, ...pageProps } }: AppProps) {
+export default function App({
+  Component,
+  pageProps: { session, ...pageProps },
+}: AppProps) {
   useEffect(() => {
     const vh = window.innerHeight * 0.01;
     document.documentElement.style.setProperty("--vh", `${vh}px`);
@@ -21,7 +24,9 @@ export default function App({ Component, pageProps: { session, ...pageProps } }:
 
   return (
     <SessionProvider session={session}>
-      <main className={`${jakarta.variable} font-jakarta md:bg-black-0D`}>
+      <main
+        className={`${jakarta.variable} font-jakarta bg-aura bg-contain md:bg-cover  bg-no-repeat bg-fixed md:bg-auradesktop`}
+      >
         <Head>
           <meta
             name="viewport"

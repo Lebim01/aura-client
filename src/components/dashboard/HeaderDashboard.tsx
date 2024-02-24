@@ -10,17 +10,17 @@ const HeaderDashboard = () => {
 
   return (
     <div
-      className="flex md:pt-[16px] justify-between items-center w-full md:p-[14px] md:bg-black-29 md:rounded-[16px]"
+      className="flex md:pt-[16px] justify-between items-center w-full md:p-[14px] md:bg-menus  md:rounded-[16px] hover:scale-105 transition-transform duration-200 ease-in-out cursor-pointer"
       onClick={() => {
         router.push(isLoggedIn ? "/profile" : "/login");
       }}
     >
-      <label className="text-[16px] leading-[130%] font-[700]">
+      <label className="text-[16px] leading-[130%] font-[700] cursor-pointer">
         {isLoggedIn ? " Bienvenido, Marcos" : "Inicia sesión"}
       </label>
       <div className="flex gap-x-[8px]">
         {router.pathname !== "/search" && (
-          <div className="rounded-full bg-yellow-aura-accent flex items-center justify-center w-[40px] h-[40px] md:hidden">
+          <div className="rounded-full bg-bg-green-button flex items-center justify-center w-[40px] h-[40px] md:hidden">
             <Image
               src={"/icons/filter.svg"}
               className="rounded-full"

@@ -13,7 +13,7 @@ export default function Login() {
   const router = useRouter();
 
   return (
-    <div className="flex w-screen h-custom-screen bg-dark-aura px-[27px] items-center justify-center  bg-aura bg-cover bg-no-repeat md:bg-auradesktop bg-center">
+    <div className="flex w-screen h-custom-screen px-[27px] items-center justify-center  ">
       {router.query.step === "welcome" && <Welcome />}
 
       <div className="flex flex-col bg-brown-aura py-[40px] px-[16px] gap-y-[32px] w-full items-center rounded-[16px] backdrop-blur-md border border-border-container md:max-w-[368px]">

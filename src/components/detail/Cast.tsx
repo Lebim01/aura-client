@@ -12,7 +12,7 @@ export default function Cast({ actors }: Props) {
       {actors?.map((item, index: number) => {
         return (
           <div
-            className="flex gap-x-[8px] items-center md:p-[8px] md:bg-black-29 md:rounded-[8px]"
+            className="flex gap-x-[8px] items-center md:p-[8px] md:bg-black-29 md:rounded-[8px] md:min-w-[216px]"
             key={index}
           >
             <Image

@@ -28,6 +28,10 @@ const config: Config = {
         "black-29": "#292929",
         "black-1D": "#1D1D1DCC",
         "black-1A": "#1A1A1A",
+        menus: "rgba(0, 0, 0, 0.50)",
+        "border-search": "rgba(107, 107, 107, 0.30)",
+        "green-opaque": "#C0FFD9",
+        "green-enlaces": "#4FD07E",
       },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
@@ -35,10 +39,11 @@ const config: Config = {
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
         aura: "url('/bgaura.png')",
         auradesktop: "url('/bgauradesktop.png')",
+        recommended: "url('/bg-recommended.png')",
         "bg-gradient-discovery":
           "linear-gradient(to top, white, rgba(255, 255, 255, 0))",
         "bg-gradient-discovery-left":
-          "linear-gradient(270deg, #0D0D0D 0%, #0D0D0D 0.01%, rgba(13, 13, 13, 0.00) 15.9%)",
+          "linear-gradient(270deg, #0D0D0D 0%, #0D0D0D 0.01%, rgba(13, 13, 13, 0.00) 8.9%)",
         "bg-green-button":
           "linear-gradient(91deg, #BFE06C -1.08%, #4FCF76 100%)",
       },
