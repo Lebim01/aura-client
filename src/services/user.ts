@@ -29,7 +29,10 @@ export const login = async (email: string, password: string) => {
       email,
       password,
     })
-    .then((r) => r.data);
+    .then((r) => {
+      console.log(r.data);
+      return r.data;
+    });
 };
 
 export const signUp = async (profile: SignUp) => {
@@ -47,4 +50,11 @@ export const getUserByEmail = async (
   email: string
 ): Promise<Profile | null> => {
   return null;
+};
+
+export const authMe = async (): Promise<Profile | null> => {
+  return axiosInstance
+    .get("/users/me")
+    .then((r) => r.data)
+    .catch(() => null);
 };

@@ -3,8 +3,15 @@ import type { NextAuthOptions, Session } from "next-auth";
 import GoogleProvider, { GoogleProfile } from "next-auth/providers/google";
 import CredentialsProvider from "next-auth/providers/credentials";
 import generatePassword from "generate-password";
-import { Profile, getUserByEmail, login, signUp } from "@/services/user";
+import {
+  Profile,
+  authMe,
+  getUserByEmail,
+  login,
+  signUp,
+} from "@/services/user";
 import { CustomSession } from "@/types/session";
+import axiosInstance from "@/services";
 
 export const authOptions: NextAuthOptions = {
   secret: process.env.NEXTAUTH_SECRET,
@@ -21,8 +28,15 @@ export const authOptions: NextAuthOptions = {
         password: { label: "Password", type: "password" },
       },
       async authorize(credentials, req) {
-        if (credentials?.username && credentials.password)
-          return login(credentials.username, credentials.password);
+        if (credentials?.username && credentials.password) {
+          const response = await login(
+            credentials.username,
+            credentials.password
+          );
+          axiosInstance.defaults.headers.Authorization = response.data;
+          const user = await authMe();
+          return user;
+        }
         return null;
       },
     }),
