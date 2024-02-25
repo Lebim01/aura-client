@@ -1,17 +1,11 @@
 import NextAuth from "next-auth";
-import type { NextAuthOptions, Session } from "next-auth";
+import type { NextAuthOptions } from "next-auth";
 import GoogleProvider, { GoogleProfile } from "next-auth/providers/google";
 import CredentialsProvider from "next-auth/providers/credentials";
 import generatePassword from "generate-password";
-import {
-  Profile,
-  authMe,
-  getUserByEmail,
-  login,
-  signUp,
-} from "@/services/user";
-import { CustomSession } from "@/types/session";
+import { authMe, getUserByEmail, login, signUp } from "@/services/user";
 import axiosInstance from "@/services";
+import { capitalizeFirstLetterOfEachWord } from "@/utils/string";
 
 export const authOptions: NextAuthOptions = {
   pages: {
@@ -63,8 +57,12 @@ export const authOptions: NextAuthOptions = {
               });
               const user = await signUp({
                 email: profile?.email,
-                firstName: googleProfile.given_name || googleProfile.name,
-                lastName: googleProfile.family_name || "",
+                firstName: capitalizeFirstLetterOfEachWord(
+                  googleProfile.given_name || googleProfile.name
+                ),
+                lastName: capitalizeFirstLetterOfEachWord(
+                  googleProfile.family_name || ""
+                ),
                 password,
                 password_confirmation: password,
                 picture: googleProfile.picture,

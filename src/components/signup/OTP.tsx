@@ -6,6 +6,7 @@ import { useRouter } from "next/router";
 import axiosInstance from "@/services";
 import useUserRegistrationStore from "@/store/userRegistrationStore";
 import { signIn } from "next-auth/react";
+import { capitalizeFirstLetterOfEachWord } from "@/utils/string";
 
 const OTP = () => {
   const { userData } = useUserRegistrationStore();
@@ -21,7 +22,7 @@ const OTP = () => {
     try {
       setDisabled(true);
       await axiosInstance.post("/auth/register", {
-        name: userData.username,
+        name: capitalizeFirstLetterOfEachWord(userData.username),
         lastname: " ",
         password: userData.pass,
         email: userData.mail,
