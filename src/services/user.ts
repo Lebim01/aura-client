@@ -30,7 +30,6 @@ export const login = async (email: string, password: string) => {
       password,
     })
     .then((r) => {
-      console.log(r.data);
       return r.data;
     });
 };

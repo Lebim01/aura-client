@@ -11,15 +11,14 @@ import Options from "@/components/login/Options";
 import { useSession } from "next-auth/react";
 
 export default function Login() {
-  const { status } = useSession()
+  const { status } = useSession();
   const router = useRouter();
 
   useEffect(() => {
-    if(status == "authenticated") {
-      router.replace("/dashboard")
+    if (status == "authenticated") {
+      router.replace("/dashboard");
     }
-  }, [status])
-
+  }, [status]);
 
   return (
     <div className="flex w-screen h-custom-screen px-[27px] items-center justify-center  ">

@@ -14,6 +14,10 @@ import { CustomSession } from "@/types/session";
 import axiosInstance from "@/services";
 
 export const authOptions: NextAuthOptions = {
+  pages: {
+    signIn: "/login",
+    error: "/login",
+  },
   secret: process.env.NEXTAUTH_SECRET,
   providers: [
     CredentialsProvider({
@@ -29,11 +33,8 @@ export const authOptions: NextAuthOptions = {
       },
       async authorize(credentials, req) {
         if (credentials?.username && credentials.password) {
-          const response = await login(
-            credentials.username,
-            credentials.password
-          );
-          axiosInstance.defaults.headers.Authorization = response.data;
+          const token = await login(credentials.username, credentials.password);
+          axiosInstance.defaults.headers.Authorization = "Bearer " + token;
           const user = await authMe();
           return user;
         }
@@ -83,19 +84,7 @@ export const authOptions: NextAuthOptions = {
       }
     },
     async session({ session, token }) {
-      let profile: Profile | null = null;
-      try {
-        if (session.user?.email) {
-          profile = await getUserByEmail(session.user.email);
-        }
-      } catch (err) {
-        console.error(err);
-      }
-      return {
-        ...session,
-        token,
-        user: profile,
-      } as CustomSession;
+      return session;
     },
     async jwt({ token, account }) {
       if (account) {
