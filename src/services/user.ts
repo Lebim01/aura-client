@@ -23,6 +23,10 @@ export type SignUp = {
   password_confirmation: string;
 };
 
+export interface ProfileWithToken extends Profile {
+  accessToken: string;
+}
+
 export const login = async (email: string, password: string) => {
   return axiosInstance
     .post("/auth/login", {
@@ -51,9 +55,9 @@ export const getUserByEmail = async (
   return null;
 };
 
-export const authMe = async (): Promise<Profile | null> => {
+export const authMe = async (token: string): Promise<ProfileWithToken | null> => {
   return axiosInstance
     .get("/users/me")
-    .then((r) => r.data)
+    .then((r) => ({ ...r.data, accessToken: token }))
     .catch(() => null);
 };

@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { api } from "@/hooks/axios";
+import axiosInstance from "@/services";
 
 // Definición de la interfaz para el estado de los videos
 interface Video {
@@ -36,7 +36,7 @@ const useVideoStore = create<VideoState>((set, get) => ({
   getVideos: async (apiUrl) => {
     try {
       get().setLoading(true);
-      const videos_result = await api.get(apiUrl);
+      const videos_result = await axiosInstance.get(apiUrl);
       set((state) => ({
         videos: [...state.videos, ...(videos_result.data as Video[])], // Asegúrate de que la respuesta coincide con la estructura de Video[]
       }));
@@ -59,7 +59,7 @@ const useVideoStore = create<VideoState>((set, get) => ({
         );
         return { videos: newVideos };
       });
-      await api.post(`/likes/video/${id}`);
+      await axiosInstance.post(`/likes/video/${id}`);
     } catch (e) {
       console.log(e);
     }
@@ -73,7 +73,7 @@ const useVideoStore = create<VideoState>((set, get) => ({
         );
         return { videos: newVideos };
       });
-      await api.delete(`/likes/video/${id}`);
+      await axiosInstance.delete(`/likes/video/${id}`);
     } catch (e) {
       console.log(e);
     }
