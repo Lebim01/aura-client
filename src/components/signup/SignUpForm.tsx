@@ -54,10 +54,10 @@ const SignUpForm = () => {
       <Separator />
 
       <ButtonCommon
-        text="INGRESAR"
+        text="CONTINUAR"
         disabled={disabled}
         onClick={() => {
-          router.push("/signup?step=otp");
+          router.push("/signup?step=username");
         }}
       />
     </div>

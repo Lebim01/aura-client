@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useEffect } from "react";
 import Welcome from "@/components/login/Welcome";
 import HeaderAuth from "@/components/common/HeaderAuth";
 import { useRouter } from "next/router";
@@ -8,9 +8,17 @@ import CheckEmail from "@/components/login/recover/CheckEmail";
 import NewPass from "@/components/login/recover/NewPass";
 import PassChanged from "@/components/login/recover/PassChanged";
 import Options from "@/components/login/Options";
+import { useSession } from "next-auth/react";
 
 export default function Login() {
+  const { status } = useSession();
   const router = useRouter();
+
+  useEffect(() => {
+    if (status == "authenticated") {
+      router.replace("/dashboard");
+    }
+  }, [status]);
 
   return (
     <div className="flex w-screen h-custom-screen px-[27px] items-center justify-center  ">

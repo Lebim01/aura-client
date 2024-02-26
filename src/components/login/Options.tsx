@@ -4,8 +4,8 @@ import HaveAccount from "@/components/common/HaveAccount";
 import SocialButton from "@/components/common/SocialButton";
 import Separator from "@/components/common/Separator";
 import ButtonCommon from "@/components/common/ButtonCommon";
-import { useRouter } from "next/router";
 import { signIn } from "next-auth/react";
+import { useSearchParams } from "next/navigation";
 
 interface UserData {
   mail: string;
@@ -20,7 +20,7 @@ const UserDataINIT = {
 const Options = () => {
   const [data, setData] = useState<UserData>(UserDataINIT);
   const [disabled, setDisabled] = useState(true);
-  const router = useRouter();
+  const searchParams = useSearchParams();
 
   const login = (username: string, password: string) => {
     signIn("credentials", {
@@ -70,6 +70,8 @@ const Options = () => {
             login(data.mail, data.pass);
           }}
         />
+
+        {searchParams.get("error") && <span className="text-red-400 text-center">Usuario y/o contraseña incorrectos</span>}
 
         <Separator />
 

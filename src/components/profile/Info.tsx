@@ -2,8 +2,10 @@ import Image from "next/image";
 import { useState, useEffect } from "react";
 import Menu from "./components/Menu";
 import useShowHideFooterStore from "@/store/showHideFooterStore";
+import { useSession } from "next-auth/react";
 
 const Info = () => {
+  const { data } = useSession()
   const [showMenu, setShowMenu] = useState(false);
   const { toggleFooter } = useShowHideFooterStore();
 
@@ -44,10 +46,10 @@ const Info = () => {
 
         <div className="flex flex-col">
           <span className="text-[18px] font-[600] leading-[27px]">
-            @Jorge93
+            {data?.user?.name}
           </span>
           <span className="text-[12px] text-yellow-aura-accent leading-[18px] font-[500]">
-            jorge.martinez@gmail.com
+            {data?.user?.email}
           </span>
         </div>
       </div>

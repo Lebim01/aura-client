@@ -1,28 +1,32 @@
 import NextAuth from "next-auth";
-import type { NextAuthOptions, Session } from "next-auth";
+import type { NextAuthOptions } from "next-auth";
 import GoogleProvider, { GoogleProfile } from "next-auth/providers/google";
 import CredentialsProvider from "next-auth/providers/credentials";
 import generatePassword from "generate-password";
-import { Profile, getUserByEmail, login, signUp } from "@/services/user";
-import { CustomSession } from "@/types/session";
+import { authMe, getUserByEmail, login, signUp } from "@/services/user";
+import axiosInstance from "@/services";
+import { capitalizeFirstLetterOfEachWord } from "@/utils/string";
 
 export const authOptions: NextAuthOptions = {
+  pages: {
+    signIn: "/login",
+    error: "/login",
+  },
   secret: process.env.NEXTAUTH_SECRET,
   providers: [
     CredentialsProvider({
-      // The name to display on the sign in form (e.g. 'Sign in with...')
       name: "Credentials",
-      // The credentials is used to generate a suitable form on the sign in page.
-      // You can specify whatever fields you are expecting to be submitted.
-      // e.g. domain, username, password, 2FA token, etc.
-      // You can pass any HTML attribute to the <input> tag through the object.
       credentials: {
         username: { label: "Username", type: "text", placeholder: "jsmith" },
         password: { label: "Password", type: "password" },
       },
       async authorize(credentials, req) {
-        if (credentials?.username && credentials.password)
-          return login(credentials.username, credentials.password);
+        if (credentials?.username && credentials.password) {
+          const token = await login(credentials.username, credentials.password);
+          axiosInstance.defaults.headers.Authorization = "Bearer " + token;
+          const user = await authMe(token);
+          return user;
+        }
         return null;
       },
     }),
@@ -48,15 +52,19 @@ export const authOptions: NextAuthOptions = {
               });
               const user = await signUp({
                 email: profile?.email,
-                firstName: googleProfile.given_name || googleProfile.name,
-                lastName: googleProfile.family_name || "",
+                firstName: capitalizeFirstLetterOfEachWord(
+                  googleProfile.given_name || googleProfile.name
+                ),
+                lastName: capitalizeFirstLetterOfEachWord(
+                  googleProfile.family_name || ""
+                ),
                 password,
                 password_confirmation: password,
                 picture: googleProfile.picture,
-                fullName: (
+                fullName: capitalizeFirstLetterOfEachWord(
                   (googleProfile.given_name || googleProfile.name) +
-                  " " +
-                  (googleProfile.family_name || "")
+                    " " +
+                    (googleProfile.family_name || "")
                 ).trim(),
               });
             }
@@ -69,23 +77,14 @@ export const authOptions: NextAuthOptions = {
       }
     },
     async session({ session, token }) {
-      let profile: Profile | null = null;
-      try {
-        if (session.user?.email) {
-          profile = await getUserByEmail(session.user.email);
-        }
-      } catch (err) {
-        console.error(err);
+      if (token?.accessToken) {
+        session.accessToken = token.accessToken;
       }
-      return {
-        ...session,
-        token,
-        user: profile,
-      } as CustomSession;
+      return session;
     },
-    async jwt({ token, account }) {
-      if (account) {
-        token.accessToken = account.access_token;
+    async jwt({ token, user }) {
+      if (user) {
+        token.accessToken = user.accessToken;
       }
       return token;
     },

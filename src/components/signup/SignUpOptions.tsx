@@ -22,7 +22,7 @@ const SignUpOptions = () => {
         background="bg-white"
       />
 
-      <SocialButton
+      {/*<SocialButton
         icon="/login/icons/facebook.svg"
         textcolor="text-white"
         text="Continue with Facebook"
@@ -34,7 +34,7 @@ const SignUpOptions = () => {
         textcolor="text-white"
         text="Continue with Apple"
         background="bg-black"
-      />
+      />*/}
     </div>
   );
 };
