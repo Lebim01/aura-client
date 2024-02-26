@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import ItemSections from "./components/Sections/ItemSections";
 import MostComponent from "./components/Sections/MostComponent";
-import { api } from "@/hooks/axios";
 import classNames from "classnames";
+import axiosInstance from "@/services";
 
 interface Props {
   text: string;
@@ -23,7 +23,9 @@ const Sections = ({ text, endpoint }: Props) => {
 
   const getSeries = async () => {
     try {
-      const series_result = await api.get(`${endpoint}?page=1&limit=10`);
+      const series_result = await axiosInstance.get(
+        `${endpoint}?page=1&limit=10`
+      );
       setSeries(series_result.data);
       setLoading(false);
     } catch (e) {

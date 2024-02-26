@@ -6,12 +6,12 @@ import Sinopsis from "@/components/detail/Sinopsis";
 import Cast from "@/components/detail/Cast";
 import Middle from "@/components/detail/HeaderDetail/Middle";
 import Reviews from "@/components/detail/Reviews";
-import { api } from "@/hooks/axios";
 import { GetStaticPropsContext, GetStaticProps, GetStaticPaths } from "next";
 import { Actor, Genre, Serie, Platform } from "@/types/series";
 import DesktopLayout from "@/components/common/DesktopLayout";
 import { getSerieBySlug } from "@/utils/neo4j";
 import Separator from "@/components/common/Separator";
+import axiosInstance from "@/services";
 
 type Tabs = "credits" | "reviews" | "video";
 
@@ -80,7 +80,7 @@ export const getStaticPaths = (async () => {
     };
   }
 
-  const res = await api.get(`/series/all-slugs`);
+  const res = await axiosInstance.get(`/series/all-slugs`);
   return {
     paths: res.data.map((slug: string) => ({
       params: {

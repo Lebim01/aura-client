@@ -5,7 +5,6 @@ import { Plus_Jakarta_Sans } from "next/font/google";
 import { SessionProvider } from "next-auth/react";
 import Head from "next/head";
 import "@api";
-import "@/hooks/axios";
 
 const jakarta = Plus_Jakarta_Sans({
   subsets: ["latin"],

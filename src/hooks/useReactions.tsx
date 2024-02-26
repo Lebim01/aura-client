@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { api } from "@/hooks/axios";
+import axiosInstance from "@/services";
 
 const useVideos = (apiUrl: string) => {
   const [isLoading, setLoading] = useState(false);
@@ -8,7 +8,7 @@ const useVideos = (apiUrl: string) => {
   const getVideos = async () => {
     try {
       setLoading(true);
-      const videos_result = await api.get(apiUrl);
+      const videos_result = await axiosInstance.get(apiUrl);
       setVideos((prevVideos: any) => {
         return [...prevVideos, ...videos_result.data];
       });
@@ -35,7 +35,7 @@ const useVideos = (apiUrl: string) => {
         return _videos;
       });
 
-      const like_result = await api.get(`/likes/video/${id}`);
+      const like_result = await axiosInstance.get(`/likes/video/${id}`);
     } catch (e) {
       console.log(e);
     } finally {

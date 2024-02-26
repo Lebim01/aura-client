@@ -6,8 +6,8 @@ import Footer from "../common/Footer";
 import Image from "next/image";
 import VideoController from "./VideoController";
 import { useRouter } from "next/navigation";
-import { api } from "@/hooks/axios";
 import useVideos from "../../hooks/useVideos";
+import axiosInstance from "@/services";
 
 const HeaderMobile = () => {
   const { back } = useRouter();
@@ -42,7 +42,7 @@ const VerticalSliderVideos: FC<Props> = (props) => {
     }
 
     try {
-      await api.post(`/dashboard/discovery-watched`, {
+      await axiosInstance.post(`/dashboard/discovery-watched`, {
         id_video: id,
       });
     } catch (e) {

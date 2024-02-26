@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
-import { api } from "./axios";
+import axiosInstance from "@/services";
+
 function useDiscoveryConsultation(page: number) {
   const [videos, setVideos] = useState<any>([]);
   const [loading, setLoading] = useState(false);
@@ -8,7 +9,7 @@ function useDiscoveryConsultation(page: number) {
   const fetchDataAsync = async () => {
     setLoading(true);
     try {
-      const result = await api.get(`/dashboard/discovery`);
+      const result = await axiosInstance.get(`/dashboard/discovery`);
       setVideos(result.data);
     } catch (err) {
       setError("Error");

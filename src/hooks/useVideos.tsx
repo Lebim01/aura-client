@@ -38,7 +38,7 @@ const useVideoStore = create<VideoState>((set, get) => ({
       get().setLoading(true);
       const videos_result = await axiosInstance.get(apiUrl);
       set((state) => ({
-        videos: [...state.videos, ...(videos_result.data as Video[])], // Asegúrate de que la respuesta coincide con la estructura de Video[]
+        videos: [...state.videos, ...(videos_result.data as Video[])],
       }));
     } catch (e) {
       console.log(e);
@@ -55,7 +55,9 @@ const useVideoStore = create<VideoState>((set, get) => ({
     try {
       set((state) => {
         const newVideos = state.videos.map((video) =>
-          video.id === id ? { ...video, like_me: true } : video
+          video.id === id
+            ? { ...video, like_me: true, likes: video.likes + 1 }
+            : video
         );
         return { videos: newVideos };
       });
@@ -69,7 +71,9 @@ const useVideoStore = create<VideoState>((set, get) => ({
     try {
       set((state) => {
         const newVideos = state.videos.map((video) =>
-          video.id === id ? { ...video, like_me: false } : video
+          video.id === id
+            ? { ...video, like_me: false, likes: video.likes - 1 }
+            : video
         );
         return { videos: newVideos };
       });
