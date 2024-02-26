@@ -5,7 +5,9 @@ import Checkbox from "./components/Checkbox";
 import Platforms from "./components/Platforms";
 import ButtonCommon from "@/components/common/ButtonCommon";
 import Recommended from "./components/Recommended";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import useShowHideFilters from "@/store/useShowHideFilters";
+import useIsMobile from "@/hooks/useIsMobile";
 
 const options = [
   { label: "Acción", value: "", img: "/categories/accion.png" },
@@ -37,8 +39,26 @@ const platforms = [
 ];
 const CategoryFilters = () => {
   const [showRecommended, setShowRecommended] = useState(false);
+  const { showHideFilters } = useShowHideFilters();
+  const [maxHeight, setMaxHeight] = useState("0px");
+  const isMobile = useIsMobile();
+
+  useEffect(() => {
+    if (showHideFilters) {
+      setMaxHeight(isMobile ? "540.75px" : "fit-content");
+    } else {
+      setMaxHeight("0px");
+    }
+  }, [showHideFilters, isMobile]);
+
   return (
-    <>
+    <div
+      style={{
+        maxHeight: maxHeight,
+        overflow: "hidden",
+        transition: "max-height 0.5s ease-in-out",
+      }}
+    >
       {showRecommended && (
         <Recommended setShow={setShowRecommended} show={showRecommended} />
       )}
@@ -85,7 +105,7 @@ const CategoryFilters = () => {
           />
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

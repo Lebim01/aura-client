@@ -10,6 +10,7 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import { usePathname } from "next/navigation";
 import useIsMobile from "@/hooks/useIsMobile";
+import useShowHideFilters from "@/store/useShowHideFilters";
 
 type Props = {
   forceDisplay?: boolean;
@@ -20,8 +21,9 @@ const DesktopLayout: FC<Props> = ({ children, forceDisplay }) => {
   const router = useRouter();
   const pathname = usePathname();
   const isMobile = useIsMobile();
-
+  const { showHideFilters } = useShowHideFilters();
   const HIDE_URL = ["/profile"];
+
   return (
     <div className="flex flex-col md:flex-row gap-y-[16px] w-screen  max-w-screen overflow-x-hidden md:max-w-[1440px]  md:justify-center md:mx-auto ">
       <div
