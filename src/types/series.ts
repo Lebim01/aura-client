@@ -1,4 +1,4 @@
-export type Movie = {
+export type Serie = {
   id: string;
   title: string;
   original_title: string;

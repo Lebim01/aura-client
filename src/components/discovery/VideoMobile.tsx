@@ -45,7 +45,7 @@ const VideoMobile = forwardRef(
           transform: `translateY(${(videoIndex - swipeIndex) * 100}%)`,
         }}
       >
-        <VideoHeader />
+        {/* <VideoHeader /> */}
         <video
           autoPlay={videoIndex == 0}
           ref={ref}

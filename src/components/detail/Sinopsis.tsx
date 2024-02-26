@@ -1,20 +1,20 @@
 import React from "react";
 import Image from "next/image";
-import { Actor, Movie, Platform } from "@/types/movies";
+import { Actor, Serie, Platform } from "@/types/series";
 
 type Props = {
-  movie: Movie;
+  serie: Serie;
   actors: Actor[];
   platforms: Platform[];
 };
 
-export default function Sinopsis({ movie, actors, platforms }: Props) {
+export default function Sinopsis({ serie, actors, platforms }: Props) {
   return (
     <div className="flex flex-col gap-y-[24px] px-[16px]">
       <div className="flex flex-col gap-y-[8px]">
         <span className="text-[12px] md:text-[16px] font-[700]">Sinopsis</span>
         <span className="text-[12px] md:text-[14px] font-[300] leading-[140%]">
-          {movie?.overview}
+          {serie?.overview}
         </span>
       </div>
 

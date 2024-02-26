@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Image from "next/image";
-import { Actor } from "@/types/movies";
+import { Actor } from "@/types/series";
 
 type Props = {
   actors: Actor[];

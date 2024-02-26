@@ -35,7 +35,7 @@ const InfoReview = ({ index, className, likes, like_me, id_video }: Props) => {
       >
         <div className="flex gap-x-[16px] items-end flex-1">
           <div className="flex flex-col gap-y-[8px] flex-1">
-            <PreviewReview />
+            {/* <PreviewReview /> */}
           </div>
           <div className="flex flex-col gap-y-[24px]">
             <div

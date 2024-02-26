@@ -11,7 +11,7 @@ interface Props {
 const Sections = ({ text, endpoint }: Props) => {
   const [showLeftPadding, setShowLeftPadding] = useState<any>(true);
   const [showRightPadding, setShowRightPadding] = useState(false);
-  const [movies, setMovies] = useState<any>([]);
+  const [series, setSeries] = useState<any>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const handleScroll = (event: any) => {
     const scrollLeft = event.target.scrollLeft;
@@ -21,10 +21,10 @@ const Sections = ({ text, endpoint }: Props) => {
     setShowRightPadding(scrollLeft + clientWidth === scrollWidth);
   };
 
-  const getMovies = async () => {
+  const getSeries = async () => {
     try {
-      const movies_result = await api.get(`${endpoint}?page=1&limit=10`);
-      setMovies(movies_result.data);
+      const series_result = await api.get(`${endpoint}?page=1&limit=10`);
+      setSeries(series_result.data);
       setLoading(false);
     } catch (e) {
       console.log(e);
@@ -32,7 +32,7 @@ const Sections = ({ text, endpoint }: Props) => {
   };
 
   useEffect(() => {
-    getMovies();
+    getSeries();
   }, []);
 
   return (
@@ -69,7 +69,7 @@ const Sections = ({ text, endpoint }: Props) => {
               </div>
             ))}
 
-        {movies.map((item: any, index: number) => {
+        {series.map((item: any, index: number) => {
           return <ItemSections key={index} props={item} />;
         })}
       </div>

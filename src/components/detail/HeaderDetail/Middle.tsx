@@ -1,13 +1,13 @@
 import React from "react";
 import Image from "next/image";
-import { Genre, Movie } from "@/types/movies";
+import { Genre, Serie } from "@/types/series";
 
 type Props = {
-  movie: Movie;
+  serie: Serie;
   genres: Genre[];
 };
 
-export default function Middle({ movie, genres }: Props) {
+export default function Middle({ serie, genres }: Props) {
   return (
     <div className="flex flex-col w-full relative px-[16px] pt-[16px]">
       <div className="w-full rounded-lg bg-gray-400 relative overflow-hidden min-h-[291px]">
@@ -16,7 +16,7 @@ export default function Middle({ movie, genres }: Props) {
             width: "100%",
             height: "100%",
             backgroundImage: `linear-gradient(to top, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0))${
-              movie?.backdrop_path ? `, url(${movie?.backdrop_path})` : ""
+              serie?.backdrop_path ? `, url(${serie?.backdrop_path})` : ""
             }`,
             backgroundSize: "cover",
             backgroundPosition: "center",
@@ -34,13 +34,13 @@ export default function Middle({ movie, genres }: Props) {
                     height={0}
                     sizes="100vw"
                     style={{ width: "56px", height: "56px" }}
-                    src={movie?.poster_path}
+                    src={serie?.poster_path}
                     alt=""
                     className="rounded-[4px] bg-white object-cover"
                   />
                   <div className="flex flex-col">
                     <span className="text-[14px] font-[600] leading-[150%]">
-                      {movie?.original_title}
+                      {serie?.original_title}
                     </span>
                     <span className="text-[12px] font-[600] leading-[150%] opacity-60">
                       {genres?.map((genre) => genre.name).join(", ")}
@@ -55,7 +55,7 @@ export default function Middle({ movie, genres }: Props) {
                     WebkitBoxOrient: "vertical",
                   }}
                 >
-                  {movie?.overview}
+                  {serie?.overview}
                 </span>
               </div>
             </div>

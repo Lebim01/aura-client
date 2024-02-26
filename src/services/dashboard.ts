@@ -4,6 +4,6 @@ export const topMexico = (page: number): Promise<any> => {
   return axiosInstance.get(`/dashboard/top-mexico?page=${page}&limit=10`);
 };
 
-export const getOneMovie = (id: string): Promise<any> => {
-  return axiosInstance.get(`/movies/${id}`);
+export const getOneSerie = (id: string): Promise<any> => {
+  return axiosInstance.get(`/series/${id}`);
 };

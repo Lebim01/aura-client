@@ -12,29 +12,30 @@ interface Props {
   endpoint: string;
 }
 const Sections = ({ text, endpoint }: Props) => {
-  const [movies, setMovies] = useState<any>([]);
+  const [series, setSeries] = useState<any>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const { filters } = useFilters();
   const isMobile = useIsMobile();
 
-  const getMovies = async () => {
+  const getSeries = async () => {
     try {
       setLoading(true);
-      const movies_result = await api.get(`${endpoint}?q=${filters}`);
-      setMovies(movies_result.data);
+      const series_result = await api.get(`${endpoint}?q=${filters}`);
+      setSeries(series_result.data);
       setLoading(false);
     } catch (e) {
+      setLoading(false);
       console.log(e);
     }
   };
 
   useEffect(() => {
-    getMovies();
+    getSeries();
   }, [filters]);
 
   return (
     <div className="grid auto-flow-dense grid-layout w-auto md:max-h-screen hidescroll overflow-y-auto md:pb-[99px]">
-      <MostComponent text={text} />
+      <MostComponent text={text} hide_ver={series.length > 0 ? false : true} />
       <div
         className={classNamesCustom(
           `align-start`,
@@ -69,13 +70,13 @@ const Sections = ({ text, endpoint }: Props) => {
               </div>
             ))}
 
-        {movies.map((item: any, index: number) => {
+        {series.map((item: any, index: number) => {
           return <ItemSections key={index} props={item} />;
         })}
 
-        {movies.length === 0 && !loading && (
+        {series.length === 0 && !loading && (
           <div className="flex justify-center items-center w-full">
-            No hay películas para mostrar.
+            No hay series para mostrar.
           </div>
         )}
       </div>

@@ -1,14 +1,14 @@
-import { getMovieBySlug } from "@/utils/neo4j";
+import { getSerieBySlug } from "@/utils/neo4j";
 import { ManagedTransaction } from "neo4j-driver";
 import neo4j from "neo4j-driver";
 
 const SELECT_MOVIE_DETAILS = `
-  OPTIONAL MATCH (a:Person)-[r:ACTED_IN]->(movie)
-  OPTIONAL MATCH (movie)-[:IS_GENRE]->(g:Genre)
-  OPTIONAL MATCH (movie)<-[:VIDEO_OF]-(v:Trailer)
-  OPTIONAL MATCH (movie)-[:SPOKEN]->(l:Language)
-  OPTIONAL MATCH (movie)<-[:PLATFORM_OF]-(p:Platform)
-  RETURN movie,
+  OPTIONAL MATCH (a:Person)-[r:ACTED_IN]->(serie)
+  OPTIONAL MATCH (serie)-[:IS_GENRE]->(g:Genre)
+  OPTIONAL MATCH (serie)<-[:VIDEO_OF]-(v:Trailer)
+  OPTIONAL MATCH (serie)-[:SPOKEN]->(l:Language)
+  OPTIONAL MATCH (serie)<-[:PLATFORM_OF]-(p:Platform)
+  RETURN serie,
     COLLECT(v) AS videos,
     COLLECT(DISTINCT {
       id: a.id_person, 
@@ -30,9 +30,9 @@ const notRepeatByID = (arr: any[]) => {
   return _new_arr;
 };
 
-const formatMovie = (object: any) => {
+const formatSerie = (object: any) => {
   return {
-    movie: object.movie.properties,
+    serie: object.serie.properties,
     actors: notRepeatByID(object.actors.filter((r: any) => r.id)).sort(
       (a, b) => {
         return a.order - b.order;
@@ -47,7 +47,7 @@ const formatMovie = (object: any) => {
 
 const GET = async (req: any, res: any) => {
   const slug = req.query.slug;
-  const results = await getMovieBySlug(slug);
+  const results = await getSerieBySlug(slug);
   res.send(results);
 };
 

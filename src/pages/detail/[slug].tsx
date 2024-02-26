@@ -8,27 +8,27 @@ import Middle from "@/components/detail/HeaderDetail/Middle";
 import Reviews from "@/components/detail/Reviews";
 import { api } from "@/hooks/axios";
 import { GetStaticPropsContext, GetStaticProps, GetStaticPaths } from "next";
-import { Actor, Genre, Movie, Platform } from "@/types/movies";
+import { Actor, Genre, Serie, Platform } from "@/types/series";
 import DesktopLayout from "@/components/common/DesktopLayout";
-import { getMovieBySlug } from "@/utils/neo4j";
+import { getSerieBySlug } from "@/utils/neo4j";
 import Separator from "@/components/common/Separator";
 
 type Tabs = "credits" | "reviews" | "video";
 
 type Props = {
-  movie: string;
+  serie: string;
   genres: Genre[];
   platforms: Platform[];
   actors: Actor[];
 };
 
 export default function Detail({
-  movie: _movie,
+  serie: _serie,
   genres,
   platforms,
   actors,
 }: Props) {
-  const [movie] = useState<Movie>(JSON.parse(_movie));
+  const [serie] = useState<Serie>(JSON.parse(_serie));
   const [tab, setTab] = useState<Tabs>("credits");
 
   return (
@@ -36,8 +36,8 @@ export default function Detail({
       <div className="flex flex-col h-screen w-screen gap-y-[32px] hidescroll pb-[90px] overflow-y-auto">
         <div className="flex flex-col gap-y-[32px] flex-1">
           {/* Cards */}
-          {tab === "credits" && <Large movie={movie} genres={genres} />}
-          {tab === "reviews" && <Middle movie={movie} genres={genres} />}
+          {tab === "credits" && <Large serie={serie} genres={genres} />}
+          {tab === "reviews" && <Middle serie={serie} genres={genres} />}
           <div className="px-[16px]">
             <Separator />
           </div>
@@ -53,7 +53,7 @@ export default function Detail({
         </div> */}
           {tab === "credits" && (
             <div className="flex flex-col md:flex-row gap-y-[32px]">
-              <Sinopsis movie={movie} actors={actors} platforms={platforms} />
+              <Sinopsis serie={serie} actors={actors} platforms={platforms} />
               <div className="flex flex-col gap-y-[16px] md:pt-[32px]">
                 <span className="text-[12px] font-[700] px-[16px] md:hidden">
                   Reparto
@@ -80,7 +80,7 @@ export const getStaticPaths = (async () => {
     };
   }
 
-  const res = await api.get(`/movies/all-slugs`);
+  const res = await api.get(`/series/all-slugs`);
   return {
     paths: res.data.map((slug: string) => ({
       params: {
@@ -93,15 +93,15 @@ export const getStaticPaths = (async () => {
 
 export const getStaticProps = (async (context: GetStaticPropsContext) => {
   const slug = context?.params?.slug || "";
-  const movie_result = await getMovieBySlug(slug as string);
+  const serie_result = await getSerieBySlug(slug as string);
   return {
     props: {
-      movie: JSON.stringify(movie_result.movie),
-      genres: movie_result.genres || [],
-      platforms: movie_result.platforms || [],
-      actors: movie_result.actors || [],
-      languages: movie_result.languages || [],
-      videos: movie_result.videos || [],
+      serie: JSON.stringify(serie_result.serie),
+      genres: serie_result.genres || [],
+      platforms: serie_result.platforms || [],
+      actors: serie_result.actors || [],
+      languages: serie_result.languages || [],
+      videos: serie_result.videos || [],
     },
   };
 }) satisfies GetStaticProps<Props>;

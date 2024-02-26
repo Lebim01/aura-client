@@ -1,14 +1,14 @@
-import { Actor, Genre, Movie, Platform } from "@/types/movies";
+import { Actor, Genre, Serie, Platform } from "@/types/series";
 import { ManagedTransaction } from "neo4j-driver";
 import neo4j from "neo4j-driver";
 
 const SELECT_MOVIE_DETAILS = `
-  OPTIONAL MATCH (a:Person)-[r:ACTED_IN]->(movie)
-  OPTIONAL MATCH (movie)-[:IS_GENRE]->(g:Genre)
-  OPTIONAL MATCH (movie)<-[:VIDEO_OF]-(v:Trailer)
-  OPTIONAL MATCH (movie)-[:SPOKEN]->(l:Language)
-  OPTIONAL MATCH (movie)<-[:PLATFORM_OF]-(p:Platform)
-  RETURN movie,
+  OPTIONAL MATCH (a:Person)-[r:ACTED_IN]->(serie)
+  OPTIONAL MATCH (serie)-[:IS_GENRE]->(g:Genre)
+  OPTIONAL MATCH (serie)<-[:VIDEO_OF]-(v:Trailer)
+  OPTIONAL MATCH (serie)-[:SPOKEN]->(l:Language)
+  OPTIONAL MATCH (serie)<-[:PLATFORM_OF]-(p:Platform)
+  RETURN serie,
     COLLECT(v) AS videos,
     COLLECT(DISTINCT {
       id: a.id_person, 
@@ -31,7 +31,7 @@ const notRepeatByID = (arr: any[]) => {
 };
 
 type Response = {
-  movie: Movie;
+  serie: Serie;
   actors: Actor[];
   genres: Genre[];
   videos: any[];
@@ -39,9 +39,9 @@ type Response = {
   languages: any[];
 };
 
-const formatMovie = (object: any): Response => {
+const formatSerie = (object: any): Response => {
   return {
-    movie: object.movie.properties,
+    serie: object.serie.properties,
     actors: notRepeatByID(object.actors.filter((r: any) => r.id)).sort(
       (a, b) => {
         return a.order - b.order;
@@ -54,7 +54,7 @@ const formatMovie = (object: any): Response => {
   };
 };
 
-export const getMovieBySlug = async (slug: string): Promise<Response> => {
+export const getSerieBySlug = async (slug: string): Promise<Response> => {
   const driver = neo4j.driver(
     `${process.env.DATABASE_SCHEME}://${process.env.DATABASE_HOST}:${process.env.DATABASE_PORT}`,
     neo4j.auth.basic(
@@ -69,7 +69,7 @@ export const getMovieBySlug = async (slug: string): Promise<Response> => {
   });
 
   const SQL = `
-    MATCH (movie:Movie { slug: $slug })
+    MATCH (serie:Serie { slug: $slug })
     ${SELECT_MOVIE_DETAILS}
   `;
   const result_query = await session.executeWrite((tx: ManagedTransaction) =>
@@ -77,6 +77,6 @@ export const getMovieBySlug = async (slug: string): Promise<Response> => {
       slug,
     })
   );
-  const results = result_query.records.map((r) => formatMovie(r.toObject()));
+  const results = result_query.records.map((r) => formatSerie(r.toObject()));
   return results[0];
 };
