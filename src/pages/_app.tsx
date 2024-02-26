@@ -24,8 +24,8 @@ export default function App({
 
   return (
     <SessionProvider session={session}>
-      <div className="fixed inset-0 bg-aura bg-cover md:bg-cover bg-no-repeat bg-fixed md:bg-auradesktop"></div>
-      <main className="relative z-10 min-h-screen">
+      <div className="fixed inset-0 bg-aura bg-cover md:bg-cover bg-no-repeat md:bg-auradesktop"></div>
+      <main className="relative min-h-screen">
         <Head>
           <meta
             name="viewport"
