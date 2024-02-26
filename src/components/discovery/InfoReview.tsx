@@ -29,7 +29,7 @@ const InfoReview = ({ index, className, likes, like_me, id_video }: Props) => {
       )}
       <div
         className={classNames(
-          "absolute flex h-fit px-[16px] flex-col justify-end transform",
+          "absolute flex h-fit px-[16px] flex-col justify-end transform w-full",
           className
         )}
       >
