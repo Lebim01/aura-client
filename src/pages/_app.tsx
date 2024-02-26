@@ -24,14 +24,34 @@ export default function App({
 
   return (
     <SessionProvider session={session}>
-      <main
-        className={`${jakarta.variable} font-jakarta bg-aura bg-cover md:bg-cover bg-fixed md:bg-auradesktop bg-repeat-y`}
-      >
+      <main className={`${jakarta.variable} font-jakarta`}>
         <Head>
           <meta
             name="viewport"
             content="width=device-width, initial-scale=1.0, maximum-scale=1.0,user-scalable=0"
           />
+          <style>
+            {`
+          main::before {
+            content: '';
+            position: fixed; /* Fijo respecto a la ventana del navegador */
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: url('ruta/a/tu/imagen/aura.jpg'); /* Ajusta la ruta de tu imagen */
+            background-size: cover;
+            background-repeat: no-repeat;
+            z-index: -1;
+          }
+
+          @media (min-width: 768px) {
+            main::before {
+              background-image: url('ruta/a/tu/imagen/auradesktop.jpg'); 
+            }
+          }
+        `}
+          </style>
         </Head>
         <Component {...pageProps} />
       </main>
