@@ -4,8 +4,8 @@ import VideoControllerDashboard from "@/components/dashboard/VideoControllerDash
 import Video from "@/components/dashboard/Video";
 import useIsMobile from "@/hooks/useIsMobile";
 import { classNamesCustom } from "@/utils/classes";
-import { CiCircleMore } from "react-icons/ci";
 import Link from "next/link";
+import Image from "next/image";
 
 interface Props {
   videos: string[];
@@ -46,8 +46,19 @@ const VideoCaroussel = ({ videos, title, sectionId }: Props) => {
             <label className="text-[16px] font-[600] leading-[150%]">
               {title}
             </label>
-            <Link href={"/sections/" + sectionId}>
-              <button className="text-sm hover:underline">Ver todo</button>
+
+            <Link
+              href={"/sections/" + sectionId}
+              className="flex gap-x-[4px] items-center hover:underline"
+            >
+              <span className="text-[12px] leading-[150%] ">Ver todo</span>
+
+              <Image
+                src={"/icons/arrow-right.svg"}
+                alt=""
+                width={16}
+                height={16}
+              />
             </Link>
           </div>
           <div
