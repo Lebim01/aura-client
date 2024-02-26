@@ -52,11 +52,11 @@ const SearchInput = () => {
         className={classNamesCustom(
           "flex space-x-[16px] md:space-x-[8px] items-center text-[12px] rounded-[6px] w-full",
           {
-            "border border-yellow-aura-accent px-[16px] bg-black-0D shadow-[0px_0px_0px_3px_rgba(251,188,5,0.20)] max-h-[46px] min-h-[46px]":
+            "border border-yellow-aura-accent px-[16px] bg-search-mobile shadow-[0px_0px_0px_3px_rgba(251,188,5,0.20)] max-h-[46px] min-h-[46px] bg-black-18":
               focused,
           },
           {
-            "flex border-border-search w-full bg-black-18 border  rounded-[8px] py-[8px] max-h-[46px] min-h-[46px] items-center pl-[16px] shadow-[0px_0px_0px_3px_rgba(0,0,0,0.0)]":
+            "flex border-border-search w-full bg-search-mobile border  rounded-[8px] py-[8px] max-h-[46px] min-h-[46px] items-center pl-[16px] shadow-[0px_0px_0px_3px_rgba(0,0,0,0.0)]":
               !focused && isMobile,
           }
         )}
@@ -69,7 +69,7 @@ const SearchInput = () => {
         />
         <input
           className={classNames(
-            "border h-[48px] rounded-[6px] focus:outline-none bg-transparent  text-white border-none w-full flex items-center  placeholder:font-[500] placeholder:text-[12px] placeholder:leading-[12px] text-[12px]",
+            "border h-[48px] rounded-[6px] focus:outline-none bg-transparent   text-white border-none w-full flex items-center  placeholder:font-[500] placeholder:text-[12px] placeholder:leading-[12px] text-[12px] placeholder:text-white placeholder:opacity-70",
             { "h-fit": !focused },
             { "placeholder:text-yellow-aura-accent": focused }
           )}

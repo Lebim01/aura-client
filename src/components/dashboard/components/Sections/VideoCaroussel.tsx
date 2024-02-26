@@ -69,14 +69,6 @@ const VideoCaroussel = ({ videos, title, sectionId }: Props) => {
                 />
               </Fragment>
             ))}
-            <div className="pl-10 pr-20">
-              <Link href={"/sections/" + sectionId}>
-                <button className="rounded-full bg-slate-900 p-8 h-[90px] w-[90px] flex flex-col space-y-4 items-center justify-center box-content hover:bg-slate-800">
-                  <span>Ver Todo</span>
-                  <CiCircleMore className="h-4 w-4" />
-                </button>
-              </Link>
-            </div>
           </div>
 
           <div

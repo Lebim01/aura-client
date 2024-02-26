@@ -43,7 +43,7 @@ const CategoryFilters = () => {
         <Recommended setShow={setShowRecommended} show={showRecommended} />
       )}
 
-      <div className="flex flex-col p-[16px] gap-y-[12px] md:gap-y-[16px] rounded-[12px] bg-menus md:w-full">
+      <div className="flex flex-col p-[16px] gap-y-[12px] md:gap-y-[16px] rounded-[12px] md:bg-menus bg-menus-mobile md:w-full">
         <div className="flex flex-col gap-y-[12px] md:gap-y-[16px]">
           <span className="font-[600] leading-[150%] text-[14px]">
             ¿Qué quieres ver hoy?

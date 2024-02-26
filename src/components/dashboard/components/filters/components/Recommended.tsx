@@ -53,7 +53,7 @@ const Recommended = ({ setShow, show }: Props) => {
 
   return (
     <div
-      className={`fixed top-0 left-0 w-screen h-screen bg-black-29 bg-opacity-80 flex justify-center items-center backdrop-blur-md z-[999999999] ${
+      className={`fixed top-0 left-0 w-screen h-screen bg-black-29 bg-opacity-80 flex justify-center items-center backdrop-blur-[7.5px] z-[999999999] ${
         show ? "animate-fadeAndScale" : ""
       }`}
     >

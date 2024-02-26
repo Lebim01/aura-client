@@ -29,6 +29,8 @@ const config: Config = {
         "black-1D": "#1D1D1DCC",
         "black-1A": "#1A1A1A",
         menus: "rgba(0, 0, 0, 0.50)",
+        "menus-mobile": "rgba(255, 255, 255, 0.10)",
+        "search-mobile": "rgba(255, 255, 255, 0.20)",
         "border-search": "rgba(107, 107, 107, 0.30)",
         "green-opaque": "#C0FFD9",
         "green-enlaces": "#4FD07E",
