@@ -37,6 +37,7 @@ const platforms = [
   { icon: "/icons/vix.svg", value: "" },
   { icon: "/icons/hbo.svg", value: "" },
 ];
+
 const CategoryFilters = () => {
   const [showRecommended, setShowRecommended] = useState(false);
   const { showHideFilters } = useShowHideFilters();
@@ -45,17 +46,15 @@ const CategoryFilters = () => {
 
   useEffect(() => {
     if (showHideFilters) {
-      setMaxHeight(isMobile ? "540.75px" : "fit-content");
+      setMaxHeight(isMobile ? "540.75px" : "min-content");
     } else {
       setMaxHeight("0px");
     }
   }, [showHideFilters, isMobile]);
-
   return (
     <div
       style={{
         maxHeight: maxHeight,
-        overflow: "hidden",
         transition: "max-height 0.5s ease-in-out",
       }}
     >
