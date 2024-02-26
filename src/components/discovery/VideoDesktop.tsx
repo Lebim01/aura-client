@@ -34,7 +34,7 @@ const VideoDesktop = forwardRef(
     }, [muted]);
 
     return (
-      <div className="relative rounded-lg overflow-hidden w-[500px] min-h-[60vh] aspect-tiktok">
+      <div className="relative rounded-lg overflow-hidden w-[500px] min-h-[60vh] max-h-[60vh] aspect-tiktok">
         {/* <VideoHeader /> */}
         <video
           ref={ref}
@@ -42,7 +42,7 @@ const VideoDesktop = forwardRef(
           loop
           muted={muted}
           playsInline
-          className="object-cover min-w-[300px] min-h-50vh cursor-pointer"
+          className="object-cover min-w-[300px] cursor-pointer"
           onClick={toggleMute}
         >
           <source src={videoUrl} type="video/mp4" />
