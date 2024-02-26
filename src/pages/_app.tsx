@@ -25,7 +25,7 @@ export default function App({
   return (
     <SessionProvider session={session}>
       <main
-        className={`${jakarta.variable} font-jakarta bg-aura bg-contain md:bg-cover  bg-no-repeat bg-fixed md:bg-auradesktop`}
+        className={`${jakarta.variable} font-jakarta bg-aura bg-cover md:bg-cover bg-no-repeat bg-fixed md:bg-auradesktop`}
       >
         <Head>
           <meta
