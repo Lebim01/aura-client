@@ -42,7 +42,7 @@ const Profile = () => {
             <>
               <Info />
               <Options />
-              <div className="w-full px-[16px] py-[32px]">
+              <div className="w-full px-[16px] py-[32px] md:hidden">
                 <ButtonCommon
                   text="CERRAR SESIÓN"
                   disabled={false}
