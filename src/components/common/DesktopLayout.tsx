@@ -27,7 +27,7 @@ const DesktopLayout: FC<Props> = ({ children, forceDisplay }) => {
     <div className="flex flex-col md:flex-row gap-y-[16px] w-screen  max-w-screen overflow-x-hidden md:max-w-[1440px]  md:justify-center md:mx-auto pt-[24px] ">
       <div
         className={classNames(
-          "md:flex flex-col gap-y-[16px] md:gap-y-[8px] px-[16px] md:min-w-[384px] md:max-w-[384px] overflow-y-auto md:h-screen hidescroll",
+          "md:flex flex-col gap-y-[16px] md:gap-y-[8px] h-fit px-[16px] md:min-w-[384px] md:max-w-[384px] overflow-y-auto md:h-screen hidescroll",
           {
             hidden: !forceDisplay || HIDE_URL.includes(pathname),
             flex: forceDisplay,
