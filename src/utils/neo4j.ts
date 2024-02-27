@@ -21,7 +21,7 @@ const SELECT_MOVIE_DETAILS = `
   COLLECT(DISTINCT {
     id: c.id_person, 
     name: c.name, 
-    role: cr.role, 
+    role: cr.role
   }) AS crew, 
   COLLECT({id: g.id, name: g.name}) AS genres,
   COLLECT({id: l.id, name: l.name}) AS languages,
