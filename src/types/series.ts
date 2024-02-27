@@ -12,6 +12,7 @@ export type Serie = {
 export type Genre = {
   id: string;
   name: string;
+  image: string;
 };
 
 export type Platform = {

@@ -47,12 +47,15 @@ export default function Large({ serie, genres }: Props) {
                     <span className="text-[12px] md:text-[16px] font-[600] leading-[150%] opacity-60 md:text-yellow-aura-accent md:hidden">
                       {genres?.map((genre) => genre.name).join(", ")}
                     </span>
-                    <Image
-                      src={"/categories_smoke/drama.png"}
-                      width={100}
-                      height={100}
-                      alt=""
-                    />
+                    {genres?.map((genre, index) => (
+                      <Image
+                        key={index}
+                        src={genre.image}
+                        width={100}
+                        height={100}
+                        alt=""
+                      />
+                    ))}
                   </div>
                 </div>
                 <span
