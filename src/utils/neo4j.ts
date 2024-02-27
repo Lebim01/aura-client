@@ -12,14 +12,14 @@ const SELECT_MOVIE_DETAILS = `
   RETURN serie,
     COLLECT(v) AS videos,
     COLLECT(DISTINCT {
-      id: a.id_person, 
+      id: a.id, 
       name: a.name, 
       character: r.character, 
       order: r.order,
       image: a.profile_path
   }) AS actors, 
   COLLECT(DISTINCT {
-    id: c.id_person, 
+    id: c.id, 
     name: c.name, 
     role: cr.role
   }) AS crew, 

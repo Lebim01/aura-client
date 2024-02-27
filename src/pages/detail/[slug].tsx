@@ -9,9 +9,9 @@ import Reviews from "@/components/detail/Reviews";
 import { GetStaticPropsContext, GetStaticProps, GetStaticPaths } from "next";
 import { Actor, Genre, Serie, Platform, Crew } from "@/types/series";
 import DesktopLayout from "@/components/common/DesktopLayout";
-import { getSerieBySlug } from "@/utils/neo4j";
 import Separator from "@/components/common/Separator";
 import axiosInstance from "@/services";
+import { getSerieBySlug } from "@/services/series";
 
 type Tabs = "credits" | "reviews" | "video";
 
