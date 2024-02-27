@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 import Image from "next/image";
 import { Genre, Serie } from "@/types/series";
 import ButtonTrailer from "./ViewTrailer";
@@ -15,8 +15,10 @@ export default function Large({ serie, genres, ...props }: Props) {
     ? `, url(${serie?.backdrop_path})`
     : "";
 
+  console.log(serie);
+
   return (
-    <div className="flex flex-col gap-y-[8px] md:gap-y-[24px] px-[16px] py-[12px] bg-black bg-opacity-50 rounded-[16px]">
+    <div className="flex flex-col gap-y-[8px] md:gap-y-[16px] px-[16px] py-[12px] bg-black bg-opacity-50 rounded-[16px]">
       <div className="w-full flex gap-x-[8px] items-center md:gap-x-[24px]">
         <Image
           width={80}
@@ -27,9 +29,9 @@ export default function Large({ serie, genres, ...props }: Props) {
         />
         <div className="flex flex-col md:flex-row md:items-center md:gap-x-[8px]">
           <span className="text-[14px] md:text-[32px] md:leading-none font-[600] leading-[150%]">
-            {serie?.original_title}
+            {serie?.title}
           </span>
-          <span className="text-[12px] md:text-[16px] font-[600] leading-[150%] opacity-60 md:text-yellow-aura-accent md:hidden">
+          <span className="text-[12px] md:text-[16px] font-[600] leading-[150%] opacity-60 md:text-yellow-aura-accent md:hidden ">
             {genres
               .filter((g) => g.image != "")
               .map((genre) => genre.name)
@@ -38,13 +40,21 @@ export default function Large({ serie, genres, ...props }: Props) {
           {genres
             ?.filter((r) => r.image != "")
             .map((genre, index) => (
-              <Image
+              <div
                 key={index}
-                src={genre.image}
-                width={100}
-                height={100}
-                alt=""
-              />
+                className="relative flex flex-col items-center justify-center h-full text-center"
+              >
+                <Image
+                  src={genre.image}
+                  width={100}
+                  height={100}
+                  alt=""
+                  className="md:block"
+                />
+                <span className="absolute text-white text-[10px]">
+                  {genre.name}
+                </span>
+              </div>
             ))}
         </div>
       </div>
