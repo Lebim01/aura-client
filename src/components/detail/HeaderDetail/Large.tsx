@@ -45,7 +45,10 @@ export default function Large({ serie, genres }: Props) {
                       {serie?.original_title}
                     </span>
                     <span className="text-[12px] md:text-[16px] font-[600] leading-[150%] opacity-60 md:text-yellow-aura-accent md:hidden">
-                      {genres?.map((genre) => genre.name).join(", ")}
+                      {genres
+                        .filter((g) => g.image != "")
+                        .map((genre) => genre.name)
+                        .join(", ")}
                     </span>
                     {genres?.map((genre, index) => (
                       <Image
