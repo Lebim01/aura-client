@@ -38,7 +38,7 @@ export default function Detail({
   return (
     <DesktopLayout>
       <div className="flex flex-col h-screen w-screen gap-y-[32px] hidescroll pb-[90px] overflow-y-auto ">
-        <div className="flex flex-col gap-y-[32px] flex-1">
+        <div className="flex flex-col gap-y-[24px] flex-1">
           {/* Cards */}
           {tab === "credits" && (
             <Large
@@ -55,7 +55,7 @@ export default function Detail({
               close={() => setOpenTrailer(false)}
             />
           )}
-          <div className="px-[16px]">
+          <div className="px-[16px] hidden md:block">
             <Separator />
           </div>
           {/*  {!loading && <Tabs option={tab} setTab={setTab} />}

@@ -8,11 +8,11 @@ type Props = {
 
 export default function Cast({ actors }: Props) {
   return (
-    <div className="grid grid-cols-2 gap-[24px] md:gap-[16px] px-[16px] md:w-max">
+    <div className="grid grid-cols-2 gap-[16px] md:gap-[16px] px-[16px] md:w-max">
       {actors?.map((item, index: number) => {
         return (
           <div
-            className="flex gap-x-[8px] items-center md:p-[8px] md:bg-black-29 md:rounded-[8px] md:min-w-[216px]"
+            className="flex gap-x-[8px] items-center p-[8px] bg-black-29 rounded-[8px] md:min-w-[216px]"
             key={index}
           >
             <Image

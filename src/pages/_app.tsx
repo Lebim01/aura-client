@@ -5,6 +5,8 @@ import { Plus_Jakarta_Sans } from "next/font/google";
 import { SessionProvider } from "next-auth/react";
 import Head from "next/head";
 import "@api";
+import { useRouter } from "next/router";
+import { classNamesCustom } from "@/utils/classes";
 
 const jakarta = Plus_Jakarta_Sans({
   subsets: ["latin"],
@@ -16,6 +18,7 @@ export default function App({
   Component,
   pageProps: { session, ...pageProps },
 }: AppProps) {
+  const router = useRouter();
   useEffect(() => {
     const vh = window.innerHeight * 0.01;
     document.documentElement.style.setProperty("--vh", `${vh}px`);
@@ -23,7 +26,12 @@ export default function App({
 
   return (
     <SessionProvider session={session}>
-      <div className="fixed inset-0 bg-aura bg-cover md:bg-cover bg-no-repeat md:bg-auradesktop"></div>
+      <div
+        className={classNamesCustom(
+          "fixed inset-0 bg-aura bg-cover md:bg-cover bg-no-repeat md:bg-auradesktop",
+          { "bg-black-0C": router.pathname === "/detail/[slug]" }
+        )}
+      ></div>
       <main className={`relative min-h-screen ${jakarta.variable}`}>
         <Head>
           <meta

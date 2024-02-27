@@ -42,7 +42,7 @@ const Footer = () => {
         }
       )}
     >
-      <div className="w-full bg-footer-dash px-[40px] py-[8px] rounded-[100px] flex items-center justify-between border border-footer-dash-border">
+      <div className="w-full bg-footer-dash px-[40px] py-[8px] rounded-[100px] flex items-center justify-between border border-footer-dash-border backdrop-blur-[7.5px]">
         {navigationOptions.map((item: any, index: number) => {
           return (
             <Link
