@@ -7,9 +7,10 @@ import Rating from "./Rating";
 type Props = {
   serie: Serie;
   genres: Genre[];
+  openTrailer: () => void;
 };
 
-export default function Large({ serie, genres }: Props) {
+export default function Large({ serie, genres, ...props }: Props) {
   const brackdrop_css = serie?.backdrop_path
     ? `, url(${serie?.backdrop_path})`
     : "";
@@ -59,7 +60,7 @@ export default function Large({ serie, genres }: Props) {
       </span>
       <div className="flex space-x-4">
         <Rating qualification={9.05} />
-        <ButtonTrailer trailer={serie.trailer} />
+        {serie.trailer && <ButtonTrailer open={props.openTrailer} />}
       </div>
     </div>
   );
