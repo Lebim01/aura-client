@@ -1,7 +1,7 @@
 import axiosInstance from "@/services";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
-import { FC, ReactNode, useEffect } from "react";
+import { FC, ReactNode, useEffect, useState } from "react";
 
 type Props = {
   children: ReactNode;
@@ -9,6 +9,7 @@ type Props = {
 
 const ProtectAuth: FC<Props> = (props) => {
   const router = useRouter();
+  const [init, setInit] = useState(false);
   const session = useSession({
     required: true,
     onUnauthenticated() {
@@ -18,13 +19,13 @@ const ProtectAuth: FC<Props> = (props) => {
 
   useEffect(() => {
     if (session.status == "authenticated") {
-      console.log(session)
       axiosInstance.defaults.headers.Authorization =
         "Bearer " + session?.data.accessToken;
+      setInit(true);
     }
   }, [session.data?.accessToken]);
 
-  if (session.status === "loading") {
+  if (session.status === "loading" || !init) {
     return null;
   }
 
