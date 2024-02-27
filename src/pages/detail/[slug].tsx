@@ -7,7 +7,7 @@ import Cast from "@/components/detail/Cast";
 import Middle from "@/components/detail/HeaderDetail/Middle";
 import Reviews from "@/components/detail/Reviews";
 import { GetStaticPropsContext, GetStaticProps, GetStaticPaths } from "next";
-import { Actor, Genre, Serie, Platform } from "@/types/series";
+import { Actor, Genre, Serie, Platform, Crew } from "@/types/series";
 import DesktopLayout from "@/components/common/DesktopLayout";
 import { getSerieBySlug } from "@/utils/neo4j";
 import Separator from "@/components/common/Separator";
@@ -20,6 +20,7 @@ type Props = {
   genres: Genre[];
   platforms: Platform[];
   actors: Actor[];
+  crew: Crew[];
 };
 
 export default function Detail({
@@ -27,6 +28,7 @@ export default function Detail({
   genres,
   platforms,
   actors,
+  crew
 }: Props) {
   const [serie] = useState<Serie>(JSON.parse(_serie));
   const [tab, setTab] = useState<Tabs>("credits");
@@ -53,7 +55,7 @@ export default function Detail({
         </div> */}
           {tab === "credits" && (
             <div className="flex flex-col md:flex-row gap-y-[32px]">
-              <Sinopsis serie={serie} actors={actors} platforms={platforms} />
+              <Sinopsis serie={serie} actors={actors} platforms={platforms} crew={crew} />
               <div className="flex flex-col gap-y-[16px] md:pt-[32px]">
                 <span className="text-[12px] font-[700] px-[16px] md:hidden">
                   Reparto
@@ -100,6 +102,7 @@ export const getStaticProps = (async (context: GetStaticPropsContext) => {
       genres: serie_result.genres || [],
       platforms: serie_result.platforms || [],
       actors: serie_result.actors || [],
+      crew: serie_result.crew || [],
       languages: serie_result.languages || [],
       videos: serie_result.videos || [],
     },

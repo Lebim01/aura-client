@@ -1,9 +1,10 @@
-import { Actor, Genre, Serie, Platform } from "@/types/series";
+import { Actor, Genre, Serie, Platform, Crew } from "@/types/series";
 import { ManagedTransaction } from "neo4j-driver";
 import neo4j from "neo4j-driver";
 
 const SELECT_MOVIE_DETAILS = `
   OPTIONAL MATCH (a:Person)-[r:ACTED_IN]->(serie)
+  OPTIONAL MATCH (c:Person)-[cr:CREW_IN]->(serie)
   OPTIONAL MATCH (serie)-[:IS_GENRE]->(g:Genre)
   OPTIONAL MATCH (serie)<-[:VIDEO_OF]-(v:Trailer)
   OPTIONAL MATCH (serie)-[:SPOKEN]->(l:Language)
@@ -17,6 +18,11 @@ const SELECT_MOVIE_DETAILS = `
       order: r.order,
       image: a.profile_path
   }) AS actors, 
+  COLLECT(DISTINCT {
+    id: c.id_person, 
+    name: c.name, 
+    role: cr.role, 
+  }) AS crew, 
   COLLECT({id: g.id, name: g.name}) AS genres,
   COLLECT({id: l.id, name: l.name}) AS languages,
   COLLECT({id: p.id, name: p.name, logo_url: p.logo_path}) AS platforms
@@ -33,6 +39,7 @@ const notRepeatByID = (arr: any[]) => {
 type Response = {
   serie: Serie;
   actors: Actor[];
+  crew: Crew[];
   genres: Genre[];
   videos: any[];
   platforms: Platform[];
@@ -47,6 +54,7 @@ const formatSerie = (object: any): Response => {
         return a.order - b.order;
       }
     ),
+    crew: notRepeatByID(object.creew.filter((r: any) => r.id)),
     genres: notRepeatByID(object.genres.filter((r: any) => r.id)),
     languages: notRepeatByID(object.languages.filter((r: any) => r.id)),
     platforms: notRepeatByID(object.platforms.filter((r: any) => r.id)),

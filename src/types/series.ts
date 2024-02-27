@@ -24,5 +24,11 @@ export type Actor = {
   id: string;
   name: string;
   character: string;
-  image: string;
+  image?: string;
+};
+
+export type Crew = {
+  id: string;
+  name: string;
+  role: string;
 };
