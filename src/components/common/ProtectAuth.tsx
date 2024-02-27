@@ -18,7 +18,9 @@ const ProtectAuth: FC<Props> = (props) => {
 
   useEffect(() => {
     if (session.status == "authenticated") {
-      axiosInstance.defaults.headers.Authorization = "Bearer " + session?.data.accessToken;
+      console.log(session)
+      axiosInstance.defaults.headers.Authorization =
+        "Bearer " + session?.data.accessToken;
     }
   }, [session.data?.accessToken]);
 

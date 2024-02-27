@@ -2,6 +2,7 @@ import DesktopLayout from "@/components/common/DesktopLayout";
 import Footer from "@/components/common/Footer";
 import ProtectAuth from "@/components/common/ProtectAuth";
 import Sections from "@/components/search/Sections";
+
 const SearchPage = () => {
   return (
     <ProtectAuth>
