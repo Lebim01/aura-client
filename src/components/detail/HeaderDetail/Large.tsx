@@ -50,15 +50,17 @@ export default function Large({ serie, genres }: Props) {
                         .map((genre) => genre.name)
                         .join(", ")}
                     </span>
-                    {genres?.map((genre, index) => (
-                      <Image
-                        key={index}
-                        src={genre.image}
-                        width={100}
-                        height={100}
-                        alt=""
-                      />
-                    ))}
+                    {genres
+                      ?.filter((r) => r.image != "")
+                      .map((genre, index) => (
+                        <Image
+                          key={index}
+                          src={genre.image}
+                          width={100}
+                          height={100}
+                          alt=""
+                        />
+                      ))}
                   </div>
                 </div>
                 <span
