@@ -12,19 +12,16 @@ import { filter } from "rxjs";
 const SearchInput = () => {
   const router = useRouter();
   const [search, setSearch] = useState("");
-  const { filters, setFilters } = useFilters();
+  const { filters, clearFilters, setFilters } = useFilters();
   const ref = useRef<HTMLInputElement | null>(null);
   const [focused, setFocused] = useState(false);
   const isMobile = useIsMobile();
-
-  const setFocuseable = () => {
-    ref.current?.focus();
-    setFocused(true);
-  };
+  const debounceTimerRef = useRef<NodeJS.Timeout | null>(null);
 
   const setUnFocuseable = () => {
     setFocused(false);
     setSearch("");
+    clearFilters();
     ref.current?.blur();
   };
 
@@ -37,9 +34,29 @@ const SearchInput = () => {
 
   useEffect(() => {
     if (router.pathname === "/dashboard") {
-      setFilters("");
+      clearFilters();
     }
   }, [router]);
+
+  const debounceSearch = (value: string) => {
+    if (debounceTimerRef.current) {
+      clearTimeout(debounceTimerRef.current);
+    }
+    debounceTimerRef.current = setTimeout(() => {
+      setFilters((prevFilters: any) => ({
+        ...prevFilters,
+        q: value,
+      }));
+    }, 500);
+  };
+
+  useEffect(() => {
+    return () => {
+      if (debounceTimerRef.current) {
+        clearTimeout(debounceTimerRef.current);
+      }
+    };
+  }, []);
 
   return (
     <div
@@ -74,10 +91,13 @@ const SearchInput = () => {
             { "placeholder:text-yellow-aura-accent": focused }
           )}
           placeholder={"¿Qué serie  estás buscando?"}
+          name="q"
           ref={ref}
-          value={filters}
+          value={search}
           onChange={(e) => {
-            setFilters(e.target.value);
+            const value = e.target.value;
+            setSearch(value);
+            debounceSearch(value);
           }}
           type={"text"}
           onFocus={() => setFocused(true)}

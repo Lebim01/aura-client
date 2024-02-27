@@ -19,7 +19,8 @@ const InputSearch = ({ url, iconactive, icon, size }: Props) => {
   const pathname = usePathname();
   const isMobile = useIsMobile();
   const [search, setSearch] = useState("");
-  const { filters, setFilters } = useFilters();
+  const { filters, setFilters, clearFilters } = useFilters();
+  const debounceTimerRef = useRef<NodeJS.Timeout | null>(null);
 
   const setFocuseable = () => {
     ref.current?.focus();
@@ -29,6 +30,7 @@ const InputSearch = ({ url, iconactive, icon, size }: Props) => {
   const setUnFocuseable = () => {
     setFocused(false);
     setSearch("");
+    clearFilters();
     ref.current?.blur();
   };
 
@@ -39,17 +41,29 @@ const InputSearch = ({ url, iconactive, icon, size }: Props) => {
     }
   }, [pathname]);
 
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setFilters(search);
+  const debounceSearch = (value: string) => {
+    if (debounceTimerRef.current) {
+      clearTimeout(debounceTimerRef.current);
+    }
+    debounceTimerRef.current = setTimeout(() => {
+      setFilters((prevFilters: any) => ({
+        ...prevFilters,
+        q: value,
+      }));
     }, 500);
+  };
 
-    return () => clearTimeout(timer);
-  }, [search]);
+  useEffect(() => {
+    return () => {
+      if (debounceTimerRef.current) {
+        clearTimeout(debounceTimerRef.current);
+      }
+    };
+  }, []);
 
   useEffect(() => {
     if (filters) {
-      setSearch(filters);
+      setSearch(filters?.q?.toString() || "");
     }
   }, [filters]);
 
@@ -83,7 +97,9 @@ const InputSearch = ({ url, iconactive, icon, size }: Props) => {
         ref={ref}
         value={search}
         onChange={(e) => {
-          setSearch(e.target.value);
+          const value = e.target.value;
+          setSearch(value);
+          debounceSearch(value);
         }}
         type={"text"}
         onFocus={() => setFocused(true)}

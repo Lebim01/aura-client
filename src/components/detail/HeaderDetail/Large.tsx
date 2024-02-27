@@ -1,10 +1,8 @@
 import React from "react";
 import Image from "next/image";
 import { Genre, Serie } from "@/types/series";
-import Link from "next/link";
 import ButtonTrailer from "./ViewTrailer";
 import Rating from "./Rating";
-import { AiOutlineConsoleSql } from "react-icons/ai";
 
 type Props = {
   serie: Serie;

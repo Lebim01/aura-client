@@ -10,32 +10,32 @@ import useShowHideFilters from "@/store/useShowHideFilters";
 import useIsMobile from "@/hooks/useIsMobile";
 
 const options = [
-  { label: "Acción", value: "", img: "/categories/accion.png" },
-  { label: "Aventura", value: "", img: "/categories/aventura.png" },
+  { label: "Acción", value: "accion", img: "/categories/accion.png" },
+  { label: "Aventura", value: "aventura", img: "/categories/aventura.png" },
   {
     label: "Ciencia Ficción",
-    value: "",
+    value: "cienciaficcion",
     img: "/categories/cienciaficcion.png",
   },
-  { label: "Comedia", value: "", img: "/categories/comedia.png" },
+  { label: "Comedia", value: "Comedia", img: "/categories/comedia.png" },
   {
     label: "Documentales",
-    value: "",
+    value: "documentales",
     img: "/categories/documentales.png",
   },
-  { label: "Drama", value: "", img: "/categories/drama.png" },
-  { label: "Fantasía", value: "", img: "/categories/fantasia.png" },
-  { label: "Suspenso", value: "", img: "/categories/suspenso.png" },
-  { label: "Terror", value: "", img: "/categories/terror.png" },
+  { label: "Drama", value: "drama", img: "/categories/drama.png" },
+  { label: "Fantasía", value: "fantasia", img: "/categories/fantasia.png" },
+  { label: "Suspenso", value: "suspenso", img: "/categories/suspenso.png" },
+  { label: "Terror", value: "terror", img: "/categories/terror.png" },
 ];
 
 const platforms = [
-  { icon: "/icons/netflix.svg", value: "" },
-  { icon: "/icons/primevideo.svg", value: "" },
-  { icon: "/icons/disney.svg", value: "" },
-  { icon: "/icons/paramount.svg", value: "" },
-  { icon: "/icons/vix.svg", value: "" },
-  { icon: "/icons/hbo.svg", value: "" },
+  { icon: "/icons/netflix.svg", value: "netflix" },
+  { icon: "/icons/primevideo.svg", value: "primevideo" },
+  { icon: "/icons/disney.svg", value: "disney" },
+  { icon: "/icons/paramount.svg", value: "paramount" },
+  { icon: "/icons/vix.svg", value: "vix" },
+  { icon: "/icons/hbo.svg", value: "hbo" },
 ];
 
 const CategoryFilters = () => {
@@ -51,6 +51,7 @@ const CategoryFilters = () => {
       setMaxHeight("0px");
     }
   }, [showHideFilters, isMobile]);
+
   return (
     <div
       style={{

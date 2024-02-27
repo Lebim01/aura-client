@@ -6,6 +6,7 @@ import useIsMobile from "@/hooks/useIsMobile";
 import { classNamesCustom } from "@/utils/classes";
 import ItemSections from "./ItemSections";
 import axiosInstance from "@/services";
+import { objectToURL } from "@/utils/objectToURL";
 interface Props {
   text: string;
   endpoint: string;
@@ -19,7 +20,9 @@ const Sections = ({ text, endpoint }: Props) => {
   const getSeries = async () => {
     try {
       setLoading(true);
-      const series_result = await axiosInstance.get(`${endpoint}?q=${filters}`);
+      const series_result = await axiosInstance.get(
+        `${endpoint}?${objectToURL(filters)}`
+      );
       setSeries(series_result.data);
       setLoading(false);
     } catch (e) {

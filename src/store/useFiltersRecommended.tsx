@@ -13,7 +13,7 @@ interface ObjectState {
   removeFilter: (key: string) => void;
 }
 
-const useFilters = create<ObjectState>((set) => ({
+const useFiltersRecommended = create<ObjectState>((set) => ({
   filters: {},
   setFilters: (newValue) =>
     set((state) => ({
@@ -34,4 +34,4 @@ const useFilters = create<ObjectState>((set) => ({
     }),
 }));
 
-export default useFilters;
+export default useFiltersRecommended;

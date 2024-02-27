@@ -21,7 +21,6 @@ const DesktopLayout: FC<Props> = ({ children, forceDisplay }) => {
   const router = useRouter();
   const pathname = usePathname();
   const isMobile = useIsMobile();
-  const { showHideFilters } = useShowHideFilters();
   const HIDE_URL = ["/profile"];
 
   return (
