@@ -20,7 +20,7 @@ const HeaderDashboard = () => {
   return (
     <div
       onClick={() => (!isMobile ? goToProfile() : () => {})}
-      className="flex md:pt-[16px] justify-between items-center w-full md:p-[14px] md:bg-menus  md:rounded-[16px] md:hover:scale-105 transition-transform duration-200 ease-in-out cursor-pointer"
+      className="flex justify-between items-center w-full md:px-[16px] md:py-[4px] md:bg-menus  md:rounded-[16px] md:hover:scale-105 transition-transform duration-200 ease-in-out cursor-pointer"
     >
       <label
         className="text-[16px] leading-[130%] font-[700] cursor-pointer capitalize"

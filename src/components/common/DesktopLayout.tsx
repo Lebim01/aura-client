@@ -24,10 +24,10 @@ const DesktopLayout: FC<Props> = ({ children, forceDisplay }) => {
   const HIDE_URL = ["/profile"];
 
   return (
-    <div className="flex flex-col md:flex-row gap-y-[16px] w-screen  max-w-screen overflow-x-hidden md:max-w-[1440px]  md:justify-center md:mx-auto ">
+    <div className="flex flex-col md:flex-row gap-y-[16px] w-screen  max-w-screen overflow-x-hidden md:max-w-[1440px]  md:justify-center md:mx-auto pt-[24px] ">
       <div
         className={classNames(
-          "md:flex flex-col gap-y-[16px] px-[16px] md:py-[24px] md:min-w-[384px] md:max-w-[384px] overflow-y-auto md:h-screen hidescroll",
+          "md:flex flex-col gap-y-[16px] md:gap-y-[8px] px-[16px] md:min-w-[384px] md:max-w-[384px] overflow-y-auto md:h-screen hidescroll",
           {
             hidden: !forceDisplay || HIDE_URL.includes(pathname),
             flex: forceDisplay,
@@ -36,10 +36,10 @@ const DesktopLayout: FC<Props> = ({ children, forceDisplay }) => {
       >
         <Image
           src={"/logo_opaque.svg"}
-          width={88}
+          width={57}
           height={17}
           alt=""
-          className="md:py-[16px] pt-[16px] md:pt-0 cursor-pointer hover:scale-110 duration-300 trasition-all"
+          className="  cursor-pointer hover:scale-110 duration-300 trasition-all"
           onClick={() => router.push("/dashboard")}
         />
 
