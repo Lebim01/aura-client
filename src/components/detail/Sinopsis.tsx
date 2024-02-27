@@ -25,15 +25,20 @@ export default function Sinopsis({ serie, actors, platforms, crew }: Props) {
             Dirección
           </span>
           <span className="text-[12px] md:text-[14px] font-[300] leading-[140%]">
-            {crew?.filter((r) => r.role == "Dirección")?.map((r) => r.name) ||
-              "--"}
+            {crew
+              ?.filter((r) => r.role == "Dirección")
+              ?.map((r) => r.name)
+              .join(", ") || "--"}
           </span>
         </div>
 
         <div className="flex flex-col gap-y-[8px] w-full md:w-1/2 md:pl-[32px]">
           <span className="text-[12px] md:text-[16px] font-[700]">Guión</span>
           <span className="text-[12px] md:text-[14px] font-[300] leading-[140%]">
-            {crew?.filter((r) => r.role == "Guión")?.map((r) => r.name) || "--"}
+            {crew
+              ?.filter((r) => r.role == "Guión")
+              ?.map((r) => r.name)
+              .join(", ") || "--"}
           </span>
         </div>
 
