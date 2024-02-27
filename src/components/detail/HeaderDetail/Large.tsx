@@ -14,8 +14,6 @@ export default function Large({ serie, genres }: Props) {
     ? `, url(${serie?.backdrop_path})`
     : "";
 
-  console.log(genres);
-
   return (
     <div className="flex flex-col w-full relative px-[16px] pt-[16px]">
       <div className="w-full rounded-lg bg-gray-400 relative overflow-hidden min-h-[423px] md:min-h-[400px]">

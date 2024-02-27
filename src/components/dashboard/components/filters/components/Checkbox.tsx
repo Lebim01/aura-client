@@ -21,10 +21,6 @@ const Checkbox = ({ label, value, image }: Props) => {
     }
   };
 
-  useEffect(() => {
-    console.log(filters);
-  }, [filters]);
-
   return (
     <div
       className={classNamesCustom("rounded-[6px] border border-transparent", {

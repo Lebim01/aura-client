@@ -18,9 +18,6 @@ const Platforms = ({ icon, value }: Props) => {
       setFilters({ ...filters, platforms: value });
     }
   };
-  useEffect(() => {
-    console.log(filters);
-  }, [filters]);
 
   return (
     <div

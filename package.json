@@ -15,6 +15,7 @@
     "classnames": "^2.5.1",
     "generate-password": "^1.7.1",
     "git": "^0.1.5",
+    "lottie-web": "^5.12.2",
     "neo4j-driver": "^5.17.0",
     "next": "14.1.0",
     "next-auth": "^4.24.6",

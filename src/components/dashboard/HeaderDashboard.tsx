@@ -4,21 +4,26 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import useShowHideFilters from "@/store/useShowHideFilters";
 import { classNamesCustom } from "@/utils/classes";
+import useIsMobile from "@/hooks/useIsMobile";
 
 const HeaderDashboard = () => {
   const router = useRouter();
   const { status, data } = useSession();
   const isLoggedIn = status == "authenticated";
   const { showHideFilters, toggleFilters } = useShowHideFilters();
+  const isMobile = useIsMobile();
 
   const goToProfile = () => {
     router.push(isLoggedIn ? "/profile" : "/login");
   };
 
   return (
-    <div className="flex md:pt-[16px] justify-between items-center w-full md:p-[14px] md:bg-menus  md:rounded-[16px] md:hover:scale-105 transition-transform duration-200 ease-in-out cursor-pointer">
+    <div
+      onClick={() => (!isMobile ? goToProfile() : () => {})}
+      className="flex md:pt-[16px] justify-between items-center w-full md:p-[14px] md:bg-menus  md:rounded-[16px] md:hover:scale-105 transition-transform duration-200 ease-in-out cursor-pointer"
+    >
       <label
-        className="text-[16px] leading-[130%] font-[700]"
+        className="text-[16px] leading-[130%] font-[700] cursor-pointer capitalize"
         onClick={() => {
           goToProfile();
         }}

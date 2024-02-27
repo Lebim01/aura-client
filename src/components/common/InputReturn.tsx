@@ -9,6 +9,8 @@ interface Props {
   name: string;
   onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
   value: string;
+  keyEnter?: boolean;
+  onClick?: () => void;
 }
 const InputReturn = ({
   icon,
@@ -17,7 +19,16 @@ const InputReturn = ({
   name,
   value,
   onChange,
+  keyEnter,
+  onClick,
 }: Props) => {
+  const handleKeyDown = (e: any) => {
+    if (e.key === "Enter" && keyEnter && onClick) {
+      e.preventDefault();
+      onClick();
+    }
+  };
+
   return (
     <div className="relative  w-full max-h-[51px]  min-h-[51px]">
       <span className="absolute inset-y-6 left-0 flex items-center pl-[16px]">
@@ -40,6 +51,7 @@ const InputReturn = ({
           onChange={onChange}
           type={type || "text"}
           name={name}
+          onKeyDown={handleKeyDown}
         />
       </div>
     </div>

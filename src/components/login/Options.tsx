@@ -1,4 +1,10 @@
-import React, { useState, ChangeEvent, useEffect } from "react";
+import React, {
+  useState,
+  ChangeEvent,
+  useEffect,
+  Dispatch,
+  SetStateAction,
+} from "react";
 import InputReturn from "@/components/common/InputReturn";
 import HaveAccount from "@/components/common/HaveAccount";
 import SocialButton from "@/components/common/SocialButton";
@@ -17,7 +23,11 @@ const UserDataINIT = {
   pass: "",
 };
 
-const Options = () => {
+interface Props {
+  setLoading: Dispatch<SetStateAction<boolean>>;
+}
+
+const Options = ({ setLoading }: Props) => {
   const [data, setData] = useState<UserData>(UserDataINIT);
   const [disabled, setDisabled] = useState(true);
   const searchParams = useSearchParams();
@@ -44,6 +54,17 @@ const Options = () => {
     setDisabled(areValuesEmpty);
   }, [data]);
 
+  useEffect(() => {
+    if (searchParams.get("error")) {
+      setLoading(false);
+    }
+  }, [searchParams]);
+
+  const startLogin = () => {
+    setLoading(true);
+    login(data.mail, data.pass);
+  };
+
   return (
     <div className="flex flex-col gap-y-[24px] w-full">
       <div className="flex flex-col gap-y-[16px] w-full">
@@ -61,17 +82,23 @@ const Options = () => {
           value={data["pass"]}
           type="password"
           onChange={handleChange}
+          keyEnter
+          onClick={startLogin}
         />
 
         <ButtonCommon
           text="INGRESAR"
           disabled={disabled}
           onClick={() => {
-            login(data.mail, data.pass);
+            startLogin();
           }}
         />
 
-        {searchParams.get("error") && <span className="text-red-400 text-center">Usuario y/o contraseña incorrectos</span>}
+        {searchParams.get("error") && (
+          <span className="text-red-400 text-center">
+            Usuario y/o contraseña incorrectos
+          </span>
+        )}
 
         <Separator />
 
