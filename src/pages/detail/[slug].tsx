@@ -34,7 +34,6 @@ export default function Detail({
   const [serie] = useState<Serie>(JSON.parse(_serie));
   const [tab, setTab] = useState<Tabs>("credits");
   const [openTrailer, setOpenTrailer] = useState(false);
-  console.log(genres);
 
   return (
     <DesktopLayout>

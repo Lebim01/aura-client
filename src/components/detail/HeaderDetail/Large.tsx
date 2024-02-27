@@ -15,8 +15,6 @@ export default function Large({ serie, genres, ...props }: Props) {
     ? `, url(${serie?.backdrop_path})`
     : "";
 
-  console.log(serie);
-
   return (
     <div className="flex flex-col gap-y-[8px] md:gap-y-[16px] px-[16px] py-[12px] bg-black bg-opacity-50 rounded-[16px]">
       <div className="w-full flex gap-x-[8px] items-center md:gap-x-[24px]">
