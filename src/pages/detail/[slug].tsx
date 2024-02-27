@@ -12,6 +12,7 @@ import DesktopLayout from "@/components/common/DesktopLayout";
 import Separator from "@/components/common/Separator";
 import axiosInstance from "@/services";
 import { getSerieBySlug } from "@/services/series";
+import TrailerModal from "@/components/detail/HeaderDetail/TrailerModal";
 
 type Tabs = "credits" | "reviews" | "video";
 
@@ -28,18 +29,32 @@ export default function Detail({
   genres,
   platforms,
   actors,
-  crew
+  crew,
 }: Props) {
   const [serie] = useState<Serie>(JSON.parse(_serie));
   const [tab, setTab] = useState<Tabs>("credits");
+  const [openTrailer, setOpenTrailer] = useState(false);
 
   return (
     <DesktopLayout>
       <div className="flex flex-col h-screen w-screen gap-y-[32px] hidescroll pb-[90px] overflow-y-auto">
         <div className="flex flex-col gap-y-[32px] flex-1">
           {/* Cards */}
-          {tab === "credits" && <Large serie={serie} genres={genres} />}
+          {tab === "credits" && (
+            <Large
+              serie={serie}
+              genres={genres}
+              openTrailer={() => setOpenTrailer(true)}
+            />
+          )}
           {tab === "reviews" && <Middle serie={serie} genres={genres} />}
+          {serie.trailer && (
+            <TrailerModal
+              url={serie.trailer}
+              open={openTrailer}
+              close={() => setOpenTrailer(false)}
+            />
+          )}
           <div className="px-[16px]">
             <Separator />
           </div>
@@ -55,7 +70,12 @@ export default function Detail({
         </div> */}
           {tab === "credits" && (
             <div className="flex flex-col md:flex-row gap-y-[32px]">
-              <Sinopsis serie={serie} actors={actors} platforms={platforms} crew={crew} />
+              <Sinopsis
+                serie={serie}
+                actors={actors}
+                platforms={platforms}
+                crew={crew}
+              />
               <div className="flex flex-col gap-y-[16px] md:pt-[32px]">
                 <span className="text-[12px] font-[700] px-[16px] md:hidden">
                   Reparto

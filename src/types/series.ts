@@ -7,6 +7,7 @@ export type Serie = {
   poster_path: string;
   overview: string;
   popularity: number;
+  trailer?: string;
 };
 
 export type Genre = {
