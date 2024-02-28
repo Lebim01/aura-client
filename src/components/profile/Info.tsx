@@ -5,7 +5,7 @@ import useShowHideFooterStore from "@/store/showHideFooterStore";
 import { useSession } from "next-auth/react";
 
 const Info = () => {
-  const { data } = useSession()
+  const { data } = useSession();
   const [showMenu, setShowMenu] = useState(false);
   const { toggleFooter } = useShowHideFooterStore();
 
@@ -28,7 +28,7 @@ const Info = () => {
           }}
         >
           <Image
-            src={"/no-photo.png"}
+            src={data?.user?.profile_img || "/no-photo.png"}
             className="rounded-full"
             alt=""
             width={80}

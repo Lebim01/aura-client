@@ -78,6 +78,8 @@ export const authOptions: NextAuthOptions = {
     },
     async session({ session, token }) {
       if (token?.accessToken) {
+        const _user = await authMe(token?.accessToken);
+        session.user = _user;
         session.accessToken = token.accessToken;
       }
       return session;

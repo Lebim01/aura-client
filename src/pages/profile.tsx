@@ -33,9 +33,8 @@ const Profile = () => {
   return (
     <ProtectAuth>
       <DesktopLayout forceDisplay>
-        <div className="flex flex-col overflow-y-auto w-auto pb-[99px] md:py-[32px] relative min-w-max flex-grow h-custom-screen">
+        <div className="flex flex-col overflow-y-auto w-auto pb-[99px] relative min-w-max flex-grow h-custom-screen hidescroll">
           <Header text={label || "Perfil"} />
-          {/*  start profile */}
           {!router.query.step ||
           Object.keys(router.query).length === 0 ||
           router.query.step === "profile" ? (
@@ -57,10 +56,7 @@ const Profile = () => {
               </div>
             </>
           ) : null}
-          {/* ends profile */}
-          {/* start general */}
           {router.query.step === "general" && <General />}
-          {/* ends general */}
         </div>
         <Footer />
       </DesktopLayout>

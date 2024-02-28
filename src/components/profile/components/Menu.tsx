@@ -58,39 +58,17 @@ const Menu = ({ show, setShow, index }: Props) => {
   const handlersMain = useSwipeable({
     onSwipedUp: (eventData) => {
       eventData.event.stopPropagation();
-      /* setShow(false); */
     },
     onSwipedDown: (eventData) => {
       eventData.event.stopPropagation();
-      /*  setShow(false); */
     },
     trackMouse: true,
   });
 
-  const handleChange = (e: any) => {
-    const newText = e.target.value;
-    setText(newText);
-
-    const newRows = newText.split("\n").length || 1;
-    setRows(newRows);
-  };
-
-  const handleScroll = useCallback((e: any) => {
-    const target = e.target;
-
-    if (target.scrollHeight - target.scrollTop === target.clientHeight) {
-      setH(true);
-    }
-
-    if (target.scrollTop === 0) {
-      setH((state) => !state);
-    }
-  }, []);
-
   return (
     <div
       className={classNamesCustom(
-        " items-end justify-end w-screen flex flex-col top-0 bg-black-1D backdrop-blur-sm bg-opacity-10 z-50",
+        " items-end justify-end w-screen flex flex-col top-0 bg-black-1D backdrop-blur-sm bg-opacity-10 z-50 ",
         {
           "h-custom-screen transition-all duration-500 absolute": show,
         },

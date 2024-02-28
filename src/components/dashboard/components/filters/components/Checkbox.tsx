@@ -23,10 +23,13 @@ const Checkbox = ({ label, value, image }: Props) => {
 
   return (
     <div
-      className={classNamesCustom("rounded-[6px] border border-transparent", {
-        "border border-yellow-aura-accent shadow-[0px_0px_0px_3px_rgba(251,188,5,0.20)]":
-          isActive,
-      })}
+      className={classNamesCustom(
+        "rounded-[6px] border border-transparent md:hover:scale-105 transition-transform duration-200 ease-in-out cursor-pointer ",
+        {
+          "border border-yellow-aura-accent shadow-[0px_0px_0px_3px_rgba(251,188,5,0.20)]":
+            isActive,
+        }
+      )}
     >
       <Image
         src={image}
@@ -35,9 +38,7 @@ const Checkbox = ({ label, value, image }: Props) => {
         sizes="100vw"
         style={{ width: "100%", height: "auto" }}
         alt=""
-        className={classNamesCustom(
-          "md:hover:scale-105 transition-transform duration-200 ease-in-out cursor-pointer select-none"
-        )}
+        className={classNamesCustom("select-none")}
         onClick={handleClick}
       />
     </div>

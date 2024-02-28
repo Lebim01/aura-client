@@ -55,9 +55,11 @@ export const getUserByEmail = async (
   return null;
 };
 
-export const authMe = async (token: string): Promise<ProfileWithToken | null> => {
+export const authMe = async (
+  token: string
+): Promise<ProfileWithToken | null> => {
   return axiosInstance
-    .get("/users/me")
+    .get("/users/me", { headers: { Authorization: `Bearer ${token}` } })
     .then((r) => ({ ...r.data, accessToken: token }))
     .catch(() => null);
 };
