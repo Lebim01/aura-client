@@ -17,6 +17,8 @@ export default function Large({ serie, genres, ...props }: Props) {
     ? `, url(${serie?.backdrop_path})`
     : "";
 
+  console.log(serie);
+
   const isMobile = useIsMobile();
 
   return (
@@ -70,8 +72,26 @@ export default function Large({ serie, genres, ...props }: Props) {
         >
           {serie?.overview}
         </span>
+        <Rating qualification={9.05} />
         <div className="flex space-x-4 mt-[8px] md:mt-0">
-          <Rating qualification={9.05} />
+          <div className="flex items-center gap-x-[8px]">
+            <span className="text-[12px] font-[600]">Calificar:</span>
+            {Array(10)
+              .fill(null)
+              .map((_: any, index: number) => (
+                <div
+                  key={index}
+                  className="cursor-pointer hover:scale-125 transition-transform duration-200 ease-in-out"
+                >
+                  <Image
+                    width={20}
+                    height={20}
+                    src={"/icons/star-rate.svg"}
+                    alt=""
+                  />
+                </div>
+              ))}
+          </div>
           {serie.trailer && <ButtonTrailer open={props.openTrailer} />}
         </div>
       </div>
