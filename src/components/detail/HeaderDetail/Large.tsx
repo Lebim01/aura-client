@@ -17,13 +17,15 @@ export default function Large({ serie, genres, ...props }: Props) {
     ? `, url(${serie?.backdrop_path})`
     : "";
 
+  console.log(serie);
+
   const isMobile = useIsMobile();
 
   return (
     <div className="px-[16px]">
       <div
         className={classNamesCustom(
-          "flex flex-col gap-y-[8px] md:gap-y-[16px] px-[16px] py-[12px]  md:bg-black md:bg-opacity-50 rounded-[16px]",
+          "flex flex-col gap-y-[16px] px-[16px] py-[12px]  md:bg-black md:bg-opacity-50 rounded-[16px]",
           { "bg-bg-gradient-detail-card": isMobile }
         )}
       >
@@ -53,7 +55,7 @@ export default function Large({ serie, genres, ...props }: Props) {
                   className="relative  flex-col items-center justify-center h-full text-center md:flex hidden"
                 >
                   <Image src={genre.image} width={100} height={100} alt="" />
-                  <span className="absolute text-white text-[10px]">
+                  <span className="absolute text-white text-[14px]">
                     {genre.name}
                   </span>
                 </div>
@@ -70,8 +72,26 @@ export default function Large({ serie, genres, ...props }: Props) {
         >
           {serie?.overview}
         </span>
-        <div className="flex space-x-4 mt-[8px] md:mt-0">
-          <Rating qualification={9.05} />
+        <Rating qualification={9.05} />
+        <div className="md:flex-row flex gap-y-[16px] md:gap-y-0 flex-col md:gap-x-[24px] mt-[8px] md:mt-0">
+          <div className="flex items-center gap-x-[8px]">
+            <span className="text-[12px] font-[600]">Calificar:</span>
+            {Array(10)
+              .fill(null)
+              .map((_: any, index: number) => (
+                <div
+                  key={index}
+                  className="cursor-pointer md:hover:scale-125 transition-transform duration-200 ease-in-out min-h-[20px] min-w-[20px]"
+                >
+                  <Image
+                    width={20}
+                    height={20}
+                    src={"/icons/star-rate.svg"}
+                    alt=""
+                  />
+                </div>
+              ))}
+          </div>
           {serie.trailer && <ButtonTrailer open={props.openTrailer} />}
         </div>
       </div>
