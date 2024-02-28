@@ -24,6 +24,7 @@ const UserName = () => {
         lastname: " ",
         password: userData.pass,
         email: userData.mail,
+        birthdate: `${userData.year}-${userData.month}-${userData.day}`,
       });
       router.push("/signup?step=otp");
     } catch (err) {
