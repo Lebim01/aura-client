@@ -3,17 +3,19 @@ import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import { FC, ReactNode, useEffect, useState } from "react";
 import Image from "next/image";
+
 type Props = {
   children: ReactNode;
+  protected?: boolean;
 };
 
-const ProtectAuth: FC<Props> = (props) => {
+const AuthProvider: FC<Props> = (props) => {
   const router = useRouter();
   const [init, setInit] = useState(false);
   const session = useSession({
-    required: true,
+    required: props.protected ?? false,
     onUnauthenticated() {
-      router.push("/login");
+      if (props.protected) router.push("/login");
     },
   });
 
@@ -43,4 +45,4 @@ const ProtectAuth: FC<Props> = (props) => {
   return props.children;
 };
 
-export default ProtectAuth;
+export default AuthProvider;

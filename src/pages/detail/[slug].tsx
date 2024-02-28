@@ -13,6 +13,7 @@ import Separator from "@/components/common/Separator";
 import axiosInstance from "@/services";
 import { getSerieBySlug } from "@/services/series";
 import TrailerModal from "@/components/detail/HeaderDetail/TrailerModal";
+import AuthProvider from "@/components/common/ProtectAuth";
 
 type Tabs = "credits" | "reviews" | "video";
 
@@ -36,61 +37,63 @@ export default function Detail({
   const [openTrailer, setOpenTrailer] = useState(false);
 
   return (
-    <DesktopLayout>
-      <div className="flex flex-col h-screen w-screen gap-y-[32px] hidescroll pb-[90px] overflow-y-auto ">
-        <div className="flex flex-col gap-y-[24px] flex-1">
-          {/* Cards */}
-          {tab === "credits" && (
-            <Large
-              serie={serie}
-              genres={genres}
-              openTrailer={() => setOpenTrailer(true)}
-            />
-          )}
-          {tab === "reviews" && <Middle serie={serie} genres={genres} />}
-          {serie.trailer && openTrailer && (
-            <TrailerModal
-              url={serie.trailer}
-              open={openTrailer}
-              close={() => setOpenTrailer(false)}
-            />
-          )}
-          <div className="px-[16px] hidden md:block">
-            <Separator />
-          </div>
-          {/*  {!loading && <Tabs option={tab} setTab={setTab} />}
-        {loading && <TabsSkeleton/>}
-        <div className="px-[16px]">
-          {!loading && <ButtonCommon
-            text="AÑADIR A LISTA"
-            onClick={() => {}}
-            disabled={false}
-          />}
-          {loading && <ButtonSkeleton/>}
-        </div> */}
-          {tab === "credits" && (
-            <div className="flex flex-col md:flex-row gap-y-[32px]">
-              <Sinopsis
+    <AuthProvider>
+      <DesktopLayout>
+        <div className="flex flex-col h-screen w-screen gap-y-[32px] hidescroll pb-[90px] overflow-y-auto ">
+          <div className="flex flex-col gap-y-[24px] flex-1">
+            {/* Cards */}
+            {tab === "credits" && (
+              <Large
                 serie={serie}
-                actors={actors}
-                platforms={platforms}
-                crew={crew}
+                genres={genres}
+                openTrailer={() => setOpenTrailer(true)}
               />
-              <div className="flex flex-col gap-y-[16px] md:pt-[32px]">
-                <span className="text-[12px] font-[700] px-[16px] md:hidden">
-                  Reparto
-                </span>
-
-                <Cast actors={actors} />
-              </div>
+            )}
+            {tab === "reviews" && <Middle serie={serie} genres={genres} />}
+            {serie.trailer && openTrailer && (
+              <TrailerModal
+                url={serie.trailer}
+                open={openTrailer}
+                close={() => setOpenTrailer(false)}
+              />
+            )}
+            <div className="px-[16px] hidden md:block">
+              <Separator />
             </div>
-          )}
+            {/*  {!loading && <Tabs option={tab} setTab={setTab} />}
+          {loading && <TabsSkeleton/>}
+          <div className="px-[16px]">
+            {!loading && <ButtonCommon
+              text="AÑADIR A LISTA"
+              onClick={() => {}}
+              disabled={false}
+            />}
+            {loading && <ButtonSkeleton/>}
+          </div> */}
+            {tab === "credits" && (
+              <div className="flex flex-col md:flex-row gap-y-[32px]">
+                <Sinopsis
+                  serie={serie}
+                  actors={actors}
+                  platforms={platforms}
+                  crew={crew}
+                />
+                <div className="flex flex-col gap-y-[16px] md:pt-[32px]">
+                  <span className="text-[12px] font-[700] px-[16px] md:hidden">
+                    Reparto
+                  </span>
 
-          {tab === "reviews" && <Reviews />}
+                  <Cast actors={actors} />
+                </div>
+              </div>
+            )}
+
+            {tab === "reviews" && <Reviews />}
+          </div>
+          <Footer />
         </div>
-        <Footer />
-      </div>
-    </DesktopLayout>
+      </DesktopLayout>
+    </AuthProvider>
   );
 }
 

@@ -9,7 +9,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import General from "@/components/profile/General";
 import { signOut } from "next-auth/react";
-import ProtectAuth from "@/components/common/ProtectAuth";
+import AuthProvider from "@/components/common/ProtectAuth";
 
 const options = [
   { step: "profile", label: "Perfil" },
@@ -31,7 +31,7 @@ const Profile = () => {
   }, [router]);
 
   return (
-    <ProtectAuth>
+    <AuthProvider protected>
       <DesktopLayout forceDisplay>
         <div className="flex flex-col overflow-y-auto w-auto pb-[99px] relative min-w-max flex-grow h-custom-screen hidescroll">
           <Header text={label || "Perfil"} />
@@ -60,7 +60,7 @@ const Profile = () => {
         </div>
         <Footer />
       </DesktopLayout>
-    </ProtectAuth>
+    </AuthProvider>
   );
 };
 
