@@ -126,5 +126,6 @@ export const getStaticProps = (async (context: GetStaticPropsContext) => {
       languages: serie_result.languages || [],
       videos: serie_result.videos || [],
     },
+    revalidate: 60,
   };
 }) satisfies GetStaticProps<Props>;
