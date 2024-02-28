@@ -8,34 +8,63 @@ import Recommended from "./components/Recommended";
 import { useState, useEffect, useRef } from "react";
 import useShowHideFilters from "@/store/useShowHideFilters";
 import useIsMobile from "@/hooks/useIsMobile";
+import useFiltersRecommended from "@/store/useFiltersRecommended";
 
 const options = [
-  { label: "Acción", value: "accion", img: "/categories/accion.png" },
-  { label: "Aventura", value: "aventura", img: "/categories/aventura.png" },
+  {
+    label: "Acción",
+    value: "88a6f078-94d2-415b-9e34-c53371f0638d",
+    img: "/categories/accion.png",
+  },
+  {
+    label: "Aventura",
+    value: "788b8bbc-10ee-4aa5-8207-8f4b2baa5e4a",
+    img: "/categories/aventura.png",
+  },
   {
     label: "Ciencia Ficción",
-    value: "cienciaficcion",
+    value: "3865b9be-ab60-436a-84a1-ef7fda5abc88",
     img: "/categories/cienciaficcion.png",
   },
-  { label: "Comedia", value: "Comedia", img: "/categories/comedia.png" },
+  {
+    label: "Comedia",
+    value: "5c74c398-b060-4fc2-ba38-2ae381fdfc0e",
+    img: "/categories/comedia.png",
+  },
   {
     label: "Documentales",
-    value: "documentales",
+    value: "18c5299d-473e-44a2-9e9f-79f8dae23212",
     img: "/categories/documentales.png",
   },
-  { label: "Drama", value: "drama", img: "/categories/drama.png" },
-  { label: "Fantasía", value: "fantasia", img: "/categories/fantasia.png" },
-  { label: "Suspenso", value: "suspenso", img: "/categories/suspenso.png" },
-  { label: "Terror", value: "terror", img: "/categories/terror.png" },
+  {
+    label: "Drama",
+    value: "80c69a86-b995-4267-a6b7-cd993e07b579",
+    img: "/categories/drama.png",
+  },
+  {
+    label: "Fantasía",
+    value: "30b91950-6a98-4bd4-be1c-d9e4fc930d5f",
+    img: "/categories/fantasia.png",
+  },
+  {
+    label: "Suspenso",
+    value: "08b92c7a-ddb1-4dd5-8dd0-884fc7e549d5",
+    img: "/categories/suspenso.png",
+  },
+  {
+    label: "Terror",
+    value: "01fda2ce-40c2-41ba-8e57-9bc82e8dcbce",
+    img: "/categories/terror.png",
+  },
 ];
 
 const platforms = [
   { icon: "/icons/netflix.svg", value: "netflix" },
-  { icon: "/icons/primevideo.svg", value: "primevideo" },
-  { icon: "/icons/disney.svg", value: "disney" },
-  { icon: "/icons/paramount.svg", value: "paramount" },
+  { icon: "/icons/hbo.svg", value: "hbo-max" },
+  { icon: "/icons/apple-tv.png", value: "apple-tv" },
+  { icon: "/icons/disney.svg", value: "disney+" },
+  { icon: "/icons/starplus.jpg", value: "star+" },
   { icon: "/icons/vix.svg", value: "vix" },
-  { icon: "/icons/hbo.svg", value: "hbo" },
 ];
 
 const CategoryFilters = () => {
@@ -43,6 +72,7 @@ const CategoryFilters = () => {
   const { showHideFilters } = useShowHideFilters();
   const isMobile = useIsMobile();
   const containerRef = useRef<any>(null);
+  const { filters } = useFiltersRecommended();
 
   useEffect(() => {
     if (showHideFilters && containerRef.current && isMobile) {
@@ -96,7 +126,7 @@ const CategoryFilters = () => {
           </div>
           <ButtonCommon
             text="RECOMENDAR"
-            disabled={false}
+            disabled={!(filters && filters?.category && filters?.platform)}
             onClick={() => {
               setShowRecommended(true);
             }}
@@ -151,7 +181,7 @@ const CategoryFilters = () => {
             </div>
             <ButtonCommon
               text="RECOMENDAR"
-              disabled={false}
+              disabled={!(filters && filters?.category && filters?.platform)}
               onClick={() => {
                 setShowRecommended(true);
               }}

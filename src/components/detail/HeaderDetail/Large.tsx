@@ -17,8 +17,6 @@ export default function Large({ serie, genres, ...props }: Props) {
     ? `, url(${serie?.backdrop_path})`
     : "";
 
-  console.log(serie);
-
   const isMobile = useIsMobile();
 
   return (

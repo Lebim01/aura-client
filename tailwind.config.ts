@@ -36,6 +36,7 @@ const config: Config = {
         "green-opaque": "#C0FFD9",
         "green-enlaces": "#4FD07E",
       },
+
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic":
@@ -53,6 +54,7 @@ const config: Config = {
           "radial-gradient(45.91% 85.94% at 55.4% 14.06%, rgba(255, 255, 255, 0.40) 0%, rgba(255, 255, 255, 0.03) 100%), radial-gradient(121.48% 78.97% at 22.73% 20.31%, rgba(226, 241, 45, 0.20) 18.63%, rgba(226, 241, 45, 0.19) 100%), radial-gradient(177.49% 126.29% at 33.52% -15.63%, #E0E342 0%, rgba(35, 173, 140, 0.58) 85.15%), radial-gradient(317.72% 44.57% at 82.39% 55.47%, #41FF7B 0%, #00BCB1 100%)",
         "bg-gradient-detail-card":
           "linear-gradient(to bottom, #101010, rgba(111, 111, 111, 0.3))",
+        "bg-green-opaque": "linear-gradient(91deg, #C0FFD9, #C0FFD9)        ",
       },
       boxShadow: {
         "custom-green": "0px 0px 8px 0px rgba(183, 244, 106, 0.20)",

@@ -9,20 +9,20 @@ interface Props {
 }
 const Platforms = ({ icon, value }: Props) => {
   const { filters, setFilters } = useFiltersRecommended();
-  const isActive = filters.platforms === value;
+  const isActive = filters.platform === value;
 
   const handleClick = () => {
     if (isActive) {
-      setFilters({ ...filters, platforms: "" });
+      setFilters({ ...filters, platform: "" });
     } else {
-      setFilters({ ...filters, platforms: value });
+      setFilters({ ...filters, platform: value });
     }
   };
 
   return (
     <div
       className={classNamesCustom(
-        "w-[78px] h-[78px] bg-black-18 flex justify-center rounded-[6px] md:hover:scale-105 transition-transform duration-200 ease-in-out cursor-pointer border border-border-search",
+        "w-[78px] h-[78px] bg-black-18 flex justify-center items-center rounded-[6px] md:hover:scale-105 transition-transform duration-200 ease-in-out cursor-pointer border border-border-search",
         {
           "border border-yellow-aura-accent shadow-[0px_0px_0px_3px_rgba(251,188,5,0.20)]":
             isActive,
@@ -30,7 +30,14 @@ const Platforms = ({ icon, value }: Props) => {
       )}
       onClick={handleClick}
     >
-      <Image src={icon} width={68} height={68} alt="" />
+      <Image
+        src={icon}
+        width={0}
+        height={0}
+        sizes="100vw"
+        style={{ width: "68px", height: "68px" }}
+        alt=""
+      />
     </div>
   );
 };

@@ -198,3 +198,18 @@ input:-webkit-autofill:active {
 .animate-scale {
   animation: scale 1.5s infinite;
 }
+
+/*  */
+
+.fade-in {
+  animation: fadeIn 500ms ease-in-out forwards;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}

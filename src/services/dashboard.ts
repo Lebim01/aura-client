@@ -7,3 +7,7 @@ export const topMexico = (page: number): Promise<any> => {
 export const getOneSerie = (id: string): Promise<any> => {
   return axiosInstance.get(`/series/${id}`);
 };
+
+export const getRecommended = (filters: any): Promise<any> => {
+  return axiosInstance.post(`/dashboard/recommended`, filters);
+};

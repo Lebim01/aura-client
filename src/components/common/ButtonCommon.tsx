@@ -10,8 +10,8 @@ const ButtonCommon = ({ text, disabled, onClick }: Props) => {
   return (
     <div
       className={classNamesCustom(
-        `flex justify-center items-center w-full rounded-[8px] h-[50px] bg-yellow-aura text-[12px] leading-[150%] text-brown-aura cursor-pointer`,
-        { "bg-green-opaque pointer-events-none": disabled },
+        `flex justify-center items-center w-full rounded-[8px] h-[50px] bg-yellow-aura text-[12px] leading-[150%] text-brown-aura cursor-pointer transition-all duration-300`,
+        { "bg-bg-green-opaque pointer-events-none": disabled },
         { "bg-bg-green-button": !disabled }
       )}
       onClick={() => onClick()}

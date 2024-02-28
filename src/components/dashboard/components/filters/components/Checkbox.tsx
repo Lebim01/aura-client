@@ -11,13 +11,13 @@ interface Props {
 }
 const Checkbox = ({ label, value, image }: Props) => {
   const { filters, setFilters } = useFiltersRecommended();
-  const isActive = filters.categories === value;
+  const isActive = filters.category === value;
 
   const handleClick = () => {
     if (isActive) {
-      setFilters({ ...filters, categories: "" });
+      setFilters({ ...filters, category: "" });
     } else {
-      setFilters({ ...filters, categories: value });
+      setFilters({ ...filters, category: value });
     }
   };
 
