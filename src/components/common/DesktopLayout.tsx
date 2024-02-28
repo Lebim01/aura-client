@@ -11,6 +11,7 @@ import { useRouter } from "next/router";
 import { usePathname } from "next/navigation";
 import useIsMobile from "@/hooks/useIsMobile";
 import { classNamesCustom } from "@/utils/classes";
+import useShowHideFilters from "@/store/useShowHideFilters";
 
 type Props = {
   forceDisplay?: boolean;
@@ -22,6 +23,7 @@ const DesktopLayout: FC<Props> = ({ children, forceDisplay }) => {
   const pathname = usePathname();
   const isMobile = useIsMobile();
   const HIDE_URL = ["/profile"];
+  const { showHideFilters } = useShowHideFilters();
 
   return (
     <div
@@ -44,7 +46,7 @@ const DesktopLayout: FC<Props> = ({ children, forceDisplay }) => {
           width={57}
           height={17}
           alt=""
-          className="  cursor-pointer hover:scale-110 duration-300 trasition-all"
+          className="cursor-pointer hover:scale-110 duration-300 trasition-all"
           onClick={() => router.push("/dashboard")}
         />
 
@@ -63,7 +65,9 @@ const DesktopLayout: FC<Props> = ({ children, forceDisplay }) => {
         )}
 
         <DesktopNavigationButtons />
-        {router.pathname !== "/search" && <CategoryFilters />}
+        {router.pathname !== "/search" && showHideFilters && (
+          <CategoryFilters />
+        )}
         <ButtonLogout />
       </div>
       {children}
