@@ -26,6 +26,7 @@ const OTP = () => {
         lastname: " ",
         password: userData.pass,
         email: userData.mail,
+        birthdate: `${userData.year}-${userData.month}-${userData.day}`,
         otp,
       });
       await signIn("credentials", {

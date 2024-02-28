@@ -10,27 +10,25 @@ import ProtectAuth from "@/components/common/ProtectAuth";
 export default function Dashboard() {
   const isMobile = useIsMobile();
   return (
-    <ProtectAuth>
-      <DesktopLayout forceDisplay>
-        <div className="flex flex-col gap-y-[16px] overflow-y-auto md:h-screen w-auto pb-[99px] md:py-[32px] relative hidescroll ">
-          <VideoCaroussel
-            videos={lo_que_nadie_te_dice.slice(0, isMobile ? 2 : 3)}
-            title="Lo que nadie te dice de..."
-            sectionId="lo-que-nadie-te-dice-de"
-          />
-          <VideoCaroussel
-            videos={tres_series}
-            title="Tres series"
-            sectionId="tres-series"
-          />
-          <VideoCaroussel
-            videos={resenias.slice(0, isMobile ? 2 : 3)}
-            title="Reseñas"
-            sectionId="resenas"
-          />
-        </div>
-        <Footer />
-      </DesktopLayout>
-    </ProtectAuth>
+    <DesktopLayout forceDisplay>
+      <div className="flex flex-col gap-y-[16px] overflow-y-auto md:h-screen w-auto pb-[99px] md:py-[32px] relative hidescroll ">
+        <VideoCaroussel
+          videos={lo_que_nadie_te_dice.slice(0, isMobile ? 2 : 3)}
+          title="Lo que nadie te dice de..."
+          sectionId="lo-que-nadie-te-dice-de"
+        />
+        <VideoCaroussel
+          videos={tres_series}
+          title="Tres series"
+          sectionId="tres-series"
+        />
+        <VideoCaroussel
+          videos={resenias.slice(0, isMobile ? 2 : 3)}
+          title="Reseñas"
+          sectionId="resenas"
+        />
+      </div>
+      <Footer />
+    </DesktopLayout>
   );
 }

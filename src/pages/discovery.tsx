@@ -10,25 +10,23 @@ const ImageViewer = () => {
   const { width } = useWindowSize();
 
   return (
-    <ProtectAuth>
-      <DesktopLayout>
-        <div
-          id="discovery-container"
-          className="fixed md:relative w-full max-h-screen md:overflow-y-auto hidescroll"
-        >
-          {(width || 0) < 768 && (
-            <div className="md:hidden">
-              <VerticalMobileVideos apiUrl="/dashboard/discovery" />
-            </div>
-          )}
-          {(width || 0) >= 768 && (
-            <div className="hidden md:block">
-              <VerticalDesktopVideos apiUrl="/dashboard/discovery" />
-            </div>
-          )}
-        </div>
-      </DesktopLayout>
-    </ProtectAuth>
+    <DesktopLayout>
+      <div
+        id="discovery-container"
+        className="fixed md:relative w-full max-h-screen md:overflow-y-auto hidescroll"
+      >
+        {(width || 0) < 768 && (
+          <div className="md:hidden">
+            <VerticalMobileVideos apiUrl="/dashboard/discovery" />
+          </div>
+        )}
+        {(width || 0) >= 768 && (
+          <div className="hidden md:block">
+            <VerticalDesktopVideos apiUrl="/dashboard/discovery" />
+          </div>
+        )}
+      </div>
+    </DesktopLayout>
   );
 };
 
