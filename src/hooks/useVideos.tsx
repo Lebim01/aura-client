@@ -1,6 +1,6 @@
 import { create } from "zustand";
 import axiosInstance from "@/services";
-
+import { watchVideo } from "@/services/videos";
 // Definición de la interfaz para el estado de los videos
 interface Video {
   // Define aquí las propiedades de tus videos, por ejemplo:
@@ -22,6 +22,7 @@ interface VideoState {
   fetchMore: (apiUrl: string) => void;
   likeVideo: (id: string) => Promise<void>;
   disLikeVideo: (id: string) => Promise<void>;
+  markWatched: (id: string) => Promise<void>;
 }
 
 // Creación de la tienda con Zustand
@@ -40,6 +41,16 @@ const useVideoStore = create<VideoState>((set, get) => ({
       set((state) => ({
         videos: [...state.videos, ...(videos_result.data as Video[])],
       }));
+    } catch (e) {
+      console.log(e);
+    } finally {
+      get().setLoading(false);
+    }
+  },
+
+  markWatched: async (id) => {
+    try {
+      await watchVideo(id);
     } catch (e) {
       console.log(e);
     } finally {

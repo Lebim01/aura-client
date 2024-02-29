@@ -33,18 +33,16 @@ type Props = {
 
 const VerticalSliderVideos: FC<Props> = (props) => {
   const { position, setSwipeIndex } = useSwipeVideos();
-  const { videos, fetchMore } = useVideos();
+  const { videos, fetchMore, markWatched } = useVideos();
 
-  const markWatched = async (id: string) => {
+  const markWatchedVideo = async (id: string) => {
     const videoIndex = videos.findIndex((video: any) => video.id === id);
     if (videoIndex !== -1 && videos[videoIndex].watched) {
       return;
     }
 
     try {
-      await axiosInstance.post(`/dashboard/discovery-watched`, {
-        id_video: id,
-      });
+      await markWatched(id);
     } catch (e) {
       console.log(e);
     }
@@ -63,7 +61,7 @@ const VerticalSliderVideos: FC<Props> = (props) => {
 
   useEffect(() => {
     if (position.swipeIndex >= 0 && videos && videos[position.swipeIndex]?.id) {
-      markWatched(videos[position.swipeIndex]?.id);
+      markWatchedVideo(videos[position.swipeIndex]?.id);
     }
   }, [position.swipeIndex, videos]);
 
