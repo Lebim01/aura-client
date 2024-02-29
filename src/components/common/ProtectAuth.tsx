@@ -20,10 +20,12 @@ const AuthProvider: FC<Props> = (props) => {
   });
 
   useEffect(() => {
+    if (session.status != "loading") {
+      setInit(true);
+    }
     if (session.status == "authenticated") {
       axiosInstance.defaults.headers.Authorization =
         "Bearer " + session?.data.accessToken;
-      setInit(true);
     }
   }, [session.data?.accessToken]);
 

@@ -59,7 +59,7 @@ const Video = forwardRef(
           }}
           preload="metadata"
         >
-          <source src={videoUrl + "#t=0.1"} type="video/mp4" />
+          <source src={videoUrl + "#t=3"} type="video/mp4" />
           Tu navegador no soporta vídeos HTML5.
         </video>
         {showIcon && (
