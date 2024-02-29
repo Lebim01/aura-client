@@ -12,6 +12,7 @@ import { usePathname } from "next/navigation";
 import useIsMobile from "@/hooks/useIsMobile";
 import { classNamesCustom } from "@/utils/classes";
 import useShowHideFilters from "@/store/useShowHideFilters";
+import { useSession } from "next-auth/react";
 
 type Props = {
   forceDisplay?: boolean;
@@ -22,6 +23,8 @@ const DesktopLayout: FC<Props> = ({ children, forceDisplay }) => {
   const router = useRouter();
   const pathname = usePathname();
   const isMobile = useIsMobile();
+  const { status } = useSession();
+  const isLogged = status == "authenticated";
   const HIDE_URL = ["/profile"];
   const { showHideFilters } = useShowHideFilters();
 
@@ -68,7 +71,7 @@ const DesktopLayout: FC<Props> = ({ children, forceDisplay }) => {
         {router.pathname !== "/search" && showHideFilters && (
           <CategoryFilters />
         )}
-        <ButtonLogout />
+        {isLogged && <ButtonLogout />}
       </div>
       {children}
     </div>
