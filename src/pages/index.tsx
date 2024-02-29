@@ -1,5 +1,3 @@
-import DesktopLayout from "@/components/common/DesktopLayout";
-
 export default function Home() {
   return (
     <div className="flex justify-center items-center h-screen">
@@ -7,6 +5,7 @@ export default function Home() {
         loop
         autoPlay
         playsInline
+        controls
         className="object-cover min-w-[300px] min-h-50vh cursor-pointer rounded-md"
         preload="metadata"
       >
