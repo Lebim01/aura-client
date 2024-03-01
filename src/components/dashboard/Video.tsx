@@ -45,7 +45,7 @@ const Video = forwardRef(
           loop
           muted={muted}
           playsInline
-          className="object-cover min-w-[300px] min-h-50vh cursor-pointer"
+          className="object-cover min-w-[300px] min-h-[60vh] max-h-[60vh] cursor-pointer"
           onClick={() => {
             if (
               (videoIndex == indexVideoZustand &&

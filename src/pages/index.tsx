@@ -6,7 +6,7 @@ export default function Home() {
         autoPlay
         playsInline
         controls
-        className="object-cover min-w-[300px] min-h-50vh cursor-pointer rounded-md"
+        className="object-cover min-w-[300px] max-h-[50vh] min-h-[50vh] cursor-pointer rounded-md"
         preload="metadata"
       >
         <source
