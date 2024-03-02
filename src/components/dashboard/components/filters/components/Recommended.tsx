@@ -63,7 +63,7 @@ const Recommended = ({ setShow, show }: Props) => {
       }`}
     >
       <div
-        className="bg-black-0D rounded-[16px] relative transition-opacity duration-300"
+        className="bg-black-0D rounded-[16px] relative transition-opacity duration-300 select-none hover:cursor-grab"
         {...handlers}
       >
         <div

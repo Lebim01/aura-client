@@ -1,0 +1,39 @@
+.animate-loading-border {
+  --offset: 3px;
+  border-radius: 100%;
+  position: relative;
+}
+
+/* Conic gradient */
+.animate-loading-border::before {
+  content: "";
+  background: conic-gradient(transparent 270deg, white, transparent);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  aspect-ratio: 1;
+  width: 80%;
+  animation: rotate 2s linear infinite;
+}
+
+/* Overlay */
+.animate-loading-border::after {
+  content: "";
+  background: inherit;
+  border-radius: inherit;
+  position: absolute;
+  inset: var(--offset);
+  height: calc(100% - 2 * var(--offset));
+  width: calc(100% - 2 * var(--offset));
+}
+
+@keyframes rotate {
+  from {
+    transform: translate(-50%, -50%) scale(1.1) rotate(0turn);
+  }
+
+  to {
+    transform: translate(-50%, -50%) scale(1.1) rotate(1turn);
+  }
+}
