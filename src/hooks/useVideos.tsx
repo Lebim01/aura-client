@@ -37,6 +37,8 @@ const useVideoStore = create<VideoState>((set, get) => ({
 
   getVideos: async (apiUrl) => {
     try {
+      if (!get().hasMore) return;
+
       get().setLoading(true);
       const videos_result = await axiosInstance.get<Video[]>(apiUrl, {
         params: {
