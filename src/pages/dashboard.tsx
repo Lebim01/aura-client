@@ -3,7 +3,6 @@ import Footer from "@/components/common/Footer";
 import DesktopLayout from "@/components/common/DesktopLayout";
 import VideoCaroussel from "@/components/dashboard/components/Sections/VideoCaroussel";
 import useIsMobile from "@/hooks/useIsMobile";
-import { prox } from "@/dataset/videos";
 import AuthProvider from "@/components/common/ProtectAuth";
 import { sections } from "@/utils/sections";
 import { GetServerSideProps } from "next";
@@ -49,8 +48,6 @@ export const getServerSideProps = (async () => {
       videos: await getVideosSection(sec.slug)
     })
   }
-
-  console.log(sections_with_videos)
   
   return { props: { sections: sections_with_videos } }
 }) satisfies GetServerSideProps<Props>

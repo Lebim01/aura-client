@@ -1,12 +1,12 @@
-"use client";
 import useFiltersRecommended from "@/store/useFiltersRecommended";
 import { classNamesCustom } from "@/utils/classes";
 import Image from "next/image";
-import { useEffect } from "react";
+
 interface Props {
   icon: string;
   value: string;
 }
+
 const Platforms = ({ icon, value }: Props) => {
   const { filters, setFilters } = useFiltersRecommended();
   const isActive = filters.platform === value;

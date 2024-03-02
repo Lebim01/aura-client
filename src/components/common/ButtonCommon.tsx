@@ -1,11 +1,12 @@
-"use client";
 import React from "react";
 import { classNamesCustom } from "@/utils/classes";
+
 interface Props {
   text: string;
   disabled: boolean;
   onClick: () => void;
 }
+
 const ButtonCommon = ({ text, disabled, onClick }: Props) => {
   return (
     <div

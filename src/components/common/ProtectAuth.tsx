@@ -31,7 +31,7 @@ const AuthProvider: FC<Props> = (props) => {
 
   if (session.status === "loading" || !init) {
     return (
-      <div className="">
+      <div className="flex items-center justify-center w-full h-screen">
         <Image
           src={"/logo_white.svg"}
           width={120}
