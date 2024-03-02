@@ -3,7 +3,6 @@ import { ForwardedRef, forwardRef, useEffect, useState, useRef } from "react";
 import useVideoMute from "@/store/useVideoMute";
 import useSwipeVideos from "@/store/useSwipeVideos";
 import { VideoProps } from "./VideoController";
-import VideoHeader from "./VideoHeader";
 import { IoVolumeHighSharp, IoVolumeMute } from "react-icons/io5";
 
 const VideoMobile = forwardRef(
@@ -52,7 +51,7 @@ const VideoMobile = forwardRef(
           loop
           muted={muted}
           playsInline
-          className="object-cover h-custom-screen w-full min-w-[300px] min-h-[500px] md:h-auto"
+          className="object-cover h-custom-screen w-full min-w-[300px] h-full min-h-[500px] md:h-auto"
           onClick={toggleMute}
         >
           <source src={videoUrl} type="video/mp4" />

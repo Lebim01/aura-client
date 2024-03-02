@@ -8,6 +8,7 @@ import VideoController from "./VideoController";
 import { useRouter } from "next/navigation";
 import useVideos from "../../hooks/useVideos";
 import axiosInstance from "@/services";
+import { useSession } from "next-auth/react";
 
 const HeaderMobile = () => {
   const { back } = useRouter();
@@ -33,7 +34,8 @@ type Props = {
 
 const VerticalSliderVideos: FC<Props> = (props) => {
   const { position, setSwipeIndex } = useSwipeVideos();
-  const { videos, fetchMore } = useVideos();
+  const { videos, fetchMore, hasMore } = useVideos();
+  const { status } = useSession();
 
   const markWatched = async (id: string) => {
     const videoIndex = videos.findIndex((video: any) => video.id === id);
@@ -52,7 +54,7 @@ const VerticalSliderVideos: FC<Props> = (props) => {
 
   useEffect(() => {
     fetchMore(props.apiUrl);
-  }, []);
+  }, [props.apiUrl]);
 
   const handlers = useSwipeable({
     onSwipedUp: () =>
@@ -62,10 +64,16 @@ const VerticalSliderVideos: FC<Props> = (props) => {
   });
 
   useEffect(() => {
-    if (position.swipeIndex >= 0 && videos && videos[position.swipeIndex]?.id) {
-      markWatched(videos[position.swipeIndex]?.id);
+    if (status == "authenticated") {
+      if (
+        position.swipeIndex >= 0 &&
+        videos &&
+        videos[position.swipeIndex]?.id
+      ) {
+        markWatched(videos[position.swipeIndex]?.id);
+      }
     }
-  }, [position.swipeIndex, videos]);
+  }, [position.swipeIndex, status]);
 
   useEffect(() => {
     if (position.swipeIndex === videos.length - 1) {
@@ -102,6 +110,14 @@ const VerticalSliderVideos: FC<Props> = (props) => {
             />
           </Fragment>
         ))}
+        {!hasMore && (
+          <div>
+            <p>
+              Has terminado de ver todo el contenido de está sección, te
+              invitamos a ver otra sección diferente
+            </p>
+          </div>
+        )}
       </div>
       <Footer />
     </>

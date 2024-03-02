@@ -31,8 +31,8 @@ const DesktopLayout: FC<Props> = ({ children, forceDisplay }) => {
   return (
     <div
       className={classNamesCustom(
-        "flex flex-col md:flex-row gap-y-[16px] w-screen  max-w-screen overflow-x-hidden md:max-w-[1440px]  md:justify-center md:mx-auto md:pt-[24px] pt-[8px]",
-        { "pt-0": router.pathname === "/profile" }
+        "flex flex-col md:flex-row gap-y-[16px] w-screen  max-w-screen overflow-x-hidden md:max-w-[1440px]  md:justify-center md:mx-auto md:pt-[24px] pt-[16px]",
+        { "pt-0": ["/profile", "/discovery"].includes(router.pathname) }
       )}
     >
       <div

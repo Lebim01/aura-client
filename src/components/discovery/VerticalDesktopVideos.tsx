@@ -4,13 +4,17 @@ import VideoDesktop from "./VideoDesktop";
 import useVideos from "../../hooks/useVideos";
 import useSwipeVideos from "@/store/useSwipeVideos";
 import axiosInstance from "@/services";
+import { useSession } from "next-auth/react";
+import Image from "next/image";
+
 type Props = {
   apiUrl: string;
 };
 
 const VerticalDesktopVideos: FC<Props> = (props) => {
   const { position } = useSwipeVideos();
-  const { videos, fetchMore } = useVideos();
+  const { videos, fetchMore, hasMore } = useVideos();
+  const { status } = useSession();
 
   const markWatched = async (id: string) => {
     const videoIndex = videos.findIndex((video: any) => video.id === id);
@@ -32,10 +36,16 @@ const VerticalDesktopVideos: FC<Props> = (props) => {
   }, []);
 
   useEffect(() => {
-    if (position.swipeIndex >= 0 && videos && videos[position.swipeIndex]?.id) {
-      markWatched(videos[position.swipeIndex]?.id);
+    if (status == "authenticated") {
+      if (
+        position.swipeIndex >= 0 &&
+        videos &&
+        videos[position.swipeIndex]?.id
+      ) {
+        markWatched(videos[position.swipeIndex]?.id);
+      }
     }
-  }, [position.swipeIndex, videos]);
+  }, [position.swipeIndex, status]);
 
   useEffect(() => {
     if (position.swipeIndex === videos.length - 1) {
@@ -71,6 +81,22 @@ const VerticalDesktopVideos: FC<Props> = (props) => {
           <div className="h-[1px] w-[600px] bg-gray-50 bg-opacity-20"></div>
         </Fragment>
       ))}
+      {!hasMore && (
+        <div className="pb-[32px] flex flex-col justify-center items-center space-y-4">
+          <p>🎉 ¡Enhorabuena! 🎉</p>
+          <p className="max-w-[450px] text-center">
+            Has terminado de ver todo el contenido de esta sección, te invitamos
+            a continuar explorando en nuestro catálogo de contenido
+          </p>
+          <Image
+            className="w-[150px] h-auto"
+            src="/logo_white.svg"
+            width={300}
+            height={150}
+            alt="logo"
+          />
+        </div>
+      )}
     </div>
   );
 };

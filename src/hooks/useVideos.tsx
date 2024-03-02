@@ -16,6 +16,7 @@ interface Video {
 interface VideoState {
   isLoading: boolean;
   videos: Video[];
+  hasMore: boolean;
   setLoading: (isLoading: boolean) => void;
   setVideos: (videos: Video[]) => void;
   getVideos: (apiUrl: string) => Promise<void>;
@@ -26,6 +27,7 @@ interface VideoState {
 
 // Creación de la tienda con Zustand
 const useVideoStore = create<VideoState>((set, get) => ({
+  hasMore: true,
   isLoading: false,
   videos: [],
 
@@ -36,9 +38,15 @@ const useVideoStore = create<VideoState>((set, get) => ({
   getVideos: async (apiUrl) => {
     try {
       get().setLoading(true);
-      const videos_result = await axiosInstance.get(apiUrl);
+      const videos_result = await axiosInstance.get<Video[]>(apiUrl, {
+        params: {
+          skip: get().videos.length,
+        },
+      });
+      const hasMore = videos_result.data.length > 0;
       set((state) => ({
-        videos: [...state.videos, ...(videos_result.data as Video[])],
+        videos: [...state.videos, ...videos_result.data],
+        hasMore,
       }));
     } catch (e) {
       console.log(e);

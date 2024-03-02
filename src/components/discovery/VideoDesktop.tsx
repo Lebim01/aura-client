@@ -42,7 +42,7 @@ const VideoDesktop = forwardRef(
           loop
           muted={muted}
           playsInline
-          className="object-cover min-w-[300px] cursor-pointer"
+          className="object-cover min-w-[300px] h-full w-full cursor-pointer"
           onClick={toggleMute}
         >
           <source src={videoUrl} type="video/mp4" />
