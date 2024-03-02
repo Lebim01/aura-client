@@ -90,7 +90,6 @@ const VerticalSliderVideos: FC<Props> = (props) => {
       document.body.style.overflow = originalStyle;
     };
   }, [position.swipeIndex]);
-  console.log(videos);
 
   return (
     <>

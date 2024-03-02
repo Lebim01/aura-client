@@ -15,6 +15,7 @@ import useVideoCommentsStore from "@/store/useVideoCommentsStore";
 import CommentsItem from "./components/CommentsItem";
 import InputComment from "./components/InputComment";
 import { useCommentMenuState } from "@/store/useCommentMenuState";
+import useIsMobile from "@/hooks/useIsMobile";
 interface Props {
   show: boolean;
   setShow: Dispatch<SetStateAction<boolean>>;
@@ -34,6 +35,7 @@ const Comments = ({ show, setShow, index, id_video }: Props) => {
     fetchMoreComments,
     hasMore,
   } = useVideoCommentsStore();
+  const isMobile = useIsMobile();
 
   useEffect(() => {
     const originalStyle = window.getComputedStyle(document.body).overflow;
@@ -49,7 +51,6 @@ const Comments = ({ show, setShow, index, id_video }: Props) => {
   }, [id_video]);
 
   useEffect(() => {
-    console.log(commentsVideos);
     /*     scrollToTop(); */
   }, [commentsVideos]);
 
@@ -112,11 +113,15 @@ const Comments = ({ show, setShow, index, id_video }: Props) => {
   return (
     <div
       className={classNamesCustom(
-        " items-end justify-end w-screen flex flex-col top-0 bg-black-1A bg-opacity-10 z-50",
+        " items-end justify-end w-full flex flex-col top-0 bg-black-1A bg-opacity-10 z-50",
         {
-          "h-custom-screen transition-all duration-500 absolute": show,
+          "h-custom-screen transition-all duration-500 absolute":
+            show && isMobile,
         },
-        { "transition-all duration-500 hidden": !show }
+        { "transition-all duration-500 hidden": !show },
+        {
+          "h-full transition-all duration-500 absolute": show && !isMobile,
+        }
       )}
       {...handlersMain}
     >
@@ -193,7 +198,7 @@ const Comments = ({ show, setShow, index, id_video }: Props) => {
           {hasMore && (
             <span
               className={classNamesCustom(
-                "flex w-full justify-center text-[12px] opacity-70",
+                "flex w-full justify-center text-[12px] opacity-70 cursor-pointer",
                 { "pointer-events-none": loading }
               )}
               onClick={() => fetchMoreComments(id_video)}

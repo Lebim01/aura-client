@@ -28,7 +28,7 @@ const CommentsItem = ({
   const { deleteComment } = useVideoCommentsStore();
   const { data } = useSession();
   const isOwner = data?.user.id === user_id;
-  console.log(isOwner);
+
   const handleMenuClick = () => {
     if (activeMenuId === id_comment) {
       closeMenu();
