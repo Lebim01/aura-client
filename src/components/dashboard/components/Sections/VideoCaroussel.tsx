@@ -1,4 +1,3 @@
-"use client";
 import React, { Fragment, useState, useRef, useEffect } from "react";
 import VideoControllerDashboard from "@/components/dashboard/VideoControllerDashboard";
 import Video from "@/components/dashboard/Video";

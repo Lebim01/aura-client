@@ -23,9 +23,11 @@ const AuthProvider: FC<Props> = (props) => {
     if (session.status == "authenticated") {
       axiosInstance.defaults.headers.Authorization =
         "Bearer " + session?.data.accessToken;
+    }
+    if (session.status != "loading") {
       setInit(true);
     }
-  }, [session.data?.accessToken]);
+  }, [session.status, session.data?.accessToken]);
 
   if (session.status === "loading" || !init) {
     return (

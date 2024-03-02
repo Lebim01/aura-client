@@ -2,14 +2,25 @@
 const nextConfig = {
   reactStrictMode: false,
   async redirects() {
-    return [
-      // Basic redirect
-      {
-        source: "/",
-        destination: "/dashboard",
-        permanent: false,
-      },
-    ];
+    const isProd = process.env.NODE_ENV == "production";
+
+    return isProd
+      ? [
+          {
+            source: "/(.{1,})",
+            destination: "/",
+            permanent: false,
+          },
+        ]
+      : [
+          /*
+          {
+            source: "/",
+            destination: "/dashboard",
+            permanent: false,
+          },
+          */
+        ];
   },
   images: {
     remotePatterns: [
