@@ -8,6 +8,8 @@ export type Serie = {
   overview: string;
   popularity: number;
   trailer?: string;
+  rating: number;
+  rated_by_me: number;
 };
 
 export type Genre = {

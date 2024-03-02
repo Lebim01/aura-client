@@ -1,10 +1,11 @@
-import React, { Fragment } from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 import { Genre, Serie } from "@/types/series";
 import ButtonTrailer from "./ViewTrailer";
 import Rating from "./Rating";
 import { classNamesCustom } from "@/utils/classes";
 import useIsMobile from "@/hooks/useIsMobile";
+import Rate from "./Rate";
 
 type Props = {
   serie: Serie;
@@ -13,10 +14,6 @@ type Props = {
 };
 
 export default function Large({ serie, genres, ...props }: Props) {
-  const brackdrop_css = serie?.backdrop_path
-    ? `, url(${serie?.backdrop_path})`
-    : "";
-
   const isMobile = useIsMobile();
 
   return (
@@ -70,26 +67,10 @@ export default function Large({ serie, genres, ...props }: Props) {
         >
           {serie?.overview}
         </span>
-        <Rating qualification={9.05} />
+        <Rating qualification={serie.rating} />
         <div className="md:flex-row flex gap-y-[16px] md:gap-y-0 flex-col md:gap-x-[24px] mt-[8px] md:mt-0">
-          <div className="flex items-center gap-x-[8px]">
-            <span className="text-[12px] font-[600]">Calificar:</span>
-            {Array(10)
-              .fill(null)
-              .map((_: any, index: number) => (
-                <div
-                  key={index}
-                  className="cursor-pointer md:hover:scale-125 transition-transform duration-200 ease-in-out min-h-[20px] min-w-[20px]"
-                >
-                  <Image
-                    width={20}
-                    height={20}
-                    src={"/icons/star-rate.svg"}
-                    alt=""
-                  />
-                </div>
-              ))}
-          </div>
+          <Rate qualification={serie.rated_by_me} id={serie.id} />
+
           {serie.trailer && <ButtonTrailer open={props.openTrailer} />}
         </div>
       </div>
