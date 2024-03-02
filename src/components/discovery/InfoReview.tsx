@@ -15,9 +15,17 @@ interface Props {
   likes: number;
   like_me: boolean;
   id_video: string;
+  comments: number;
 }
 
-const InfoReview = ({ index, className, likes, like_me, id_video }: Props) => {
+const InfoReview = ({
+  index,
+  className,
+  likes,
+  like_me,
+  id_video,
+  comments,
+}: Props) => {
   const [showComments, setShowComments] = useState(false);
   const { toggleFooter } = useShowHideFooterStore();
   const { likeVideo, disLikeVideo } = useVideos();
@@ -76,7 +84,7 @@ const InfoReview = ({ index, className, likes, like_me, id_video }: Props) => {
                 src="/icons/globe.svg"
                 alt=""
               />
-              <span className="text-[10px] leading-[130%]">222</span>
+              <span className="text-[10px] leading-[130%]">{comments}</span>
             </div>
 
             <div className="flex flex-col w-full items-center gap-y-[4px]">

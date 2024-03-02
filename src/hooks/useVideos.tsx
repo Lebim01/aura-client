@@ -10,6 +10,7 @@ interface Video {
   like_me: boolean;
   url: string;
   likes: number;
+  comments: number;
 }
 
 // Interfaz para el estado y las acciones de la tienda

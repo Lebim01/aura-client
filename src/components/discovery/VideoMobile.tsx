@@ -7,7 +7,7 @@ import { IoVolumeHighSharp, IoVolumeMute } from "react-icons/io5";
 
 const VideoMobile = forwardRef(
   (
-    { videoUrl, videoIndex, likes, like_me, id_video }: VideoProps,
+    { videoUrl, videoIndex, likes, like_me, id_video, comments }: VideoProps,
     ref: ForwardedRef<HTMLVideoElement>
   ) => {
     const {
@@ -71,6 +71,7 @@ const VideoMobile = forwardRef(
           likes={likes}
           like_me={like_me}
           id_video={id_video}
+          comments={comments}
         />
       </div>
     );

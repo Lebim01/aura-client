@@ -10,6 +10,7 @@ export type VideoProps = {
   likes: number;
   like_me: boolean;
   id_video: string;
+  comments: number;
 };
 
 type Props = {
@@ -20,6 +21,7 @@ type Props = {
   likes: number;
   like_me: boolean;
   id_video: string;
+  comments: number;
 };
 
 const VideoController: FC<Props> = ({
@@ -30,6 +32,7 @@ const VideoController: FC<Props> = ({
   likes,
   like_me,
   id_video,
+  comments,
 }) => {
   const interacted = useUserInteraction();
   const {
@@ -88,6 +91,7 @@ const VideoController: FC<Props> = ({
         likes={likes}
         like_me={like_me}
         id_video={id_video}
+        comments={comments}
       />
     </div>
   );
