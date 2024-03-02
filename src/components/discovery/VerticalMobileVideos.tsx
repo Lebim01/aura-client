@@ -90,6 +90,7 @@ const VerticalSliderVideos: FC<Props> = (props) => {
       document.body.style.overflow = originalStyle;
     };
   }, [position.swipeIndex]);
+  console.log(videos);
 
   return (
     <>
@@ -103,6 +104,7 @@ const VerticalSliderVideos: FC<Props> = (props) => {
               videoIndex={i}
               layout="mobile"
               likes={video.likes}
+              comments={video.comments}
               like_me={video.like_me}
               id_video={video.id}
             />

@@ -74,6 +74,7 @@ const VerticalDesktopVideos: FC<Props> = (props) => {
             likes={video.likes}
             like_me={video.like_me}
             id_video={video.id}
+            comments={video.comments}
           />
           <div className="h-[1px] w-[600px] bg-gray-50 bg-opacity-20"></div>
         </Fragment>
