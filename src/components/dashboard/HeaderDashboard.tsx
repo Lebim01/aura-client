@@ -44,7 +44,7 @@ const HeaderDashboard = () => {
           >
             <Image
               src={"/icons/filter.svg"}
-              className="rounded-full"
+              className="rounded-full h-[20px] w-[20px]"
               alt=""
               width={20}
               height={20}
@@ -59,7 +59,7 @@ const HeaderDashboard = () => {
         >
           <Image
             src={data?.user?.profile_img || "/no-photo.png"}
-            className="rounded-full"
+            className="rounded-full h-[32px] w-[32px]"
             alt=""
             width={32}
             height={32}

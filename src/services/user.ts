@@ -2,11 +2,10 @@ import axiosInstance from ".";
 
 export type Profile = {
   id: string;
-  firstName?: string;
-  lastName?: string;
-  fullName: string;
+  name?: string;
+  lastname?: string;
   email: string;
-  picture?: string;
+  profile_img?: string;
 };
 
 export type Credencials = {
@@ -18,7 +17,7 @@ export type SignUp = {
   lastName?: string;
   fullName: string;
   email: string;
-  picture?: string;
+  profile_img?: string;
   password: string;
   password_confirmation: string;
 };
@@ -62,4 +61,8 @@ export const authMe = async (
     .get("/users/me", { headers: { Authorization: `Bearer ${token}` } })
     .then((r) => ({ ...r.data, accessToken: token }))
     .catch(() => null);
+};
+
+export const updateUser = async (user: Partial<Profile>) => {
+  return axiosInstance.patch("/auth/update", user).then((r) => r.data);
 };

@@ -29,7 +29,7 @@ const AuthProvider: FC<Props> = (props) => {
     }
   }, [session.status, session.data?.accessToken]);
 
-  if (session.status === "loading" || !init) {
+  if (!init) {
     return (
       <div className="flex w-screen h-custom-screen px-[27px] items-center justify-center  ">
         <Image

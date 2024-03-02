@@ -60,7 +60,7 @@ export const authOptions: NextAuthOptions = {
                 ),
                 password,
                 password_confirmation: password,
-                picture: googleProfile.picture,
+                profile_img: googleProfile.picture,
                 fullName: capitalizeFirstLetterOfEachWord(
                   (googleProfile.given_name || googleProfile.name) +
                     " " +
