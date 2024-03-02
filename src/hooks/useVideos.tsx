@@ -37,6 +37,7 @@ const useVideoStore = create<VideoState>((set, get) => ({
 
   getVideos: async (apiUrl) => {
     try {
+      if (get().isLoading) return;
       if (!get().hasMore) return;
 
       get().setLoading(true);
