@@ -14,7 +14,6 @@ import axiosInstance from "@/services";
 import { getSerieBySlug } from "@/services/series";
 import TrailerModal from "@/components/detail/HeaderDetail/TrailerModal";
 import AuthProvider from "@/components/common/ProtectAuth";
-import { useSession } from "next-auth/react";
 
 type Tabs = "credits" | "reviews" | "video";
 
@@ -36,7 +35,7 @@ export default function Detail({
   const [serie] = useState<Serie>(JSON.parse(_serie));
   const [tab, setTab] = useState<Tabs>("credits");
   const [openTrailer, setOpenTrailer] = useState(false);
-  console.log(serie);
+
   return (
     <AuthProvider>
       <DesktopLayout>

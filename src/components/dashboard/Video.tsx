@@ -39,13 +39,13 @@ const Video = forwardRef(
     }, [muted]);
 
     return (
-      <div className="rounded-lg  relative overflow-hidden min-h-[518px] flex flex-col md:min-w-[358px]">
+      <div className="rounded-lg relative overflow-hidden min-h-[60vh] flex flex-col md:min-w-[358px] aspect-tiktok">
         <video
           ref={ref}
           loop
           muted={muted}
           playsInline
-          className="object-cover min-w-[300px] min-h-[60vh] max-h-[60vh] cursor-pointer"
+          className="object-cover aspect-tiktok cursor-pointer h-full w-full"
           onClick={() => {
             if (
               (videoIndex == indexVideoZustand &&
