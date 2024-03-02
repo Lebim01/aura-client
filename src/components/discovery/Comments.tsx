@@ -11,18 +11,29 @@ import {
 import { useSwipeable } from "react-swipeable";
 import { classNamesCustom } from "@/utils/classes";
 import useShowHideFooterStore from "@/store/showHideFooterStore";
+import useVideoCommentsStore from "@/store/useVideoCommentsStore";
+import CommentsItem from "./components/CommentsItem";
+import InputComment from "./components/InputComment";
+import { useCommentMenuState } from "@/store/useCommentMenuState";
 interface Props {
   show: boolean;
   setShow: Dispatch<SetStateAction<boolean>>;
   index: number;
+  id_video: string;
 }
 
-const Comments = ({ show, setShow, index }: Props) => {
+const Comments = ({ show, setShow, index, id_video }: Props) => {
   const [h, setH] = useState<boolean>(false);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
-  const [rows, setRows] = useState(1);
-  const [text, setText] = useState("");
-  const { showHideFooter, toggleFooter } = useShowHideFooterStore();
+  const { closeMenu } = useCommentMenuState();
+  const { toggleFooter } = useShowHideFooterStore();
+  const {
+    getVideoComments,
+    commentsVideos,
+    loading,
+    fetchMoreComments,
+    hasMore,
+  } = useVideoCommentsStore();
 
   useEffect(() => {
     const originalStyle = window.getComputedStyle(document.body).overflow;
@@ -32,6 +43,15 @@ const Comments = ({ show, setShow, index }: Props) => {
       document.body.style.overflow = originalStyle;
     };
   }, []);
+
+  useEffect(() => {
+    getVideoComments(id_video, 1);
+  }, [id_video]);
+
+  useEffect(() => {
+    console.log(commentsVideos);
+    /*     scrollToTop(); */
+  }, [commentsVideos]);
 
   const handlers = useSwipeable({
     onSwipedUp: (eventData) => {
@@ -44,6 +64,15 @@ const Comments = ({ show, setShow, index }: Props) => {
     },
     trackMouse: true,
   });
+
+  const scrollToTop = () => {
+    if (scrollContainerRef.current) {
+      scrollContainerRef.current.scrollTo({
+        top: 0,
+        behavior: "smooth",
+      });
+    }
+  };
 
   const handlersComments = useSwipeable({
     onSwipedUp: (eventData) => {
@@ -67,23 +96,16 @@ const Comments = ({ show, setShow, index }: Props) => {
     trackMouse: true,
   });
 
-  const handleChange = (e: any) => {
-    const newText = e.target.value;
-    setText(newText);
-
-    const newRows = newText.split("\n").length || 1;
-    setRows(newRows);
-  };
-
   const handleScroll = useCallback((e: any) => {
     const target = e.target;
+    const isAtBottom =
+      Math.abs(target.scrollHeight - target.scrollTop - target.clientHeight) <
+      1;
 
-    if (target.scrollHeight - target.scrollTop === target.clientHeight) {
+    if (isAtBottom) {
       setH(true);
-    }
-
-    if (target.scrollTop === 0) {
-      setH((state) => !state);
+    } else if (target.scrollTop === 0) {
+      setH(false);
     }
   }, []);
 
@@ -101,6 +123,7 @@ const Comments = ({ show, setShow, index }: Props) => {
       <div
         className="w-full flex-1"
         onClick={() => {
+          closeMenu();
           setShow(false);
           toggleFooter(false);
         }}
@@ -132,6 +155,7 @@ const Comments = ({ show, setShow, index }: Props) => {
                 height={20}
                 className=""
                 onClick={() => {
+                  closeMenu();
                   setShow(false);
 
                   toggleFooter(false);
@@ -150,63 +174,35 @@ const Comments = ({ show, setShow, index }: Props) => {
           className="flex flex-col gap-y-[21px] justify-start w-full overflow-y-auto hidescroll flex-1 z-50"
           {...handlersComments}
           onScroll={handleScroll}
+          ref={scrollContainerRef}
         >
-          <div className="flex gap-x-[8px] items-start">
-            <Image
-              src={""}
-              alt=""
-              width={24}
-              height={24}
-              className="bg-gray-400 rounded-full min-w-[24px] min-h-[24px]"
-            />
-            <div className="flex flex-col gap-y-[8px]">
-              <div className="flex flex-col">
-                <div className="flex gap-x-[4px]">
-                  <span>Carlos Martínez</span>
-                  <span>•</span>
-                  <span>1d</span>
-                </div>
-                <span
-                  className="text-[12px] leading-[130%] overflow-hidden block text-ellipsis max-h-[calc(2*1.3*12px)]"
-                  style={{
-                    display: "-webkit-box",
-                    WebkitLineClamp: "2",
-                    WebkitBoxOrient: "vertical",
-                  }}
-                >
-                  Lorem ipsum dolor sit amet consectetur. Maecenas sit nisi a ac
-                  in amet nullam. Morbi aliquam cras sit quis pharetra integer.
-                  Lacus auctor suscipit in nulla.
-                </span>
-              </div>
-              <span className="font-[700] text-[12px] leading-[120%]">
-                Responder
-              </span>
-            </div>
-          </div>
+          {commentsVideos.map((item: any, index: number) => {
+            return (
+              <CommentsItem
+                key={index}
+                comment={item.comment.comment}
+                date={item.comment.created_at}
+                name={item.comment.user_name}
+                last_name={item.comment.user_lastname}
+                user_img={item.comment.user_img || "/no-photo.png"}
+                id_comment={item.comment.id}
+                user_id={item.comment.user_id}
+              />
+            );
+          })}
+          {hasMore && (
+            <span
+              className={classNamesCustom(
+                "flex w-full justify-center text-[12px] opacity-70",
+                { "pointer-events-none": loading }
+              )}
+              onClick={() => fetchMoreComments(id_video)}
+            >
+              Ver más comentarios
+            </span>
+          )}
         </div>
-        <div className="w-full flex items-center gap-x-[8px]">
-          <div className="w-[32px] h-[32px]">
-            <Image
-              src={""}
-              alt=""
-              width={32}
-              height={32}
-              className="bg-gray-400 rounded-full min-w-[24px] min-h-[24px]"
-            />
-          </div>
-          <div className="flex w-full px-[16px] py-[12px] border border-border-comment-input rounded-[6px] ">
-            <textarea
-              placeholder="Escribe algo..."
-              rows={rows}
-              className="w-full bg-transparent focus:ring-transparent focus:outline-none h-auto "
-              value={text}
-              onChange={handleChange}
-              style={{ resize: "none" }}
-            />
-            <Image src={"/icons/happy.svg"} alt="" width={16} height={16} />
-          </div>
-        </div>
+        <InputComment id_video={id_video} />
       </div>
     </div>
   );

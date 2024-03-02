@@ -25,7 +25,12 @@ const InfoReview = ({ index, className, likes, like_me, id_video }: Props) => {
   return (
     <>
       {showComments && (
-        <Comments show={showComments} setShow={setShowComments} index={index} />
+        <Comments
+          show={showComments}
+          setShow={setShowComments}
+          index={index}
+          id_video={id_video}
+        />
       )}
       <div
         className={classNames(
@@ -57,7 +62,7 @@ const InfoReview = ({ index, className, likes, like_me, id_video }: Props) => {
               />
               <span className="text-[10px] leading-[130%]">{likes}</span>
             </div>
-            {/*        <div
+            <div
               className="flex flex-col w-full items-center gap-y-[4px]"
               onClick={() => {
                 setShowComments(true);
@@ -72,7 +77,7 @@ const InfoReview = ({ index, className, likes, like_me, id_video }: Props) => {
                 alt=""
               />
               <span className="text-[10px] leading-[130%]">222</span>
-            </div> */}
+            </div>
 
             <div className="flex flex-col w-full items-center gap-y-[4px]">
               <div className="w-[30px]">
