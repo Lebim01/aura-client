@@ -87,7 +87,7 @@ const VideoControllerDashboard: FC<Props> = ({
   ]);
 
   return (
-    <div ref={ref}>
+    <div ref={ref} className="aspect-tiktok">
       <Component
         ref={onRenderVideo}
         videoUrl={videoUrl}

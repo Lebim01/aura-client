@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { FC, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import { rateSerie } from "@/services/series";
 
 type Props = {
@@ -9,7 +9,7 @@ type Props = {
 
 const Rate: FC<Props> = ({ qualification, id }) => {
   const [myRate, setMyRate] = useState(qualification);
-  console.log(qualification);
+
   const rateSerieSend = async (rate: number) => {
     try {
       setMyRate(rate);
@@ -19,6 +19,10 @@ const Rate: FC<Props> = ({ qualification, id }) => {
       console.log(e);
     }
   };
+
+  useEffect(() => {
+    setMyRate(qualification);
+  }, [qualification]);
 
   return (
     <div className="flex items-center gap-x-[8px]">

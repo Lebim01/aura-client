@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import Image from "next/image";
 import { Genre, Serie } from "@/types/series";
 import ButtonTrailer from "./ViewTrailer";
@@ -6,6 +6,7 @@ import Rating from "./Rating";
 import { classNamesCustom } from "@/utils/classes";
 import useIsMobile from "@/hooks/useIsMobile";
 import Rate from "./Rate";
+import useRatedByMe from "@/hooks/useRatedByMe";
 
 type Props = {
   serie: Serie;
@@ -15,6 +16,7 @@ type Props = {
 
 export default function Large({ serie, genres, ...props }: Props) {
   const isMobile = useIsMobile();
+  const rated_by_me = useRatedByMe(serie.id);
 
   return (
     <div className="px-[16px]">
@@ -69,7 +71,7 @@ export default function Large({ serie, genres, ...props }: Props) {
         </span>
         <Rating qualification={serie.rating} />
         <div className="md:flex-row flex gap-y-[16px] md:gap-y-0 flex-col md:gap-x-[24px] mt-[8px] md:mt-0">
-          <Rate qualification={serie.rated_by_me} id={serie.id} />
+          <Rate qualification={rated_by_me} id={serie.id} />
 
           {serie.trailer && <ButtonTrailer open={props.openTrailer} />}
         </div>
