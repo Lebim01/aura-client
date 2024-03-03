@@ -8,10 +8,16 @@ interface Props {
   textcolor: string;
   onClick?: (e: any) => void;
 }
-const SocialButton = ({ text, icon, background, textcolor, onClick }: Props) => {
+const SocialButton = ({
+  text,
+  icon,
+  background,
+  textcolor,
+  onClick,
+}: Props) => {
   return (
     <div
-      className={`flex justify-center gap-x-[16px] items-center w-full rounded-[8px] h-[50px] font-[600] text-[16px] ${background} ${textcolor}`}
+      className={`flex justify-center gap-x-[16px] items-center w-full rounded-[8px] h-[50px] font-[600] text-[16px] ${background} ${textcolor} hover:cursor-pointer select-none`}
       onClick={onClick}
     >
       <Image src={icon} width={24} height={24} alt="" />

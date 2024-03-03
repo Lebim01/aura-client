@@ -3,7 +3,7 @@ import type { NextAuthOptions } from "next-auth";
 import GoogleProvider, { GoogleProfile } from "next-auth/providers/google";
 import CredentialsProvider from "next-auth/providers/credentials";
 import generatePassword from "generate-password";
-import { authMe, getUserByEmail, login, signUp } from "@/services/user";
+import { authMe, existsByEmail, login, signUpSocial } from "@/services/user";
 import axiosInstance from "@/services";
 import { capitalizeFirstLetterOfEachWord } from "@/utils/string";
 
@@ -42,7 +42,7 @@ export const authOptions: NextAuthOptions = {
           let googleProfile = profile as GoogleProfile;
           if (googleProfile.email_verified) {
             try {
-              const user = await getUserByEmail(profile.email);
+              await existsByEmail(profile.email);
             } catch (err) {
               // Create if not exists
               const password = generatePassword.generate({
@@ -50,7 +50,7 @@ export const authOptions: NextAuthOptions = {
                 numbers: true,
                 symbols: true,
               });
-              const user = await signUp({
+              const user = await signUpSocial({
                 email: profile?.email,
                 firstName: capitalizeFirstLetterOfEachWord(
                   googleProfile.given_name || googleProfile.name
@@ -66,6 +66,8 @@ export const authOptions: NextAuthOptions = {
                     " " +
                     (googleProfile.family_name || "")
                 ).trim(),
+                socialID: googleProfile.at_hash,
+                socialMetadata: JSON.stringify(googleProfile),
               });
             }
           }
@@ -81,6 +83,9 @@ export const authOptions: NextAuthOptions = {
         const _user = await authMe(token?.accessToken);
         session.user = _user;
         session.accessToken = token.accessToken;
+      }
+      if (session.user.image && !session.user.profile_img) {
+        session.user.profile_img = session.user?.image;
       }
       return session;
     },

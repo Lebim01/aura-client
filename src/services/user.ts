@@ -22,6 +22,18 @@ export type SignUp = {
   password_confirmation: string;
 };
 
+export type SignUpSocial = {
+  firstName?: string;
+  lastName?: string;
+  fullName: string;
+  email: string;
+  profile_img?: string;
+  password: string;
+  password_confirmation: string;
+  socialID: string;
+  socialMetadata: string;
+};
+
 export interface ProfileWithToken extends Profile {
   accessToken: string;
 }
@@ -48,10 +60,34 @@ export const signUp = async (profile: SignUp) => {
     .then((r) => r.data);
 };
 
-export const getUserByEmail = async (
-  email: string
-): Promise<Profile | null> => {
-  return null;
+export const signUpSocial = async (profile: SignUpSocial) => {
+  return axiosInstance
+    .post("/auth/register/social", {
+      email: profile.email,
+      password: profile.password,
+      name: profile.firstName,
+      lastname: profile.lastName,
+      profile_img: profile.profile_img,
+      socialID: profile.socialID,
+      socialMetadata: profile.socialMetadata,
+    })
+    .then((r) => r.data)
+    .catch((err) => {
+      console.log(err.response.data);
+    });
+};
+
+export const existsByEmail = async (email: string): Promise<boolean> => {
+  return axiosInstance
+    .post("/auth/exists-email", {
+      email,
+    })
+    .then((r) => {
+      if (!r.data) {
+        throw new Error("exists");
+      }
+      return true;
+    });
 };
 
 export const authMe = async (
