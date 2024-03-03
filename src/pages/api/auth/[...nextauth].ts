@@ -1,4 +1,5 @@
 import NextAuth from "next-auth";
+import { encode } from "next-auth/jwt";
 import type { NextAuthOptions } from "next-auth";
 import GoogleProvider, { GoogleProfile } from "next-auth/providers/google";
 import CredentialsProvider from "next-auth/providers/credentials";
@@ -11,6 +12,9 @@ export const authOptions: NextAuthOptions = {
   pages: {
     signIn: "/login",
     error: "/login",
+  },
+  session: {
+    strategy: "jwt",
   },
   secret: process.env.NEXTAUTH_SECRET,
   providers: [
@@ -36,13 +40,13 @@ export const authOptions: NextAuthOptions = {
     }),
   ],
   callbacks: {
-    async signIn({ account, profile }) {
+    async signIn({ account, profile, user }) {
       try {
         if (account?.provider == "google" && profile?.email) {
           let googleProfile = profile as GoogleProfile;
           if (googleProfile.email_verified) {
             try {
-              await existsByEmail(profile.email);
+              await existsByEmail(profile.email, googleProfile.sub);
             } catch (err) {
               // Create if not exists
               const password = generatePassword.generate({
@@ -50,7 +54,7 @@ export const authOptions: NextAuthOptions = {
                 numbers: true,
                 symbols: true,
               });
-              const user = await signUpSocial({
+              await signUpSocial({
                 email: profile?.email,
                 firstName: capitalizeFirstLetterOfEachWord(
                   googleProfile.given_name || googleProfile.name
@@ -66,7 +70,7 @@ export const authOptions: NextAuthOptions = {
                     " " +
                     (googleProfile.family_name || "")
                 ).trim(),
-                socialID: googleProfile.at_hash,
+                socialID: googleProfile.sub,
                 socialMetadata: JSON.stringify(googleProfile),
               });
             }
@@ -74,18 +78,21 @@ export const authOptions: NextAuthOptions = {
         }
         return true;
       } catch (err) {
-        console.error(err);
         return false;
       }
     },
     async session({ session, token }) {
-      if (token?.accessToken) {
-        const _user = await authMe(token?.accessToken);
-        session.user = _user;
+      if (!token.accessToken && token.sub) {
+        const _user = await existsByEmail(session.user.email, token.sub!);
+        if (_user) {
+          const { accessToken, ...userData } = _user;
+          session.user = userData;
+          session.accessToken = accessToken;
+        }
+      } else if (token?.accessToken) {
+        const authme = await authMe(token?.accessToken);
+        session.user = authme;
         session.accessToken = token.accessToken;
-      }
-      if (session.user.image && !session.user.profile_img) {
-        session.user.profile_img = session.user?.image;
       }
       return session;
     },

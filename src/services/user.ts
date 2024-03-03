@@ -77,16 +77,20 @@ export const signUpSocial = async (profile: SignUpSocial) => {
     });
 };
 
-export const existsByEmail = async (email: string): Promise<boolean> => {
+export const existsByEmail = async (
+  email: string,
+  socialID: string
+): Promise<{ accessToken: string } | false> => {
   return axiosInstance
     .post("/auth/exists-email", {
       email,
+      id: socialID,
     })
     .then((r) => {
-      if (!r.data) {
+      if (r.data == false) {
         throw new Error("exists");
       }
-      return true;
+      return r.data;
     });
 };
 
