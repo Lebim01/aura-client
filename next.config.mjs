@@ -12,15 +12,7 @@ const nextConfig = {
             permanent: false,
           },
         ]
-      : [
-          /*
-          {
-            source: "/",
-            destination: "/dashboard",
-            permanent: false,
-          },
-          */
-        ];
+      : [];
   },
   images: {
     remotePatterns: [
