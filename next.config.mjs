@@ -2,7 +2,7 @@
 const nextConfig = {
   reactStrictMode: false,
   async redirects() {
-    const isProd = process.env.VERCEL_URL == "production";
+    const isProd = process.env.NODE_ENV == "production";
 
     return isProd
       ? [

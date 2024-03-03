@@ -81,10 +81,11 @@ const ModalPhoto: FC<Props> = (props) => {
             className="block w-full text-sm border rounded-lg cursor-pointer text-gray-400 focus:outline-none bg-gray-700 border-gray-600 placeholder-gray-400"
             aria-describedby="file_input_help"
             id="file_input"
+            name="file[]"
             type="file"
             placeholder="PNG, JPG or JPEG."
             disabled={uploading}
-            accept=".png,.jpg,.jpeg"
+            accept="image/*;capture=camera"
             onChange={(e) =>
               e.currentTarget.files &&
               e.currentTarget.files.length > 0 &&
