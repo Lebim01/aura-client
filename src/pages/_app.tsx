@@ -1,10 +1,10 @@
 import "@/styles/globals.css";
 import type { AppProps } from "next/app";
+import Head from "next/head";
 import React, { useEffect } from "react";
 import { Plus_Jakarta_Sans } from "next/font/google";
 import { SessionProvider } from "next-auth/react";
-import Head from "next/head";
-import "@api";
+import { GoogleAnalytics } from "@next/third-parties/google";
 import { useRouter } from "next/router";
 import { classNamesCustom } from "@/utils/classes";
 
@@ -40,6 +40,10 @@ export default function App({
           />
         </Head>
         <Component {...pageProps} />
+
+        {process.env.NODE_ENV === "production" && (
+          <GoogleAnalytics gaId="G-9LP50R2EP0" />
+        )}
       </main>
     </SessionProvider>
   );
