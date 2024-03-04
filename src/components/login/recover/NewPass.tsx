@@ -1,7 +1,8 @@
 import React, { useState, ChangeEvent, useEffect } from "react";
 import InputReturn from "@/components/common/InputReturn";
 import ButtonCommon from "@/components/common/ButtonCommon";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
+
 interface UserData {
   pass: string;
   confirm_pass: string;

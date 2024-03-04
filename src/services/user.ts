@@ -106,3 +106,25 @@ export const authMe = async (
 export const updateUser = async (user: Partial<Profile>) => {
   return axiosInstance.patch("/auth/update", user).then((r) => r.data);
 };
+
+export const updatePassword = async (password: string) => {
+  return axiosInstance.post("users/update/password", {
+    password,
+  });
+};
+
+export const recoverPassword = async ({
+  email,
+  password,
+  otp,
+}: {
+  email: string;
+  password: string;
+  otp?: string;
+}) => {
+  return axiosInstance.post("users/recover/password", {
+    email,
+    password,
+    otp,
+  });
+};

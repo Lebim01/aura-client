@@ -1,7 +1,4 @@
-"use client";
-import React, { ChangeEvent, useState, useEffect } from "react";
-import Image from "next/image";
-import useUserRegistrationStore from "@/store/userRegistrationStore";
+import React, { ChangeEvent, useState } from "react";
 import { classNamesCustom } from "@/utils/classes";
 
 interface UserData {
@@ -18,26 +15,20 @@ interface Props {
   icon?: string;
   placeholder: string;
   type?: string;
-  name: keyof UserData;
-  onChange?: () => void;
+  name?: string;
+  value: string;
+  onChange?: (value: string) => void;
 }
-const InputRegister = ({ icon, placeholder, type, name }: Props) => {
-  const { userData, setUserField } = useUserRegistrationStore();
-  const [value, setValue] = useState<string>("");
+
+const InputCommon = ({ value, placeholder, type, name, onChange }: Props) => {
   const [focused, setFocused] = useState(false);
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
-    setUserField(name, value);
-    setValue(value);
+    onChange && onChange(value);
   };
 
   return (
     <div className="relative w-full max-h-[51px] min-h-[51px]">
-      {icon && (
-        <span className="absolute inset-y-6 left-0 flex items-center pl-[16px]">
-          <Image src={`${icon}.svg`} width={16} height={16} alt="" />
-        </span>
-      )}
       <div className="pl-10 flex flex-col bg-inputs rounded-[8px] py-[8px] max-h-[51px] min-h-[51px] justify-center">
         {value !== "" && (
           <label className="text-[10px] font-[700] opacity-50 text-left">
@@ -52,7 +43,7 @@ const InputRegister = ({ icon, placeholder, type, name }: Props) => {
             { "h-[21px]": focused }
           )}
           placeholder={placeholder}
-          value={userData[name]}
+          value={value}
           onChange={handleChange}
           type={type || "text"}
           name={name}
@@ -64,4 +55,4 @@ const InputRegister = ({ icon, placeholder, type, name }: Props) => {
   );
 };
 
-export default InputRegister;
+export default InputCommon;

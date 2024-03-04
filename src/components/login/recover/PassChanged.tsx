@@ -1,8 +1,7 @@
-"use client";
 import React from "react";
 import ButtonCommon from "@/components/common/ButtonCommon";
-import { useRouter } from "next/router";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 const PassChanged = () => {
   const router = useRouter();
