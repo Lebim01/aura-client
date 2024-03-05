@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import Loader from "@/components/signup/Loader";
 import HaveAccount from "@/components/common/HaveAccount";
@@ -10,10 +10,18 @@ import UserName from "@/components/signup/UserName";
 import Success from "@/components/signup/Success";
 import { useRouter } from "next/router";
 import HeaderAuth from "@/components/common/HeaderAuth";
+import { useSession } from "next-auth/react";
 
 export default function Signup() {
   const [loading, setLoading] = useState(false);
   const router = useRouter();
+  const { status } = useSession();
+
+  useEffect(() => {
+    if (status == "authenticated") {
+      router.replace("/dashboard");
+    }
+  }, [status]);
 
   return (
     <div className="flex w-screen h-custom-screen bg-dark-aura px-[27px] items-center justify-center bg-aura bg-cover bg-no-repeat md:bg-auradesktop  bg-center">
