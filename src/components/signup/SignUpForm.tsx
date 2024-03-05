@@ -6,6 +6,7 @@ import ButtonCommon from "../common/ButtonCommon";
 import Select from "../common/Select";
 import useUserRegistrationStore from "@/store/userRegistrationStore";
 import { useRouter } from "next/router";
+import PasswordFeedback from "../common/PasswordFeedback";
 
 const SignUpForm = () => {
   const { userData } = useUserRegistrationStore();
@@ -37,6 +38,10 @@ const SignUpForm = () => {
         icon="/login/icons/mail"
         placeholder="CORREO ELECTRÓNICO"
         name="mail"
+      />
+      <PasswordFeedback
+        pass={userData.pass}
+        confirm_pass={userData.confirm_pass}
       />
       <Input
         icon="/login/icons/lock"
