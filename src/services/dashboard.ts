@@ -24,8 +24,12 @@ export type VideoDashboardResponse = {
   comments: number;
   section: string;
   url: string;
-}
+};
 
-export const getVideosSection = (section: string) => {
-  return axiosInstance.get<VideoDashboardResponse[]>(`/dashboard/section/${section}`).then(r => r.data)
-}
+export const getVideosSection = (section: string, limit?: number) => {
+  return axiosInstance
+    .get<VideoDashboardResponse[]>(
+      `/dashboard/section/${section}${limit ? "?limit=" + limit : ""}`
+    )
+    .then((r) => r.data);
+};
