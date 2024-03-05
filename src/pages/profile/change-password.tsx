@@ -11,7 +11,7 @@ const ProfileChangePasswordPage = () => {
     pass: "",
     confirm_pass: "",
   });
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [status, setStatus] = useState<null | boolean>(null);
 
   const isDisabled = useMemo(() => {
