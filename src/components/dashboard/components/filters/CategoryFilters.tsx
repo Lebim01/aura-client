@@ -140,9 +140,14 @@ const platforms = [
     logo_url: "/icons/vix.svg",
   },
   {
-    id: "2db6b8b5-4d5e-4b41-88c2-46aa67f16aa1",
+    id: "83991d40-7578-4a63-9083-3eb1cf880a3f",
     name: "prime-video",
     logo_url: "/icons/primevideo.svg",
+  },
+  {
+    id: "b0c10aa4-0a88-4741-a08b-04218167a23e",
+    name: "paramount",
+    logo_url: "/icons/paramount.svg",
   },
 ];
 
