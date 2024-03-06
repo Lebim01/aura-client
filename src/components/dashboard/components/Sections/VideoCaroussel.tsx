@@ -63,9 +63,17 @@ const VideoCaroussel = ({ videos, title, sectionId }: Props) => {
           <div
             ref={scrollContainerRef}
             className={classNamesCustom(
-              "flex gap-x-[16px] items-center px-[16px] overflow-x-auto",
+              "",
               { "scrollnice pb-[8px]": !isMobile },
-              { hidescroll: isMobile }
+              { hidescroll: isMobile },
+              {
+                "grid grid-cols-1 md:grid-cols-3 gap-x-[16px] gap-y-[16px] px-[16px]":
+                  videos.length < 3,
+              },
+              {
+                "flex gap-x-[16px] items-center px-[16px] overflow-x-auto":
+                  videos.length >= 3,
+              }
             )}
           >
             {videos.map((video, i) => (
@@ -81,13 +89,15 @@ const VideoCaroussel = ({ videos, title, sectionId }: Props) => {
             ))}
           </div>
 
-          <div
-            className={classNamesCustom(
-              "absolute bottom-0 left-0 w-full h-[650px] pointer-events-none bg-bg-gradient-discovery-left hidden md:block transition-all duration-300",
-              { "opacity-0": !showGradient },
-              { "opacity-100": showGradient }
-            )}
-          ></div>
+          {videos.length >= 3 && (
+            <div
+              className={classNamesCustom(
+                "absolute bottom-0 left-0 w-full h-[650px] pointer-events-none bg-bg-gradient-discovery-left hidden md:block transition-all duration-300",
+                { "opacity-0": !showGradient },
+                { "opacity-100": showGradient }
+              )}
+            ></div>
+          )}
         </>
       )}
     </div>
