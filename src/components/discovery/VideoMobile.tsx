@@ -72,6 +72,7 @@ const VideoMobile = forwardRef(
           like_me={like_me}
           id_video={id_video}
           comments={comments}
+          url_video={videoUrl}
         />
       </div>
     );

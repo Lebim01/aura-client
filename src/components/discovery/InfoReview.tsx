@@ -16,6 +16,7 @@ interface Props {
   like_me: boolean;
   id_video: string;
   comments: number;
+  url_video: string;
 }
 
 const InfoReview = ({
@@ -25,10 +26,31 @@ const InfoReview = ({
   like_me,
   id_video,
   comments,
+  url_video,
 }: Props) => {
   const [showComments, setShowComments] = useState(false);
   const { toggleFooter } = useShowHideFooterStore();
   const { likeVideo, disLikeVideo } = useVideos();
+
+  const handleDownload = async () => {
+    try {
+      const response = await fetch(url_video);
+      if (!response.ok) throw new Error("Error!");
+      const blob = await response.blob();
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "video.mp4";
+      document.body.appendChild(a);
+      a.click();
+
+      window.URL.revokeObjectURL(url);
+      document.body.removeChild(a);
+    } catch (error) {
+      console.error("Download error:", error);
+      alert("Error al descargar el video.");
+    }
+  };
 
   const handleShare = async () => {
     if (navigator.share) {
@@ -112,11 +134,31 @@ const InfoReview = ({
               />
               <span className="text-[10px] leading-[130%]">{comments}</span>
             </div>
-
-            <div className="flex flex-col w-full items-center gap-y-[4px] cursor-pointer">
-              <div className="w-[30px]" onClick={handleShare}>
-                <Image width={30} height={30} src="/icons/share.svg" alt="" />
-              </div>
+            <div
+              className="flex flex-col w-full items-center gap-y-[4px]"
+              onClick={handleDownload}
+            >
+              <Image
+                className="w-[30px] hover:cursor-pointer"
+                width={30}
+                height={30}
+                src="/icons/download.svg"
+                alt=""
+              />
+              <span className="text-[10px] leading-[130%]">Descargar</span>
+            </div>
+            <div
+              className="flex flex-col w-full items-center gap-y-[4px]"
+              onClick={handleShare}
+            >
+              <Image
+                className="w-[30px] hover:cursor-pointer"
+                width={30}
+                height={30}
+                src="/icons/share.svg"
+                alt=""
+              />
+              <span className="text-[10px] leading-[130%]">compartir</span>
             </div>
           </div>
         </div>

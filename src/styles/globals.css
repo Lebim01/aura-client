@@ -10,7 +10,6 @@
   --background-end-rgb: 0, 0, 0;
 }
 
-
 html {
   @apply bg-black-0D;
 }
@@ -32,7 +31,7 @@ body {
 }
 
 .translateinfo {
-  transform: translateY(calc(var(--vh, 1vh) * 100 - 250px));
+  transform: translateY(calc(var(--vh, 1vh) * 100 - 350px));
   /*  transform: translateY(calc(var(--vh, 1vh) * 100 - 200px)); */
 }
 
