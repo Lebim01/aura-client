@@ -6,6 +6,7 @@ import { useSwipeable } from "react-swipeable";
 import { getRecommended } from "@/services/dashboard";
 import useFiltersRecommended from "@/store/useFiltersRecommended";
 import { classNamesCustom } from "@/utils/classes";
+import { useRouter } from "next/router";
 
 interface Props {
   setShow: Dispatch<SetStateAction<boolean>>;
@@ -18,6 +19,7 @@ const Recommended = ({ setShow, show }: Props) => {
   const [data, setData] = useState<any>([]);
   const [animationClass, setAnimationClass] = useState("");
   const [loading, setLoading] = useState(true);
+  const router = useRouter();
   useEffect(() => {
     const originalStyle = window.getComputedStyle(document.body).overflow;
     document.body.style.overflow = "hidden";
@@ -90,6 +92,11 @@ const Recommended = ({ setShow, show }: Props) => {
             ) : data.length > 0 ? (
               <div
                 className={`flex flex-col gap-y-[10px] transition-opacity duration-500 ${animationClass}`}
+                onClick={() => {
+                  setShow(false);
+                  router.push("/detail/[slug]", `/detail/${data[index].slug}`);
+                  /*  window.location.reload(); */
+                }}
               >
                 <Image
                   src={data[index]?.poster_path}
@@ -110,7 +117,9 @@ const Recommended = ({ setShow, show }: Props) => {
                 </div>
               </div>
             ) : (
-              <>No hay series</>
+              <>
+                Por el momento, no hay series que cumplan con estos parámetros
+              </>
             )}
 
             <div className="flex gap-x-[9px] justify-center items-center">

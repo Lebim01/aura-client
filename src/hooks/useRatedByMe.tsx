@@ -7,6 +7,7 @@ const useRatedByMe = (id: string) => {
   useEffect(() => {
     getRatedByMe(id)
       .then((rating) => {
+        console.log("s'ojcioak;jsd", rating);
         setRate(Number(rating || 0));
       })
       .catch(() => {

@@ -10,7 +10,7 @@ const Rating: FC<Props> = ({ qualification }) => {
     <div className="hidden md:flex md:items-center md:space-x-2">
       <Image height={20} width={20} alt="star-icon" src="/icons/star.svg" />
       <span className="text-[12px] leading-[15px] font-semibold">
-        {qualification}
+        {qualification.toFixed(1)}
       </span>
     </div>
   );

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 import { Genre, Serie } from "@/types/series";
 import ButtonTrailer from "./ViewTrailer";
@@ -17,6 +17,7 @@ type Props = {
 export default function Large({ serie, genres, ...props }: Props) {
   const isMobile = useIsMobile();
   const rated_by_me = useRatedByMe(serie.id);
+  const [serieRating, setSerieRating] = useState(serie.rating);
 
   return (
     <div className="px-[16px]">
@@ -69,9 +70,13 @@ export default function Large({ serie, genres, ...props }: Props) {
         >
           {serie?.overview}
         </span>
-        <Rating qualification={serie.rating} />
+        <Rating qualification={serieRating} />
         <div className="md:flex-row flex gap-y-[16px] md:gap-y-0 flex-col md:gap-x-[24px] mt-[8px] md:mt-0">
-          <Rate qualification={rated_by_me} id={serie.id} />
+          <Rate
+            qualification={rated_by_me}
+            id={serie.id}
+            setSerieRating={setSerieRating}
+          />
 
           {serie.trailer && <ButtonTrailer open={props.openTrailer} />}
         </div>

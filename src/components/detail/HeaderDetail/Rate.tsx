@@ -1,19 +1,21 @@
 import Image from "next/image";
-import { FC, useEffect, useState } from "react";
+import { Dispatch, FC, SetStateAction, useEffect, useState } from "react";
 import { rateSerie } from "@/services/series";
 
 type Props = {
   qualification: number;
   id: string;
+  setSerieRating: Dispatch<SetStateAction<number>>;
 };
 
-const Rate: FC<Props> = ({ qualification, id }) => {
+const Rate: FC<Props> = ({ qualification, id, setSerieRating }) => {
   const [myRate, setMyRate] = useState(qualification);
 
   const rateSerieSend = async (rate: number) => {
     try {
       setMyRate(rate);
-      await rateSerie({ rating: rate, serieID: id });
+      const res = await rateSerie({ rating: rate, serieID: id });
+      setSerieRating(res.average_rating);
     } catch (e) {
       setMyRate(qualification);
       console.log(e);

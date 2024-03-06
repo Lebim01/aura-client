@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Footer from "@/components/common/Footer";
 import Large from "@/components/detail/HeaderDetail/Large";
 import Tabs from "@/components/detail/Tabs";
@@ -32,9 +32,13 @@ export default function Detail({
   actors,
   crew,
 }: Props) {
-  const [serie] = useState<Serie>(JSON.parse(_serie));
+  const [serie, setSerie] = useState<Serie>(JSON.parse(_serie));
   const [tab, setTab] = useState<Tabs>("credits");
   const [openTrailer, setOpenTrailer] = useState(false);
+
+  useEffect(() => {
+    setSerie(JSON.parse(_serie));
+  }, [_serie]);
 
   return (
     <AuthProvider>
