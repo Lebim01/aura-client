@@ -30,6 +30,32 @@ const InfoReview = ({
   const { toggleFooter } = useShowHideFooterStore();
   const { likeVideo, disLikeVideo } = useVideos();
 
+  const handleShare = async () => {
+    if (navigator.share) {
+      try {
+        await navigator.share({
+          url: `${window.location.href}/${id_video}`,
+          title: "Écha un vistazo!",
+          text: "Te podría interesar.",
+        });
+      } catch (error) {
+        alert(error);
+
+        console.error("Error sharing:", error);
+      }
+    } else {
+      try {
+        await navigator.clipboard.writeText(
+          `${window.location.href}/${id_video}`
+        );
+        console.log("URL copied to clipboard");
+      } catch (error) {
+        alert(error);
+        console.error("Error copying URL:", error);
+      }
+    }
+  };
+
   return (
     <>
       {showComments && (
@@ -87,8 +113,8 @@ const InfoReview = ({
               <span className="text-[10px] leading-[130%]">{comments}</span>
             </div>
 
-            <div className="flex flex-col w-full items-center gap-y-[4px]">
-              <div className="w-[30px]">
+            <div className="flex flex-col w-full items-center gap-y-[4px] cursor-pointer">
+              <div className="w-[30px]" onClick={handleShare}>
                 <Image width={30} height={30} src="/icons/share.svg" alt="" />
               </div>
             </div>

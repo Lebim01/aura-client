@@ -47,7 +47,7 @@ const options = [
     value: "18c5299d-473e-44a2-9e9f-79f8dae23212",
     img: "/categories/documentales-min.jpg",
     style: {
-      "background-blend-mode": "color",
+      backgroundBlendMode: "color",
       background:
         "linear-gradient(90deg, rgba(247,245,239,0.788) 0%, rgba(224,220,205,0.8) 100%)",
     },
