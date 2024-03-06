@@ -1,12 +1,12 @@
 export default function Home() {
   return (
-    <div className="flex justify-center items-center h-screen">
+    <div className="flex justify-center items-center fixed inset-0 z-0 overflow-hidden ">
       <video
         loop
         autoPlay
         playsInline
         controls
-        className="object-cover min-w-[300px] max-h-[50vh] min-h-[50vh] cursor-pointer rounded-md"
+        className="object-cover md:min-w-[300px] md:max-h-[50vh] md:min-h-[50vh] cursor-pointer rounded-md h-full"
         preload="metadata"
       >
         <source
