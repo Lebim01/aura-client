@@ -1,14 +1,32 @@
 export const sections = [
   {
-    slug: 'lo-que-nadie-te-dice-de',
-    name: 'Lo que nadie te dice de...'
-  }, 
-  {
-    slug: 'daily',
-    name: 'Contenido diario'
+    slug: "mi-aura",
+    name: "Mi Aura",
+    orientation: "vertical",
   },
   {
-    slug: 'resenas',
-    name: 'Reseñas'
-  }
-]
+    slug: "lo-que-nadie-te-dice-de",
+    name: "Lo que nadie te dice de...",
+    orientation: "vertical",
+  },
+  {
+    slug: "mis-5-series",
+    name: "Mis 5 Series",
+    orientation: "vertical",
+  },
+  {
+    slug: "mi-vida-en-series",
+    name: "Mi Vida en Series",
+    orientation: "horizontal",
+  },
+  {
+    slug: "Blanco y Negro",
+    name: "blanco-negro",
+    orientation: "horizontal",
+  },
+  {
+    slug: "En llamado con",
+    name: "en-llamado-con",
+    orientation: "horizontal",
+  },
+];

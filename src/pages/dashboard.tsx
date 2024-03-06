@@ -7,6 +7,8 @@ import AuthProvider from "@/components/common/ProtectAuth";
 import { sections } from "@/utils/sections";
 import { GetServerSideProps } from "next";
 import { VideoDashboardResponse, getVideosSection } from "@/services/dashboard";
+import Link from "next/link";
+import Image from "next/image";
 
 type Props = {
   sections: Section[];
@@ -15,6 +17,7 @@ type Props = {
 type Section = {
   name: string;
   slug: string;
+  orientation: "vertical" | "horizontal";
   videos: VideoDashboardResponse[];
 };
 
@@ -23,29 +26,52 @@ export default function Dashboard({ sections }: Props) {
   return (
     <AuthProvider>
       <DesktopLayout forceDisplay>
-        <div className="flex flex-col gap-y-[16px] overflow-y-auto md:h-screen w-auto pb-[99px] md:pb-[32px] relative hidescroll ">
-          {sections.map(({ name, slug, videos }, index) => (
-            <VideoCaroussel
-              key={index}
-              videos={videos.slice(0, isMobile ? 2 : 3).map((v) => v.url)}
-              title={name}
-              sectionId={slug}
-            />
-          ))}
-
-          <div className="flex flex-col gap-y-[8px] relative md:min-w-[1056px] p-4">
-            <label className="text-[16px] font-[600] leading-[150%]">
-              Video Magistrales
-            </label>
-            <video controls preload="metadata" className="aspect-video">
-              <source
-                src={
-                  "https://pub-9eaa456ff98b4bb0a1e8636ea9c0de4b.r2.dev/Trailer%20-%20Mi%20vida%20en%20Series.mp4#t=0.1"
-                }
-                type="video/mp4"
+        <div className="flex flex-col gap-y-[16px] overflow-y-auto md:h-screen w-auto pb-[99px] md:pb-[32px] relative hidescroll flex-1">
+          {sections
+            .filter((r) => r.orientation == "vertical")
+            .filter((r) => r.videos.length > 0)
+            .map(({ name, slug, videos }, index) => (
+              <VideoCaroussel
+                key={index}
+                videos={videos.slice(0, isMobile ? 2 : 3).map((v) => v.url)}
+                title={name}
+                sectionId={slug}
               />
-            </video>
-          </div>
+            ))}
+
+          {sections
+            .filter((r) => r.orientation == "horizontal")
+            .filter((r) => r.videos.length > 0)
+            .map(({ name, slug, videos }, index) => (
+              <div
+                className="flex flex-col gap-y-[8px] relative md:min-w-[1056px] p-4"
+                key={index}
+              >
+                <div className="flex justify-between">
+                  <label className="text-[16px] font-[600] leading-[150%]">
+                    {name}
+                  </label>
+                  <Link
+                    href={"/sections/" + slug}
+                    className="flex gap-x-[4px] items-center hover:underline"
+                  >
+                    <span className="text-[12px] leading-[150%] ">
+                      Ver todo
+                    </span>
+
+                    <Image
+                      src={"/icons/arrow-right.svg"}
+                      alt=""
+                      width={16}
+                      height={16}
+                    />
+                  </Link>
+                </div>
+                <video controls preload="metadata" className="aspect-video">
+                  <source src={`${videos[0].url}#t=0.1`} type="video/mp4" />
+                </video>
+              </div>
+            ))}
         </div>
         <Footer />
       </DesktopLayout>
@@ -59,6 +85,7 @@ export const getServerSideProps = (async () => {
     sections_with_videos.push({
       name: sec.name,
       slug: sec.slug,
+      orientation: sec.orientation as "vertical" | "horizontal",
       videos: await getVideosSection(sec.slug),
     });
   }

@@ -4,6 +4,7 @@ import SocialButton from "../common/SocialButton";
 import Separator from "../common/Separator";
 import ButtonCommon from "../common/ButtonCommon";
 import { useRouter } from "next/router";
+import { signIn } from "next-auth/react";
 
 const SignUpOptions = () => {
   const router = useRouter();
@@ -20,6 +21,9 @@ const SignUpOptions = () => {
         textcolor="text-black text-opacity-50"
         text="Continue with Google"
         background="bg-white"
+        onClick={() => {
+          signIn("google");
+        }}
       />
 
       {/*<SocialButton

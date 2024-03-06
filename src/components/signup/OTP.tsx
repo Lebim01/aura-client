@@ -29,11 +29,11 @@ const OTP = () => {
         birthdate: `${userData.year}-${userData.month}-${userData.day}`,
         otp,
       });
+      router.push("/signup?step=success");
       await signIn("credentials", {
         email: userData.mail,
         password: userData.pass,
       });
-      router.push("/signup?step=success");
     } catch (err) {
       console.error(err);
     } finally {
