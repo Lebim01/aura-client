@@ -218,6 +218,6 @@ input:-webkit-autofill:active {
   max-height: unset !important;
   height: 100vw !important;
   width: 100vh !important;
-  width: calc(var(--vh, 1vh) * 100);
+  width: calc(var(--vh, 1vh) * 100) !important;
   object-fit: cover !important;
 }
