@@ -4,10 +4,19 @@ import useVideoMute from "@/store/useVideoMute";
 import useSwipeVideos from "@/store/useSwipeVideos";
 import { VideoProps } from "./VideoController";
 import { IoVolumeHighSharp, IoVolumeMute } from "react-icons/io5";
+import { classNamesCustom } from "@/utils/classes";
 
 const VideoMobile = forwardRef(
   (
-    { videoUrl, videoIndex, likes, like_me, id_video, comments }: VideoProps,
+    {
+      videoUrl,
+      videoOrientation,
+      videoIndex,
+      likes,
+      like_me,
+      id_video,
+      comments,
+    }: VideoProps,
     ref: ForwardedRef<HTMLVideoElement>
   ) => {
     const {
@@ -38,7 +47,7 @@ const VideoMobile = forwardRef(
 
     return (
       <div
-        className="image-slide bg-bg-gradient-discovery relative md:h-auto md:relative"
+        className="image-slide bg-bg-gradient-discovery md:h-auto"
         style={{
           backgroundImage: `linear-gradient(to top, rgba(0, 0, 0, 0.7) 15%, rgba(0, 0, 0, 0) 30%)`,
           transform: `translateY(${(videoIndex - swipeIndex) * 100}%)`,
@@ -51,7 +60,12 @@ const VideoMobile = forwardRef(
           loop
           muted={muted}
           playsInline
-          className="object-cover h-custom-screen w-full min-w-[300px] h-full min-h-[500px] md:h-auto"
+          
+          className={classNamesCustom(
+            "",
+            videoOrientation == "vertical" && "h-full min-h-[500px] object-cover h-custom-screen w-full min-w-[300px]",
+            videoOrientation == "horizontal" && "video-horizontal"
+          )}
           onClick={toggleMute}
         >
           <source src={videoUrl} type="video/mp4" />

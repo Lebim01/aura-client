@@ -37,19 +37,6 @@ const VerticalSliderVideos: FC<Props> = (props) => {
   const { videos, fetchMore, markWatched, hasMore } = useVideos();
   const { status } = useSession();
 
-  const markWatchedVideo = async (id: string) => {
-    const videoIndex = videos.findIndex((video: any) => video.id === id);
-    if (videoIndex !== -1 && videos[videoIndex].watched) {
-      return;
-    }
-
-    try {
-      await markWatched(id);
-    } catch (e) {
-      console.log(e);
-    }
-  };
-
   useEffect(() => {
     fetchMore(props.apiUrl);
   }, [props.apiUrl]);
@@ -113,12 +100,20 @@ const VerticalSliderVideos: FC<Props> = (props) => {
             />
           </Fragment>
         ))}
-        {!hasMore && (
-          <div>
-            <p>
-              Has terminado de ver todo el contenido de está sección, te
-              invitamos a ver otra sección diferente
+        {!hasMore && position.swipeIndex == videos.length - 1 && (
+          <div className="flex flex-col justify-center items-center space-y-4 absolute top-0 text-sm bg-gray-600/25 py-4">
+            <p>🎉 ¡Enhorabuena! 🎉</p>
+            <p className="max-w-[450px] text-center">
+              Has terminado de ver todo el contenido de esta sección, te
+              invitamos a continuar explorando en nuestro catálogo de contenido
             </p>
+            <Image
+              className="w-[100px] h-auto"
+              src="/logo_white.svg"
+              width={120}
+              height={100}
+              alt="logo"
+            />
           </div>
         )}
       </div>

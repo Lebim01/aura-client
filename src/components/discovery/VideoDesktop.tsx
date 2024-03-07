@@ -44,8 +44,8 @@ const VideoDesktop = forwardRef(
     return (
       <div
         className={classNamesCustom(
-          "relative rounded-lg overflow-hidden",
-          videoOrientation == "vertical" && "w-[500px] min-h-[60vh]",
+          "relative rounded-lg overflow-hidden min-h-[60vh]",
+          videoOrientation == "vertical" && "w-[500px]",
           videoOrientation == "horizontal" && "py-[10%]"
         )}
       >
