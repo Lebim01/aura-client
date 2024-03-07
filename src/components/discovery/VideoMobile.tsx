@@ -39,6 +39,7 @@ const VideoMobile = forwardRef(
     } = useSwipeVideos();
     const streamRef = useRef<StreamPlayerApi | undefined>();
     const { muted, toggleMute } = useVideoMute();
+    const [canPlay, setCanPlay] = useState(false);
 
     useImperativeHandle(ref, () => ({
       play: () => {
@@ -58,10 +59,10 @@ const VideoMobile = forwardRef(
     };
 
     useEffect(() => {
-      if (swipeIndex == videoIndex) {
+      if (swipeIndex == videoIndex && canPlay) {
         streamRef.current?.play();
       }
-    }, [swipeIndex, videoIndex]);
+    }, [swipeIndex, videoIndex, canPlay]);
 
     return (
       <div
@@ -84,6 +85,10 @@ const VideoMobile = forwardRef(
           )}
           muted={videoIndex != swipeIndex || muted}
           loop
+          preload="metadata"
+          onCanPlay={(e) => {
+            setCanPlay(true);
+          }}
           poster={`https://customer-fuwnvhure6hzod9h.cloudflarestream.com/${videoUrl}/thumbnails/thumbnail.jpg?time=2s&height=600`}
         />
         <div
