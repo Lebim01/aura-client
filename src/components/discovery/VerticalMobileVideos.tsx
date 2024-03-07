@@ -7,8 +7,8 @@ import Image from "next/image";
 import VideoController from "./VideoController";
 import { useRouter } from "next/navigation";
 import useVideos from "../../hooks/useVideos";
-import axiosInstance from "@/services";
 import { useSession } from "next-auth/react";
+import { sections } from "@/utils/sections";
 
 const HeaderMobile = () => {
   const { back } = useRouter();
@@ -100,6 +100,10 @@ const VerticalSliderVideos: FC<Props> = (props) => {
             <VideoController
               Component={VideoMobile}
               videoUrl={video.url}
+              videoOrientation={
+                sections.find((r) => r.slug == video.section)?.orientation ??
+                "vertical"
+              }
               videoIndex={i}
               layout="mobile"
               likes={video.likes}

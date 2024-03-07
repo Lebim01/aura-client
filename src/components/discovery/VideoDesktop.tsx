@@ -1,13 +1,21 @@
 import { ForwardedRef, forwardRef, useEffect, useState, useRef } from "react";
 import useVideoMute from "@/store/useVideoMute";
 import { VideoProps } from "./VideoController";
-import VideoHeader from "./VideoHeader";
 import InfoReview from "./InfoReview";
 import { IoVolumeHighSharp, IoVolumeMute } from "react-icons/io5";
+import { classNamesCustom } from "@/utils/classes";
 
 const VideoDesktop = forwardRef(
   (
-    { videoUrl, videoIndex, likes, like_me, id_video, comments }: VideoProps,
+    {
+      videoUrl,
+      videoOrientation,
+      videoIndex,
+      likes,
+      like_me,
+      id_video,
+      comments,
+    }: VideoProps,
     ref: ForwardedRef<HTMLVideoElement>
   ) => {
     const { muted, toggleMute } = useVideoMute();
@@ -34,37 +42,49 @@ const VideoDesktop = forwardRef(
     }, [muted]);
 
     return (
-      <div className="relative rounded-lg overflow-hidden w-[500px] min-h-[60vh]">
-        {/* <VideoHeader /> */}
-        <video
-          ref={ref}
-          autoPlay={videoIndex == 0}
-          loop
-          muted={muted}
-          playsInline
-          className="object-cover min-w-[300px] h-full w-full cursor-pointer aspect-tiktok"
-          onClick={toggleMute}
-        >
-          <source src={videoUrl} type="video/mp4" />
-          Tu navegador no soporta vídeos HTML5.
-        </video>
-        {showIcon && (
-          <div
-            className="icon-fade-in-out absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-[80px]"
-            key={iconKey}
-          >
-            {muted ? <IoVolumeMute /> : <IoVolumeHighSharp />}
-          </div>
+      <div
+        className={classNamesCustom(
+          "relative rounded-lg overflow-hidden",
+          videoOrientation == "vertical" && "w-[500px] min-h-[60vh]",
+          videoOrientation == "horizontal" && "py-[10%]"
         )}
-        <InfoReview
-          className="bottom-4"
-          index={videoIndex}
-          likes={likes}
-          like_me={like_me}
-          id_video={id_video}
-          comments={comments}
-          url_video={videoUrl}
-        />
+      >
+        {/* <VideoHeader /> */}
+        <div className="relative">
+          <video
+            ref={ref}
+            autoPlay={videoIndex == 0}
+            loop
+            muted={muted}
+            playsInline
+            className={classNamesCustom(
+              "object-cover min-w-[300px] h-full w-full cursor-pointer",
+              videoOrientation == "vertical" && "aspect-tiktok",
+              videoOrientation == "horizontal" && "aspect-video"
+            )}
+            onClick={toggleMute}
+          >
+            <source src={videoUrl} type="video/mp4" />
+            Tu navegador no soporta vídeos HTML5.
+          </video>
+          {showIcon && (
+            <div
+              className="icon-fade-in-out absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-[80px]"
+              key={iconKey}
+            >
+              {muted ? <IoVolumeMute /> : <IoVolumeHighSharp />}
+            </div>
+          )}
+          <InfoReview
+            className="bottom-4"
+            index={videoIndex}
+            likes={likes}
+            like_me={like_me}
+            id_video={id_video}
+            comments={comments}
+            url_video={videoUrl}
+          />
+        </div>
       </div>
     );
   }

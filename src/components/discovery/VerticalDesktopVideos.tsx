@@ -6,6 +6,7 @@ import useSwipeVideos from "@/store/useSwipeVideos";
 import axiosInstance from "@/services";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
+import { sections } from "@/utils/sections";
 
 type Props = {
   apiUrl: string;
@@ -15,18 +16,6 @@ const VerticalDesktopVideos: FC<Props> = (props) => {
   const { position } = useSwipeVideos();
   const { videos, fetchMore, markWatched, hasMore } = useVideos();
   const { status } = useSession();
-
-  const markWatchedVideo = async (id: string) => {
-    const videoIndex = videos.findIndex((video: any) => video.id === id);
-    if (videoIndex !== -1 && videos[videoIndex].watched) {
-      return;
-    }
-    try {
-      await markWatched(id);
-    } catch (e) {
-      console.log(e);
-    }
-  };
 
   useEffect(() => {
     fetchMore(props.apiUrl);
@@ -68,6 +57,10 @@ const VerticalDesktopVideos: FC<Props> = (props) => {
         <Fragment key={i}>
           <VideoController
             videoUrl={video.url}
+            videoOrientation={
+              sections.find((r) => r.slug == video.section)?.orientation ??
+              "vertical"
+            }
             videoIndex={i}
             Component={VideoDesktop}
             layout="desktop"

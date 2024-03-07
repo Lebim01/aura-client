@@ -11,6 +11,7 @@ interface Video {
   url: string;
   likes: number;
   comments: number;
+  section: string;
 }
 
 // Interfaz para el estado y las acciones de la tienda
