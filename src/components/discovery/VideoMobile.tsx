@@ -105,7 +105,7 @@ const VideoMobile = forwardRef(
               "h-full min-h-[500px] object-cover h-custom-screen w-full min-w-[300px]",
             videoOrientation == "horizontal" && "video-horizontal"
           )}
-          autoplay={videoIndex == 0}
+          autoplay={videoIndex == swipeIndex}
           muted={videoIndex != swipeIndex || muted}
           loop
         />

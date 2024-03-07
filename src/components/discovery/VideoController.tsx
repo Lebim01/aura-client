@@ -82,7 +82,9 @@ const VideoController: FC<Props> = ({
   }, []);
 
   useEffect(() => {
-    playVideoIndex();
+    if (layout == "desktop") {
+      playVideoIndex();
+    }
   }, [swipeIndex, videoIndex, interacted]);
 
   return (
