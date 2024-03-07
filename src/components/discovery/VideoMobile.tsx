@@ -37,7 +37,7 @@ const VideoMobile = forwardRef(
     const {
       position: { swipeIndex },
     } = useSwipeVideos();
-    const { muted, setMute } = useVideoMute()
+    const { muted, setMute } = useVideoMute();
     const streamRef = useRef<StreamPlayerApi | undefined>();
     const [autoplayMuted, setAutoplayMuted] = useState(true);
 
@@ -63,15 +63,19 @@ const VideoMobile = forwardRef(
 
     useEffect(() => {
       if (swipeIndex == videoIndex) {
-        canAutoPlay.video({ muted: false }).then(({ result }) => {
+        canAutoPlay.video({ muted: true }).then(({ result }) => {
           if (result) {
-            setAutoplayMuted(false);
-            streamRef.current?.play();
+            setAutoplayMuted(true);
+            setTimeout(() => {
+              streamRef.current?.play();
+            }, 100);
           } else {
-            canAutoPlay.video({ muted: true }).then(({ result }) => {
+            canAutoPlay.video({ muted: false }).then(({ result }) => {
               if (result) {
-                setAutoplayMuted(true);
-                streamRef.current?.play();
+                setAutoplayMuted(false);
+                setTimeout(() => {
+                  streamRef.current?.play();
+                }, 100);
               }
             });
           }
@@ -79,7 +83,7 @@ const VideoMobile = forwardRef(
       } else {
         streamRef.current?.pause();
       }
-    }, [swipeIndex, videoIndex]);
+    }, [swipeIndex, videoIndex, autoplayMuted]);
 
     return (
       <div
@@ -109,6 +113,11 @@ const VideoMobile = forwardRef(
               "h-full min-h-[500px] object-cover h-custom-screen w-full min-w-[300px]",
             videoOrientation == "horizontal" && "video-horizontal"
           )}
+          onPlay={() => {
+            if (!muted) {
+              setAutoplayMuted(false);
+            }
+          }}
           autoplay={videoIndex == 0}
           muted={autoplayMuted}
           preload={"metadata"}
