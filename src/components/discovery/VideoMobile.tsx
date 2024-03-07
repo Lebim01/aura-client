@@ -59,16 +59,29 @@ const VideoMobile = forwardRef(
     };
 
     const playVideo = () => {
-      setAutoplayMuted(true);
-      setTimeout(() => {
-        streamRef.current?.play();
-      }, 300);
+      if (autoplayMuted) {
+        setAutoplayMuted(true);
+        setTimeout(() => {
+          streamRef.current?.play();
+        }, 300);
 
-      canAutoPlay.video({ muted: false }).then(({ result }) => {
-        if (result) {
-          setAutoplayMuted(false);
-        }
-      });
+        canAutoPlay.video({ muted: false }).then(({ result }) => {
+          if (result) {
+            setAutoplayMuted(false);
+          }
+        });
+      } else {
+        canAutoPlay.video({ muted: false }).then(({ result }) => {
+          if (result) {
+            setAutoplayMuted(false);
+          } else {
+            setAutoplayMuted(true);
+            setTimeout(() => {
+              streamRef.current?.play();
+            }, 300);
+          }
+        });
+      }
     };
 
     useEffect(() => {
