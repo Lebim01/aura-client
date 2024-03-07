@@ -76,22 +76,23 @@ const VideoMobile = forwardRef(
         }}
       >
         {/* <VideoHeader /> */}
-        <Stream
-          controls={false}
-          src={inited ? videoUrl : ""}
-          streamRef={streamRef}
-          className={classNamesCustom(
-            "select-none",
-            videoOrientation == "vertical" &&
-              "h-full min-h-[500px] object-cover h-custom-screen w-full min-w-[300px]",
-            videoOrientation == "horizontal" && "video-horizontal"
-          )}
-          autoplay={videoIndex == swipeIndex}
-          muted={videoIndex != swipeIndex || muted}
-          loop
-          key={inited ? "1" : "0"}
-          preload="metadata"
-        />
+        {inited && (
+          <Stream
+            controls={false}
+            src={videoUrl}
+            streamRef={streamRef}
+            className={classNamesCustom(
+              "select-none",
+              videoOrientation == "vertical" &&
+                "h-full min-h-[500px] object-cover h-custom-screen w-full min-w-[300px]",
+              videoOrientation == "horizontal" && "video-horizontal"
+            )}
+            autoplay={videoIndex == swipeIndex}
+            muted={videoIndex != swipeIndex || muted}
+            loop
+            preload="metadata"
+          />
+        )}
         <div
           className="absolute h-full w-full top-0 left-0"
           onClick={togglePlay}
