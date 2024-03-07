@@ -14,6 +14,7 @@ import canAutoPlay from "can-autoplay";
 import { Stream } from "@cloudflare/stream-react";
 import { classNamesCustom } from "@/utils/classes";
 import type { StreamPlayerApi } from "@cloudflare/stream-react";
+import useVideoMute from "@/store/useVideoMute";
 
 type Handler = {
   play: () => void;
@@ -36,8 +37,8 @@ const VideoMobile = forwardRef(
     const {
       position: { swipeIndex },
     } = useSwipeVideos();
+    const { muted, setMute } = useVideoMute();
     const streamRef = useRef<StreamPlayerApi | undefined>();
-    const [autoplayMuted, setAutoplayMuted] = useState(true);
 
     useImperativeHandle(ref, () => ({
       play: () => {
@@ -49,7 +50,7 @@ const VideoMobile = forwardRef(
     }));
 
     const togglePlay = () => {
-      setAutoplayMuted(false);
+      setMute(false);
       if (streamRef.current?.paused) {
         canAutoPlay.video().then(() => {
           streamRef.current?.play();
@@ -63,12 +64,12 @@ const VideoMobile = forwardRef(
       if (swipeIndex == videoIndex) {
         canAutoPlay.video({ muted: false }).then(({ result }) => {
           if (result) {
-            setAutoplayMuted(false);
+            setMute(false);
             streamRef.current?.play();
           } else {
             canAutoPlay.video({ muted: true }).then(({ result }) => {
               if (result) {
-                setAutoplayMuted(true);
+                setMute(true);
                 streamRef.current?.play();
               }
             });
@@ -88,10 +89,10 @@ const VideoMobile = forwardRef(
         }}
       >
         {/* <VideoHeader /> */}
-        {autoplayMuted && (
+        {muted && (
           <button
             className="absolute top-2 left-2 bg-bg-green-button z-10 p-2 rounded-sm flex items-center space-x-2"
-            onClick={() => setAutoplayMuted(false)}
+            onClick={() => setMute(false)}
           >
             <MdHearingDisabled /> <span>Reactivar Sonido</span>
           </button>
@@ -107,8 +108,9 @@ const VideoMobile = forwardRef(
               "h-full min-h-[500px] object-cover h-custom-screen w-full min-w-[300px]",
             videoOrientation == "horizontal" && "video-horizontal"
           )}
-          muted={autoplayMuted}
-          preload={videoIndex == 0 ? "auto" : "metadata"}
+          autoplay={videoIndex == 0}
+          muted={muted}
+          preload={"metadata"}
           poster={`https://customer-fuwnvhure6hzod9h.cloudflarestream.com/${videoUrl}/thumbnails/thumbnail.jpg?time=2s&height=600`}
         />
         <div
