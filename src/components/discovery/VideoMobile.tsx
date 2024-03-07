@@ -82,7 +82,7 @@ const VideoMobile = forwardRef(
       } else {
         streamRef.current?.pause();
       }
-    }, [swipeIndex, videoIndex]);
+    }, [swipeIndex, videoIndex, muted]);
 
     return (
       <div
