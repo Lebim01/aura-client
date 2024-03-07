@@ -1,4 +1,10 @@
-export const sections = [
+type Section = {
+  name: string;
+  slug: string;
+  orientation: "vertical" | "horizontal";
+};
+
+export const sections: Section[] = [
   {
     slug: "mi-aura",
     name: "Mi Aura",
@@ -20,13 +26,13 @@ export const sections = [
     orientation: "horizontal",
   },
   {
-    slug: "Blanco y Negro",
-    name: "blanco-negro",
+    slug: "blanco-negro",
+    name: "Blanco y Negro",
     orientation: "horizontal",
   },
   {
-    slug: "En llamado con",
-    name: "en-llamado-con",
+    slug: "en-llamado-con",
+    name: "En llamado con",
     orientation: "horizontal",
   },
 ];

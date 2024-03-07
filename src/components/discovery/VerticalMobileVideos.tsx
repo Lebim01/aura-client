@@ -1,14 +1,14 @@
 import useSwipeVideos from "@/store/useSwipeVideos";
-import { FC, Fragment, useEffect, useState } from "react";
+import { FC, Fragment, useEffect } from "react";
 import { useSwipeable } from "react-swipeable";
 import VideoMobile from "./VideoMobile";
 import Footer from "../common/Footer";
 import Image from "next/image";
 import VideoController from "./VideoController";
 import { useRouter } from "next/navigation";
-import useVideos from "../../hooks/useVideos";
-import axiosInstance from "@/services";
+import useVideos, { Video } from "../../hooks/useVideos";
 import { useSession } from "next-auth/react";
+import { sections } from "@/utils/sections";
 
 const HeaderMobile = () => {
   const { back } = useRouter();
@@ -36,19 +36,6 @@ const VerticalSliderVideos: FC<Props> = (props) => {
   const { position, setSwipeIndex } = useSwipeVideos();
   const { videos, fetchMore, markWatched, hasMore } = useVideos();
   const { status } = useSession();
-
-  const markWatchedVideo = async (id: string) => {
-    const videoIndex = videos.findIndex((video: any) => video.id === id);
-    if (videoIndex !== -1 && videos[videoIndex].watched) {
-      return;
-    }
-
-    try {
-      await markWatched(id);
-    } catch (e) {
-      console.log(e);
-    }
-  };
 
   useEffect(() => {
     fetchMore(props.apiUrl);
@@ -94,12 +81,19 @@ const VerticalSliderVideos: FC<Props> = (props) => {
   return (
     <>
       {/*<HeaderMobile />*/}
-      <div {...handlers} className={"overflow-hidden relative w-full h-screen"}>
-        {videos.map((video: any, i: number) => (
-          <Fragment key={i}>
+      <div
+        {...handlers}
+        className={"overflow-hidden relative w-full h-screen z-10"}
+      >
+        {videos.map((video: Video, i: number) => (
+          <Fragment key={video.id}>
             <VideoController
               Component={VideoMobile}
-              videoUrl={video.url}
+              videoUrl={video.hsl}
+              videoOrientation={
+                sections.find((r) => r.slug == video.section)?.orientation ??
+                "vertical"
+              }
               videoIndex={i}
               layout="mobile"
               likes={video.likes}
@@ -109,12 +103,20 @@ const VerticalSliderVideos: FC<Props> = (props) => {
             />
           </Fragment>
         ))}
-        {!hasMore && (
-          <div>
-            <p>
-              Has terminado de ver todo el contenido de está sección, te
-              invitamos a ver otra sección diferente
+        {!hasMore && position.swipeIndex == videos.length - 1 && (
+          <div className="flex flex-col justify-center items-center space-y-4 absolute top-0 text-sm bg-gray-600/25 py-4">
+            <p>🎉 ¡Enhorabuena! 🎉</p>
+            <p className="max-w-[450px] text-center">
+              Has terminado de ver todo el contenido de esta sección, te
+              invitamos a continuar explorando en nuestro catálogo de contenido
             </p>
+            <Image
+              className="w-[100px] h-auto"
+              src="/logo_white.svg"
+              width={120}
+              height={100}
+              alt="logo"
+            />
           </div>
         )}
       </div>

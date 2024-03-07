@@ -1,13 +1,27 @@
-import { ForwardedRef, forwardRef, useEffect, useState, useRef } from "react";
+import {
+  ForwardedRef,
+  forwardRef,
+  useEffect,
+  useState,
+  useRef,
+  useImperativeHandle,
+} from "react";
 import useVideoMute from "@/store/useVideoMute";
 import { VideoProps } from "./VideoControllerDashboard";
 import { IoVolumeHighSharp, IoVolumeMute } from "react-icons/io5";
+import { Stream, StreamPlayerApi } from "@cloudflare/stream-react";
+
+type Handler = {
+  play: () => void;
+  pause: () => void;
+};
 
 const Video = forwardRef(
   (
     { videoUrl, videoIndex, sectionId }: VideoProps,
-    ref: ForwardedRef<HTMLVideoElement>
+    ref: ForwardedRef<Handler>
   ) => {
+    const streamRef = useRef<StreamPlayerApi | undefined>();
     const {
       muted,
       toggleMute,
@@ -19,6 +33,15 @@ const Video = forwardRef(
     const [showIcon, setShowIcon] = useState(false);
     const [iconKey, setIconKey] = useState(0);
     const showIconTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+
+    useImperativeHandle(ref, () => ({
+      play: () => {
+        streamRef.current?.play();
+      },
+      pause: () => {
+        streamRef.current?.pause();
+      },
+    }));
 
     useEffect(() => {
       setShowIcon(true);
@@ -40,28 +63,15 @@ const Video = forwardRef(
 
     return (
       <div className="rounded-lg relative overflow-hidden min-h-[60vh] flex flex-col md:min-w-[358px] aspect-tiktok">
-        <video
-          ref={ref}
-          loop
-          muted={muted}
-          playsInline
+        <Stream
+          controls={false}
+          src={videoUrl}
+          streamRef={streamRef}
           className="object-cover aspect-tiktok cursor-pointer h-full w-full"
-          onClick={() => {
-            if (
-              (videoIndex == indexVideoZustand &&
-                sectionId == sectionIdZustand) ||
-              muted
-            ) {
-              toggleMute();
-            }
-            setIndexVideo(videoIndex);
-            setSectionId(sectionId);
-          }}
+          muted={muted}
           preload="metadata"
-        >
-          <source src={videoUrl + "#t=0.1"} type="video/mp4" />
-          Tu navegador no soporta vídeos HTML5.
-        </video>
+          loop
+        />
         {showIcon && (
           <div
             className="icon-fade-in-out absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-[80px]"
@@ -75,6 +85,20 @@ const Video = forwardRef(
               sectionId === sectionIdZustand && <IoVolumeHighSharp />}
           </div>
         )}
+        <div
+          className="absolute h-full w-full top-0 left-0"
+          onClick={() => {
+            if (
+              (videoIndex == indexVideoZustand &&
+                sectionId == sectionIdZustand) ||
+              muted
+            ) {
+              toggleMute();
+            }
+            setIndexVideo(videoIndex);
+            setSectionId(sectionId);
+          }}
+        ></div>
       </div>
     );
   }

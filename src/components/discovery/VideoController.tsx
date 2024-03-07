@@ -5,8 +5,9 @@ import useUserInteraction from "@/hooks/useUserInteraction";
 
 export type VideoProps = {
   videoUrl: string;
+  videoOrientation: "vertical" | "horizontal";
   videoIndex: number;
-  ref: Ref<HTMLVideoElement>;
+  ref: Ref<any>;
   likes: number;
   like_me: boolean;
   id_video: string;
@@ -15,6 +16,7 @@ export type VideoProps = {
 
 type Props = {
   videoUrl: string;
+  videoOrientation: "vertical" | "horizontal";
   videoIndex: number;
   Component: FC<VideoProps>;
   layout: "desktop" | "mobile";
@@ -28,6 +30,7 @@ const VideoController: FC<Props> = ({
   Component,
   videoIndex,
   videoUrl,
+  videoOrientation,
   layout,
   likes,
   like_me,
@@ -79,14 +82,17 @@ const VideoController: FC<Props> = ({
   }, []);
 
   useEffect(() => {
-    playVideoIndex();
+    if (layout == "desktop") {
+      playVideoIndex();
+    }
   }, [swipeIndex, videoIndex, interacted]);
 
   return (
-    <div ref={ref}>
+    <div ref={ref} className="w-full flex justify-center">
       <Component
         ref={onRenderVideo}
         videoUrl={videoUrl}
+        videoOrientation={videoOrientation}
         videoIndex={videoIndex}
         likes={likes}
         like_me={like_me}

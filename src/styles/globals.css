@@ -31,8 +31,7 @@ body {
 }
 
 .translateinfo {
-  transform: translateY(calc(var(--vh, 1vh) * 100 - 350px));
-  /*  transform: translateY(calc(var(--vh, 1vh) * 100 - 200px)); */
+  transform: translate(calc(100vw - 100%), calc(var(--vh, 1vh) * 100 - 350px));
 }
 
 .h-custom-screen {
@@ -205,4 +204,19 @@ input:-webkit-autofill:active {
   100% {
     opacity: 1;
   }
+}
+
+.video-horizontal {
+  -webkit-transform: rotate(90deg) translateY(-100%);
+  -moz-transform: rotate(90deg) translateY(-100%);
+  -o-transform: rotate(90deg) translateY(-100%);
+  -ms-transform: rotate(90deg) translateY(-100%);
+  transform: rotate(90deg) translateY(-100%);
+  transform-origin: top left;
+  max-width: unset !important;
+  max-height: unset !important;
+  height: 100vw !important;
+  width: 100vh !important;
+  width: calc(var(--vh, 1vh) * 100) !important;
+  object-fit: cover !important;
 }

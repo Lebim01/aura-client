@@ -1,70 +1,117 @@
-import { ForwardedRef, forwardRef, useEffect, useState, useRef } from "react";
-import useVideoMute from "@/store/useVideoMute";
+import {
+  ForwardedRef,
+  forwardRef,
+  useState,
+  useRef,
+  useImperativeHandle,
+  useEffect,
+} from "react";
+import canAutoPlay from "can-autoplay";
 import { VideoProps } from "./VideoController";
-import VideoHeader from "./VideoHeader";
 import InfoReview from "./InfoReview";
-import { IoVolumeHighSharp, IoVolumeMute } from "react-icons/io5";
+import { classNamesCustom } from "@/utils/classes";
+import { Stream, StreamPlayerApi } from "@cloudflare/stream-react";
+import { MdHearingDisabled } from "react-icons/md";
+import useVideoMute from "@/store/useVideoMute";
+
+type Handler = {
+  play: () => void;
+  pause: () => void;
+};
 
 const VideoDesktop = forwardRef(
   (
-    { videoUrl, videoIndex, likes, like_me, id_video, comments }: VideoProps,
-    ref: ForwardedRef<HTMLVideoElement>
+    {
+      videoUrl,
+      videoOrientation,
+      videoIndex,
+      likes,
+      like_me,
+      id_video,
+      comments,
+    }: VideoProps,
+    ref: ForwardedRef<Handler>
   ) => {
-    const { muted, toggleMute } = useVideoMute();
-    const [showIcon, setShowIcon] = useState(false);
-    const [iconKey, setIconKey] = useState(0);
-    const showIconTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+    const { muted, setMute } = useVideoMute();
+    const streamRef = useRef<StreamPlayerApi | undefined>();
+
+    useImperativeHandle(ref, () => ({
+      play: () => {
+        streamRef.current?.play();
+      },
+      pause: () => {
+        streamRef.current?.pause();
+      },
+    }));
+
+    const togglePlay = () => {
+      setMute(false);
+      if (streamRef.current?.paused) {
+        canAutoPlay.video().then(() => {
+          streamRef.current?.play();
+        });
+      } else {
+        streamRef.current?.pause();
+      }
+    };
 
     useEffect(() => {
-      setShowIcon(true);
-      setIconKey((prevKey) => prevKey + 1);
-
-      if (showIconTimeoutRef.current) {
-        clearTimeout(showIconTimeoutRef.current);
-      }
-      showIconTimeoutRef.current = setTimeout(() => {
-        setShowIcon(false);
-      }, 2000);
-
-      return () => {
-        if (showIconTimeoutRef.current) {
-          clearTimeout(showIconTimeoutRef.current);
+      canAutoPlay.video({ muted: false }).then(({ result }) => {
+        if (result) {
+          setMute(false);
         }
-      };
-    }, [muted]);
+      });
+    }, []);
 
     return (
-      <div className="relative rounded-lg overflow-hidden w-[500px] min-h-[60vh]">
-        {/* <VideoHeader /> */}
-        <video
-          ref={ref}
-          autoPlay={videoIndex == 0}
-          loop
-          muted={muted}
-          playsInline
-          className="object-cover min-w-[300px] h-full w-full cursor-pointer aspect-tiktok"
-          onClick={toggleMute}
-        >
-          <source src={videoUrl} type="video/mp4" />
-          Tu navegador no soporta vídeos HTML5.
-        </video>
-        {showIcon && (
-          <div
-            className="icon-fade-in-out absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-[80px]"
-            key={iconKey}
-          >
-            {muted ? <IoVolumeMute /> : <IoVolumeHighSharp />}
-          </div>
+      <div
+        className={classNamesCustom(
+          "relative rounded-lg overflow-hidden min-h-[60vh] w-full",
+          videoOrientation == "vertical" && "w-[500px]",
+          videoOrientation == "horizontal" && "py-[10%]"
         )}
-        <InfoReview
-          className="bottom-4"
-          index={videoIndex}
-          likes={likes}
-          like_me={like_me}
-          id_video={id_video}
-          comments={comments}
-          url_video={videoUrl}
-        />
+      >
+        {/* <VideoHeader /> */}
+        <div className="relative">
+          {muted && (
+            <button
+              className="absolute top-2 left-2 bg-bg-green-button z-10 p-2 rounded-sm flex items-center space-x-2"
+              onClick={() => setMute(false)}
+            >
+              <MdHearingDisabled /> <span>Reactivar Sonido</span>
+            </button>
+          )}
+          <Stream
+            controls={videoOrientation == "horizontal"}
+            src={videoUrl}
+            streamRef={streamRef}
+            className={classNamesCustom(
+              "cursor-pointer",
+              videoOrientation == "vertical" &&
+                "aspect-tiktok min-w-[300px] h-full w-full",
+              videoOrientation == "horizontal" &&
+                "aspect-video min-w-[500px] w-auto h-auto"
+            )}
+            autoplay={videoIndex == 0}
+            muted={muted}
+            preload="metadata"
+            loop
+            responsive
+          />
+          <div
+            className="absolute h-full w-full top-0 left-0"
+            onClick={togglePlay}
+          ></div>
+          <InfoReview
+            className="bottom-4"
+            index={videoIndex}
+            likes={likes}
+            like_me={like_me}
+            id_video={id_video}
+            comments={comments}
+            url_video={videoUrl}
+          />
+        </div>
       </div>
     );
   }

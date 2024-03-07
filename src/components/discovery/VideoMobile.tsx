@@ -1,70 +1,120 @@
 import InfoReview from "./InfoReview";
-import { ForwardedRef, forwardRef, useEffect, useState, useRef } from "react";
-import useVideoMute from "@/store/useVideoMute";
+import {
+  ForwardedRef,
+  forwardRef,
+  useEffect,
+  useState,
+  useRef,
+  useImperativeHandle,
+} from "react";
+import { MdHearingDisabled } from "react-icons/md";
 import useSwipeVideos from "@/store/useSwipeVideos";
 import { VideoProps } from "./VideoController";
-import { IoVolumeHighSharp, IoVolumeMute } from "react-icons/io5";
+import canAutoPlay from "can-autoplay";
+import { Stream } from "@cloudflare/stream-react";
+import { classNamesCustom } from "@/utils/classes";
+import type { StreamPlayerApi } from "@cloudflare/stream-react";
+
+type Handler = {
+  play: () => void;
+  pause: () => void;
+};
 
 const VideoMobile = forwardRef(
   (
-    { videoUrl, videoIndex, likes, like_me, id_video, comments }: VideoProps,
-    ref: ForwardedRef<HTMLVideoElement>
+    {
+      videoUrl,
+      videoOrientation,
+      videoIndex,
+      likes,
+      like_me,
+      id_video,
+      comments,
+    }: VideoProps,
+    ref: ForwardedRef<Handler>
   ) => {
     const {
       position: { swipeIndex },
     } = useSwipeVideos();
-    const { muted, toggleMute } = useVideoMute();
-    const [showIcon, setShowIcon] = useState(false);
-    const [iconKey, setIconKey] = useState(0);
-    const showIconTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+    const streamRef = useRef<StreamPlayerApi | undefined>();
+    const [autoplayMuted, setAutoplayMuted] = useState(true);
+
+    useImperativeHandle(ref, () => ({
+      play: () => {
+        streamRef.current?.play();
+      },
+      pause: () => {
+        streamRef.current?.pause();
+      },
+    }));
+
+    const togglePlay = () => {
+      setAutoplayMuted(false);
+      if (streamRef.current?.paused) {
+        canAutoPlay.video().then(() => {
+          streamRef.current?.play();
+        });
+      } else {
+        streamRef.current?.pause();
+      }
+    };
 
     useEffect(() => {
-      setShowIcon(true);
-      setIconKey((prevKey) => prevKey + 1);
-
-      if (showIconTimeoutRef.current) {
-        clearTimeout(showIconTimeoutRef.current);
+      if (swipeIndex == videoIndex) {
+        canAutoPlay.video({ muted: false }).then(({ result }) => {
+          if (result) {
+            setAutoplayMuted(false);
+            streamRef.current?.play();
+          } else {
+            canAutoPlay.video({ muted: true }).then(({ result }) => {
+              if (result) {
+                setAutoplayMuted(true);
+                streamRef.current?.play();
+              }
+            });
+          }
+        });
+      } else {
+        streamRef.current?.pause();
       }
-      showIconTimeoutRef.current = setTimeout(() => {
-        setShowIcon(false);
-      }, 2000);
-
-      return () => {
-        if (showIconTimeoutRef.current) {
-          clearTimeout(showIconTimeoutRef.current);
-        }
-      };
-    }, [muted]);
+    }, [swipeIndex, videoIndex]);
 
     return (
       <div
-        className="image-slide bg-bg-gradient-discovery relative md:h-auto md:relative"
+        className="image-slide bg-bg-gradient-discovery"
         style={{
           backgroundImage: `linear-gradient(to top, rgba(0, 0, 0, 0.7) 15%, rgba(0, 0, 0, 0) 30%)`,
           transform: `translateY(${(videoIndex - swipeIndex) * 100}%)`,
         }}
       >
         {/* <VideoHeader /> */}
-        <video
-          autoPlay={videoIndex == 0}
-          ref={ref}
-          loop
-          muted={muted}
-          playsInline
-          className="object-cover h-custom-screen w-full min-w-[300px] h-full min-h-[500px] md:h-auto"
-          onClick={toggleMute}
-        >
-          <source src={videoUrl} type="video/mp4" />
-          Tu navegador no soporta vídeos HTML5.
-        </video>
-        {showIcon && (
-          <div
-            className="icon-fade-in-out absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-[80px]"
-            key={iconKey}
+        {autoplayMuted && (
+          <button
+            className="absolute top-2 left-2 bg-bg-green-button z-10 p-2 rounded-sm flex items-center space-x-2"
+            onClick={() => setAutoplayMuted(false)}
           >
-            {muted ? <IoVolumeMute /> : <IoVolumeHighSharp />}
-          </div>
+            <MdHearingDisabled /> <span>Reactivar Sonido</span>
+          </button>
         )}
+        <Stream
+          loop
+          controls={false}
+          src={videoUrl}
+          streamRef={streamRef}
+          className={classNamesCustom(
+            "select-none",
+            videoOrientation == "vertical" &&
+              "h-full min-h-[500px] object-cover h-custom-screen w-full min-w-[300px]",
+            videoOrientation == "horizontal" && "video-horizontal"
+          )}
+          muted={autoplayMuted}
+          preload={videoIndex == 0 ? "auto" : "metadata"}
+          poster={`https://customer-fuwnvhure6hzod9h.cloudflarestream.com/${videoUrl}/thumbnails/thumbnail.jpg?time=2s&height=600`}
+        />
+        <div
+          className="absolute h-full w-full top-0 left-0"
+          onClick={togglePlay}
+        ></div>
         <InfoReview
           className="translateinfo inset-0"
           index={videoIndex}
