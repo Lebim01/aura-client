@@ -117,7 +117,7 @@ const platforms = [
   {
     id: "f9d25f46-085d-48b7-bcf0-589d65a38b27",
     name: "hbo-max",
-    logo_url: "/icons/hbo.png",
+    logo_url: "/icons/hbomax.png",
   },
   {
     id: "4aaa0cf6-68c1-4e5e-bd70-00ee377059fa",
@@ -127,7 +127,7 @@ const platforms = [
   {
     id: "7314cdc2-5242-4f64-af7d-f12752a9d915",
     name: "disney+",
-    logo_url: "/icons/disney.svg",
+    logo_url: "/icons/disney+.png",
   },
   {
     id: "f3ae6bb1-6142-49ee-bd00-0bc82b90929b",
@@ -137,17 +137,17 @@ const platforms = [
   {
     id: "2db6b8b5-4d5e-4b41-88c2-46aa67f16aa1",
     name: "vix",
-    logo_url: "/icons/vix.svg",
+    logo_url: "/icons/vix.png",
   },
   {
     id: "83991d40-7578-4a63-9083-3eb1cf880a3f",
     name: "prime-video",
-    logo_url: "/icons/primevideo.svg",
+    logo_url: "/icons/primevideo.png",
   },
   {
     id: "b0c10aa4-0a88-4741-a08b-04218167a23e",
     name: "paramount",
-    logo_url: "/icons/paramount.svg",
+    logo_url: "/icons/paramount.png",
   },
 ];
 
