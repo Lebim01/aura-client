@@ -62,7 +62,7 @@ const VideoMobile = forwardRef(
 
     useEffect(() => {
       if (swipeIndex == videoIndex) {
-        canAutoPlay.video({ muted: true }).then(({ result }) => {
+        canAutoPlay.video({ muted: false }).then(({ result }) => {
           if (result) {
             setMute(false);
             streamRef.current?.play();
