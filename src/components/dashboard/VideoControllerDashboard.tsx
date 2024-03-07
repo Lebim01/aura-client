@@ -28,7 +28,6 @@ const VideoControllerDashboard: FC<Props> = ({
   const interacted = useUserInteraction();
   const {
     muted,
-    toggleMute,
     indexVideo: indexVideoZustand,
     sectionId: sectionIdZustand,
   } = useVideoMute();

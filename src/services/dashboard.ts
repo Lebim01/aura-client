@@ -24,6 +24,7 @@ export type VideoDashboardResponse = {
   comments: number;
   section: string;
   url: string;
+  hsl: string;
 };
 
 export const getVideosSection = (section: string, limit?: number) => {
