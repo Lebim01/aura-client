@@ -31,7 +31,7 @@ const ModalPhoto: FC<Props> = (props) => {
       props.close();
     } catch (err) {
       console.error(err);
-      setError("Algo fallo al subir la imagen, intenta más tarde");
+      setError("Algo falló al subir la imagen, intenta más tarde");
     } finally {
       const form: HTMLFormElement | null = document.querySelector("#form");
       if (form) {
