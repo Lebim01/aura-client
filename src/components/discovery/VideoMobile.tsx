@@ -107,7 +107,6 @@ const VideoMobile = forwardRef(
           )}
           autoplay={videoIndex == 0}
           muted={videoIndex != swipeIndex || muted}
-          preload="metadata"
           loop
         />
         {showIcon && (
