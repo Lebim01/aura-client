@@ -70,9 +70,19 @@ const VideoMobile = forwardRef(
       };
     }, [muted]);
 
+    const togglePlay = () => {
+      if (streamRef.current?.paused) {
+        streamRef.current?.play();
+      } else {
+        streamRef.current?.pause();
+      }
+    };
+
     useEffect(() => {
       if (swipeIndex == videoIndex) {
         streamRef.current?.play();
+      } else {
+        streamRef.current?.pause();
       }
     }, [swipeIndex, videoIndex]);
 
@@ -110,7 +120,7 @@ const VideoMobile = forwardRef(
         )}
         <div
           className="absolute h-full w-full top-0 left-0"
-          onClick={toggleMute}
+          onClick={togglePlay}
         ></div>
         <InfoReview
           className="translateinfo inset-0"
