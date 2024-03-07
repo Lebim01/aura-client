@@ -99,7 +99,7 @@ const VideoMobile = forwardRef(
         )}
         <Stream
           loop
-          controls={false}
+          controls={videoOrientation == "horizontal"}
           src={videoUrl}
           streamRef={streamRef}
           className={classNamesCustom(
@@ -110,7 +110,8 @@ const VideoMobile = forwardRef(
           )}
           autoplay={videoIndex == 0}
           muted={muted}
-          preload={"metadata"}
+          responsive
+          preload="metadata"
           poster={`https://customer-fuwnvhure6hzod9h.cloudflarestream.com/${videoUrl}/thumbnails/thumbnail.jpg?time=2s&height=600`}
         />
         <div
