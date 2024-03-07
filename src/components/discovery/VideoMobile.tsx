@@ -63,17 +63,11 @@ const VideoMobile = forwardRef(
     useEffect(() => {
       if (swipeIndex == videoIndex) {
         if (muted) {
+          streamRef.current?.play();
+
           canAutoPlay.video({ muted: false }).then(({ result }) => {
             if (result) {
               setMute(false);
-              streamRef.current?.play();
-            } else {
-              canAutoPlay.video({ muted: true }).then(({ result }) => {
-                if (result) {
-                  setMute(true);
-                  streamRef.current?.play();
-                }
-              });
             }
           });
         } else {
@@ -113,7 +107,7 @@ const VideoMobile = forwardRef(
             videoOrientation == "horizontal" && "video-horizontal"
           )}
           autoplay={videoIndex == 0}
-          muted={muted}
+          muted={muted || videoIndex != swipeIndex}
           responsive
           preload="metadata"
           poster={`https://customer-fuwnvhure6hzod9h.cloudflarestream.com/${videoUrl}/thumbnails/thumbnail.jpg?time=2s&height=600`}
