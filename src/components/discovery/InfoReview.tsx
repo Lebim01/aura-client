@@ -58,7 +58,7 @@ const InfoReview = ({
     if (navigator.share) {
       try {
         await navigator.share({
-          url: `${window.location.href}/${id_video}`,
+          url: `${window.location.href}?shared=${id_video}`,
           title: "Écha un vistazo!",
           text: "Te podría interesar.",
         });
