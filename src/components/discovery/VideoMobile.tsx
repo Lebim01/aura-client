@@ -62,23 +62,19 @@ const VideoMobile = forwardRef(
 
     useEffect(() => {
       if (swipeIndex == videoIndex) {
-        if (muted) {
-          canAutoPlay.video({ muted: true }).then(({ result }) => {
-            if (result) {
-              setMute(false);
-              streamRef.current?.play();
-            } else {
-              canAutoPlay.video({ muted: true }).then(({ result }) => {
-                if (result) {
-                  setMute(true);
-                  streamRef.current?.play();
-                }
-              });
-            }
-          });
-        } else {
-          streamRef.current?.play();
-        }
+        canAutoPlay.video({ muted: true }).then(({ result }) => {
+          if (result) {
+            setMute(false);
+            streamRef.current?.play();
+          } else {
+            canAutoPlay.video({ muted: true }).then(({ result }) => {
+              if (result) {
+                setMute(true);
+                streamRef.current?.play();
+              }
+            });
+          }
+        });
       } else {
         streamRef.current?.pause();
       }
