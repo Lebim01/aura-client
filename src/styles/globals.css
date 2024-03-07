@@ -31,8 +31,7 @@ body {
 }
 
 .translateinfo {
-  transform: translateY(calc(var(--vh, 1vh) * 100 - 350px));
-  /*  transform: translateY(calc(var(--vh, 1vh) * 100 - 200px)); */
+  transform: translate(calc(100vw - 100%), calc(var(--vh, 1vh) * 100 - 350px));
 }
 
 .h-custom-screen {

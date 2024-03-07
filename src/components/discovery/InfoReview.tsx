@@ -90,7 +90,7 @@ const InfoReview = ({
       )}
       <div
         className={classNames(
-          "absolute flex h-fit px-[16px] flex-col justify-end transform w-full",
+          "absolute flex h-fit pr-[16px] flex-col justify-end transform w-min right-0",
           className
         )}
       >
