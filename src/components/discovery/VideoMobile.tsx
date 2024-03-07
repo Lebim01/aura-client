@@ -51,39 +51,40 @@ const VideoMobile = forwardRef(
     }));
 
     const togglePlay = () => {
-      setAutoplayMuted(false);
       if (streamRef.current?.paused) {
-        canAutoPlay.video().then(() => {
-          streamRef.current?.play();
-        });
+        playVideo();
       } else {
         streamRef.current?.pause();
       }
     };
 
+    const playVideo = () => {
+      canAutoPlay.video({ muted: true }).then(({ result }) => {
+        if (result) {
+          setAutoplayMuted(true);
+          setTimeout(() => {
+            streamRef.current?.play();
+          }, 100);
+        } else {
+          canAutoPlay.video({ muted: false }).then(({ result }) => {
+            if (result) {
+              setAutoplayMuted(false);
+              setTimeout(() => {
+                streamRef.current?.play();
+              }, 100);
+            }
+          });
+        }
+      });
+    };
+
     useEffect(() => {
       if (swipeIndex == videoIndex) {
-        canAutoPlay.video({ muted: true }).then(({ result }) => {
-          if (result) {
-            setAutoplayMuted(true);
-            setTimeout(() => {
-              streamRef.current?.play();
-            }, 100);
-          } else {
-            canAutoPlay.video({ muted: false }).then(({ result }) => {
-              if (result) {
-                setAutoplayMuted(false);
-                setTimeout(() => {
-                  streamRef.current?.play();
-                }, 100);
-              }
-            });
-          }
-        });
+        playVideo();
       } else {
         streamRef.current?.pause();
       }
-    }, [swipeIndex, videoIndex, autoplayMuted]);
+    }, [swipeIndex, videoIndex]);
 
     return (
       <div
@@ -113,11 +114,6 @@ const VideoMobile = forwardRef(
               "h-full min-h-[500px] object-cover h-custom-screen w-full min-w-[300px]",
             videoOrientation == "horizontal" && "video-horizontal"
           )}
-          onPlay={() => {
-            if (!muted) {
-              setAutoplayMuted(false);
-            }
-          }}
           autoplay={videoIndex == 0}
           muted={autoplayMuted}
           preload={"metadata"}
