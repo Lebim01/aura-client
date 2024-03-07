@@ -61,8 +61,6 @@ const InfoReview = ({
           text: "Te podría interesar.",
         });
       } catch (error) {
-        alert(error);
-
         console.error("Error sharing:", error);
       }
     } else {
