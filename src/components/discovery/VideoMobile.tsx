@@ -86,9 +86,10 @@ const VideoMobile = forwardRef(
           muted={videoIndex != swipeIndex || muted}
           loop
           preload="metadata"
-          onCanPlay={(e) => {
+          onLoadedMetaData={(e) => {
             setCanPlay(true);
           }}
+          
           poster={`https://customer-fuwnvhure6hzod9h.cloudflarestream.com/${videoUrl}/thumbnails/thumbnail.jpg?time=2s&height=600`}
         />
         <div
