@@ -74,6 +74,7 @@ const VideoMobile = forwardRef(
       >
         {/* <VideoHeader /> */}
         <Stream
+          loop
           controls={false}
           src={videoUrl}
           streamRef={streamRef}
@@ -84,9 +85,8 @@ const VideoMobile = forwardRef(
             videoOrientation == "horizontal" && "video-horizontal"
           )}
           muted={videoIndex != swipeIndex || muted}
-          loop
-          preload="metadata"
-          autoplay
+          autoplay={videoIndex == 0}
+          preload={videoIndex == 0 ? "auto" : "metadata"}
           onLoadedMetaData={(e) => {
             setCanPlay(true);
           }}
