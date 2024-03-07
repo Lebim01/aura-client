@@ -1,5 +1,5 @@
 import useSwipeVideos from "@/store/useSwipeVideos";
-import { FC, Fragment, useEffect, useState } from "react";
+import { FC, Fragment, useEffect } from "react";
 import { useSwipeable } from "react-swipeable";
 import VideoMobile from "./VideoMobile";
 import Footer from "../common/Footer";
@@ -81,12 +81,15 @@ const VerticalSliderVideos: FC<Props> = (props) => {
   return (
     <>
       {/*<HeaderMobile />*/}
-      <div {...handlers} className={"overflow-hidden relative w-full h-screen"}>
+      <div
+        {...handlers}
+        className={"overflow-hidden relative w-full h-screen z-10"}
+      >
         {videos.map((video: any, i: number) => (
           <Fragment key={i}>
             <VideoController
               Component={VideoMobile}
-              videoUrl={video.url}
+              videoUrl={video.hsl}
               videoOrientation={
                 sections.find((r) => r.slug == video.section)?.orientation ??
                 "vertical"

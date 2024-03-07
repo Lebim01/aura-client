@@ -7,7 +7,7 @@ export type VideoProps = {
   videoUrl: string;
   videoOrientation: "vertical" | "horizontal";
   videoIndex: number;
-  ref: Ref<HTMLVideoElement>;
+  ref: Ref<any>;
   likes: number;
   like_me: boolean;
   id_video: string;
@@ -86,7 +86,7 @@ const VideoController: FC<Props> = ({
   }, [swipeIndex, videoIndex, interacted]);
 
   return (
-    <div ref={ref}>
+    <div ref={ref} className="w-full flex justify-center">
       <Component
         ref={onRenderVideo}
         videoUrl={videoUrl}

@@ -56,7 +56,7 @@ const VerticalDesktopVideos: FC<Props> = (props) => {
       {videos.map((video, i) => (
         <Fragment key={i}>
           <VideoController
-            videoUrl={video.url}
+            videoUrl={video.hsl}
             videoOrientation={
               sections.find((r) => r.slug == video.section)?.orientation ??
               "vertical"

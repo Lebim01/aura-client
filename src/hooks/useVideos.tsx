@@ -9,6 +9,7 @@ interface Video {
   title: string;
   like_me: boolean;
   url: string;
+  hsl: string;
   likes: number;
   comments: number;
   section: string;

@@ -1,10 +1,25 @@
 import InfoReview from "./InfoReview";
-import { ForwardedRef, forwardRef, useEffect, useState, useRef } from "react";
+import {
+  ForwardedRef,
+  forwardRef,
+  useEffect,
+  useState,
+  useRef,
+  MutableRefObject,
+  useImperativeHandle,
+} from "react";
 import useVideoMute from "@/store/useVideoMute";
 import useSwipeVideos from "@/store/useSwipeVideos";
 import { VideoProps } from "./VideoController";
 import { IoVolumeHighSharp, IoVolumeMute } from "react-icons/io5";
+import { Stream } from "@cloudflare/stream-react";
 import { classNamesCustom } from "@/utils/classes";
+import type { StreamPlayerApi } from "@cloudflare/stream-react";
+
+type Handler = {
+  play: () => void;
+  pause: () => void;
+};
 
 const VideoMobile = forwardRef(
   (
@@ -17,15 +32,25 @@ const VideoMobile = forwardRef(
       id_video,
       comments,
     }: VideoProps,
-    ref: ForwardedRef<HTMLVideoElement>
+    ref: ForwardedRef<Handler>
   ) => {
     const {
       position: { swipeIndex },
     } = useSwipeVideos();
+    const streamRef = useRef<StreamPlayerApi | undefined>();
     const { muted, toggleMute } = useVideoMute();
     const [showIcon, setShowIcon] = useState(false);
     const [iconKey, setIconKey] = useState(0);
     const showIconTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+
+    useImperativeHandle(ref, () => ({
+      play: () => {
+        streamRef.current?.play();
+      },
+      pause: () => {
+        streamRef.current?.pause();
+      },
+    }));
 
     useEffect(() => {
       setShowIcon(true);
@@ -47,30 +72,28 @@ const VideoMobile = forwardRef(
 
     return (
       <div
-        className="image-slide bg-bg-gradient-discovery md:h-auto"
+        className="image-slide bg-bg-gradient-discovery"
         style={{
           backgroundImage: `linear-gradient(to top, rgba(0, 0, 0, 0.7) 15%, rgba(0, 0, 0, 0) 30%)`,
           transform: `translateY(${(videoIndex - swipeIndex) * 100}%)`,
         }}
       >
         {/* <VideoHeader /> */}
-        <video
-          autoPlay={videoIndex == 0}
-          ref={ref}
-          loop
-          muted={muted}
-          playsInline
-          
+        <Stream
+          controls={false}
+          src={videoUrl}
+          streamRef={streamRef}
           className={classNamesCustom(
-            "",
-            videoOrientation == "vertical" && "h-full min-h-[500px] object-cover h-custom-screen w-full min-w-[300px]",
+            "select-none",
+            videoOrientation == "vertical" &&
+              "h-full min-h-[500px] object-cover h-custom-screen w-full min-w-[300px]",
             videoOrientation == "horizontal" && "video-horizontal"
           )}
-          onClick={toggleMute}
-        >
-          <source src={videoUrl} type="video/mp4" />
-          Tu navegador no soporta vídeos HTML5.
-        </video>
+          autoplay={videoIndex == 0}
+          muted={videoIndex != swipeIndex || muted}
+          preload="metadata"
+          loop
+        />
         {showIcon && (
           <div
             className="icon-fade-in-out absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-[80px]"
@@ -79,6 +102,10 @@ const VideoMobile = forwardRef(
             {muted ? <IoVolumeMute /> : <IoVolumeHighSharp />}
           </div>
         )}
+        <div
+          className="absolute h-full w-full top-0 left-0"
+          onClick={toggleMute}
+        ></div>
         <InfoReview
           className="translateinfo inset-0"
           index={videoIndex}

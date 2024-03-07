@@ -1,9 +1,22 @@
-import { ForwardedRef, forwardRef, useEffect, useState, useRef } from "react";
+import {
+  ForwardedRef,
+  forwardRef,
+  useEffect,
+  useState,
+  useRef,
+  useImperativeHandle,
+} from "react";
 import useVideoMute from "@/store/useVideoMute";
 import { VideoProps } from "./VideoController";
 import InfoReview from "./InfoReview";
 import { IoVolumeHighSharp, IoVolumeMute } from "react-icons/io5";
 import { classNamesCustom } from "@/utils/classes";
+import { Stream, StreamPlayerApi } from "@cloudflare/stream-react";
+
+type Handler = {
+  play: () => void;
+  pause: () => void;
+};
 
 const VideoDesktop = forwardRef(
   (
@@ -16,12 +29,22 @@ const VideoDesktop = forwardRef(
       id_video,
       comments,
     }: VideoProps,
-    ref: ForwardedRef<HTMLVideoElement>
+    ref: ForwardedRef<Handler>
   ) => {
+    const streamRef = useRef<StreamPlayerApi | undefined>();
     const { muted, toggleMute } = useVideoMute();
     const [showIcon, setShowIcon] = useState(false);
     const [iconKey, setIconKey] = useState(0);
     const showIconTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+
+    useImperativeHandle(ref, () => ({
+      play: () => {
+        streamRef.current?.play();
+      },
+      pause: () => {
+        streamRef.current?.pause();
+      },
+    }));
 
     useEffect(() => {
       setShowIcon(true);
@@ -44,29 +67,30 @@ const VideoDesktop = forwardRef(
     return (
       <div
         className={classNamesCustom(
-          "relative rounded-lg overflow-hidden min-h-[60vh]",
+          "relative rounded-lg overflow-hidden min-h-[60vh] w-full",
           videoOrientation == "vertical" && "w-[500px]",
           videoOrientation == "horizontal" && "py-[10%]"
         )}
       >
         {/* <VideoHeader /> */}
         <div className="relative">
-          <video
-            ref={ref}
-            autoPlay={videoIndex == 0}
-            loop
-            muted={muted}
-            playsInline
+          <Stream
+            controls={videoOrientation == "horizontal"}
+            src={videoUrl}
+            streamRef={streamRef}
             className={classNamesCustom(
-              "object-cover min-w-[300px] h-full w-full cursor-pointer",
-              videoOrientation == "vertical" && "aspect-tiktok",
-              videoOrientation == "horizontal" && "aspect-video"
+              "cursor-pointer",
+              videoOrientation == "vertical" &&
+                "aspect-tiktok min-w-[300px] h-full w-full",
+              videoOrientation == "horizontal" &&
+                "aspect-video min-w-[500px] w-auto h-auto"
             )}
-            onClick={toggleMute}
-          >
-            <source src={videoUrl} type="video/mp4" />
-            Tu navegador no soporta vídeos HTML5.
-          </video>
+            autoplay={videoIndex == 0}
+            muted={muted}
+            preload="metadata"
+            loop
+            responsive
+          />
           {showIcon && (
             <div
               className="icon-fade-in-out absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-[80px]"
@@ -75,6 +99,10 @@ const VideoDesktop = forwardRef(
               {muted ? <IoVolumeMute /> : <IoVolumeHighSharp />}
             </div>
           )}
+          <div
+            className="absolute h-full w-full top-0 left-0"
+            onClick={toggleMute}
+          ></div>
           <InfoReview
             className="bottom-4"
             index={videoIndex}
