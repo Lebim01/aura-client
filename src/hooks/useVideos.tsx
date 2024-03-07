@@ -2,7 +2,7 @@ import { create } from "zustand";
 import axiosInstance from "@/services";
 import { watchVideo } from "@/services/videos";
 // Definición de la interfaz para el estado de los videos
-interface Video {
+export interface Video {
   // Define aquí las propiedades de tus videos, por ejemplo:
   watched: boolean;
   id: string;

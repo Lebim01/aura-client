@@ -61,7 +61,7 @@ const VideoMobile = forwardRef(
       if (swipeIndex == videoIndex) {
         streamRef.current?.play();
       }
-    }, [swipeIndex]);
+    }, [swipeIndex, videoIndex]);
 
     return (
       <div
@@ -82,7 +82,6 @@ const VideoMobile = forwardRef(
               "h-full min-h-[500px] object-cover h-custom-screen w-full min-w-[300px]",
             videoOrientation == "horizontal" && "video-horizontal"
           )}
-          autoplay={videoIndex == swipeIndex}
           muted={videoIndex != swipeIndex || muted}
           loop
           preload="metadata"

@@ -6,7 +6,7 @@ import Footer from "../common/Footer";
 import Image from "next/image";
 import VideoController from "./VideoController";
 import { useRouter } from "next/navigation";
-import useVideos from "../../hooks/useVideos";
+import useVideos, { Video } from "../../hooks/useVideos";
 import { useSession } from "next-auth/react";
 import { sections } from "@/utils/sections";
 
@@ -85,7 +85,7 @@ const VerticalSliderVideos: FC<Props> = (props) => {
         {...handlers}
         className={"overflow-hidden relative w-full h-screen z-10"}
       >
-        {videos.map((video: any, i: number) => (
+        {videos.map((video: Video, i: number) => (
           <Fragment key={i}>
             <VideoController
               Component={VideoMobile}
