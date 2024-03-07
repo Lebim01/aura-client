@@ -20,6 +20,7 @@ interface VideoState {
   isLoading: boolean;
   videos: Video[];
   hasMore: boolean;
+  url: string;
   setLoading: (isLoading: boolean) => void;
   setVideos: (videos: Video[]) => void;
   getVideos: (apiUrl: string) => Promise<void>;
@@ -34,6 +35,7 @@ const useVideoStore = create<VideoState>((set, get) => ({
   hasMore: true,
   isLoading: false,
   videos: [],
+  url: "",
 
   setLoading: (isLoading) => set(() => ({ isLoading })),
 
@@ -41,6 +43,13 @@ const useVideoStore = create<VideoState>((set, get) => ({
 
   getVideos: async (apiUrl) => {
     try {
+      if (apiUrl != get().url) {
+        set({
+          url: apiUrl,
+          videos: [],
+        });
+      }
+
       if (get().isLoading) return;
       if (!get().hasMore) return;
 
