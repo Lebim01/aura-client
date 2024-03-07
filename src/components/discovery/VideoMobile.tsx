@@ -5,13 +5,12 @@ import {
   useEffect,
   useState,
   useRef,
-  MutableRefObject,
   useImperativeHandle,
 } from "react";
-import useVideoMute from "@/store/useVideoMute";
+import { MdHearingDisabled } from "react-icons/md";
 import useSwipeVideos from "@/store/useSwipeVideos";
 import { VideoProps } from "./VideoController";
-import { IoVolumeHighSharp, IoVolumeMute } from "react-icons/io5";
+import canAutoPlay from "can-autoplay";
 import { Stream } from "@cloudflare/stream-react";
 import { classNamesCustom } from "@/utils/classes";
 import type { StreamPlayerApi } from "@cloudflare/stream-react";
@@ -38,8 +37,7 @@ const VideoMobile = forwardRef(
       position: { swipeIndex },
     } = useSwipeVideos();
     const streamRef = useRef<StreamPlayerApi | undefined>();
-    const { muted, toggleMute } = useVideoMute();
-    const [canPlay, setCanPlay] = useState(false);
+    const [autoplayMuted, setAutoplayMuted] = useState(true);
 
     useImperativeHandle(ref, () => ({
       play: () => {
@@ -51,18 +49,35 @@ const VideoMobile = forwardRef(
     }));
 
     const togglePlay = () => {
+      setAutoplayMuted(false);
       if (streamRef.current?.paused) {
-        streamRef.current?.play();
+        canAutoPlay.video().then(() => {
+          streamRef.current?.play();
+        });
       } else {
         streamRef.current?.pause();
       }
     };
 
     useEffect(() => {
-      if (swipeIndex == videoIndex && canPlay) {
-        streamRef.current?.play();
+      if (swipeIndex == videoIndex) {
+        canAutoPlay.video({ muted: false }).then(({ result }) => {
+          if (result) {
+            setAutoplayMuted(false);
+            streamRef.current?.play();
+          } else {
+            canAutoPlay.video({ muted: true }).then(({ result }) => {
+              if (result) {
+                setAutoplayMuted(true);
+                streamRef.current?.play();
+              }
+            });
+          }
+        });
+      } else {
+        streamRef.current?.pause();
       }
-    }, [swipeIndex, videoIndex, canPlay]);
+    }, [swipeIndex, videoIndex]);
 
     return (
       <div
@@ -73,6 +88,14 @@ const VideoMobile = forwardRef(
         }}
       >
         {/* <VideoHeader /> */}
+        {autoplayMuted && (
+          <button
+            className="absolute top-2 left-2 bg-bg-green-button z-10 p-2 rounded-sm flex items-center space-x-2"
+            onClick={() => setAutoplayMuted(false)}
+          >
+            <MdHearingDisabled /> <span>Reactivar Sonido</span>
+          </button>
+        )}
         <Stream
           loop
           controls={false}
@@ -84,12 +107,8 @@ const VideoMobile = forwardRef(
               "h-full min-h-[500px] object-cover h-custom-screen w-full min-w-[300px]",
             videoOrientation == "horizontal" && "video-horizontal"
           )}
-          muted={videoIndex != swipeIndex || muted}
-          autoplay={videoIndex == 0}
+          muted={autoplayMuted}
           preload={videoIndex == 0 ? "auto" : "metadata"}
-          onLoadedMetaData={(e) => {
-            setCanPlay(true);
-          }}
           poster={`https://customer-fuwnvhure6hzod9h.cloudflarestream.com/${videoUrl}/thumbnails/thumbnail.jpg?time=2s&height=600`}
         />
         <div

@@ -1,17 +1,18 @@
 import {
   ForwardedRef,
   forwardRef,
-  useEffect,
   useState,
   useRef,
   useImperativeHandle,
+  useEffect,
 } from "react";
-import useVideoMute from "@/store/useVideoMute";
+import canAutoPlay from "can-autoplay";
 import { VideoProps } from "./VideoController";
 import InfoReview from "./InfoReview";
-import { IoVolumeHighSharp, IoVolumeMute } from "react-icons/io5";
 import { classNamesCustom } from "@/utils/classes";
 import { Stream, StreamPlayerApi } from "@cloudflare/stream-react";
+import { MdHearingDisabled } from "react-icons/md";
+import useVideoMute from "@/store/useVideoMute";
 
 type Handler = {
   play: () => void;
@@ -31,11 +32,8 @@ const VideoDesktop = forwardRef(
     }: VideoProps,
     ref: ForwardedRef<Handler>
   ) => {
+    const { muted, setMute } = useVideoMute();
     const streamRef = useRef<StreamPlayerApi | undefined>();
-    const { muted, toggleMute } = useVideoMute();
-    const [showIcon, setShowIcon] = useState(false);
-    const [iconKey, setIconKey] = useState(0);
-    const showIconTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
     useImperativeHandle(ref, () => ({
       play: () => {
@@ -46,23 +44,24 @@ const VideoDesktop = forwardRef(
       },
     }));
 
-    useEffect(() => {
-      setShowIcon(true);
-      setIconKey((prevKey) => prevKey + 1);
-
-      if (showIconTimeoutRef.current) {
-        clearTimeout(showIconTimeoutRef.current);
+    const togglePlay = () => {
+      setMute(false);
+      if (streamRef.current?.paused) {
+        canAutoPlay.video().then(() => {
+          streamRef.current?.play();
+        });
+      } else {
+        streamRef.current?.pause();
       }
-      showIconTimeoutRef.current = setTimeout(() => {
-        setShowIcon(false);
-      }, 2000);
+    };
 
-      return () => {
-        if (showIconTimeoutRef.current) {
-          clearTimeout(showIconTimeoutRef.current);
+    useEffect(() => {
+      canAutoPlay.video({ muted: false }).then(({ result }) => {
+        if (result) {
+          setMute(false);
         }
-      };
-    }, [muted]);
+      });
+    }, []);
 
     return (
       <div
@@ -74,6 +73,14 @@ const VideoDesktop = forwardRef(
       >
         {/* <VideoHeader /> */}
         <div className="relative">
+          {muted && (
+            <button
+              className="absolute top-2 left-2 bg-bg-green-button z-10 p-2 rounded-sm flex items-center space-x-2"
+              onClick={() => setMute(false)}
+            >
+              <MdHearingDisabled /> <span>Reactivar Sonido</span>
+            </button>
+          )}
           <Stream
             controls={videoOrientation == "horizontal"}
             src={videoUrl}
@@ -91,17 +98,9 @@ const VideoDesktop = forwardRef(
             loop
             responsive
           />
-          {showIcon && (
-            <div
-              className="icon-fade-in-out absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-[80px]"
-              key={iconKey}
-            >
-              {muted ? <IoVolumeMute /> : <IoVolumeHighSharp />}
-            </div>
-          )}
           <div
             className="absolute h-full w-full top-0 left-0"
-            onClick={toggleMute}
+            onClick={togglePlay}
           ></div>
           <InfoReview
             className="bottom-4"

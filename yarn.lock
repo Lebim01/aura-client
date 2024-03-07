@@ -243,6 +243,11 @@
   dependencies:
     tslib "^2.4.0"
 
+"@types/can-autoplay@^3.0.4":
+  version "3.0.4"
+  resolved "https://registry.yarnpkg.com/@types/can-autoplay/-/can-autoplay-3.0.4.tgz#e3490efec29ecf0340246da82fe61bd098fec3ab"
+  integrity sha512-CyusyiAMUjTIL7mTKCAPV1PjBCjxhlRwuerev6/F3WLsv9sRRiEoOjX9+OJLyAEMqAsr2aN+2bd/kqbISL9HsQ==
+
 "@types/json5@^0.0.29":
   version "0.0.29"
   resolved "https://registry.npmjs.org/@types/json5/-/json5-0.0.29.tgz"
@@ -643,6 +648,11 @@ camelize@^1.0.0:
   version "1.0.1"
   resolved "https://registry.npmjs.org/camelize/-/camelize-1.0.1.tgz"
   integrity sha512-dU+Tx2fsypxTgtLoE36npi3UqcjSSMNYfkqgmoEhtZrraP5VWq0K7FkWVTYa8eMPtnU/G2txVsfdCJTn9uzpuQ==
+
+can-autoplay@^3.0.2:
+  version "3.0.2"
+  resolved "https://registry.yarnpkg.com/can-autoplay/-/can-autoplay-3.0.2.tgz#d48b4d68c44834fdb02635a4014f06609b22caee"
+  integrity sha512-Ih6wc7yJB4TylS/mLyAW0Dj5Nh3Gftq/g966TcxgvpNCOzlbqTs85srAq7mwIspo4w8gnLCVVGroyCHfh6l9aA==
 
 caniuse-lite@^1.0.30001578, caniuse-lite@^1.0.30001579, caniuse-lite@^1.0.30001580:
   version "1.0.30001582"
