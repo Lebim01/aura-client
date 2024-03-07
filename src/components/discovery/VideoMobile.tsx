@@ -116,7 +116,7 @@ const VideoMobile = forwardRef(
           onClick={togglePlay}
         ></div>
         <InfoReview
-          className="bottom-20"
+          className="translateinfo inset-0"
           index={videoIndex}
           likes={likes}
           like_me={like_me}
