@@ -84,8 +84,7 @@ const VideoMobile = forwardRef(
           )}
           muted={videoIndex != swipeIndex || muted}
           loop
-          poster={`https://customer-fuwnvhure6hzod9h.cloudflarestream.com/${videoUrl}/thumbnails/thumbnail.jpg%3Ftime%3D1s%26height%3D600`}
-          preload="metadata"
+          poster={`https://customer-fuwnvhure6hzod9h.cloudflarestream.com/${videoUrl}/thumbnails/thumbnail.jpg?time=2s&height=600`}
         />
         <div
           className="absolute h-full w-full top-0 left-0"
