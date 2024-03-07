@@ -61,8 +61,6 @@ const InfoReview = ({
           text: "Te podría interesar.",
         });
       } catch (error) {
-        alert(error);
-
         console.error("Error sharing:", error);
       }
     } else {
@@ -72,7 +70,6 @@ const InfoReview = ({
         );
         console.log("URL copied to clipboard");
       } catch (error) {
-        alert(error);
         console.error("Error copying URL:", error);
       }
     }
