@@ -89,6 +89,7 @@ const VideoMobile = forwardRef(
           autoplay={videoIndex == swipeIndex}
           muted={videoIndex != swipeIndex || muted}
           loop
+          key={inited ? "1" : "0"}
           preload="metadata"
         />
         <div
