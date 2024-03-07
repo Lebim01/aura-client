@@ -1,13 +1,13 @@
-import useSwipeVideos from "@/store/useSwipeVideos";
 import { FC, Ref, useCallback, useEffect, useRef } from "react";
 import { useIntersectionObserver } from "@uidotdev/usehooks";
 import useUserInteraction from "@/hooks/useUserInteraction";
 import useVideoMute from "@/store/useVideoMute";
 import useIsMobile from "@/hooks/useIsMobile";
+
 export type VideoProps = {
   videoUrl: string;
   videoIndex: number;
-  ref: Ref<HTMLVideoElement>;
+  ref: Ref<any>;
   sectionId: string;
 };
 
