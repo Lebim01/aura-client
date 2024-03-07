@@ -74,7 +74,7 @@ const VideoMobile = forwardRef(
         {/* <VideoHeader /> */}
         <Stream
           controls={false}
-          src={"0f3a58d004dc64af1116f87240a3e64c"}
+          src={videoUrl}
           streamRef={streamRef}
           className={classNamesCustom(
             "select-none",
@@ -84,6 +84,7 @@ const VideoMobile = forwardRef(
           )}
           muted={videoIndex != swipeIndex || muted}
           loop
+          poster={`https://customer-fuwnvhure6hzod9h.cloudflarestream.com/${videoUrl}/thumbnails/thumbnail.jpg%3Ftime%3D1s%26height%3D600`}
           preload="metadata"
         />
         <div
