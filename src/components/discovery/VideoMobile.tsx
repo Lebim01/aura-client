@@ -37,8 +37,9 @@ const VideoMobile = forwardRef(
     const {
       position: { swipeIndex },
     } = useSwipeVideos();
-    const { muted, setMute } = useVideoMute();
+    const { muted, setMute } = useVideoMute()
     const streamRef = useRef<StreamPlayerApi | undefined>();
+    const [autoplayMuted, setAutoplayMuted] = useState(true);
 
     useImperativeHandle(ref, () => ({
       play: () => {
@@ -50,7 +51,7 @@ const VideoMobile = forwardRef(
     }));
 
     const togglePlay = () => {
-      setMute(false);
+      setAutoplayMuted(false);
       if (streamRef.current?.paused) {
         canAutoPlay.video().then(() => {
           streamRef.current?.play();
@@ -64,12 +65,12 @@ const VideoMobile = forwardRef(
       if (swipeIndex == videoIndex) {
         canAutoPlay.video({ muted: false }).then(({ result }) => {
           if (result) {
-            setMute(false);
+            setAutoplayMuted(false);
             streamRef.current?.play();
           } else {
             canAutoPlay.video({ muted: true }).then(({ result }) => {
               if (result) {
-                setMute(true);
+                setAutoplayMuted(true);
                 streamRef.current?.play();
               }
             });
@@ -78,7 +79,7 @@ const VideoMobile = forwardRef(
       } else {
         streamRef.current?.pause();
       }
-    }, [swipeIndex, videoIndex, muted]);
+    }, [swipeIndex, videoIndex]);
 
     return (
       <div
@@ -89,17 +90,17 @@ const VideoMobile = forwardRef(
         }}
       >
         {/* <VideoHeader /> */}
-        {muted && (
+        {autoplayMuted && (
           <button
             className="absolute top-2 left-2 bg-bg-green-button z-10 p-2 rounded-sm flex items-center space-x-2"
-            onClick={() => setMute(false)}
+            onClick={() => setAutoplayMuted(false)}
           >
             <MdHearingDisabled /> <span>Reactivar Sonido</span>
           </button>
         )}
         <Stream
           loop
-          controls={videoOrientation == "horizontal"}
+          controls={false}
           src={videoUrl}
           streamRef={streamRef}
           className={classNamesCustom(
@@ -109,9 +110,8 @@ const VideoMobile = forwardRef(
             videoOrientation == "horizontal" && "video-horizontal"
           )}
           autoplay={videoIndex == 0}
-          muted={muted || videoIndex != swipeIndex}
-          responsive
-          preload="metadata"
+          muted={autoplayMuted}
+          preload={"metadata"}
           poster={`https://customer-fuwnvhure6hzod9h.cloudflarestream.com/${videoUrl}/thumbnails/thumbnail.jpg?time=2s&height=600`}
         />
         <div
