@@ -70,6 +70,12 @@ const VideoMobile = forwardRef(
       };
     }, [muted]);
 
+    useEffect(() => {
+      if (swipeIndex == videoIndex) {
+        streamRef.current?.play();
+      }
+    }, [swipeIndex, videoIndex]);
+
     return (
       <div
         className="image-slide bg-bg-gradient-discovery"
