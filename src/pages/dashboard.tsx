@@ -22,6 +22,7 @@ type Section = {
 };
 
 export default function Dashboard({ sections }: Props) {
+  console.log(sections)
   const isMobile = useIsMobile();
   return (
     <AuthProvider>
