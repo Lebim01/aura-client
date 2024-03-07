@@ -70,7 +70,6 @@ const InfoReview = ({
         );
         console.log("URL copied to clipboard");
       } catch (error) {
-        alert(error);
         console.error("Error copying URL:", error);
       }
     }
