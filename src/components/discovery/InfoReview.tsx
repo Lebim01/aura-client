@@ -8,7 +8,7 @@ import { useState } from "react";
 import useShowHideFooterStore from "@/store/showHideFooterStore";
 import classNames from "classnames";
 import useVideos from "../../hooks/useVideos";
-
+import { useSession } from "next-auth/react";
 interface Props {
   className?: string;
   index: number;
@@ -31,6 +31,8 @@ const InfoReview = ({
   const [showComments, setShowComments] = useState(false);
   const { toggleFooter } = useShowHideFooterStore();
   const { likeVideo, disLikeVideo } = useVideos();
+  const { status } = useSession();
+  const isLoggedIn = status == "authenticated";
 
   const handleDownload = async () => {
     try {
@@ -96,41 +98,48 @@ const InfoReview = ({
             {/* <PreviewReview /> */}
           </div>
           <div className="flex flex-col gap-y-[24px]">
-            <div
-              className="flex flex-col w-full items-center gap-y-[4px]"
-              onClick={() => {
-                if (!like_me) {
-                  likeVideo(id_video);
-                } else {
-                  disLikeVideo(id_video);
-                }
-              }}
-            >
-              <Image
-                className="w-[30px] hover:cursor-pointer"
-                width={30}
-                height={30}
-                src={like_me ? "/icons/hearth-red.svg" : "/icons/hearth.svg"}
-                alt=""
-              />
-              <span className="text-[10px] leading-[130%]">{likes}</span>
-            </div>
-            <div
-              className="flex flex-col w-full items-center gap-y-[4px]"
-              onClick={() => {
-                setShowComments(true);
-                toggleFooter(true);
-              }}
-            >
-              <Image
-                className="w-[30px] hover:cursor-pointer"
-                width={30}
-                height={30}
-                src="/icons/globe.svg"
-                alt=""
-              />
-              <span className="text-[10px] leading-[130%]">{comments}</span>
-            </div>
+            {isLoggedIn && (
+              <>
+                {" "}
+                <div
+                  className="flex flex-col w-full items-center gap-y-[4px]"
+                  onClick={() => {
+                    if (!like_me) {
+                      likeVideo(id_video);
+                    } else {
+                      disLikeVideo(id_video);
+                    }
+                  }}
+                >
+                  <Image
+                    className="w-[30px] hover:cursor-pointer"
+                    width={30}
+                    height={30}
+                    src={
+                      like_me ? "/icons/hearth-red.svg" : "/icons/hearth.svg"
+                    }
+                    alt=""
+                  />
+                  <span className="text-[10px] leading-[130%]">{likes}</span>
+                </div>
+                <div
+                  className="flex flex-col w-full items-center gap-y-[4px]"
+                  onClick={() => {
+                    setShowComments(true);
+                    toggleFooter(true);
+                  }}
+                >
+                  <Image
+                    className="w-[30px] hover:cursor-pointer"
+                    width={30}
+                    height={30}
+                    src="/icons/globe.svg"
+                    alt=""
+                  />
+                  <span className="text-[10px] leading-[130%]">{comments}</span>
+                </div>
+              </>
+            )}
             <div
               className="flex flex-col w-full items-center gap-y-[4px]"
               onClick={handleDownload}
