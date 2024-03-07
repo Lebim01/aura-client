@@ -3,7 +3,6 @@ import VideoController from "./VideoController";
 import VideoDesktop from "./VideoDesktop";
 import useVideos from "../../hooks/useVideos";
 import useSwipeVideos from "@/store/useSwipeVideos";
-import axiosInstance from "@/services";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
 import { sections } from "@/utils/sections";
@@ -54,7 +53,7 @@ const VerticalDesktopVideos: FC<Props> = (props) => {
   return (
     <div className="flex flex-col space-y-8 items-center py-4">
       {videos.map((video, i) => (
-        <Fragment key={i}>
+        <Fragment key={video.id}>
           <VideoController
             videoUrl={video.hsl}
             videoOrientation={

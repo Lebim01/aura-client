@@ -77,7 +77,7 @@ const VideoCaroussel = ({ videos, title, sectionId }: Props) => {
             )}
           >
             {videos.map((video, i) => (
-              <Fragment key={i}>
+              <Fragment key={video}>
                 <VideoControllerDashboard
                   videoUrl={video}
                   videoIndex={i}

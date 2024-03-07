@@ -86,7 +86,7 @@ const VerticalSliderVideos: FC<Props> = (props) => {
         className={"overflow-hidden relative w-full h-screen z-10"}
       >
         {videos.map((video: Video, i: number) => (
-          <Fragment key={i}>
+          <Fragment key={video.id}>
             <VideoController
               Component={VideoMobile}
               videoUrl={video.hsl}

@@ -32,7 +32,7 @@ export default function Dashboard({ sections }: Props) {
             .filter((r) => r.videos.length > 0)
             .map(({ name, slug, videos }, index) => (
               <VideoCaroussel
-                key={index}
+                key={slug}
                 videos={videos.slice(0, isMobile ? 2 : 3).map((v) => v.hsl)}
                 title={name}
                 sectionId={slug}
