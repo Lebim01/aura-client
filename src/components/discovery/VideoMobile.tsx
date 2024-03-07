@@ -39,9 +39,7 @@ const VideoMobile = forwardRef(
     } = useSwipeVideos();
     const streamRef = useRef<StreamPlayerApi | undefined>();
     const { muted, toggleMute } = useVideoMute();
-    const [showIcon, setShowIcon] = useState(false);
-    const [iconKey, setIconKey] = useState(0);
-    const showIconTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+    const [inited, setInited] = useState(false);
 
     useImperativeHandle(ref, () => ({
       play: () => {
@@ -51,24 +49,6 @@ const VideoMobile = forwardRef(
         streamRef.current?.pause();
       },
     }));
-
-    useEffect(() => {
-      setShowIcon(true);
-      setIconKey((prevKey) => prevKey + 1);
-
-      if (showIconTimeoutRef.current) {
-        clearTimeout(showIconTimeoutRef.current);
-      }
-      showIconTimeoutRef.current = setTimeout(() => {
-        setShowIcon(false);
-      }, 2000);
-
-      return () => {
-        if (showIconTimeoutRef.current) {
-          clearTimeout(showIconTimeoutRef.current);
-        }
-      };
-    }, [muted]);
 
     const togglePlay = () => {
       if (streamRef.current?.paused) {
@@ -80,6 +60,7 @@ const VideoMobile = forwardRef(
 
     useEffect(() => {
       if (swipeIndex == videoIndex) {
+        setInited(true);
         streamRef.current?.play();
       } else {
         streamRef.current?.pause();
@@ -97,7 +78,7 @@ const VideoMobile = forwardRef(
         {/* <VideoHeader /> */}
         <Stream
           controls={false}
-          src={videoUrl}
+          src={inited ? videoUrl : ""}
           streamRef={streamRef}
           className={classNamesCustom(
             "select-none",
@@ -108,15 +89,8 @@ const VideoMobile = forwardRef(
           autoplay={videoIndex == swipeIndex}
           muted={videoIndex != swipeIndex || muted}
           loop
+          preload="metadata"
         />
-        {showIcon && (
-          <div
-            className="icon-fade-in-out absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-[80px]"
-            key={iconKey}
-          >
-            {muted ? <IoVolumeMute /> : <IoVolumeHighSharp />}
-          </div>
-        )}
         <div
           className="absolute h-full w-full top-0 left-0"
           onClick={togglePlay}
