@@ -71,7 +71,7 @@ const VideoMobile = forwardRef(
               setAutoplayMuted(false);
               setTimeout(() => {
                 streamRef.current?.play();
-              }, 100);
+              }, 300);
             }
           });
         }
