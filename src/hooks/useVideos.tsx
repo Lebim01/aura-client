@@ -30,6 +30,12 @@ interface VideoState {
   markWatched: (id: string) => Promise<void>;
 }
 
+const wait = (ms: number) => {
+  return new Promise((resolve, reject) => {
+    setTimeout(resolve, ms);
+  });
+};
+
 // Creación de la tienda con Zustand
 const useVideoStore = create<VideoState>((set, get) => ({
   hasMore: true,
@@ -49,6 +55,7 @@ const useVideoStore = create<VideoState>((set, get) => ({
           url: apiUrl,
           videos: [],
         });
+        await wait(100);
       }
 
       if (get().isLoading) return;
