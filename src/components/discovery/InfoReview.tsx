@@ -85,7 +85,7 @@ const InfoReview = ({
           className
         )}
       >
-        <div className="flex gap-x-[16px] items-end flex-1">
+        <div className="flex gap-x-[16px] items-end flex-1 inset-0">
           <div className="flex flex-col gap-y-[8px] flex-1">
             {/* <PreviewReview /> */}
           </div>

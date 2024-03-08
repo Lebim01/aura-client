@@ -14,7 +14,7 @@ import canAutoPlay from "can-autoplay";
 import { Stream } from "@cloudflare/stream-react";
 import { classNamesCustom } from "@/utils/classes";
 import type { StreamPlayerApi } from "@cloudflare/stream-react";
-import useVideoMute from "@/store/useVideoMute";
+import { useSession } from "next-auth/react";
 
 type Handler = {
   play: () => void;
@@ -37,9 +37,10 @@ const VideoMobile = forwardRef(
     const {
       position: { swipeIndex },
     } = useSwipeVideos();
-    const { muted, setMute } = useVideoMute();
     const streamRef = useRef<StreamPlayerApi | undefined>();
     const [autoplayMuted, setAutoplayMuted] = useState(true);
+    const { status } = useSession();
+    const isLogged = status == "authenticated";
 
     useImperativeHandle(ref, () => ({
       play: () => {
@@ -130,7 +131,10 @@ const VideoMobile = forwardRef(
           onClick={togglePlay}
         ></div>
         <InfoReview
-          className="translateinfo inset-0"
+          className={classNamesCustom("translateinfo inset-0", {
+            translateinfologged: isLogged,
+            translateinfounlogged: !isLogged,
+          })}
           index={videoIndex}
           likes={likes}
           like_me={like_me}
