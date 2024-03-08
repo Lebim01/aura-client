@@ -5,7 +5,6 @@ import { updateUser } from "@/services/user";
 import { classNamesCustom } from "@/utils/classes";
 import { useSession } from "next-auth/react";
 import { FC, useState } from "react";
-import ImageUploading from "react-images-uploading";
 
 type Props = {
   open: boolean;
@@ -16,7 +15,6 @@ const ModalPhoto: FC<Props> = (props) => {
   const { data, update } = useSession();
   const [uploading, setUploading] = useState(false);
   const [error, setError] = useState<null | string>(null);
-  const [images, setImages] = useState([]);
 
   const onUploadImage = async (file: File) => {
     if (uploading) return;
@@ -33,7 +31,7 @@ const ModalPhoto: FC<Props> = (props) => {
       props.close();
     } catch (err) {
       console.error(err);
-      setError("Algo falló al subir la imagen, intenta más tarde");
+      setError("Algo fallo al subir la imagen, intenta más tarde");
     } finally {
       const form: HTMLFormElement | null = document.querySelector("#form");
       if (form) {
@@ -43,10 +41,11 @@ const ModalPhoto: FC<Props> = (props) => {
     }
   };
 
-  const onChange = (imageList: any, addUpdateIndex: any) => {
-    setImages(imageList);
-    if (imageList[0]) {
-      onUploadImage(imageList[0].file);
+  const selectImage = () => {
+    const input: HTMLInputElement | null =
+      document.querySelector("#file_input");
+    if (input) {
+      input.click();
     }
   };
 
@@ -58,62 +57,41 @@ const ModalPhoto: FC<Props> = (props) => {
       title="Subir foto de perfil"
     >
       <form id="form">
-        <div className="py-4">
-          <ImageUploading
-            value={images}
-            onChange={onChange}
-            maxNumber={1}
-            dataURLKey="data_url"
-          >
-            {({
-              imageList,
-              onImageUpload,
-              onImageRemoveAll,
-              onImageUpdate,
-              onImageRemove,
-              isDragging,
-              dragProps,
-            }) => (
-              // write your building UI
-              <div
-                className="upload__image-wrapper flex flex-col items-center space-y-4"
-                style={isDragging ? { backgroundColor: "red" } : undefined}
-                {...dragProps}
-              >
-                <div className="relative w-[120px] h-[120px]">
-                  <div
-                    className={classNamesCustom(
-                      "animate-spin h-full w-full rounded-full",
-                      uploading ? "visible" : "invisible"
-                    )}
-                    style={{
-                      backgroundColor: "#00DBDE",
-                      backgroundImage:
-                        "linear-gradient(90deg, #00DBDE 0%, #FC00FF 100%)",
-                    }}
-                  />
-                  <img
-                    className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full w-[110px] h-[110px] hover:cursor-pointer"
-                    src={
-                      (imageList[0] && imageList[0]["data_url"]) ||
-                      data?.user?.profile_img ||
-                      "/no-photo.png"
-                    }
-                    alt="Extra large avatar"
-                    onClick={uploading ? undefined : onImageUpload}
-                  />
-                </div>
-
-                <div
-                  className="block w-full border rounded-lg cursor-pointer text-white focus:outline-none bg-gray-600 border-gray-600 placeholder-gray-400 hover:bg-gray-700 text-center"
-                  onClick={uploading ? undefined : onImageUpload}
-                >
-                  Seleccionar archivo
-                </div>
-              </div>
-            )}
-          </ImageUploading>
-
+        <div className="py-4 flex flex-col items-center space-y-4">
+          <div className="w-[120px] h-[120px] relative">
+            <div
+              className={classNamesCustom(
+                "animate-spin h-full w-full rounded-full",
+                uploading ? "visible" : "invisible"
+              )}
+              style={{
+                backgroundColor: "#00DBDE",
+                backgroundImage:
+                  "linear-gradient(90deg, #00DBDE 0%, #FC00FF 100%)",
+              }}
+            />
+            <img
+              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full w-[110px] h-[110px] hover:cursor-pointer"
+              src={data?.user?.profile_img || "/no-photo.png"}
+              alt="Extra large avatar"
+              onClick={uploading ? undefined : selectImage}
+            />
+          </div>
+          <input
+            className="block w-full text-sm border rounded-lg cursor-pointer text-gray-400 focus:outline-none bg-gray-700 border-gray-600 placeholder-gray-400"
+            aria-describedby="file_input_help"
+            id="file_input"
+            name="file[]"
+            type="file"
+            placeholder="PNG, JPG or JPEG."
+            disabled={uploading}
+            accept="image/*;capture=camera"
+            onChange={(e) =>
+              e.currentTarget.files &&
+              e.currentTarget.files.length > 0 &&
+              onUploadImage(e.currentTarget.files[0])
+            }
+          ></input>
           {error && <span className="text-red-500">{error}</span>}
         </div>
       </form>
