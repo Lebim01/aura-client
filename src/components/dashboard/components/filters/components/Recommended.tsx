@@ -99,6 +99,7 @@ const Recommended = ({ setShow, show }: Props) => {
                 }}
               >
                 <Image
+                  key={data[index]?.poster_path}
                   src={data[index]?.poster_path}
                   width={0}
                   height={0}
@@ -117,9 +118,9 @@ const Recommended = ({ setShow, show }: Props) => {
                 </div>
               </div>
             ) : (
-              <>
-                Por el momento, no hay series que cumplan con estos parámetros
-              </>
+              <div className=" w-[172px] h-[262px] flex justify-center items-center text-center">
+                Por el momento, no hay series que cumplan con estos parámetros.
+              </div>
             )}
 
             <div className="flex gap-x-[9px] justify-center items-center">

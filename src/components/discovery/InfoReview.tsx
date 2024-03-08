@@ -9,6 +9,10 @@ import useShowHideFooterStore from "@/store/showHideFooterStore";
 import classNames from "classnames";
 import useVideos from "../../hooks/useVideos";
 import { useSession } from "next-auth/react";
+import useIsMobile from "@/hooks/useIsMobile";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 interface Props {
   className?: string;
   index: number;
@@ -33,7 +37,7 @@ const InfoReview = ({
   const { likeVideo, disLikeVideo } = useVideos();
   const { status } = useSession();
   const isLoggedIn = status == "authenticated";
-
+  const isMobile = useIsMobile();
   const handleDownload = async () => {
     try {
       const response = await fetch(url_video);
@@ -55,7 +59,7 @@ const InfoReview = ({
   };
 
   const handleShare = async () => {
-    if (navigator.share) {
+    if (navigator.share && isMobile) {
       try {
         await navigator.share({
           url: `${window.location.href}?shared=${id_video}`,
@@ -68,9 +72,10 @@ const InfoReview = ({
     } else {
       try {
         await navigator.clipboard.writeText(
-          `${window.location.href}/${id_video}`
+          `${window.location.href}?shared=${id_video}`
         );
         console.log("URL copied to clipboard");
+        toast.success("Enlace copiado al portapapeles con éxito!");
       } catch (error) {
         console.error("Error copying URL:", error);
       }
@@ -87,6 +92,7 @@ const InfoReview = ({
           id_video={id_video}
         />
       )}
+      <ToastContainer theme="dark" />
       <div
         className={classNames(
           "absolute flex h-fit pr-[16px] flex-col justify-end transform w-min right-0",

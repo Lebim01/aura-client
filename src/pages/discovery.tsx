@@ -1,22 +1,15 @@
-"use client";
 import React, { useEffect, useState } from "react";
 import DesktopLayout from "@/components/common/DesktopLayout";
 import VerticalMobileVideos from "@/components/discovery/VerticalMobileVideos";
 import VerticalDesktopVideos from "@/components/discovery/VerticalDesktopVideos";
 import { useWindowSize } from "@uidotdev/usehooks";
 import AuthProvider from "@/components/common/ProtectAuth";
-import { useRouter } from "next/router";
+import { useSearchParams } from "next/navigation";
 
 const ImageViewer = () => {
   const { width } = useWindowSize();
-  const router = useRouter();
-  const [idVideo, setIdVideo] = useState("");
-
-  useEffect(() => {
-    if (router.query.shared) {
-      setIdVideo(router.query.shared.toString());
-    }
-  }, [router]);
+  const searchParams = useSearchParams();
+  const idVideo = searchParams.get("shared");
 
   return (
     <AuthProvider>
