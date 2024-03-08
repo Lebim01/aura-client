@@ -9,6 +9,7 @@ import { useRouter } from "next/router";
 const ImageViewer = () => {
   const { width } = useWindowSize();
   const router = useRouter();
+
   return (
     <AuthProvider>
       <DesktopLayout>
@@ -16,14 +17,14 @@ const ImageViewer = () => {
           id="discovery-container"
           className="fixed md:relative w-full max-h-screen md:overflow-y-auto hidescroll"
         >
-          {(width || 0) < 768 && (
+          {(width || 0) < 768 && router.isReady && (
             <div className="md:hidden">
               <VerticalMobileVideos
                 apiUrl={`/dashboard/discovery?shared=${router.query.shared}`}
               />
             </div>
           )}
-          {(width || 0) >= 768 && (
+          {(width || 0) >= 768 && router.isReady && (
             <div className="hidden md:block">
               <VerticalDesktopVideos
                 apiUrl={`/dashboard/discovery?shared=${router.query.shared}`}
