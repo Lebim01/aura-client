@@ -1,3 +1,4 @@
+"use client"
 import useSwipeVideos from "@/store/useSwipeVideos";
 import { FC, Fragment, useEffect } from "react";
 import { useSwipeable } from "react-swipeable";

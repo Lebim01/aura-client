@@ -1,3 +1,4 @@
+"use client";
 import axiosInstance from "@/services";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";

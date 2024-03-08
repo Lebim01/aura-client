@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react";
+"use server";
+import React from "react";
 import DesktopLayout from "@/components/common/DesktopLayout";
 import VerticalMobileVideos from "@/components/discovery/VerticalMobileVideos";
 import VerticalDesktopVideos from "@/components/discovery/VerticalDesktopVideos";

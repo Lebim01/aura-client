@@ -1,3 +1,4 @@
+"use client"
 import { FC, Fragment, useEffect } from "react";
 import VideoController from "./VideoController";
 import VideoDesktop from "./VideoDesktop";
