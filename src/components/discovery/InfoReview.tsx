@@ -51,10 +51,14 @@ const InfoReview = ({
   };
 
   const handleShare = async () => {
+    const baseUrl = `${window.location.protocol}//${window.location.host}${window.location.pathname}`;
+
+    const shareUrl = `${baseUrl}?shared=${id_video}`;
+
     if (navigator.share && isMobile) {
       try {
         await navigator.share({
-          url: `${window.location.href}?shared=${id_video}`,
+          url: shareUrl,
           title: "Écha un vistazo!",
           text: "Te podría interesar.",
         });
@@ -63,9 +67,7 @@ const InfoReview = ({
       }
     } else {
       try {
-        await navigator.clipboard.writeText(
-          `${window.location.href}?shared=${id_video}`
-        );
+        await navigator.clipboard.writeText(shareUrl);
         console.log("URL copied to clipboard");
         toast.success("Enlace copiado al portapapeles con éxito!");
       } catch (error) {
