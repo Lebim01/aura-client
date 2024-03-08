@@ -30,8 +30,12 @@ body {
   }
 }
 
-.translateinfo {
-  transform: translate(calc(100vw - 100%), calc(var(--vh, 1vh) * 100 - 350px));
+.translateinfologged {
+  transform: translate(calc(100vw - 100%), calc(var(--vh, 1vh) * 100 - 360px));
+}
+
+.translateinfounlogged {
+  transform: translate(calc(100vw - 100%), calc(var(--vh, 1vh) * 100 - 220px));
 }
 
 .h-custom-screen {
