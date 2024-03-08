@@ -44,6 +44,7 @@ const useVideoStore = create<VideoState>((set, get) => ({
   getVideos: async (apiUrl) => {
     try {
       if (apiUrl != get().url) {
+        console.log("change url", get().url, "->", apiUrl);
         set({
           url: apiUrl,
           videos: [],
