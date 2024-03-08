@@ -67,7 +67,7 @@ const useVideoStore = create<VideoState>((set, get) => ({
           skip: get().videos.length,
         },
       });
-      const hasMore = videos_result.data.length > 0;
+      const hasMore = videos_result.data.length >= 3;
       set((state) => ({
         videos: [...state.videos, ...videos_result.data],
         hasMore,
