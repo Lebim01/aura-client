@@ -1,17 +1,14 @@
-"use server";
 import React from "react";
 import DesktopLayout from "@/components/common/DesktopLayout";
 import VerticalMobileVideos from "@/components/discovery/VerticalMobileVideos";
 import VerticalDesktopVideos from "@/components/discovery/VerticalDesktopVideos";
 import { useWindowSize } from "@uidotdev/usehooks";
 import AuthProvider from "@/components/common/ProtectAuth";
-import { useSearchParams } from "next/navigation";
+import { useRouter } from "next/router";
 
 const ImageViewer = () => {
   const { width } = useWindowSize();
-  const searchParams = useSearchParams();
-  const idVideo = searchParams.get("shared");
-
+  const router = useRouter();
   return (
     <AuthProvider>
       <DesktopLayout>
@@ -22,14 +19,14 @@ const ImageViewer = () => {
           {(width || 0) < 768 && (
             <div className="md:hidden">
               <VerticalMobileVideos
-                apiUrl={`/dashboard/discovery?shared=${idVideo}`}
+                apiUrl={`/dashboard/discovery?shared=${router.query.shared}`}
               />
             </div>
           )}
           {(width || 0) >= 768 && (
             <div className="hidden md:block">
               <VerticalDesktopVideos
-                apiUrl={`/dashboard/discovery?shared=${idVideo}`}
+                apiUrl={`/dashboard/discovery?shared=${router.query.shared}`}
               />
             </div>
           )}
