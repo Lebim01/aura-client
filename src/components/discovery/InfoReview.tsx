@@ -36,18 +36,10 @@ const InfoReview = ({
 
   const handleDownload = async () => {
     try {
-      const response = await fetch(url_video);
-      if (!response.ok) throw new Error("Error!");
-      const blob = await response.blob();
-      const url = window.URL.createObjectURL(blob);
-      const a = document.createElement("a");
-      a.href = url;
-      a.download = "video.mp4";
-      document.body.appendChild(a);
-      a.click();
-
-      window.URL.revokeObjectURL(url);
-      document.body.removeChild(a);
+      const link = document.createElement("a");
+      link.href = `https://customer-fuwnvhure6hzod9h.cloudflarestream.com/${url_video}/downloads/default.mp4`;
+      link.target = "_blank";
+      link.click();
     } catch (error) {
       console.error("Download error:", error);
       alert("Error al descargar el video.");
@@ -141,11 +133,11 @@ const InfoReview = ({
               </>
             )}
             <div
-              className="flex flex-col w-full items-center gap-y-[4px]"
+              className="flex flex-col w-full items-center gap-y-[4px] hover:cursor-pointer"
               onClick={handleDownload}
             >
               <Image
-                className="w-[30px] hover:cursor-pointer"
+                className="w-[30px]"
                 width={30}
                 height={30}
                 src="/icons/download.svg"
