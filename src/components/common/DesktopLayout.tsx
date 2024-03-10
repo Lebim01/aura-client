@@ -1,4 +1,3 @@
-"use client";
 import { FC, ReactNode } from "react";
 import HeaderDashboard from "../dashboard/HeaderDashboard";
 import CategoryFilters from "../dashboard/components/filters/CategoryFilters";

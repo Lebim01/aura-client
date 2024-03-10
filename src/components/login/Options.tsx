@@ -34,7 +34,7 @@ const Options = ({ setLoading }: Props) => {
 
   const login = (username: string, password: string) => {
     signIn("credentials", {
-      username,
+      username: username.toLowerCase(),
       password,
     });
   };

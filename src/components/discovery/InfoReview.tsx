@@ -1,17 +1,14 @@
 "use client";
-
 import Image from "next/image";
-import Reactions from "./Reactions";
-import PreviewReview from "../common/PreviewReview";
 import Comments from "./Comments";
 import { useState } from "react";
 import useShowHideFooterStore from "@/store/showHideFooterStore";
 import classNames from "classnames";
-import useVideos from "../../hooks/useVideos";
 import { useSession } from "next-auth/react";
 import useIsMobile from "@/hooks/useIsMobile";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useVideos } from "@/context/VideosContext";
 
 interface Props {
   className?: string;
@@ -34,7 +31,7 @@ const InfoReview = ({
 }: Props) => {
   const [showComments, setShowComments] = useState(false);
   const { toggleFooter } = useShowHideFooterStore();
-  const { likeVideo, disLikeVideo } = useVideos();
+  const { likeVideo, dislikeVideo } = useVideos();
   const { status } = useSession();
   const isLoggedIn = status == "authenticated";
   const isMobile = useIsMobile();
@@ -106,7 +103,7 @@ const InfoReview = ({
                     if (!like_me) {
                       likeVideo(id_video);
                     } else {
-                      disLikeVideo(id_video);
+                      dislikeVideo(id_video);
                     }
                   }}
                 >

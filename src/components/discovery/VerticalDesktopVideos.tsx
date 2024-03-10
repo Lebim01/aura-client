@@ -1,25 +1,17 @@
-"use client";
 import { FC, Fragment, useEffect } from "react";
 import VideoController from "./VideoController";
 import VideoDesktop from "./VideoDesktop";
-import useVideos from "../../hooks/useVideos";
 import useSwipeVideos from "@/store/useSwipeVideos";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
 import { sections } from "@/utils/sections";
+import { useVideos } from "@/context/VideosContext";
+import LoadingDots from "../common/LoadingDots";
 
-type Props = {
-  apiUrl: string;
-};
-
-const VerticalDesktopVideos: FC<Props> = (props) => {
+const VerticalDesktopVideos: FC = () => {
   const { position } = useSwipeVideos();
-  const { videos, fetchMore, markWatched, hasMore } = useVideos();
+  const { videos, fetchMore, markWatched, hasMore, loading } = useVideos();
   const { status } = useSession();
-
-  useEffect(() => {
-    fetchMore(props.apiUrl);
-  }, []);
 
   useEffect(() => {
     if (status == "authenticated") {
@@ -35,7 +27,7 @@ const VerticalDesktopVideos: FC<Props> = (props) => {
 
   useEffect(() => {
     if (position.swipeIndex === videos.length - 1) {
-      fetchMore(props.apiUrl);
+      fetchMore();
     }
 
     const originalStyle = window.getComputedStyle(document.body).overflow;
@@ -72,6 +64,7 @@ const VerticalDesktopVideos: FC<Props> = (props) => {
           <div className="h-[1px] w-[600px] bg-gray-50 bg-opacity-20"></div>
         </Fragment>
       ))}
+      {loading && <LoadingDots />}
       {!hasMore && (
         <div className="pb-[32px] flex flex-col justify-center items-center space-y-4">
           <p>🎉 ¡Enhorabuena! 🎉</p>
