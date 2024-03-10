@@ -46,7 +46,7 @@ const Sections = ({ text, endpoint }: Props) => {
           <span className="p-[16px]"> No hay series para mostrar.</span>
         </div>
       ) : (
-        <div className="grid auto-flow-dense grid-layout w-auto md:max-w-[1056px] md:max-h-screen hidescroll overflow-y-auto md:pb-[99px]">
+        <div className="grid auto-flow-dense grid-layout w-auto md:max-w-[1056px] md:max-h-screen hidescroll overflow-y-auto md:pb-[99px] gap-y-[16px]">
           {!loading && (
             <MostComponent
               text={text}
@@ -55,15 +55,7 @@ const Sections = ({ text, endpoint }: Props) => {
           )}
           <div
             className={classNamesCustom(
-              `align-start`,
-              {
-                "grid grid-cols-2 gap-x-[32px] gap-y-[16px] px-[16px] py-[12px] hidescroll w-fit mx-auto":
-                  isMobile,
-              },
-              {
-                "grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-x-[32px] gap-y-[16px] hidescroll w-fit mx-auto py-[16px]  overflow-x-hidden ":
-                  !isMobile,
-              }
+              `align-start grid  grid-cols-[repeat(auto-fit,minmax(166px,1fr))] gap-[16px]`
             )}
           >
             {loading &&
@@ -87,9 +79,10 @@ const Sections = ({ text, endpoint }: Props) => {
                   </div>
                 ))}
 
-            {series.map((item: any, index: number) => {
-              return <ItemSections key={index} props={item} />;
-            })}
+            {!loading &&
+              series.map((item: any, index: number) => {
+                return <ItemSections key={index} props={item} />;
+              })}
           </div>
         </div>
       )}

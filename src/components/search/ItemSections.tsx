@@ -4,7 +4,7 @@ import Link from "next/link";
 const ItemSections = ({ props }: any) => {
   return (
     <Link href={"/detail/[slug]"} as={`/detail/${props.slug}`}>
-      <div className="flex flex-col gap-y-[8px] min-w-[146px] md:min-w-[166px] justify-center items-center">
+      <div className="flex flex-col gap-y-[8px] min-w-[146px] md:min-w-[166px] md:max-w-[166px] justify-center items-center">
         <Image
           src={props.poster_path}
           width={166}

@@ -38,10 +38,10 @@ const VideoCaroussel = ({ videos, title, sectionId }: Props) => {
   }, []);
 
   return (
-    <div className="flex flex-col gap-y-[8px] relative md:min-w-[1056px]">
+    <div className="flex flex-col gap-y-[8px] relative md:max-w-[1056px]">
       {videos.length > 0 && (
         <>
-          <div className="flex justify-between items-center px-[16px] z-50">
+          <div className="flex justify-between items-center z-50">
             <label className="text-[16px] font-[600] leading-[150%]">
               {title}
             </label>

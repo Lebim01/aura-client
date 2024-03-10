@@ -35,6 +35,8 @@ const config: Config = {
         "border-search": "rgba(107, 107, 107, 0.30)",
         "green-opaque": "#C0FFD9",
         "green-enlaces": "#4FD07E",
+        "green-logout": "#133F2C",
+        "navigation-bg": "rgba(255, 255, 255, 0.12)",
       },
 
       backgroundImage: {
@@ -42,7 +44,8 @@ const config: Config = {
         "gradient-conic":
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
         aura: "url('/bgaura.png')",
-        auradesktop: "url('https://pub-bf9da7896edf4ee98e6d6dd8e72340c7.r2.dev/images%2Fbgauradesktop.png')",
+        auradesktop:
+          "url('https://pub-bf9da7896edf4ee98e6d6dd8e72340c7.r2.dev/images%2Fbgauradesktop.png')",
         recommended: "url('/bg-recommended.png')",
         "bg-gradient-discovery":
           "linear-gradient(to top, white, rgba(255, 255, 255, 0))",

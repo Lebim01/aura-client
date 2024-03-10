@@ -15,7 +15,7 @@ const ImageViewer = () => {
       <DesktopLayout>
         <div
           id="discovery-container"
-          className="fixed md:relative w-full max-h-screen md:overflow-y-auto hidescroll"
+          className="fixed md:relative w-full max-h-screen md:overflow-y-auto hidescroll md:max-w-[1056px]"
         >
           {(width || 0) < 768 && router.isReady && (
             <div className="md:hidden">

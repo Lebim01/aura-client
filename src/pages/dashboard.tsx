@@ -26,7 +26,7 @@ export default function Dashboard({ sections }: Props) {
   return (
     <AuthProvider>
       <DesktopLayout forceDisplay>
-        <div className="flex flex-col gap-y-[16px] overflow-y-auto md:h-screen w-auto pb-[99px] md:pb-[32px] relative hidescroll flex-1">
+        <div className="flex flex-col gap-y-[16px] overflow-y-auto md:h-screen  pb-[99px] relative hidescroll md:max-w-[1056px]">
           {sections
             .filter((r) => r.orientation == "vertical")
             .filter((r) => r.videos.length > 0)
@@ -44,7 +44,7 @@ export default function Dashboard({ sections }: Props) {
             .filter((r) => r.videos.length > 0)
             .map(({ name, slug, videos }, index) => (
               <div
-                className="flex flex-col gap-y-[8px] relative md:min-w-[1056px] p-4"
+                className="flex flex-col gap-y-[8px] relative p-4"
                 key={index}
               >
                 <div className="flex justify-between">

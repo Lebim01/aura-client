@@ -32,7 +32,7 @@ const AuthProvider: FC<Props> = (props) => {
 
   if (!init) {
     return (
-      <div className="flex w-screen h-custom-screen px-[27px] items-center justify-center  ">
+      <div className="flex w-screen h-custom-screen px-[27px] items-center justify-center">
         <Image
           src={"/logo_white.svg"}
           width={120}

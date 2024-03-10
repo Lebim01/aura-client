@@ -60,16 +60,16 @@ const Recommended = ({ setShow, show }: Props) => {
   });
   return (
     <div
-      className={`fixed top-0 left-0 w-screen h-screen bg-black-29 bg-opacity-80 flex justify-center items-center backdrop-blur-[7.5px] z-[999999999] ${
-        show ? "animate-fadeAndScale" : ""
-      }`}
+      className={`fixed top-0 left-0 w-screen h-screen bg-black-29 bg-opacity-80 flex justify-center items-center backdrop-blur-[7.5px] z-[999999999] `}
     >
       <div
-        className="bg-black-0D rounded-[16px] relative transition-opacity duration-300 select-none hover:cursor-grab"
+        className={`bg-black-0D rounded-[16px] relative transition-opacity duration-300 select-none hover:cursor-grab  ${
+          show ? "animate-fadeAndScale" : ""
+        }`}
         {...handlers}
       >
         <div
-          className={`bg-recommended bg-contain bg-no-repeat rounded-[16px] `}
+          className={`bg-recommended bg-contain bg-no-repeat rounded-[16px]`}
         >
           <div
             className={`pt-[48px] pb-[36px] px-[52px] flex flex-col gap-y-[32px] `}

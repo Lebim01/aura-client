@@ -68,7 +68,6 @@ const InfoReview = ({
     } else {
       try {
         await navigator.clipboard.writeText(shareUrl);
-        console.log("URL copied to clipboard");
         toast.success("Enlace copiado al portapapeles con éxito!");
       } catch (error) {
         console.error("Error copying URL:", error);

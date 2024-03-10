@@ -161,51 +161,54 @@ const CategoryFilters = () => {
         <Recommended setShow={setShowRecommended} show={showRecommended} />
       )}
 
-      <div className="flex flex-col p-[16px] gap-y-[12px] md:gap-y-[16px] rounded-[12px] md:bg-menus bg-menus-mobile md:w-full">
-        <div className="flex flex-col gap-y-[12px] md:gap-y-[16px]">
-          <span className="font-[600] leading-[150%] text-[14px]">
-            ¿Qué quieres ver hoy?
-          </span>
-          <div className="w-full flex justify-between">
-            <div className="grid grid-cols-3 gap-[8px] w-full">
-              {options.map((item: any, index: number) => {
-                return (
-                  <CategoryItem
-                    label={item.label}
-                    value={item.value}
-                    image={item.img}
-                    bg={item.style}
-                    key={index}
-                  />
-                );
-              })}
+      <div className="flex flex-col gap-y-[12px] md:gap-y-[16px] rounded-[12px] md:bg-transparent bg-menus-mobile md:min-w-[326px] md:max-w-[326px]">
+        <div className="flex flex-col gap-y-[12px] md:gap-y-[37px]">
+          <div className="flex flex-col gap-y-[12px]">
+            <span className="font-[600] leading-[150%] text-[14px]">
+              ¿Qué quieres ver hoy?
+            </span>
+            <div className="w-full flex justify-between">
+              <div className="grid grid-cols-3 gap-[8px] w-full">
+                {options.map((item: any, index: number) => {
+                  return (
+                    <CategoryItem
+                      label={item.label}
+                      value={item.value}
+                      image={item.img}
+                      bg={item.style}
+                      key={index}
+                    />
+                  );
+                })}
+              </div>
             </div>
           </div>
-          <div className="w-full h-[1px] border border-white border-opacity-20 "></div>
 
-          <span className="font-[600] leading-[150%] text-[14px]">
-            Plataformas
-          </span>
-          <div className="flex justify-center items-center">
-            <div className="grid grid-cols-4 gap-[8px] justify-center items-center">
-              {platforms.map((item, index: number) => {
-                return (
-                  <Platforms
-                    icon={item.logo_url}
-                    value={item.name}
-                    key={index}
-                  />
-                );
-              })}
+          <div className="flex flex-col gap-y-[12px]">
+            <span className="font-[600] leading-[150%] text-[14px]">
+              Plataformas
+            </span>
+            <div className="flex justify-center items-center">
+              <div className="grid grid-cols-4 gap-[8px] justify-center items-center">
+                {platforms.map((item, index: number) => {
+                  return (
+                    <Platforms
+                      icon={item.logo_url}
+                      value={item.name}
+                      key={index}
+                    />
+                  );
+                })}
+              </div>
             </div>
+            <ButtonCommon
+              text="RECOMENDAR"
+              disabled={!(filters && filters?.category && filters?.platform)}
+              onClick={() => {
+                setShowRecommended(true);
+              }}
+            />
           </div>
-          <ButtonCommon
-            text="RECOMENDAR"
-            disabled={!(filters && filters?.category && filters?.platform)}
-            onClick={() => {
-              setShowRecommended(true);
-            }}
-          />
         </div>
       </div>
     </>

@@ -58,9 +58,15 @@ const SearchInput = () => {
     };
   }, []);
 
+  useEffect(() => {
+    if (filters) {
+      setSearch(filters?.q?.toString() || "");
+    }
+  }, [filters]);
+
   return (
     <div
-      className="w-full flex md:hidden"
+      className="w-[617px]"
       onClick={() => {
         /* router.push("/search", undefined, { shallow: true }); */
       }}

@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import { FC, Fragment, useEffect } from "react";
 import VideoController from "./VideoController";
 import VideoDesktop from "./VideoDesktop";
@@ -52,7 +52,7 @@ const VerticalDesktopVideos: FC<Props> = (props) => {
   }, [position.swipeIndex]);
 
   return (
-    <div className="flex flex-col space-y-8 items-center py-4">
+    <div className="flex flex-col space-y-8 items-center md:pb-[100px]">
       {videos.map((video, i) => (
         <Fragment key={video.id}>
           <VideoController

@@ -12,6 +12,7 @@ export const navigationOptions = [
     icon: "/icons/home.svg",
     iconactive: "/icons/home-active.svg",
     size: 20,
+    hide: false,
   },
   {
     url: "/search",
@@ -20,6 +21,7 @@ export const navigationOptions = [
     iconactive: "/icons/search-active.svg",
     size: 20,
     type: "button",
+    hide: true,
   },
   {
     url: "/discovery",
@@ -27,6 +29,7 @@ export const navigationOptions = [
     icon: "/icons/discovery.svg",
     iconactive: "/icons/discovery-active.svg",
     size: 14,
+    hide: false,
   },
 ];
 const Footer = () => {
