@@ -9,29 +9,32 @@ import VideosContextProvider from "@/context/VideosContext";
 const ImageViewer = () => {
   const { width } = useWindowSize();
   const router = useRouter();
+
   return (
     <AuthProvider>
       <DesktopLayout>
-        <VideosContextProvider
-          url={`/dashboard/discovery`}
-          shared={router.query.shared as string}
-        >
-          <div
-            id="discovery-container"
-            className="fixed md:relative w-full max-h-screen md:overflow-y-auto hidescroll"
+        {router.isReady && (
+          <VideosContextProvider
+            url={`/dashboard/discovery`}
+            shared={router.query.shared as string}
           >
-            {(width || 0) < 768 && (
-              <div className="md:hidden">
-                <VerticalMobileVideos />
-              </div>
-            )}
-            {(width || 0) >= 768 && (
-              <div className="hidden md:block">
-                <VerticalDesktopVideos />
-              </div>
-            )}
-          </div>
-        </VideosContextProvider>
+            <div
+              id="discovery-container"
+              className="fixed md:relative w-full max-h-screen md:overflow-y-auto hidescroll"
+            >
+              {(width || 0) < 768 && (
+                <div className="md:hidden">
+                  <VerticalMobileVideos />
+                </div>
+              )}
+              {(width || 0) >= 768 && (
+                <div className="hidden md:block">
+                  <VerticalDesktopVideos />
+                </div>
+              )}
+            </div>
+          </VideosContextProvider>
+        )}
       </DesktopLayout>
     </AuthProvider>
   );
