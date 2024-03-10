@@ -1,4 +1,3 @@
-"use client"
 import useSwipeVideos from "@/store/useSwipeVideos";
 import { FC, Fragment, useEffect } from "react";
 import { useSwipeable } from "react-swipeable";
@@ -7,9 +6,10 @@ import Footer from "../common/Footer";
 import Image from "next/image";
 import VideoController from "./VideoController";
 import { useRouter } from "next/navigation";
-import useVideos, { Video } from "../../hooks/useVideos";
 import { useSession } from "next-auth/react";
 import { sections } from "@/utils/sections";
+import { useVideos } from "@/context/VideosContext";
+import { Video } from "@/types/video";
 
 const HeaderMobile = () => {
   const { back } = useRouter();
@@ -29,18 +29,10 @@ const HeaderMobile = () => {
   );
 };
 
-type Props = {
-  apiUrl: string;
-};
-
-const VerticalSliderVideos: FC<Props> = (props) => {
+const VerticalSliderVideos: FC = (props) => {
   const { position, setSwipeIndex } = useSwipeVideos();
   const { videos, fetchMore, markWatched, hasMore } = useVideos();
   const { status } = useSession();
-
-  useEffect(() => {
-    fetchMore(props.apiUrl);
-  }, [props.apiUrl]);
 
   const handlers = useSwipeable({
     onSwipedUp: () =>
@@ -63,7 +55,7 @@ const VerticalSliderVideos: FC<Props> = (props) => {
 
   useEffect(() => {
     if (position.swipeIndex === videos.length - 1) {
-      fetchMore(props.apiUrl);
+      fetchMore();
     }
 
     const originalStyle = window.getComputedStyle(document.body).overflow;

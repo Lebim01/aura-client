@@ -1,25 +1,16 @@
-"use client"
 import { FC, Fragment, useEffect } from "react";
 import VideoController from "./VideoController";
 import VideoDesktop from "./VideoDesktop";
-import useVideos from "../../hooks/useVideos";
 import useSwipeVideos from "@/store/useSwipeVideos";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
 import { sections } from "@/utils/sections";
+import { useVideos } from "@/context/VideosContext";
 
-type Props = {
-  apiUrl: string;
-};
-
-const VerticalDesktopVideos: FC<Props> = (props) => {
+const VerticalDesktopVideos: FC = (props) => {
   const { position } = useSwipeVideos();
   const { videos, fetchMore, markWatched, hasMore } = useVideos();
   const { status } = useSession();
-
-  useEffect(() => {
-    fetchMore(props.apiUrl);
-  }, []);
 
   useEffect(() => {
     if (status == "authenticated") {
@@ -35,7 +26,7 @@ const VerticalDesktopVideos: FC<Props> = (props) => {
 
   useEffect(() => {
     if (position.swipeIndex === videos.length - 1) {
-      fetchMore(props.apiUrl);
+      fetchMore();
     }
 
     const originalStyle = window.getComputedStyle(document.body).overflow;

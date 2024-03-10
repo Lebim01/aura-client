@@ -9,6 +9,7 @@ import { GetServerSideProps } from "next";
 import { VideoDashboardResponse, getVideosSection } from "@/services/dashboard";
 import Link from "next/link";
 import Image from "next/image";
+import VideosContextProvider from "@/context/VideosContext";
 
 type Props = {
   sections: Section[];

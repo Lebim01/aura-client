@@ -1,5 +1,4 @@
 import NextAuth from "next-auth";
-import { encode } from "next-auth/jwt";
 import type { NextAuthOptions } from "next-auth";
 import GoogleProvider, { GoogleProfile } from "next-auth/providers/google";
 import CredentialsProvider from "next-auth/providers/credentials";
@@ -7,6 +6,7 @@ import generatePassword from "generate-password";
 import { authMe, existsByEmail, login, signUpSocial } from "@/services/user";
 import axiosInstance from "@/services";
 import { capitalizeFirstLetterOfEachWord } from "@/utils/string";
+import dayjs from "dayjs";
 
 export const authOptions: NextAuthOptions = {
   pages: {
@@ -82,6 +82,12 @@ export const authOptions: NextAuthOptions = {
       }
     },
     async session({ session, token }) {
+      const isExpired = dayjs(new Date(token.iat * 1000)).isBefore(new Date());
+
+      if (isExpired) {
+        throw new Error("Expired");
+      }
+
       if (!token.accessToken && token.sub) {
         const _user = await existsByEmail(session.user.email, token.sub!);
         if (_user) {
