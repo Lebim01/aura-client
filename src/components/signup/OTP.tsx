@@ -25,7 +25,7 @@ const OTP = () => {
         name: capitalizeFirstLetterOfEachWord(userData.username),
         lastname: " ",
         password: userData.pass,
-        email: userData.mail,
+        email: userData.mail.toLowerCase(),
         birthdate: `${userData.year}-${userData.month}-${userData.day}`,
         otp,
       });
