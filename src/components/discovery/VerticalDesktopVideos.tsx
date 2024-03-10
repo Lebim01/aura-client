@@ -6,10 +6,11 @@ import { useSession } from "next-auth/react";
 import Image from "next/image";
 import { sections } from "@/utils/sections";
 import { useVideos } from "@/context/VideosContext";
+import LoadingDots from "../common/LoadingDots";
 
-const VerticalDesktopVideos: FC = (props) => {
+const VerticalDesktopVideos: FC = () => {
   const { position } = useSwipeVideos();
-  const { videos, fetchMore, markWatched, hasMore } = useVideos();
+  const { videos, fetchMore, markWatched, hasMore, loading } = useVideos();
   const { status } = useSession();
 
   useEffect(() => {
@@ -63,6 +64,7 @@ const VerticalDesktopVideos: FC = (props) => {
           <div className="h-[1px] w-[600px] bg-gray-50 bg-opacity-20"></div>
         </Fragment>
       ))}
+      {loading && <LoadingDots />}
       {!hasMore && (
         <div className="pb-[32px] flex flex-col justify-center items-center space-y-4">
           <p>🎉 ¡Enhorabuena! 🎉</p>

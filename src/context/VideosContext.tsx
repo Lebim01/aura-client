@@ -40,8 +40,8 @@ const VideosContext = createContext<ContextData>({
 });
 
 const VideosContextProvider = (props: Props) => {
-  const [loading, setLoading] = useState(false);
-  const [hasMore, setHasMore] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [hasMore, setHasMore] = useState(true);
   const [videos, setVideos] = useState<Video[]>([]);
   const [error, setError] = useState<null | string>(null);
 
@@ -117,6 +117,7 @@ const VideosContextProvider = (props: Props) => {
   };
 
   useEffect(() => {
+    console.log("fetch");
     fetchMore(0);
   }, [props.url]);
 
