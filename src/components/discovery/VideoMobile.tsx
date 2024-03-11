@@ -41,6 +41,7 @@ const VideoMobile = forwardRef(
     const streamRef = useRef<any>();
     const [autoplayMuted, setAutoplayMuted] = useState(true);
     const { status } = useSession();
+    const [tap, setTap] = useState(false);
     const isLogged = status == "authenticated";
 
     useImperativeHandle(ref, () => ({
@@ -115,7 +116,7 @@ const VideoMobile = forwardRef(
           loop
           playsInline
           webkit-playsinline
-          controls
+          controls={tap}
           src={`https://customer-fuwnvhure6hzod9h.cloudflarestream.com/${videoUrl}`}
           ref={streamRef}
           className={classNamesCustom(
@@ -125,6 +126,7 @@ const VideoMobile = forwardRef(
           manifest={`https://customer-fuwnvhure6hzod9h.cloudflarestream.com/${videoUrl}/manifest/video.m3u8`}
           poster={`https%3A%2F%2Fcustomer-fuwnvhure6hzod9h.cloudflarestream.com%2F${videoUrl}%2Fthumbnails%2Fthumbnail.jpg%3Ftime%3D%26height%3D600`}
           muted={autoplayMuted}
+          onClick={() => setTap(true)}
         />
         <InfoReview
           className={classNamesCustom("translateinfo inset-0", {
