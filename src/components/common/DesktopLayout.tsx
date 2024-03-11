@@ -2,7 +2,6 @@
 import { FC, ReactNode } from "react";
 import CategoryFilters from "../dashboard/components/filters/CategoryFilters";
 import DesktopNavigationButtons from "./DesktopNavigationButtons";
-import { usePathname } from "next/navigation";
 import useIsMobile from "@/hooks/useIsMobile";
 import NavHeader from "./NavHeader";
 import NavHeaderMobile from "./NavHeaderMobile";
