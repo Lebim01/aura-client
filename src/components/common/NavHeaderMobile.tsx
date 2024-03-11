@@ -7,7 +7,7 @@ import Link from "next/link";
 const NavHeaderMobile = () => {
   const { status, data } = useSession();
   const isLogged = status == "authenticated";
-  console.log(data)
+  
   return (
     <div className="pb-[16px] flex justify-between items-center">
       <div className="font-bold">
