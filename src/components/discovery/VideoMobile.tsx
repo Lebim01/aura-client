@@ -118,12 +118,10 @@ const VideoMobile = forwardRef(
           src={`https://customer-fuwnvhure6hzod9h.cloudflarestream.com/${videoUrl}/iframe?poster=https%3A%2F%2Fcustomer-fuwnvhure6hzod9h.cloudflarestream.com%2F${videoUrl}%2Fthumbnails%2Fthumbnail.jpg%3Ftime%3D%26height%3D600`}
           ref={streamRef}
           className={classNamesCustom(
-            "select-none",
-            videoOrientation == "vertical" &&
-              "h-full min-h-[500px] object-cover h-custom-screen w-full min-w-[300px]",
-            videoOrientation == "horizontal" && "video-horizontal"
+            "select-none h-full min-h-[500px] object-cover h-custom-screen w-full min-w-[300px]",
+            videoOrientation == "horizontal" && "object-contain"
           )}
-          manifest={`https://customer-fuwnvhure6hzod9h.cloudflarestream.com/${videoUrl}/manifest/video.mpd`}
+          manifest={`https://customer-fuwnvhure6hzod9h.cloudflarestream.com/${videoUrl}/manifest/video.m3u8`}
           muted={autoplayMuted}
         />
         <div
