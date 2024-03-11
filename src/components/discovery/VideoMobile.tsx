@@ -114,6 +114,7 @@ const VideoMobile = forwardRef(
         <HLSPlayer
           loop
           playsInline={true}
+          webkit-playsinline
           controls={videoOrientation == "horizontal"}
           src={`https://customer-fuwnvhure6hzod9h.cloudflarestream.com/${videoUrl}`}
           ref={streamRef}
