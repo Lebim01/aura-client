@@ -33,6 +33,8 @@ export default function Large({ serie, genres, ...props }: Props) {
             height={80}
             src={serie?.poster_path}
             alt=""
+            key={serie?.poster_path}
+            quality={100}
             className="rounded-[4px] bg-white object-cover w-[56px] h-[56px] md:w-[80px] md:h-[80px] md:shadow-[0px_1px_11px_2px_#FBBC05E0]"
           />
           <div className="flex flex-col md:flex-row md:items-center md:gap-x-[8px]">
