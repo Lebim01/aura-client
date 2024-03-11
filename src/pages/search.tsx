@@ -7,7 +7,7 @@ import Sections from "@/components/search/Sections";
 const SearchPage = () => {
   return (
     <AuthProvider>
-      <DesktopLayout forceDisplay>
+      <DesktopLayout>
         <div className="flex flex-col gap-y-[24px] overflow-y-auto w-auto pb-[99px] md:py-[32px] relative min-w-max flex-grow hidescroll md:max-w-[1056px] justify-center">
           <InputSearch />
           <Sections text="Tu búsqueda" endpoint="/search/series" />

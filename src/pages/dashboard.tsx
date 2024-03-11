@@ -26,7 +26,64 @@ type Section = {
 export default function Dashboard({ sections }: Props) {
   const isMobile = useIsMobile();
   return (
-    <div></div>
+    <AuthProvider>
+      <DesktopLayout>
+        {isMobile && (
+          <div className="flex flex-col space-y-[16px]">
+            <SearchInput />
+            <CategoryFilters />
+          </div>
+        )}
+        <div className="flex flex-col gap-y-[16px] overflow-y-auto md:h-screen pb-[99px] relative hidescroll md:max-w-[1056px] pt-[32px] md:pt-0">
+          {sections
+            .filter((r) => r.orientation == "vertical")
+            .filter((r) => r.videos.length > 0)
+            .map(({ name, slug, videos }, index) => (
+              <VideoCaroussel
+                key={slug}
+                videos={videos.slice(0, isMobile ? 2 : 3).map((v) => v.hsl)}
+                title={name}
+                sectionId={slug}
+              />
+            ))}
+
+          {sections
+            .filter((r) => r.orientation == "horizontal")
+            .filter((r) => r.videos.length > 0)
+            .map(({ name, slug, videos }, index) => (
+              <div
+                className="flex flex-col gap-y-[8px] relative p-4"
+                key={index}
+              >
+                <div className="flex justify-between">
+                  <label className="text-[16px] font-[600] leading-[150%]">
+                    {name}
+                  </label>
+                  <Link
+                    href={"/sections/" + slug}
+                    className="flex gap-x-[4px] items-center hover:underline"
+                  >
+                    <span className="text-[12px] leading-[150%] ">
+                      Ver todo
+                    </span>
+
+                    <Image
+                      src={"/icons/arrow-right.svg"}
+                      alt=""
+                      width={16}
+                      height={16}
+                    />
+                  </Link>
+                </div>
+                <video controls preload="metadata" className="aspect-video">
+                  <source src={`${videos[0].url}#t=0.1`} type="video/mp4" />
+                </video>
+              </div>
+            ))}
+        </div>
+        <Footer />
+      </DesktopLayout>
+    </AuthProvider>
   );
 }
 

@@ -43,7 +43,7 @@ const ProfileChangePasswordPage = () => {
 
   return (
     <AuthProvider protected>
-      <DesktopLayout forceDisplay>
+      <DesktopLayout>
         <div className="w-full">
           <div className="md:bg-menus bg-neutral-800/70 flex flex-col rounded-lg p-6 space-y-4">
             <label>Actualizar contraseña</label>
