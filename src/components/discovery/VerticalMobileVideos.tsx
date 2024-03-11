@@ -1,5 +1,5 @@
 import useSwipeVideos from "@/store/useSwipeVideos";
-import { FC, Fragment, useEffect } from "react";
+import { FC, Fragment, useEffect, useState } from "react";
 import { useSwipeable } from "react-swipeable";
 import VideoMobile from "./VideoMobile";
 import Footer from "../common/Footer";
@@ -33,11 +33,16 @@ const VerticalSliderVideos: FC = (props) => {
   const { position, setSwipeIndex } = useSwipeVideos();
   const { videos, fetchMore, markWatched, hasMore } = useVideos();
   const { status } = useSession();
+  const [showLegend, setShowLegend] = useState(false);
 
   const handlers = useSwipeable({
-    onSwipedUp: () =>
-      setSwipeIndex(Math.min(position.swipeIndex + 1, videos.length - 1)),
-    onSwipedDown: () => setSwipeIndex(Math.max(position.swipeIndex - 1, 0)),
+    onSwipedUp: () => {
+      setSwipeIndex(Math.min(position.swipeIndex + 1, videos.length - 1));
+      if (!hasMore) setShowLegend(true);
+    },
+    onSwipedDown: () => {
+      setSwipeIndex(Math.max(position.swipeIndex - 1, 0));
+    },
     trackMouse: true,
   });
 
@@ -96,8 +101,8 @@ const VerticalSliderVideos: FC = (props) => {
             />
           </Fragment>
         ))}
-        {!hasMore && position.swipeIndex == videos.length - 1 && (
-          <div className="flex flex-col justify-center items-center space-y-4 absolute top-0 text-sm bg-gray-600/25 py-4">
+        {showLegend && videos.length - 1 == position.swipeIndex && (
+          <div className="flex flex-col justify-center items-center space-y-4 absolute top-[100px] text-sm bg-neutral-600/70 py-4">
             <p>🎉 ¡Enhorabuena! 🎉</p>
             <p className="max-w-[450px] text-center">
               Has terminado de ver todo el contenido de esta sección, te
