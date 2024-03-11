@@ -113,15 +113,16 @@ const VideoMobile = forwardRef(
         )}
         <HLSPlayer
           loop
-          playsInline
-          controls={false}
-          src={`https://customer-fuwnvhure6hzod9h.cloudflarestream.com/${videoUrl}/iframe?poster=https%3A%2F%2Fcustomer-fuwnvhure6hzod9h.cloudflarestream.com%2F${videoUrl}%2Fthumbnails%2Fthumbnail.jpg%3Ftime%3D%26height%3D600`}
+          playsInline={true}
+          controls={videoOrientation == "horizontal"}
+          src={`https://customer-fuwnvhure6hzod9h.cloudflarestream.com/${videoUrl}`}
           ref={streamRef}
           className={classNamesCustom(
             "select-none h-full min-h-[500px] object-cover h-custom-screen w-full min-w-[300px]",
             videoOrientation == "horizontal" && "object-contain"
           )}
           manifest={`https://customer-fuwnvhure6hzod9h.cloudflarestream.com/${videoUrl}/manifest/video.m3u8`}
+          poster={`https%3A%2F%2Fcustomer-fuwnvhure6hzod9h.cloudflarestream.com%2F${videoUrl}%2Fthumbnails%2Fthumbnail.jpg%3Ftime%3D%26height%3D600`}
           muted={autoplayMuted}
         />
         <div

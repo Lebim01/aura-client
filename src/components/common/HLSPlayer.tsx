@@ -3,6 +3,7 @@ import React, {
   useEffect,
   useImperativeHandle,
   useRef,
+  useState,
 } from "react";
 import Hls from "hls.js";
 
@@ -14,7 +15,7 @@ const HLSPlayer = forwardRef<HTMLVideoElement, Props>(
   ({ manifest, ...props }, ref) => {
     const videoRef = useRef<HTMLVideoElement>(null);
 
-    useImperativeHandle(ref, () => videoRef.current!); // Expose internal ref to forwardedRef. (Allows for callback & regular useRef)
+    useImperativeHandle(ref, () => videoRef.current!);
 
     useEffect(() => {
       const src = manifest;
@@ -22,7 +23,8 @@ const HLSPlayer = forwardRef<HTMLVideoElement, Props>(
       if (!video) return;
 
       let hls: Hls | null;
-      if (video.canPlayType("application/vnd.apple.mpegurl")) { // Safari
+      if (video.canPlayType("application/vnd.apple.mpegurl")) {
+        // Safari
         video.src = src;
       } else if (Hls.isSupported()) {
         const hls = new Hls();
