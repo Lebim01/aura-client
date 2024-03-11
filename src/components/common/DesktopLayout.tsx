@@ -16,7 +16,7 @@ const DesktopLayout: FC<Props> = ({ children }) => {
   const router = useRouter()
   const isMobile = useIsMobile();
 
-  if (router.pathname == "/discovery" || router.pathname.startsWith("/section"))
+  if (isMobile && router.pathname == "/discovery" || router.pathname.startsWith("/section"))
     return children;
 
   if (isMobile) {
