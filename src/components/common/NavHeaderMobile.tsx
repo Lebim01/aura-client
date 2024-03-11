@@ -16,7 +16,7 @@ const NavHeaderMobile = () => {
       <div className="flex space-x-[8px]">
         <Link href="/profile">
           <CircleButton className="border-yellow-aura-accent">
-            <Image
+            <img
               alt="Profile image"
               width={30}
               height={30}
