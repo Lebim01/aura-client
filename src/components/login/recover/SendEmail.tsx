@@ -3,6 +3,7 @@ import ButtonCommon from "@/components/common/ButtonCommon";
 import InputReturn from "../../common/InputReturn";
 import { recoverPassword } from "@/services/user";
 import { useRouter } from "next/navigation";
+import InputPassword from "@/components/common/InputPassword";
 
 const DEFAULT_STATE = {
   email: "",
@@ -73,23 +74,19 @@ const SendEmail = () => {
           value={state.email}
           onChange={(e) => setState((d) => ({ ...d, email: e.target.value }))}
         />
-        <InputReturn
-          icon="/login/icons/lock"
+        <InputPassword
+          LeftIcon="/login/icons/lock"
           placeholder="NUEVA CONTRASEÑA"
-          type="password"
           name="pass"
           value={state.pass}
-          onChange={(e) => setState((d) => ({ ...d, pass: e.target.value }))}
+          onChange={(value) => setState((d) => ({ ...d, pass: value }))}
         />
-        <InputReturn
-          icon="/login/icons/lock"
+        <InputPassword
+          LeftIcon="/login/icons/lock"
           placeholder="CONFIRMAR CONTRASEÑA"
-          type="password"
           name="confirm_pass"
           value={state.confirm_pass}
-          onChange={(e) =>
-            setState((d) => ({ ...d, confirm_pass: e.target.value }))
-          }
+          onChange={(value) => setState((d) => ({ ...d, confirm_pass: value }))}
         />
         {sended && (
           <InputReturn

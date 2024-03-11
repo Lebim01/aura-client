@@ -1,6 +1,7 @@
 import ButtonCommon from "@/components/common/ButtonCommon";
 import DesktopLayout from "@/components/common/DesktopLayout";
 import InputCommon from "@/components/common/Input";
+import InputPassword from "@/components/common/InputPassword";
 import PasswordFeedback from "@/components/common/PasswordFeedback";
 import AuthProvider from "@/components/common/ProtectAuth";
 import { updatePassword } from "@/services/user";
@@ -54,19 +55,19 @@ const ProfileChangePasswordPage = () => {
             />
 
             <div className="flex flex-col space-y-2">
-              <InputCommon
+              <InputPassword
+                LeftIcon="/login/icons/lock"
                 value={state.pass}
                 placeholder="Nueva contraseña"
                 onChange={(value) => setState((d) => ({ ...d, pass: value }))}
-                type="password"
               />
-              <InputCommon
+              <InputPassword
+                LeftIcon="/login/icons/lock"
                 value={state.confirm_pass}
                 placeholder="Confirmar contraseña"
                 onChange={(value) =>
                   setState((d) => ({ ...d, confirm_pass: value }))
                 }
-                type="password"
               />
             </div>
 

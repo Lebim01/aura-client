@@ -2,6 +2,7 @@ import React, { useState, ChangeEvent, useEffect } from "react";
 import InputReturn from "@/components/common/InputReturn";
 import ButtonCommon from "@/components/common/ButtonCommon";
 import { useRouter } from "next/navigation";
+import InputPassword from "@/components/common/InputPassword";
 
 interface UserData {
   pass: string;
@@ -45,22 +46,30 @@ const NewPass = () => {
   return (
     <div className="flex flex-col gap-y-[32px] w-full">
       <div className="flex flex-col gap-y-[16px] w-full">
-        <InputReturn
-          icon={"/login/icons/lock"}
+        <InputPassword
+          LeftIcon="/login/icons/lock"
           placeholder="INGRESA TU NUEVA CONTRASEÑA"
           name="pass"
           value={data["pass"]}
-          type="password"
-          onChange={handleChange}
+          onChange={(value) => {
+            setData((prevState) => ({
+              ...prevState,
+              pass: value,
+            }));
+          }}
         />
         <div className="flex flex-col w-full gap-y-[8px]">
-          <InputReturn
-            icon={"/login/icons/lock"}
+          <InputPassword
+            LeftIcon="/login/icons/lock"
             placeholder="CONFIRMA TU CONTRASEÑA"
             name="confirm_pass"
             value={data["confirm_pass"]}
-            type="password"
-            onChange={handleChange}
+            onChange={(value) => {
+              setData((prevState) => ({
+                ...prevState,
+                confirm_pass: value,
+              }));
+            }}
           />
           {showError && (
             <span className="leading-[100%] text-[12px] text-red-400">

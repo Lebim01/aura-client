@@ -7,9 +7,10 @@ import Select from "../common/Select";
 import useUserRegistrationStore from "@/store/userRegistrationStore";
 import { useRouter } from "next/router";
 import PasswordFeedback from "../common/PasswordFeedback";
+import InputPassword from "../common/InputPassword";
 
 const SignUpForm = () => {
-  const { userData } = useUserRegistrationStore();
+  const { userData, setUserField } = useUserRegistrationStore();
   const [disabled, setDisabled] = useState<boolean>(true);
   const router = useRouter();
 
@@ -43,16 +44,23 @@ const SignUpForm = () => {
         pass={userData.pass}
         confirm_pass={userData.confirm_pass}
       />
-      <Input
-        icon="/login/icons/lock"
+      <InputPassword
+        LeftIcon="/login/icons/lock"
+        value={userData.pass}
+        onChange={(value) => {
+          setUserField("pass", value);
+        }}
         placeholder="CONTRASEÑA"
-        type="password"
         name="pass"
       />
-      <Input
-        icon="/login/icons/lock"
+      <InputPassword
+        LeftIcon="/login/icons/lock"
+        value={userData.confirm_pass}
+        onChange={(value) => {
+          console.log("change", value);
+          setUserField("confirm_pass", value);
+        }}
         placeholder="REPETIR CONTRASEÑA"
-        type="password"
         name="confirm_pass"
       />
 
