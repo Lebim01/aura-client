@@ -15,6 +15,10 @@ const DesktopLayout: FC<Props> = ({ children }) => {
   const router = useRouter()
   const isMobile = useIsMobile();
 
+  if (router.pathname == "/discovery" || router.pathname.startsWith("/section"))
+    return children;
+
+
   return (
     <div className="flex flex-col  gap-y-[30px] overflow-hidden md:h-screen">
       <NavHeader />
