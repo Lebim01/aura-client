@@ -7,11 +7,11 @@ import Link from "next/link";
 const NavHeaderMobile = () => {
   const { status, data } = useSession();
   const isLogged = status == "authenticated";
-  
+
   return (
     <div className="pb-[16px] flex justify-between items-center">
       <div className="font-bold">
-        
+        {isLogged ? `Bienvenido ${data?.user.name}` : "Inicia Sesión"}
       </div>
       <div className="flex space-x-[8px]">
         <Link href="/profile">
@@ -20,7 +20,11 @@ const NavHeaderMobile = () => {
               alt="Profile image"
               width={30}
               height={30}
-              src={data?.user.profile_img ?? "/icons/user.svg"}
+              src={
+                isLogged
+                  ? data?.user.profile_img || "/icons/user.svg"
+                  : "/icons/user.svg"
+              }
               className="rounded-full"
             />
           </CircleButton>
