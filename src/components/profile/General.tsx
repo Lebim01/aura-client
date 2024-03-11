@@ -8,7 +8,7 @@ const options = [
   { label: "Seguridad", url: "" },
 ];
 
-const optionAsistence = [{ label: "Privacidad y términos", url: "" }];
+const optionAsistence = [{ label: "Privacidad y términos", url: "/terms-conditions" }];
 
 const General = () => {
   return (
