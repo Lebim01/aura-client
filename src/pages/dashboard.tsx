@@ -26,11 +26,7 @@ type Section = {
 export default function Dashboard({ sections }: Props) {
   const isMobile = useIsMobile();
   return (
-    <AuthProvider>
-      <DesktopLayout forceDisplay>
-        <div></div>
-      </DesktopLayout>
-    </AuthProvider>
+    <div></div>
   );
 }
 
