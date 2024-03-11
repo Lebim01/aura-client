@@ -8,7 +8,7 @@ type Props = {
 
 export default function Cast({ actors }: Props) {
   return (
-    <div className="grid grid-cols-2 gap-[16px] md:gap-[16px] px-[16px] md:w-max">
+    <div className="grid grid-cols-2 gap-[16px] md:gap-[16px] md:px-[16px] md:w-max">
       {actors?.map((item, index: number) => {
         return (
           <div

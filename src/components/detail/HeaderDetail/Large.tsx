@@ -20,11 +20,11 @@ export default function Large({ serie, genres, ...props }: Props) {
   const [serieRating, setSerieRating] = useState(serie.rating);
 
   return (
-    <div className="px-[16px]">
+    <div>
       <div
         className={classNamesCustom(
-          "flex flex-col gap-y-[16px] px-[16px] py-[12px]  md:bg-black md:bg-opacity-50 rounded-[16px]",
-          { "bg-bg-gradient-detail-card": isMobile }
+          "flex flex-col gap-y-[16px] px-[16px] py-[12px] md:bg-black md:bg-opacity-50 rounded-[16px]",
+          { "bg-bg-gradient-detail-card w-full": isMobile }
         )}
       >
         <div className="w-full flex gap-x-[8px] items-center md:gap-x-[24px]">

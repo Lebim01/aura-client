@@ -3,7 +3,7 @@ import Image from "next/image";
 
 export default function Reviews() {
   return (
-    <div className="flex flex-col gap-y-[32px] px-[16px]">
+    <div className="flex flex-col gap-y-[32px] md:px-[16px]">
       <div className="flex flex-col gap-y-[8px]">
         <div className="flex items-center justify-between">
           <div className="flex gap-x-[8px] items-center">
