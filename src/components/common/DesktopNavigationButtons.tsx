@@ -44,7 +44,7 @@ const DesktopNavigationButtons = () => {
           href="/terms-conditions"
           className="text-xs text-neutral-300 underline"
         >
-          Terminos y condiciones
+          Términos y condiciones
         </Link>
       </div>
     </div>
