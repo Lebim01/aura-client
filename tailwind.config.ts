@@ -59,6 +59,10 @@ const config: Config = {
           "linear-gradient(to bottom, #101010, rgba(111, 111, 111, 0.3))",
         "bg-green-opaque": "linear-gradient(91deg, #C0FFD9, #C0FFD9)        ",
       },
+      borderColor: {
+        "aura-green":
+          "linear-gradient(143.13deg, #B8DE63 14.64%, #53D174 86.07%)",
+      },
       boxShadow: {
         "custom-green": "0px 0px 8px 0px rgba(183, 244, 106, 0.20)",
       },

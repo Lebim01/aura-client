@@ -14,6 +14,7 @@ import { classNamesCustom } from "@/utils/classes";
 import useShowHideFilters from "@/store/useShowHideFilters";
 import { useSession } from "next-auth/react";
 import NavHeader from "./NavHeader";
+import NavHeaderMobile from "./NavHeaderMobile";
 
 type Props = {
   forceDisplay?: boolean;
@@ -25,9 +26,22 @@ const DesktopLayout: FC<Props> = ({ children, forceDisplay }) => {
   const pathname = usePathname();
   const isMobile = useIsMobile();
   const { status } = useSession();
-  const isLogged = status == "authenticated";
   const HIDE_URL = ["/profile"];
   const { showHideFilters } = useShowHideFilters();
+
+  if (pathname == "/discovery" || pathname.startsWith("/section"))
+    return children;
+
+  if (isMobile) {
+    return (
+      <div className="flex flex-col">
+        <div className="p-[16px]">
+          <NavHeaderMobile />
+          {children}
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="flex flex-col  gap-y-[30px] overflow-hidden md:h-screen">

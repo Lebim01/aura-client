@@ -82,11 +82,11 @@ export const authOptions: NextAuthOptions = {
       }
     },
     async session({ session, token }) {
-      const isExpired = dayjs(new Date(token.iat * 1000)).isBefore(new Date());
+      /*const isExpired = dayjs(new Date(token.iat * 1000)).isBefore(new Date());
 
       if (isExpired) {
         throw new Error("Expired");
-      }
+      }*/
 
       if (!token.accessToken && token.sub) {
         const _user = await existsByEmail(session.user.email, token.sub!);

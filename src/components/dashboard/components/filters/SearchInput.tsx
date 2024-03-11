@@ -7,7 +7,6 @@ import useFilters from "@/store/useFilters";
 import { useState, useRef, useEffect } from "react";
 import { classNamesCustom } from "@/utils/classes";
 import useIsMobile from "@/hooks/useIsMobile";
-import { filter } from "rxjs";
 
 const SearchInput = () => {
   const router = useRouter();
@@ -66,7 +65,7 @@ const SearchInput = () => {
 
   return (
     <div
-      className="w-[617px]"
+      className="w-full md:w-[617px]"
       onClick={() => {
         /* router.push("/search", undefined, { shallow: true }); */
       }}

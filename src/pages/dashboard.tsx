@@ -9,7 +9,9 @@ import { GetServerSideProps } from "next";
 import { VideoDashboardResponse, getVideosSection } from "@/services/dashboard";
 import Link from "next/link";
 import Image from "next/image";
-import VideosContextProvider from "@/context/VideosContext";
+
+import CategoryFilters from "@/components/dashboard/components/filters/CategoryFilters";
+import SearchInput from "@/components/dashboard/components/filters/SearchInput";
 
 type Props = {
   sections: Section[];
@@ -27,7 +29,13 @@ export default function Dashboard({ sections }: Props) {
   return (
     <AuthProvider>
       <DesktopLayout forceDisplay>
-        <div className="flex flex-col gap-y-[16px] overflow-y-auto md:h-screen  pb-[99px] relative hidescroll md:max-w-[1056px]">
+        {isMobile && (
+          <div className="flex flex-col space-y-[16px]">
+            <SearchInput />
+            <CategoryFilters />
+          </div>
+        )}
+        <div className="flex flex-col gap-y-[16px] overflow-y-auto md:h-screen pb-[99px] relative hidescroll md:max-w-[1056px] pt-[32px] md:pt-0">
           {sections
             .filter((r) => r.orientation == "vertical")
             .filter((r) => r.videos.length > 0)

@@ -55,7 +55,7 @@ const Sections = ({ text, endpoint }: Props) => {
           )}
           <div
             className={classNamesCustom(
-              `align-start grid  grid-cols-[repeat(auto-fit,minmax(166px,1fr))] gap-[16px]`
+              `align-start grid grid-cols-2 md:grid-cols-[repeat(auto-fit,minmax(166px,1fr))] gap-[16px]`
             )}
           >
             {loading &&
