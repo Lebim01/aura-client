@@ -13,7 +13,7 @@ import { VideoProps } from "./VideoController";
 import canAutoPlay from "can-autoplay";
 import { classNamesCustom } from "@/utils/classes";
 import { useSession } from "next-auth/react";
-import ReactHlsPlayer from 'react-hls-player';
+import HLSPlayer from "../common/HLSPlayer";
 
 type Handler = {
   play: () => void;
@@ -109,17 +109,13 @@ const VideoMobile = forwardRef(
             <MdHearingDisabled /> <span>Reactivar Sonido</span>
           </button>
         )}
-        <ReactHlsPlayer
+        <HLSPlayer
           src={`https://customer-fuwnvhure6hzod9h.cloudflarestream.com/${videoUrl}/iframe?poster=https%3A%2F%2Fcustomer-fuwnvhure6hzod9h.cloudflarestream.com%2F${videoUrl}%2Fthumbnails%2Fthumbnail.jpg%3Ftime%3D%26height%3D600`}
           controls={false}
           width="100%"
           height="auto"
-          playerRef={streamRef}
-          hlsConfig={{
-            maxLoadingDelay: 4,
-            minAutoBitrate: 0,
-            lowLatencyMode: true,
-          }}
+          ref={streamRef}
+          manifest={`https://customer-fuwnvhure6hzod9h.cloudflarestream.com/${videoUrl}/manifest/video.m3u8`}
           className={classNamesCustom(
             "select-none",
             videoOrientation == "vertical" &&
