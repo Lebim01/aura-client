@@ -11,22 +11,12 @@ const NavHeaderMobile = () => {
   return (
     <div className="pb-[16px] flex justify-between items-center">
       <div className="font-bold">
-        {isLogged ? `Bienvenido ${data?.user.name}` : "Inicia Sesión"}
+        
       </div>
       <div className="flex space-x-[8px]">
         <Link href="/profile">
           <CircleButton className="border-yellow-aura-accent">
-            <img
-              alt="Profile image"
-              width={30}
-              height={30}
-              src={
-                isLogged
-                  ? data?.user.profile_img || "/icons/user.svg"
-                  : "/icons/user.svg"
-              }
-              className="rounded-full"
-            />
+            <div> </div>
           </CircleButton>
         </Link>
       </div>
