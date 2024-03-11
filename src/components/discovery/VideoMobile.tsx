@@ -113,9 +113,9 @@ const VideoMobile = forwardRef(
         )}
         <HLSPlayer
           loop
-          playsInline={true}
+          playsInline
           webkit-playsinline
-          controls={videoOrientation == "horizontal"}
+          controls
           src={`https://customer-fuwnvhure6hzod9h.cloudflarestream.com/${videoUrl}`}
           ref={streamRef}
           className={classNamesCustom(
@@ -126,12 +126,6 @@ const VideoMobile = forwardRef(
           poster={`https%3A%2F%2Fcustomer-fuwnvhure6hzod9h.cloudflarestream.com%2F${videoUrl}%2Fthumbnails%2Fthumbnail.jpg%3Ftime%3D%26height%3D600`}
           muted={autoplayMuted}
         />
-        {videoOrientation == "vertical" && (
-          <div
-            className="absolute h-full w-full top-0 left-0"
-            onClick={togglePlay}
-          ></div>
-        )}
         <InfoReview
           className={classNamesCustom("translateinfo inset-0", {
             translateinfologged: isLogged,
