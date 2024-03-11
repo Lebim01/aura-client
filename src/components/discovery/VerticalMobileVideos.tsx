@@ -38,7 +38,8 @@ const VerticalSliderVideos: FC = (props) => {
   const handlers = useSwipeable({
     onSwipedUp: () => {
       setSwipeIndex(Math.min(position.swipeIndex + 1, videos.length - 1));
-      if (!hasMore) setShowLegend(true);
+      if (!hasMore && position.swipeIndex + 1 == videos.length)
+        setShowLegend(true);
     },
     onSwipedDown: () => {
       setSwipeIndex(Math.max(position.swipeIndex - 1, 0));
