@@ -31,7 +31,7 @@ const DesktopLayout: FC<Props> = ({ children }) => {
   }
 
   return (
-    <div className="flex flex-col  gap-y-[30px] overflow-hidden md:h-screen">
+    <div className="flex flex-col gap-y-[30px] overflow-hidden md:h-screen">
       <NavHeader />
       <div className="flex flex-col-reverse md:flex-row items-start justify-between gap-x-[24px] md:px-[24px]">
         <DesktopNavigationButtons />

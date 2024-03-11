@@ -1,4 +1,6 @@
-export default function Home() {
+import Convocatoria from "@/components/index/Convocatoria";
+
+const Video = () => {
   return (
     <div className="flex justify-center items-center fixed inset-0 z-0 overflow-hidden ">
       <video
@@ -19,4 +21,8 @@ export default function Home() {
       </video>
     </div>
   );
+};
+
+export default function Home() {
+  return process.env.NEXT_PUBLIC_REDIRECT ? <Video /> : <Convocatoria />;
 }

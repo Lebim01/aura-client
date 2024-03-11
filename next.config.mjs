@@ -2,7 +2,7 @@
 const nextConfig = {
   reactStrictMode: false,
   async redirects() {
-    const isProd = process.env.REDIRECT == "1";
+    const isProd = process.env.NEXT_PUBLIC_REDIRECT == "1";
 
     return isProd
       ? [
