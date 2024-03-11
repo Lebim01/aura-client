@@ -72,7 +72,7 @@ const options = [
   },
   {
     label: "Musical",
-    value: "b0cbfe5a-9bd6-4a35-9888-d555ae16444d",
+    value: "d304197c-cbf9-40f5-a144-972a84ac61b8",
     img: "/categories/musical-min.jpg",
     style: {
       background:
