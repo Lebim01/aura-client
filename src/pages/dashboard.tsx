@@ -28,13 +28,7 @@ export default function Dashboard({ sections }: Props) {
   return (
     <AuthProvider>
       <DesktopLayout forceDisplay>
-        {isMobile && (
-          <div className="flex flex-col space-y-[16px]">
-            <SearchInput />
-            <CategoryFilters />
-          </div>
-        )}
-        <Footer />
+        <div></div>
       </DesktopLayout>
     </AuthProvider>
   );
