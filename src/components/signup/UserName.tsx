@@ -11,6 +11,7 @@ const UserName = () => {
   const [disabled, setDisabled] = useState<boolean>(true);
   const { userData } = useUserRegistrationStore();
   const router = useRouter();
+  const [error, setError] = useState<null | string>(null)
 
   useEffect(() => {
     setDisabled(userData.username.trim() !== "" ? false : true);
@@ -29,6 +30,7 @@ const UserName = () => {
       router.push("/signup?step=otp");
     } catch (err) {
       console.error(err);
+      setError('Algo salio mal, intenta mas tarde')
     } finally {
       setDisabled(false);
     }

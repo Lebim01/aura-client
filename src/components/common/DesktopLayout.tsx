@@ -29,7 +29,7 @@ const DesktopLayout: FC<Props> = ({ children, forceDisplay }) => {
   const HIDE_URL = ["/profile"];
   const { showHideFilters } = useShowHideFilters();
 
-  if (pathname == "/discovery" || pathname.startsWith("/section"))
+  if (isMobile && pathname == "/discovery" || pathname.startsWith("/section"))
     return children;
 
   if (isMobile) {
