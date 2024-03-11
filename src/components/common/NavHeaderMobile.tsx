@@ -10,7 +10,22 @@ const NavHeaderMobile = () => {
   
   return (
     <div className="pb-[16px] flex justify-between items-center">
-      
+      <div className="font-bold">
+        
+      </div>
+      <div className="flex space-x-[8px]">
+        <Link href="/profile">
+          <CircleButton className="border-yellow-aura-accent">
+            <Image
+              alt="Profile image"
+              width={30}
+              height={30}
+              src={data?.user.profile_img ?? "/icons/user.svg"}
+              className="rounded-full"
+            />
+          </CircleButton>
+        </Link>
+      </div>
     </div>
   );
 };
