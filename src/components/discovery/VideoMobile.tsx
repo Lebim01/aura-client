@@ -91,6 +91,7 @@ const VideoMobile = forwardRef(
       if (swipeIndex == videoIndex) {
         playVideo();
       } else {
+        setTap(false);
         streamRef.current?.pause();
       }
     }, [swipeIndex, videoIndex]);
