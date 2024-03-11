@@ -26,13 +26,7 @@ const NavHeaderMobile = () => {
         </CircleButton>*/}
         <Link href="/profile">
           <CircleButton className="border-yellow-aura-accent">
-            <Image
-              alt="Profile image"
-              width={30}
-              height={30}
-              src={data?.user.profile_img ?? "/icons/user.svg"}
-              className="rounded-full"
-            />
+            <div></div>
           </CircleButton>
         </Link>
       </div>

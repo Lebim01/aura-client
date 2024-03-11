@@ -2,6 +2,7 @@
 import { FC, ReactNode } from "react";
 import CategoryFilters from "../dashboard/components/filters/CategoryFilters";
 import DesktopNavigationButtons from "./DesktopNavigationButtons";
+
 import useIsMobile from "@/hooks/useIsMobile";
 import NavHeader from "./NavHeader";
 import NavHeaderMobile from "./NavHeaderMobile";
@@ -22,7 +23,7 @@ const DesktopLayout: FC<Props> = ({ children }) => {
     return (
       <div className="flex flex-col">
         <div className="p-[16px]">
-          
+          <NavHeaderMobile />
           {children}
         </div>
       </div>
