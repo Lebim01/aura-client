@@ -6,6 +6,7 @@ interface FilterObject {
 
 interface ObjectState {
   filters: FilterObject;
+  init: boolean;
   setFilters: (
     newValue: FilterObject | ((prevState: FilterObject) => FilterObject)
   ) => void;
@@ -14,9 +15,11 @@ interface ObjectState {
 }
 
 const useFilters = create<ObjectState>((set) => ({
+  init: true,
   filters: {},
   setFilters: (newValue) =>
     set((state) => ({
+      init: false,
       filters:
         typeof newValue === "function"
           ? newValue(state.filters)

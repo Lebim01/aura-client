@@ -7,15 +7,16 @@ import { classNamesCustom } from "@/utils/classes";
 import ItemSections from "./ItemSections";
 import axiosInstance from "@/services";
 import { objectToURL } from "@/utils/objectToURL";
+import { Serie } from "@/types/series";
 interface Props {
   text: string;
   endpoint: string;
+  initData: Serie[];
 }
-const Sections = ({ text, endpoint }: Props) => {
-  const [series, setSeries] = useState<any>([]);
-  const [loading, setLoading] = useState<boolean>(true);
-  const { filters } = useFilters();
-  const isMobile = useIsMobile();
+const Sections = ({ text, endpoint, initData }: Props) => {
+  const [series, setSeries] = useState<any>(initData);
+  const [loading, setLoading] = useState<boolean>(false);
+  const { filters, init } = useFilters();
 
   const getSeries = async () => {
     try {
@@ -32,8 +33,8 @@ const Sections = ({ text, endpoint }: Props) => {
   };
 
   useEffect(() => {
-    getSeries();
-  }, [filters]);
+    if (!init) getSeries();
+  }, [init, filters]);
 
   return (
     <>
