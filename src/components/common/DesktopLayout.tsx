@@ -1,3 +1,4 @@
+"use client"
 import { FC, ReactNode } from "react";
 import CategoryFilters from "../dashboard/components/filters/CategoryFilters";
 import DesktopNavigationButtons from "./DesktopNavigationButtons";
@@ -5,16 +6,17 @@ import { usePathname } from "next/navigation";
 import useIsMobile from "@/hooks/useIsMobile";
 import NavHeader from "./NavHeader";
 import NavHeaderMobile from "./NavHeaderMobile";
+import { useRouter } from "next/router";
 
 type Props = {
   children: ReactNode;
 };
 
 const DesktopLayout: FC<Props> = ({ children }) => {
-  const pathname = usePathname();
+  const router = useRouter()
   const isMobile = useIsMobile();
 
-  if (pathname == "/discovery" || pathname.startsWith("/section"))
+  if (router.pathname == "/discovery" || router.pathname.startsWith("/section"))
     return children;
 
   if (isMobile) {

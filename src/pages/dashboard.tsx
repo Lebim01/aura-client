@@ -1,3 +1,4 @@
+"use client"
 import Footer from "@/components/common/Footer";
 import DesktopLayout from "@/components/common/DesktopLayout";
 import VideoCaroussel from "@/components/dashboard/components/Sections/VideoCaroussel";
