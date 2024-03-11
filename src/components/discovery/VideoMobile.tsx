@@ -11,10 +11,9 @@ import { MdHearingDisabled } from "react-icons/md";
 import useSwipeVideos from "@/store/useSwipeVideos";
 import { VideoProps } from "./VideoController";
 import canAutoPlay from "can-autoplay";
-import { Stream } from "@cloudflare/stream-react";
 import { classNamesCustom } from "@/utils/classes";
-import type { StreamPlayerApi } from "@cloudflare/stream-react";
 import { useSession } from "next-auth/react";
+import ReactHlsPlayer from 'react-hls-player';
 
 type Handler = {
   play: () => void;
@@ -37,7 +36,7 @@ const VideoMobile = forwardRef(
     const {
       position: { swipeIndex },
     } = useSwipeVideos();
-    const streamRef = useRef<StreamPlayerApi | undefined>();
+    const streamRef = useRef<any>();
     const [autoplayMuted, setAutoplayMuted] = useState(true);
     const { status } = useSession();
     const isLogged = status == "authenticated";
@@ -110,21 +109,23 @@ const VideoMobile = forwardRef(
             <MdHearingDisabled /> <span>Reactivar Sonido</span>
           </button>
         )}
-        <Stream
-          loop
+        <ReactHlsPlayer
+          src={`https://customer-fuwnvhure6hzod9h.cloudflarestream.com/${videoUrl}/iframe?poster=https%3A%2F%2Fcustomer-fuwnvhure6hzod9h.cloudflarestream.com%2F${videoUrl}%2Fthumbnails%2Fthumbnail.jpg%3Ftime%3D%26height%3D600`}
           controls={false}
-          src={videoUrl}
-          streamRef={streamRef}
+          width="100%"
+          height="auto"
+          playerRef={streamRef}
+          hlsConfig={{
+            maxLoadingDelay: 4,
+            minAutoBitrate: 0,
+            lowLatencyMode: true,
+          }}
           className={classNamesCustom(
             "select-none",
             videoOrientation == "vertical" &&
               "h-full min-h-[500px] object-cover h-custom-screen w-full min-w-[300px]",
             videoOrientation == "horizontal" && "video-horizontal"
           )}
-          autoplay={videoIndex == 0}
-          muted={autoplayMuted}
-          preload={"metadata"}
-          poster={`https://customer-fuwnvhure6hzod9h.cloudflarestream.com/${videoUrl}/thumbnails/thumbnail.jpg?time=2s&height=600`}
         />
         <div
           className="absolute h-full w-full top-0 left-0"
