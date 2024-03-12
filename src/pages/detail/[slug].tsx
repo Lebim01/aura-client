@@ -46,7 +46,7 @@ export default function Detail({
   return (
     <AuthProvider>
       <DesktopLayout>
-        <div className="flex flex-col h-screen w-full md:w-screen gap-y-[32px] hidescroll overflow-y-auto md:px-[16px] pb-[150px]">
+        <div className="flex flex-col h-auto w-full md:w-screen gap-y-[32px] md:px-[16px] pb-[100px]">
           <div className="flex flex-col gap-y-[24px] flex-1">
             {/* Cards */}
 
