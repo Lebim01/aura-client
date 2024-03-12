@@ -4,7 +4,6 @@ import Large from "@/components/detail/HeaderDetail/Large";
 import Tabs from "@/components/detail/Tabs";
 import Sinopsis from "@/components/detail/Sinopsis";
 import Cast from "@/components/detail/Cast";
-import Middle from "@/components/detail/HeaderDetail/Middle";
 import Reviews from "@/components/detail/Reviews";
 import { GetStaticPropsContext, GetStaticProps, GetStaticPaths } from "next";
 import { Actor, Genre, Serie, Platform, Crew } from "@/types/series";
@@ -14,6 +13,8 @@ import axiosInstance from "@/services";
 import { getSerieBySlug } from "@/services/series";
 import TrailerModal from "@/components/detail/HeaderDetail/TrailerModal";
 import AuthProvider from "@/components/common/ProtectAuth";
+import { Video } from "@/types/video";
+import VideoReviews from "@/components/detail/VideoReviews";
 
 type Tabs = "credits" | "reviews" | "video";
 
@@ -23,6 +24,7 @@ type Props = {
   platforms: Platform[];
   actors: Actor[];
   crew: Crew[];
+  videos: Video[];
 };
 
 export default function Detail({
@@ -31,6 +33,7 @@ export default function Detail({
   platforms,
   actors,
   crew,
+  videos,
 }: Props) {
   const [serie, setSerie] = useState<Serie>(JSON.parse(_serie));
   const [tab, setTab] = useState<Tabs>("credits");
@@ -43,17 +46,16 @@ export default function Detail({
   return (
     <AuthProvider>
       <DesktopLayout>
-        <div className="flex flex-col h-screen w-full md:w-screen gap-y-[32px] hidescroll mb-[90px] md:overflow-y-auto md:px-[16px]">
+        <div className="flex flex-col h-screen w-full md:w-screen gap-y-[32px] hidescroll overflow-y-auto md:px-[16px] pb-[150px]">
           <div className="flex flex-col gap-y-[24px] flex-1">
             {/* Cards */}
-            {tab === "credits" && (
-              <Large
-                serie={serie}
-                genres={genres}
-                openTrailer={() => setOpenTrailer(true)}
-              />
-            )}
-            {tab === "reviews" && <Middle serie={serie} genres={genres} />}
+
+            <Large
+              serie={serie}
+              genres={genres}
+              openTrailer={() => setOpenTrailer(true)}
+            />
+            {/*tab === "reviews" && <Middle serie={serie} genres={genres} />*/}
             {serie.trailer && openTrailer && (
               <TrailerModal
                 url={serie.trailer}
@@ -64,16 +66,7 @@ export default function Detail({
             <div className="px-[16px] hidden md:block">
               <Separator />
             </div>
-            {/*  {!loading && <Tabs option={tab} setTab={setTab} />}
-          {loading && <TabsSkeleton/>}
-          <div className="px-[16px]">
-            {!loading && <ButtonCommon
-              text="AÑADIR A LISTA"
-              onClick={() => {}}
-              disabled={false}
-            />}
-            {loading && <ButtonSkeleton/>}
-          </div> */}
+            {videos.length > 0 && <Tabs option={tab} setTab={setTab} />}
             {tab === "credits" && (
               <div className="flex flex-col md:flex-row gap-y-[32px]">
                 <Sinopsis
@@ -93,10 +86,11 @@ export default function Detail({
             )}
 
             {tab === "reviews" && <Reviews />}
+            {tab === "video" && <VideoReviews videos={videos} />}
           </div>
-          <Footer />
         </div>
       </DesktopLayout>
+      <Footer />
     </AuthProvider>
   );
 }

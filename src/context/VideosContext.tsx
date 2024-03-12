@@ -25,6 +25,7 @@ type Props = {
   url: string;
   children: ReactNode;
   shared?: string;
+  initData?: Video[];
 };
 
 const VideosContext = createContext<ContextData>({
@@ -42,7 +43,7 @@ const VideosContext = createContext<ContextData>({
 const VideosContextProvider = (props: Props) => {
   const [loading, setLoading] = useState(false);
   const [hasMore, setHasMore] = useState(true);
-  const [videos, setVideos] = useState<Video[]>([]);
+  const [videos, setVideos] = useState<Video[]>(props.initData || []);
   const [error, setError] = useState<null | string>(null);
 
   const fetchMore = async (forceSkip?: number) => {

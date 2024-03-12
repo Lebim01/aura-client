@@ -12,17 +12,17 @@ interface Props {
 
 const options = [
   { label: "Ficha y Creditos", value: "credits" },
-  { label: "Reseñas", value: "reviews" },
+  //{ label: "Reseñas", value: "reviews" },
   { label: "Reseñas en vídeo", value: "video" },
 ];
 export default function Tabs({ option, setTab }: Props) {
   return (
-    <div className="flex gap-x-[16px] items-center px-[16px]">
+    <div className="flex gap-x-[16px] items-center md:px-[16px]">
       {options.map((item: any, index: number) => {
         return (
           <div
             className={classNamesCustom(
-              "flex justify-center items-center h-[32px] w-fit bg-white rounded-[4px] px-[8px] text-[12px]",
+              "flex justify-center items-center h-[32px] w-fit bg-white rounded-[4px] px-[8px] text-[12px] hover:cursor-pointer select-none",
               { "bg-black": item.value !== option }
             )}
             onClick={() => setTab(item.value)}

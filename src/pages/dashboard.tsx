@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import Footer from "@/components/common/Footer";
 import DesktopLayout from "@/components/common/DesktopLayout";
 import VideoCaroussel from "@/components/dashboard/components/Sections/VideoCaroussel";
@@ -82,8 +82,8 @@ export default function Dashboard({ sections }: Props) {
               </div>
             ))}
         </div>
-        <Footer />
       </DesktopLayout>
+      <Footer />
     </AuthProvider>
   );
 }
