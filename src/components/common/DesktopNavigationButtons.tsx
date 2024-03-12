@@ -1,9 +1,7 @@
 import Link from "next/link";
 import { navigationOptions } from "./Footer";
 import Image from "next/image";
-import classNames from "classnames";
 import { usePathname } from "next/navigation";
-import InputSearch from "./InputSearch";
 import { Fragment } from "react";
 import { classNamesCustom } from "@/utils/classes";
 
@@ -21,7 +19,6 @@ const DesktopNavigationButtons = () => {
                 href={item.url}
                 className={classNamesCustom(
                   "text-[12px] hover:scale-105 transition-transform duration-200 ease-in-out cursor-pointer p-[8px] rounded-[6px]",
-                  { "bg-navigation-bg": pathname === item.url }
                 )}
               >
                 <div className="flex space-x-[16px] md:space-x-[8px] items-center">
