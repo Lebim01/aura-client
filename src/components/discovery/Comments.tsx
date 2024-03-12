@@ -113,7 +113,7 @@ const Comments = ({ show, setShow, index, id_video }: Props) => {
   return (
     <div
       className={classNamesCustom(
-        " items-end justify-end w-full flex flex-col top-0 bg-black-1A bg-opacity-10 z-50",
+        " items-end justify-end w-full flex flex-col top-0 bg-black-1A bg-opacity-80 z-50",
         {
           "h-custom-screen transition-all duration-500 absolute":
             show && isMobile,
