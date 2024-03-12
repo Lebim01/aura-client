@@ -21,7 +21,7 @@ const DesktopNavigationButtons = () => {
             >
               <div
                 className={classNamesCustom(
-                  "text-[12px] hover:scale-105 transition-transform duration-200 ease-in-out cursor-pointer p-[8px] rounded-[6px]",
+                  "text-[12px] hover:scale-105 transition-transform duration-200 ease-in-out cursor-pointer p-[8px] rounded-[6px] flex items-center space-x-[8px]",
                 )}
               >
                 <Image
