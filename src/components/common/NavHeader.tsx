@@ -2,7 +2,6 @@
 import React from "react";
 import Image from "next/image";
 import { useRouter } from "next/router";
-import SearchInput from "../dashboard/components/filters/SearchInput";
 import HeaderDashboard from "../dashboard/HeaderDashboard";
 import InputSearch from "./InputSearch";
 const NavHeader = () => {
@@ -20,7 +19,7 @@ const NavHeader = () => {
         />
       </div>
 
-      <InputSearch />
+      <InputSearch className={router.pathname !== "/search" ? "" : "hidden"} />
       <HeaderDashboard />
     </div>
   );

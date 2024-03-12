@@ -1,13 +1,17 @@
 import Image from "next/image";
 import classNames from "classnames";
 import { usePathname } from "next/navigation";
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, FC } from "react";
 import { classNamesCustom } from "@/utils/classes";
 import useFilters from "@/store/useFilters";
 import useIsMobile from "@/hooks/useIsMobile";
 import { useRouter } from "next/router";
 
-const InputSearch = () => {
+type Props = {
+  className?: string;
+};
+
+const InputSearch: FC<Props> = (props) => {
   const [focused, setFocused] = useState(false);
   const ref = useRef<HTMLInputElement | null>(null);
   const pathname = usePathname();
@@ -79,7 +83,8 @@ const InputSearch = () => {
         {
           "flex border-transparent w-full bg-black-18 border rounded-[8px] py-[8px] items-center shadow-[0px_0px_0px_3px_rgba(0,0,0,0.0)]":
             !focused && isMobile,
-        }
+        },
+        props.className
       )}
       onClick={() => {
         if (router.pathname !== "/search") {
