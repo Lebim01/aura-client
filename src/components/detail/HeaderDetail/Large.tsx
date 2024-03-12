@@ -62,7 +62,7 @@ export default function Large({ serie, genres, ...props }: Props) {
               ))}
           </div>
         </div>
-        <span className="text-[12px] md:text-[14px] md:max-w-[50%] md:leading-[21px] leading-[130%] overflow-hidden block text-ellipsis">
+        <span className="text-[12px] md:text-[14px] md:max-w-[50%] md:leading-[21px] leading-[130%] block">
           {serie?.overview}
         </span>
         <Rating qualification={serieRating} />
