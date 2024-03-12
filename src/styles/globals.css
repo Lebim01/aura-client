@@ -53,6 +53,11 @@ body {
   height: calc(var(--vh, 1vh) * 100 - 156px);
 }
 
+.h-custom-screen-desktop {
+  height: 100vh;
+  height: calc(var(--vh, 1vh) * 100 - 78px);
+}
+
 .h-custom-screen-comments {
   height: 100vh;
   height: calc(var(--vh, 1vh) * 100 - 60px);
