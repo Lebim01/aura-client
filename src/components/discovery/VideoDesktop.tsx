@@ -13,6 +13,7 @@ import { classNamesCustom } from "@/utils/classes";
 import { Stream, StreamPlayerApi } from "@cloudflare/stream-react";
 import { MdHearingDisabled } from "react-icons/md";
 import useVideoMute from "@/store/useVideoMute";
+import HLSPlayer from "../common/HLSPlayer";
 
 type Handler = {
   play: () => void;
@@ -33,7 +34,7 @@ const VideoDesktop = forwardRef(
     ref: ForwardedRef<Handler>
   ) => {
     const { muted, setMute } = useVideoMute();
-    const streamRef = useRef<StreamPlayerApi | undefined>();
+    const streamRef = useRef<any>();
 
     useImperativeHandle(ref, () => ({
       play: () => {
@@ -81,10 +82,13 @@ const VideoDesktop = forwardRef(
               <MdHearingDisabled /> <span>Reactivar Sonido</span>
             </button>
           )}
-          <Stream
+          <HLSPlayer
+            loop
+            playsInline
+            webkit-playsinline
             controls={videoOrientation == "horizontal"}
-            src={videoUrl}
-            streamRef={streamRef}
+            src={`https://customer-fuwnvhure6hzod9h.cloudflarestream.com/${videoUrl}`}
+            ref={streamRef}
             className={classNamesCustom(
               "cursor-pointer",
               videoOrientation == "vertical" &&
@@ -92,11 +96,8 @@ const VideoDesktop = forwardRef(
               videoOrientation == "horizontal" &&
                 "aspect-video min-w-[500px] w-auto h-auto"
             )}
-            autoplay={videoIndex == 0}
-            muted={muted}
-            preload="metadata"
-            loop
-            responsive
+            manifest={`https://customer-fuwnvhure6hzod9h.cloudflarestream.com/${videoUrl}/manifest/video.m3u8`}
+            poster={`https%3A%2F%2Fcustomer-fuwnvhure6hzod9h.cloudflarestream.com%2F${videoUrl}%2Fthumbnails%2Fthumbnail.jpg%3Ftime%3D%26height%3D600`}
           />
           <div
             className="absolute h-full w-full top-0 left-0"
