@@ -3,7 +3,6 @@ import React, {
   useEffect,
   useImperativeHandle,
   useRef,
-  useState,
 } from "react";
 import Hls from "hls.js";
 
@@ -35,7 +34,7 @@ const HLSPlayer = forwardRef<HTMLVideoElement, Props>(
       return () => hls?.destroy();
     }, [manifest]);
 
-    return <video {...props} ref={videoRef} />;
+    return <video {...props} playsInline ref={videoRef} />;
   }
 );
 

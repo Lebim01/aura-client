@@ -1,7 +1,6 @@
 import {
   ForwardedRef,
   forwardRef,
-  useState,
   useRef,
   useImperativeHandle,
   useEffect,
@@ -10,7 +9,6 @@ import canAutoPlay from "can-autoplay";
 import { VideoProps } from "./VideoController";
 import InfoReview from "./InfoReview";
 import { classNamesCustom } from "@/utils/classes";
-import { Stream, StreamPlayerApi } from "@cloudflare/stream-react";
 import { MdHearingDisabled } from "react-icons/md";
 import useVideoMute from "@/store/useVideoMute";
 import HLSPlayer from "../common/HLSPlayer";
@@ -86,7 +84,7 @@ const VideoDesktop = forwardRef(
             loop
             playsInline
             webkit-playsinline
-            controls={videoOrientation == "horizontal"}
+            controls
             src={`https://customer-fuwnvhure6hzod9h.cloudflarestream.com/${videoUrl}`}
             ref={streamRef}
             className={classNamesCustom(
