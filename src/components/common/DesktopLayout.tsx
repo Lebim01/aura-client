@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import { FC, ReactNode } from "react";
 import CategoryFilters from "../dashboard/components/filters/CategoryFilters";
 import DesktopNavigationButtons from "./DesktopNavigationButtons";
@@ -13,11 +13,16 @@ type Props = {
 };
 
 const DesktopLayout: FC<Props> = ({ children }) => {
-  const router = useRouter()
+  const router = useRouter();
   const isMobile = useIsMobile();
 
-  if (isMobile && router.pathname == "/discovery" || router.pathname.startsWith("/section"))
+  if (
+    (isMobile && router.pathname == "/discovery") ||
+    router.pathname.startsWith("/section")
+  )
     return children;
+
+  if (isMobile && router.pathname == "/profile") return children;
 
   if (isMobile) {
     return (

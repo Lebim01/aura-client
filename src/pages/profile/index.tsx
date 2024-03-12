@@ -32,7 +32,7 @@ const Profile = () => {
   return (
     <AuthProvider protected>
       <DesktopLayout>
-        <div className="flex flex-col overflow-y-auto w-auto pb-[99px] relative min-w-max flex-grow h-custom-screen hidescroll">
+        <div className="flex flex-col overflow-y-auto w-auto pb-[99px] relative min-w-max flex-grow h-custom-screen hidescroll md:max-w-[1056px]">
           <Header text={label || "Perfil"} />
           {!step || step === "profile" ? (
             <>
