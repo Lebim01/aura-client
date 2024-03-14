@@ -26,10 +26,9 @@ type Section = {
 };
 
 export default function Dashboard({ sections, isMobile }: Props) {
-  const isMobileNoSSR = useIsMobile();
   return (
     <AuthProvider>
-      <DesktopLayout>
+      <DesktopLayout isMobile={isMobile}>
         {isMobile && (
           <div className="flex flex-col space-y-[16px]">
             <SearchInput />

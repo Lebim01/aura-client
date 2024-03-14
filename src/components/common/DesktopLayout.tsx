@@ -10,11 +10,11 @@ import { useRouter } from "next/router";
 
 type Props = {
   children: ReactNode;
+  isMobile: boolean;
 };
 
-const DesktopLayout: FC<Props> = ({ children }) => {
+const DesktopLayout: FC<Props> = ({ children, isMobile }) => {
   const router = useRouter();
-  const isMobile = useIsMobile();
 
   if (
     (isMobile && router.pathname == "/discovery") ||

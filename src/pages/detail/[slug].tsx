@@ -5,7 +5,7 @@ import Tabs from "@/components/detail/Tabs";
 import Sinopsis from "@/components/detail/Sinopsis";
 import Cast from "@/components/detail/Cast";
 import Reviews from "@/components/detail/Reviews";
-import { GetStaticPropsContext, GetStaticProps, GetStaticPaths } from "next";
+import { GetStaticPaths, GetServerSideProps } from "next";
 import { Actor, Genre, Serie, Platform, Crew } from "@/types/series";
 import DesktopLayout from "@/components/common/DesktopLayout";
 import Separator from "@/components/common/Separator";
@@ -25,6 +25,7 @@ type Props = {
   actors: Actor[];
   crew: Crew[];
   videos: Video[];
+  isMobile: boolean;
 };
 
 export default function Detail({
@@ -34,6 +35,7 @@ export default function Detail({
   actors,
   crew,
   videos,
+  isMobile,
 }: Props) {
   const [serie, setSerie] = useState<Serie>(JSON.parse(_serie));
   const [tab, setTab] = useState<Tabs>("credits");
@@ -45,7 +47,7 @@ export default function Detail({
 
   return (
     <AuthProvider>
-      <DesktopLayout>
+      <DesktopLayout isMobile={isMobile}>
         <div className="flex flex-col h-auto w-full md:w-screen gap-y-[32px] md:px-[16px] pb-[100px]">
           <div className="flex flex-col gap-y-[24px] flex-1">
             {/* Cards */}
@@ -114,7 +116,13 @@ export const getStaticPaths = (async () => {
   };
 }) satisfies GetStaticPaths;
 
-export const getStaticProps = (async (context: GetStaticPropsContext) => {
+export const getStaticProps = (async (context) => {
+  const userAgent = context.req.headers["user-agent"] as string;
+  const isMobile = Boolean(
+    userAgent.match(
+      /Android|BlackBerry|iPhone|iPad|iPod|Opera Mini|IEMobile|WPDesktop/i
+    )
+  );
   const slug = context?.params?.slug || "";
   const serie_result = await getSerieBySlug(slug as string);
   return {
@@ -126,7 +134,8 @@ export const getStaticProps = (async (context: GetStaticPropsContext) => {
       crew: serie_result.crew || [],
       languages: serie_result.languages || [],
       videos: serie_result.videos || [],
+      isMobile,
     },
     revalidate: 60,
   };
-}) satisfies GetStaticProps<Props>;
+}) satisfies GetServerSideProps<Props>;

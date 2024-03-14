@@ -5,14 +5,20 @@ import { useWindowSize } from "@uidotdev/usehooks";
 import AuthProvider from "@/components/common/ProtectAuth";
 import { useRouter } from "next/router";
 import VideosContextProvider from "@/context/VideosContext";
+import { GetServerSideProps } from "next";
+import { FC } from "react";
 
-const ImageViewer = () => {
+type Props = {
+  isMobile: boolean;
+}
+
+const ImageViewer: FC<Props> = ({ isMobile }) => {
   const { width } = useWindowSize();
   const router = useRouter();
 
   return (
     <AuthProvider>
-      <DesktopLayout>
+      <DesktopLayout isMobile={isMobile}>
         {router.isReady && (
           <VideosContextProvider
             url={`/dashboard/discovery`}
@@ -41,3 +47,14 @@ const ImageViewer = () => {
 };
 
 export default ImageViewer;
+
+export const getServerSideProps = (async (context) => {
+  const userAgent = context.req.headers["user-agent"] as string;
+  const isMobile = Boolean(
+    userAgent.match(
+      /Android|BlackBerry|iPhone|iPad|iPod|Opera Mini|IEMobile|WPDesktop/i
+    )
+  );
+
+  return { props: { isMobile } };
+}) satisfies GetServerSideProps<Props>;
