@@ -97,12 +97,8 @@ const VideoDesktop = forwardRef(
             manifest={`https://customer-fuwnvhure6hzod9h.cloudflarestream.com/${videoUrl}/manifest/video.m3u8`}
             poster={`https://customer-fuwnvhure6hzod9h.cloudflarestream.com/${videoUrl}/thumbnails/thumbnail.jpg?time=1s&height=600`}
           />
-          <div
-            className="absolute h-full w-full top-0 left-0"
-            onClick={togglePlay}
-          ></div>
           <InfoReview
-            className="bottom-4"
+            className="bottom-[80px]"
             index={videoIndex}
             likes={likes}
             like_me={like_me}
