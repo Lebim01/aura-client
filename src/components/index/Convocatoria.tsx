@@ -1,10 +1,11 @@
 import { FC } from "react";
 import DesktopLayout from "../common/DesktopLayout";
 import AuthProvider from "../common/ProtectAuth";
+import Footer from "../common/Footer";
 
 type Props = {
   isMobile: boolean;
-}
+};
 
 const Convocatoria: FC<Props> = ({ isMobile }) => {
   return (
@@ -154,6 +155,7 @@ const Convocatoria: FC<Props> = ({ isMobile }) => {
           </div>
         </div>
       </DesktopLayout>
+      {isMobile && <Footer />}
     </AuthProvider>
   );
 };
