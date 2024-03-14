@@ -14,7 +14,7 @@ const NavHeader = () => {
           width={80}
           height={17}
           alt=""
-          className="cursor-pointer hover:scale-110 duration-300 trasition-all"
+          className="cursor-pointer object-cover object-center hover:scale-110 duration-300 trasition-all"
           onClick={() => router.push("/dashboard")}
         />
       </div>

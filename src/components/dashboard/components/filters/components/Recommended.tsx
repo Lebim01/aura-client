@@ -119,7 +119,7 @@ const Recommended = ({ setShow, show }: Props) => {
               </div>
             ) : (
               <div className=" w-[172px] h-[262px] flex justify-center items-center text-center">
-                Por el momento, no hay series que cumplan con estos parámetros.
+                Por el momento, en esta plataforma no hay ese género
               </div>
             )}
 
