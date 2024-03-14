@@ -88,7 +88,7 @@ const ModalPhoto: FC<Props> = (props) => {
                 }}
               />
               <img
-                className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full w-[110px] h-[110px] hover:cursor-pointer"
+                className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full w-[110px] h-[110px] hover:cursor-pointer object-cover object-center"
                 src={data?.user?.profile_img || "/no-photo.png"}
                 alt="Extra large avatar"
                 onClick={uploading ? undefined : selectImage}

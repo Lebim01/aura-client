@@ -37,7 +37,7 @@ const Info = () => {
         >
           <Image
             src={data?.user?.profile_img || "/no-photo.png"}
-            className="rounded-full h-[80px] w-[80px]"
+            className="rounded-full h-[80px] w-[80px] object-cover object-center"
             alt=""
             width={80}
             height={80}

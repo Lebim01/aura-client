@@ -64,7 +64,7 @@ const InputComment = ({ id_video }: Props) => {
           alt=""
           width={32}
           height={32}
-          className="bg-gray-400 rounded-full min-w-[24px] min-h-[24px]"
+          className="bg-gray-400 rounded-full object-cover object-center min-w-[24px] min-h-[24px]"
         />
       </div>
       <div className="flex w-full px-[16px] py-[12px] border border-border-comment-input rounded-[6px] ">

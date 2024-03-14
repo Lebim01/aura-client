@@ -63,7 +63,7 @@ const HeaderDashboard = () => {
           >
             <Image
               src={data?.user?.profile_img || "/no-photo.png"}
-              className="rounded-full h-[32px] w-[32px] min-h-[32px] min-w-[32px]"
+              className="rounded-full h-[32px] w-[32px] min-h-[32px] min-w-[32px] object-cover object-center"
               alt=""
               width={32}
               height={32}
