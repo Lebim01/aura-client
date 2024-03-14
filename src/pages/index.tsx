@@ -1,4 +1,5 @@
 import Convocatoria from "@/components/index/Convocatoria";
+import { GetServerSideProps } from "next";
 
 const Video = () => {
   return (
@@ -23,6 +24,25 @@ const Video = () => {
   );
 };
 
-export default function Home() {
-  return process.env.NEXT_PUBLIC_REDIRECT ? <Video /> : <Convocatoria />;
+type Props = {
+  isMobile: boolean;
+};
+
+export default function Home({ isMobile }: Props) {
+  return process.env.NEXT_PUBLIC_REDIRECT ? (
+    <Video />
+  ) : (
+    <Convocatoria isMobile={isMobile} />
+  );
 }
+
+export const getServerSideProps = (async (context) => {
+  const userAgent = context.req.headers["user-agent"] as string;
+  const isMobile = Boolean(
+    userAgent.match(
+      /Android|BlackBerry|iPhone|iPad|iPod|Opera Mini|IEMobile|WPDesktop/i
+    )
+  );
+
+  return { props: { isMobile } };
+}) satisfies GetServerSideProps<Props>;
