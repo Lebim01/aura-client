@@ -83,9 +83,9 @@ const VideoDesktop = forwardRef(
           <HLSPlayer
             loop
             playsInline
-            webkit-playsinline
+            webkit-playsinline="true"
             controls
-            src={`https://customer-fuwnvhure6hzod9h.cloudflarestream.com/${videoUrl}`}
+            //src={`https://customer-fuwnvhure6hzod9h.cloudflarestream.com/${videoUrl}`}
             ref={streamRef}
             className={classNamesCustom(
               "cursor-pointer",
@@ -95,7 +95,7 @@ const VideoDesktop = forwardRef(
                 "aspect-video min-w-[500px] w-auto h-auto"
             )}
             manifest={`https://customer-fuwnvhure6hzod9h.cloudflarestream.com/${videoUrl}/manifest/video.m3u8`}
-            poster={`https%3A%2F%2Fcustomer-fuwnvhure6hzod9h.cloudflarestream.com%2F${videoUrl}%2Fthumbnails%2Fthumbnail.jpg%3Ftime%3D%26height%3D600`}
+            poster={`https%3A%2F%2Fcustomer-fuwnvhure6hzod9h.cloudflarestream.com%2F${videoUrl}%2Fthumbnails%2Fthumbnail.jpg%3Ftime%3D1s%26height%3D600`}
           />
           <div
             className="absolute h-full w-full top-0 left-0"

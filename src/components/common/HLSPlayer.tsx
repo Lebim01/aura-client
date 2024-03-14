@@ -4,7 +4,7 @@ import React, {
   useImperativeHandle,
   useRef,
 } from "react";
-import Hls from "hls.js";
+import Hls, { Events } from "hls.js";
 
 interface Props extends React.HTMLProps<HTMLVideoElement> {
   manifest: string;
@@ -26,7 +26,9 @@ const HLSPlayer = forwardRef<HTMLVideoElement, Props>(
         // Safari
         video.src = src;
       } else if (Hls.isSupported()) {
-        const hls = new Hls();
+        const hls = new Hls({
+          startLevel: 4
+        });
         hls.loadSource(src);
         hls.attachMedia(video);
       }
@@ -34,7 +36,9 @@ const HLSPlayer = forwardRef<HTMLVideoElement, Props>(
       return () => hls?.destroy();
     }, [manifest]);
 
-    return <video {...props} playsInline ref={videoRef} />;
+    return (
+      <video {...props} playsInline webkit-playsinline="true" ref={videoRef} />
+    );
   }
 );
 

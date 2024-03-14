@@ -9,7 +9,7 @@ const DesktopNavigationButtons = () => {
   const pathname = usePathname();
 
   return (
-    <div className="hidden md:flex flex-col">
+    <div className="hidden md:flex flex-col md:space-y-2">
       <div className="flex-col flex gap-y-[16px] rounded-[12px] md:min-w-[280px] flex-1">
         {navigationOptions
           .filter((item) => item.hide === false || item.hide === undefined)
@@ -36,6 +36,14 @@ const DesktopNavigationButtons = () => {
               </div>
             </Link>
           ))}
+      </div>
+      <div>
+        <Link
+          href="/"
+          className="text-xs text-neutral-300 underline"
+        >
+          Convocatoria
+        </Link>
       </div>
       <div>
         <Link

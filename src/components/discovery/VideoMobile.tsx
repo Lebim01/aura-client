@@ -11,9 +11,7 @@ import { MdHearingDisabled } from "react-icons/md";
 import useSwipeVideos from "@/store/useSwipeVideos";
 import { VideoProps } from "./VideoController";
 import canAutoPlay from "can-autoplay";
-import { Stream } from "@cloudflare/stream-react";
 import { classNamesCustom } from "@/utils/classes";
-import type { StreamPlayerApi } from "@cloudflare/stream-react";
 import { useSession } from "next-auth/react";
 import HLSPlayer from "../common/HLSPlayer";
 
@@ -116,16 +114,16 @@ const VideoMobile = forwardRef(
         <HLSPlayer
           loop
           playsInline
-          webkit-playsinline
+          webkit-playsinline="true"
           controls={tap}
-          src={`https://customer-fuwnvhure6hzod9h.cloudflarestream.com/${videoUrl}`}
+          //src={`https://customer-fuwnvhure6hzod9h.cloudflarestream.com/${videoUrl}`}
           ref={streamRef}
           className={classNamesCustom(
             "select-none h-full min-h-[500px] object-cover h-custom-screen w-full min-w-[300px]",
             videoOrientation == "horizontal" && "object-contain"
           )}
           manifest={`https://customer-fuwnvhure6hzod9h.cloudflarestream.com/${videoUrl}/manifest/video.m3u8`}
-          poster={`https%3A%2F%2Fcustomer-fuwnvhure6hzod9h.cloudflarestream.com%2F${videoUrl}%2Fthumbnails%2Fthumbnail.jpg%3Ftime%3D%26height%3D600`}
+          poster={`https%3A%2F%2Fcustomer-fuwnvhure6hzod9h.cloudflarestream.com%2F${videoUrl}%2Fthumbnails%2Fthumbnail.jpg%3Ftime%3D1s%26height%3D600`}
           muted={autoplayMuted}
           onClick={() => setTap(true)}
         />
