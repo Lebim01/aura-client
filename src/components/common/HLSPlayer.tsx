@@ -27,7 +27,7 @@ const HLSPlayer = forwardRef<HTMLVideoElement, Props>(
         video.src = src;
       } else if (Hls.isSupported()) {
         const hls = new Hls({
-          startLevel: 4
+          startLevel: 3,
         });
         hls.loadSource(src);
         hls.attachMedia(video);
