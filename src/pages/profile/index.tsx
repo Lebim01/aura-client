@@ -4,18 +4,23 @@ import ButtonCommon from "@/components/common/ButtonCommon";
 import Info from "@/components/profile/Info";
 import Options from "@/components/profile/Options";
 import Header from "@/components/profile/Header";
-import { useEffect, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import General from "@/components/profile/General";
 import { signOut } from "next-auth/react";
 import AuthProvider from "@/components/common/ProtectAuth";
 import { useRouter, useSearchParams } from "next/navigation";
+import { GetServerSideProps } from "next";
+
+type Props = {
+  isMobile: boolean;
+};
 
 const options = [
   { step: "profile", label: "Perfil" },
   { step: "general", label: "Ajustes" },
 ];
 
-const Profile = () => {
+const Profile: FC<Props> = ({ isMobile }) => {
   const searchParams = useSearchParams();
   const step = searchParams.get("step");
   const router = useRouter();
@@ -31,7 +36,7 @@ const Profile = () => {
 
   return (
     <AuthProvider protected>
-      <DesktopLayout>
+      <DesktopLayout isMobile={isMobile}>
         <div className="flex flex-col overflow-y-auto w-auto pb-[99px] relative min-w-max flex-grow h-custom-screen hidescroll md:max-w-[1056px]">
           <Header text={label || "Perfil"} />
           {!step || step === "profile" ? (
@@ -62,3 +67,14 @@ const Profile = () => {
 };
 
 export default Profile;
+
+export const getServerSideProps = (async (context) => {
+  const userAgent = context.req.headers["user-agent"] as string;
+  const isMobile = Boolean(
+    userAgent.match(
+      /Android|BlackBerry|iPhone|iPad|iPod|Opera Mini|IEMobile|WPDesktop/i
+    )
+  );
+
+  return { props: { isMobile } };
+}) satisfies GetServerSideProps<Props>;

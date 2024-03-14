@@ -5,9 +5,14 @@ import InputPassword from "@/components/common/InputPassword";
 import PasswordFeedback from "@/components/common/PasswordFeedback";
 import AuthProvider from "@/components/common/ProtectAuth";
 import { updatePassword } from "@/services/user";
-import { useMemo, useState } from "react";
+import { GetServerSideProps } from "next";
+import { FC, useMemo, useState } from "react";
 
-const ProfileChangePasswordPage = () => {
+type Props = {
+  isMobile: boolean;
+};
+
+const ProfileChangePasswordPage: FC<Props> = ({ isMobile }) => {
   const [state, setState] = useState({
     pass: "",
     confirm_pass: "",
@@ -44,7 +49,7 @@ const ProfileChangePasswordPage = () => {
 
   return (
     <AuthProvider protected>
-      <DesktopLayout>
+      <DesktopLayout isMobile={isMobile}>
         <div className="w-full">
           <div className="md:bg-menus bg-neutral-800/70 flex flex-col rounded-lg p-6 space-y-4">
             <label>Actualizar contraseña</label>
@@ -98,3 +103,14 @@ const ProfileChangePasswordPage = () => {
 };
 
 export default ProfileChangePasswordPage;
+
+export const getServerSideProps = (async (context) => {
+  const userAgent = context.req.headers["user-agent"] as string;
+  const isMobile = Boolean(
+    userAgent.match(
+      /Android|BlackBerry|iPhone|iPad|iPod|Opera Mini|IEMobile|WPDesktop/i
+    )
+  );
+
+  return { props: { isMobile } };
+}) satisfies GetServerSideProps<Props>;

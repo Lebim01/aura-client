@@ -4,14 +4,20 @@ import VerticalDesktopVideos from "@/components/discovery/VerticalDesktopVideos"
 import { useWindowSize } from "@uidotdev/usehooks";
 import AuthProvider from "@/components/common/ProtectAuth";
 import VideosContextProvider from "@/context/VideosContext";
+import { GetServerSideProps } from "next";
+import { FC } from "react";
 
-const ImageViewer = () => {
+type Props = {
+  isMobile: boolean;
+};
+
+const ImageViewer: FC<Props> = ({ isMobile }) => {
   const slug = "mis-5-series";
   const { width } = useWindowSize();
 
   return (
     <AuthProvider>
-      <DesktopLayout>
+      <DesktopLayout isMobile={isMobile}>
         <VideosContextProvider url={"/dashboard/section/" + slug}>
           <div
             id="discovery-container"
@@ -35,3 +41,14 @@ const ImageViewer = () => {
 };
 
 export default ImageViewer;
+
+export const getServerSideProps = (async (context) => {
+  const userAgent = context.req.headers["user-agent"] as string;
+  const isMobile = Boolean(
+    userAgent.match(
+      /Android|BlackBerry|iPhone|iPad|iPod|Opera Mini|IEMobile|WPDesktop/i
+    )
+  );
+
+  return { props: { isMobile } };
+}) satisfies GetServerSideProps<Props>;
