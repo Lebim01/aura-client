@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import Footer from "@/components/common/Footer";
 import Large from "@/components/detail/HeaderDetail/Large";
 import Tabs from "@/components/detail/Tabs";
 import Sinopsis from "@/components/detail/Sinopsis";
 import Cast from "@/components/detail/Cast";
 import Reviews from "@/components/detail/Reviews";
-import { GetStaticPaths, GetServerSideProps } from "next";
+import { GetStaticPaths, GetStaticProps } from "next";
 import { Actor, Genre, Serie, Platform, Crew } from "@/types/series";
 import DesktopLayout from "@/components/common/DesktopLayout";
 import Separator from "@/components/common/Separator";
@@ -15,6 +15,7 @@ import TrailerModal from "@/components/detail/HeaderDetail/TrailerModal";
 import AuthProvider from "@/components/common/ProtectAuth";
 import { Video } from "@/types/video";
 import VideoReviews from "@/components/detail/VideoReviews";
+import useIsMobile from "@/hooks/useIsMobile";
 
 type Tabs = "credits" | "reviews" | "video";
 
@@ -25,7 +26,6 @@ type Props = {
   actors: Actor[];
   crew: Crew[];
   videos: Video[];
-  isMobile: boolean;
 };
 
 export default function Detail({
@@ -35,8 +35,8 @@ export default function Detail({
   actors,
   crew,
   videos,
-  isMobile,
 }: Props) {
+  const isMobile = useIsMobile();
   const [serie, setSerie] = useState<Serie>(JSON.parse(_serie));
   const [tab, setTab] = useState<Tabs>("credits");
   const [openTrailer, setOpenTrailer] = useState(false);
@@ -117,12 +117,6 @@ export const getStaticPaths = (async () => {
 }) satisfies GetStaticPaths;
 
 export const getStaticProps = (async (context) => {
-  const userAgent = context.req.headers["user-agent"] as string;
-  const isMobile = Boolean(
-    userAgent.match(
-      /Android|BlackBerry|iPhone|iPad|iPod|Opera Mini|IEMobile|WPDesktop/i
-    )
-  );
   const slug = context?.params?.slug || "";
   const serie_result = await getSerieBySlug(slug as string);
   return {
@@ -134,8 +128,8 @@ export const getStaticProps = (async (context) => {
       crew: serie_result.crew || [],
       languages: serie_result.languages || [],
       videos: serie_result.videos || [],
-      isMobile,
+      isMobile: false,
     },
     revalidate: 60,
   };
-}) satisfies GetServerSideProps<Props>;
+}) satisfies GetStaticProps<Props>;
