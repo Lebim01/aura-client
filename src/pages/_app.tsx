@@ -1,4 +1,5 @@
 import "@/styles/globals.css";
+import "nprogress/nprogress.css";
 import type { AppProps } from "next/app";
 import Head from "next/head";
 import React, { useEffect } from "react";
@@ -7,6 +8,7 @@ import { SessionProvider } from "next-auth/react";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import { useRouter } from "next/router";
 import { classNamesCustom } from "@/utils/classes";
+import NProgress from "nprogress";
 
 const jakarta = Plus_Jakarta_Sans({
   subsets: ["latin"],
@@ -22,6 +24,22 @@ export default function App({
   useEffect(() => {
     const vh = window.innerHeight * 0.01;
     document.documentElement.style.setProperty("--vh", `${vh}px`);
+  }, []);
+
+  useEffect(() => {
+    const handleRouteStart = () => NProgress.start();
+    const handleRouteDone = () => NProgress.done();
+
+    router.events.on("routeChangeStart", handleRouteStart);
+    router.events.on("routeChangeComplete", handleRouteDone);
+    router.events.on("routeChangeError", handleRouteDone);
+
+    return () => {
+      // Make sure to remove the event handler on unmount!
+      router.events.off("routeChangeStart", handleRouteStart);
+      router.events.off("routeChangeComplete", handleRouteDone);
+      router.events.off("routeChangeError", handleRouteDone);
+    };
   }, []);
 
   return (
