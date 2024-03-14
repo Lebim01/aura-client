@@ -11,15 +11,19 @@ import { Serie } from "@/types/series";
 interface Props {
   text: string;
   endpoint: string;
-  initData: Serie[];
 }
-const Sections = ({ text, endpoint, initData }: Props) => {
-  const [series, setSeries] = useState<any>(initData);
+const Sections = ({ text, endpoint }: Props) => {
+  const [series, setSeries] = useState<any>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const { filters, init } = useFilters();
 
   const getSeries = async () => {
     try {
+      if (!filters.q) {
+        setSeries([]);
+        return;
+      }
+
       setLoading(true);
       const series_result = await axiosInstance.get(
         `${endpoint}?${objectToURL(filters)}`

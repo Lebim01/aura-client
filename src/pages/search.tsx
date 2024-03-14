@@ -3,12 +3,9 @@ import Footer from "@/components/common/Footer";
 import InputSearch from "@/components/common/InputSearch";
 import AuthProvider from "@/components/common/ProtectAuth";
 import Sections from "@/components/search/Sections";
-import axiosInstance from "@/services";
-import { Serie } from "@/types/series";
 import { GetServerSideProps } from "next";
 
 type Props = {
-  series: Serie[];
   isMobile: boolean;
 };
 
@@ -21,7 +18,6 @@ const SearchPage = (props: Props) => {
           <Sections
             text="Tu búsqueda"
             endpoint="/search/series"
-            initData={props.series}
           />
         </div>
         <Footer />
@@ -37,9 +33,9 @@ export const getServerSideProps = (async (context) => {
       /Android|BlackBerry|iPhone|iPad|iPod|Opera Mini|IEMobile|WPDesktop/i
     )
   );
-  const series_result = await axiosInstance.get(`/search/series`);
+  //const series_result = await axiosInstance.get(`/search/series`);
 
-  return { props: { series: series_result.data, isMobile } };
+  return { props: { isMobile } };
 }) satisfies GetServerSideProps<Props>;
 
 export default SearchPage;
