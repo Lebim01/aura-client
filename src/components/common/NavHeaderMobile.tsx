@@ -25,7 +25,7 @@ const NavHeaderMobile = () => {
                   ? data?.user?.profile_img || "/icons/user.svg"
                   : "/icons/user.svg"
               }
-              className="rounded-full object-cover object-center"
+              className="rounded-full object-cover object-center max-w-[30px] max-h-[30px]"
             />
           </CircleButton>
         </Link>
