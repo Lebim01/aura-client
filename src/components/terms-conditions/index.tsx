@@ -1,10 +1,15 @@
+import { FC } from "react";
 import DesktopLayout from "../common/DesktopLayout";
 import AuthProvider from "../common/ProtectAuth";
 
-const TermsAndConditions = () => {
+type Props = {
+  isMobile: boolean;
+};
+
+const TermsAndConditions: FC<Props> = ({ isMobile }) => {
   return (
     <AuthProvider>
-      <DesktopLayout>
+      <DesktopLayout isMobile={isMobile}>
         <div className="flex flex-col gap-y-[16px] overflow-y-auto md:h-screen pb-[99px] relative hidescroll md:max-w-[1056px] pt-[32px] md:pt-0">
           <div className="flex justify-center">
             <div className="max-w-[1440px] py-[40px] text-[20px]">
