@@ -15,6 +15,7 @@ import SearchInput from "@/components/dashboard/components/filters/SearchInput";
 
 type Props = {
   sections: Section[];
+  isMobile: boolean;
 };
 
 type Section = {
@@ -24,8 +25,8 @@ type Section = {
   videos: VideoDashboardResponse[];
 };
 
-export default function Dashboard({ sections }: Props) {
-  const isMobile = useIsMobile();
+export default function Dashboard({ sections, isMobile }: Props) {
+  const isMobileNoSSR = useIsMobile();
   return (
     <AuthProvider>
       <DesktopLayout>
@@ -88,7 +89,14 @@ export default function Dashboard({ sections }: Props) {
   );
 }
 
-export const getServerSideProps = (async () => {
+export const getServerSideProps = (async (context) => {
+  const userAgent = context.req.headers["user-agent"] as string;
+  const isMobile = Boolean(
+    userAgent.match(
+      /Android|BlackBerry|iPhone|iPad|iPod|Opera Mini|IEMobile|WPDesktop/i
+    )
+  );
+
   const sections_with_videos = [];
   for (const sec of sections) {
     sections_with_videos.push({
@@ -99,5 +107,5 @@ export const getServerSideProps = (async () => {
     });
   }
 
-  return { props: { sections: sections_with_videos } };
+  return { props: { sections: sections_with_videos, isMobile } };
 }) satisfies GetServerSideProps<Props>;
