@@ -88,7 +88,7 @@ const VideoDesktop = forwardRef(
             //src={`https://customer-fuwnvhure6hzod9h.cloudflarestream.com/${videoUrl}`}
             ref={streamRef}
             className={classNamesCustom(
-              "cursor-pointer",
+              "cursor-pointer max-h-[80vh]",
               videoOrientation == "vertical" &&
                 "aspect-tiktok min-w-[300px] h-full w-full",
               videoOrientation == "horizontal" &&
