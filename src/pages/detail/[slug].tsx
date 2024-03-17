@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useState, useEffect } from "react";
 import Footer from "@/components/common/Footer";
 import Large from "@/components/detail/HeaderDetail/Large";
 import Tabs from "@/components/detail/Tabs";
@@ -51,7 +51,6 @@ export default function Detail({
         <div className="flex flex-col h-auto w-full md:w-screen gap-y-[32px] md:px-[16px] pb-[100px]">
           <div className="flex flex-col gap-y-[24px] flex-1">
             {/* Cards */}
-
             <Large
               serie={serie}
               genres={genres}

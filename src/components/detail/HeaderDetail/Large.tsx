@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { Genre, Serie } from "@/types/series";
 import ButtonTrailer from "./ViewTrailer";
@@ -7,6 +7,7 @@ import { classNamesCustom } from "@/utils/classes";
 import useIsMobile from "@/hooks/useIsMobile";
 import Rate from "./Rate";
 import useRatedByMe from "@/hooks/useRatedByMe";
+import { markSearch } from "@/services/series";
 
 type Props = {
   serie: Serie;
@@ -18,6 +19,10 @@ export default function Large({ serie, genres, ...props }: Props) {
   const isMobile = useIsMobile();
   const rated_by_me = useRatedByMe(serie.id);
   const [serieRating, setSerieRating] = useState(serie.rating);
+
+  useEffect(() => {
+    markSearch(serie.id);
+  }, [serie.id]);
 
   return (
     <div>

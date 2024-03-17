@@ -25,3 +25,7 @@ export const getRate = (slug: string): Promise<string | null> => {
     .then((r) => r.data)
     .catch(() => null);
 };
+
+export const markSearch = (id: string) => {
+  return axiosInstance.post(`/series/mark-search/${id}`)
+}
