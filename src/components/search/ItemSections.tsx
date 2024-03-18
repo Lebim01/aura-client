@@ -1,6 +1,7 @@
 import Link from "next/link";
+import { FC } from "react";
 
-const ItemSections = ({ props }: any) => {
+const ItemSections: FC<any> = (props) => {
   return (
     <Link href={"/detail/[slug]"} as={`/detail/${props.slug}`}>
       <div className="flex flex-col gap-y-[8px] min-w-[146px] md:min-w-[166px] md:max-w-[166px] justify-center items-center">

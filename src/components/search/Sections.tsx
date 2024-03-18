@@ -2,11 +2,11 @@ import { useState, useEffect } from "react";
 import MostComponent from "../dashboard/components/Sections/MostComponent";
 import classNames from "classnames";
 import useFilters from "@/store/useFilters";
-import useIsMobile from "@/hooks/useIsMobile";
 import { classNamesCustom } from "@/utils/classes";
 import ItemSections from "./ItemSections";
 import axiosInstance from "@/services";
 import { objectToURL } from "@/utils/objectToURL";
+import History from "./History";
 import { Serie } from "@/types/series";
 interface Props {
   text: string;
@@ -16,6 +16,19 @@ const Sections = ({ text, endpoint }: Props) => {
   const [series, setSeries] = useState<any>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const { filters, init } = useFilters();
+
+  const [history, setHistory] = useState<Serie[]>([]);
+
+  useEffect(() => {
+    axiosInstance
+      .get("/series/searched")
+      .then((r) => {
+        setHistory(r.data);
+      })
+      .catch((err) => {
+        setHistory([]);
+      });
+  }, []);
 
   const getSeries = async () => {
     try {
@@ -42,7 +55,9 @@ const Sections = ({ text, endpoint }: Props) => {
 
   return (
     <>
-      {series.length === 0 && !loading ? (
+      {!filters.q && <History history={history} />}
+
+      {series.length === 0 && !loading && history.length == 0 ? (
         <div className="flex flex-col justify-start items-start w-full">
           <MostComponent
             text={text}
@@ -50,7 +65,7 @@ const Sections = ({ text, endpoint }: Props) => {
           />
           <span className="p-[16px]"> No hay series para mostrar.</span>
         </div>
-      ) : (
+      ) : series.length > 0 ? (
         <div className="grid auto-flow-dense grid-layout w-auto md:max-w-[1056px] md:max-h-screen hidescroll overflow-y-auto md:pb-[99px] gap-y-[16px]">
           {!loading && (
             <MostComponent
@@ -86,11 +101,11 @@ const Sections = ({ text, endpoint }: Props) => {
 
             {!loading &&
               series.map((item: any, index: number) => {
-                return <ItemSections key={index} props={item} />;
+                return <ItemSections key={index} {...item} />;
               })}
           </div>
         </div>
-      )}
+      ) : null}
     </>
   );
 };
