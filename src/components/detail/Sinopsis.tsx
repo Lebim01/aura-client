@@ -1,6 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import { Actor, Serie, Platform, Crew } from "@/types/series";
+import Link from "next/link";
 
 type Props = {
   serie: Serie;
@@ -63,14 +64,15 @@ export default function Sinopsis({ serie, actors, platforms, crew }: Props) {
             <div className="flex gap-x-[12px] flex-wrap gap-y-[12px]">
               {platforms?.map((item, index: number) => {
                 return (
-                  <Image
-                    key={index}
-                    width={48}
-                    height={48}
-                    style={{ width: "48px", height: "48px" }}
-                    src={item?.logo_url || ""}
-                    alt=""
-                  />
+                  <Link href={item.link} key={index}>
+                    <Image
+                      width={48}
+                      height={48}
+                      style={{ width: "48px", height: "48px" }}
+                      src={item?.logo_url || ""}
+                      alt=""
+                    />
+                  </Link>
                 );
               })}
             </div>

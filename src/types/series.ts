@@ -22,6 +22,7 @@ export type Platform = {
   id: string;
   name: string;
   logo_url: string;
+  link: string;
 };
 
 export type Actor = {
