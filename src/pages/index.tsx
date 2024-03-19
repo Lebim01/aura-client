@@ -1,38 +1,90 @@
-import Convocatoria from "@/components/index/Convocatoria";
+"use client";
+import Footer from "@/components/common/Footer";
+import DesktopLayout from "@/components/common/DesktopLayout";
+import VideoCaroussel from "@/components/dashboard/components/Sections/VideoCaroussel";
+import useIsMobile from "@/hooks/useIsMobile";
+import AuthProvider from "@/components/common/ProtectAuth";
+import { sections } from "@/utils/sections";
 import { GetServerSideProps } from "next";
+import { VideoDashboardResponse, getVideosSection } from "@/services/dashboard";
+import Link from "next/link";
+import Image from "next/image";
 
-const Video = () => {
-  return (
-    <div className="flex justify-center items-center fixed inset-0 z-0 overflow-hidden ">
-      <video
-        loop
-        autoPlay
-        playsInline
-        controls
-        className="object-cover md:min-w-[300px] md:max-h-[50vh] md:min-h-[50vh] cursor-pointer rounded-md h-full"
-        preload="metadata"
-      >
-        <source
-          src={
-            "https://pub-bf9da7896edf4ee98e6d6dd8e72340c7.r2.dev/videos%2Fproximamente.mp4#t=3"
-          }
-          type="video/mp4"
-        />
-        Tu navegador no soporta vídeos HTML5.
-      </video>
-    </div>
-  );
-};
+import CategoryFilters from "@/components/dashboard/components/filters/CategoryFilters";
+import SearchInput from "@/components/dashboard/components/filters/SearchInput";
 
 type Props = {
+  sections: Section[];
   isMobile: boolean;
 };
 
-export default function Home({ isMobile }: Props) {
-  return process.env.NEXT_PUBLIC_REDIRECT ? (
-    <Video />
-  ) : (
-    <Convocatoria isMobile={isMobile} />
+type Section = {
+  name: string;
+  slug: string;
+  orientation: "vertical" | "horizontal";
+  videos: VideoDashboardResponse[];
+};
+
+export default function Dashboard({ sections, isMobile }: Props) {
+  return (
+    <AuthProvider>
+      <DesktopLayout isMobile={isMobile}>
+        {isMobile && (
+          <div className="flex flex-col space-y-[16px]">
+            <SearchInput />
+            <CategoryFilters />
+          </div>
+        )}
+        <div className="flex flex-col gap-y-[16px] overflow-y-auto md:h-screen pb-[99px] relative hidescroll md:max-w-[1056px] pt-[32px] md:pt-0">
+          {sections
+            .filter((r) => r.orientation == "vertical")
+            .filter((r) => r.videos.length > 0)
+            .map(({ name, slug, videos }, index) => (
+              <VideoCaroussel
+                key={slug}
+                videos={videos.slice(0, isMobile ? 2 : 3).map((v) => v.hsl)}
+                title={name}
+                sectionId={slug}
+              />
+            ))}
+
+          {sections
+            .filter((r) => r.orientation == "horizontal")
+            .filter((r) => r.videos.length > 0)
+            .map(({ name, slug, videos }, index) => (
+              <div
+                className="flex flex-col gap-y-[8px] relative p-4"
+                key={index}
+              >
+                <div className="flex justify-between">
+                  <label className="text-[16px] font-[600] leading-[150%]">
+                    {name}
+                  </label>
+                  <Link
+                    href={"/sections/" + slug}
+                    className="flex gap-x-[4px] items-center hover:underline"
+                  >
+                    <span className="text-[12px] leading-[150%] ">
+                      Ver todo
+                    </span>
+
+                    <Image
+                      src={"/icons/arrow-right.svg"}
+                      alt=""
+                      width={16}
+                      height={16}
+                    />
+                  </Link>
+                </div>
+                <video controls preload="metadata" className="aspect-video">
+                  <source src={`${videos[0].url}#t=0.1`} type="video/mp4" />
+                </video>
+              </div>
+            ))}
+        </div>
+      </DesktopLayout>
+      <Footer />
+    </AuthProvider>
   );
 }
 
@@ -44,5 +96,15 @@ export const getServerSideProps = (async (context) => {
     )
   );
 
-  return { props: { isMobile } };
+  const sections_with_videos = [];
+  for (const sec of sections) {
+    sections_with_videos.push({
+      name: sec.name,
+      slug: sec.slug,
+      orientation: sec.orientation as "vertical" | "horizontal",
+      videos: await getVideosSection(sec.slug),
+    });
+  }
+
+  return { props: { sections: sections_with_videos, isMobile } };
 }) satisfies GetServerSideProps<Props>;

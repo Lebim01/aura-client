@@ -39,7 +39,7 @@ const DesktopNavigationButtons = () => {
       </div>
       <div>
         <Link
-          href="/"
+          href="/convocatoria"
           className="text-xs text-neutral-300 underline"
         >
           Convocatoria
