@@ -10,6 +10,11 @@ export type Serie = {
   trailer?: string;
   rating: number;
   rated_by_me: number;
+  created_at: {
+    year: number;
+    month: number;
+    day: number;
+  }
 };
 
 export type Genre = {

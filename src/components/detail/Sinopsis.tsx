@@ -13,6 +13,17 @@ type Props = {
 export default function Sinopsis({ serie, actors, platforms, crew }: Props) {
   return (
     <div className="flex flex-col gap-y-[24px] md:px-[16px]">
+      {serie?.created_at?.year && (
+        <div className="flex flex-col gap-y-[8px]">
+          <span className="text-[12px] md:text-[16px] font-[700]">
+            Año de publicación
+          </span>
+          <span className="text-[12px] md:text-[14px] font-[300] leading-[140%]">
+            {serie?.created_at?.year}
+          </span>
+        </div>
+      )}
+
       <div className="flex flex-col gap-y-[8px]">
         <span className="text-[12px] md:text-[16px] font-[700]">Sinopsis</span>
         <span className="text-[12px] md:text-[14px] font-[300] leading-[140%]">
