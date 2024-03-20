@@ -66,14 +66,15 @@ const VideoCaroussel = ({ videos, title, sectionId }: Props) => {
               "",
               { "scrollnice pb-[8px]": !isMobile },
               { hidescroll: isMobile },
-              {
-                "grid grid-cols-1 md:grid-cols-3 gap-x-[16px] gap-y-[16px] md:px-[16px]":
-                  videos.length < 3,
-              },
-              {
-                "flex gap-x-[16px] items-center px-[16px] overflow-x-auto":
-                  videos.length >= 3,
-              }
+              { "flex space-x-[8px] overflow-x-auto h-[80vh]": isMobile },
+              !isMobile
+                ? {
+                    "grid grid-cols-1 md:grid-cols-3 gap-x-[16px] gap-y-[16px] md:px-[16px]":
+                      videos.length < 3,
+                    "flex gap-x-[16px] items-center px-[16px] overflow-x-auto":
+                      videos.length >= 3,
+                  }
+                : {}
             )}
           >
             {videos.map((video, i) => (
