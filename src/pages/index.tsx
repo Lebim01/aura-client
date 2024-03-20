@@ -12,6 +12,8 @@ import Image from "next/image";
 
 import CategoryFilters from "@/components/dashboard/components/filters/CategoryFilters";
 import SearchInput from "@/components/dashboard/components/filters/SearchInput";
+import HLSPlayer from "@/components/common/HLSPlayer";
+import { classNamesCustom } from "@/utils/classes";
 
 type Props = {
   sections: Section[];
@@ -76,9 +78,19 @@ export default function Dashboard({ sections, isMobile }: Props) {
                     />
                   </Link>
                 </div>
-                <video controls preload="metadata" className="aspect-video">
-                  <source src={`${videos[0].url}#t=0.1`} type="video/mp4" />
-                </video>
+                <HLSPlayer
+                  loop
+                  playsInline
+                  webkit-playsinline="true"
+                  controls
+                  muted
+                  className={classNamesCustom(
+                    "cursor-pointer object-contain",
+                    "aspect-video w-auto h-auto"
+                  )}
+                  manifest={`https://customer-fuwnvhure6hzod9h.cloudflarestream.com/${videos[0].hsl}/manifest/video.m3u8`}
+                  poster={`https://customer-fuwnvhure6hzod9h.cloudflarestream.com/${videos[0].hsl}/thumbnails/thumbnail.jpg?time=2s&height=600`}
+                />
               </div>
             ))}
         </div>
