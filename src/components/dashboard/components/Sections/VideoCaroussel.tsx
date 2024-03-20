@@ -66,7 +66,7 @@ const VideoCaroussel = ({ videos, title, sectionId }: Props) => {
               "",
               { "scrollnice pb-[8px]": !isMobile },
               { hidescroll: isMobile },
-              { "flex space-x-[8px] overflow-x-auto h-[80vh]": isMobile },
+              { "flex space-x-[8px] overflow-x-auto": isMobile },
               !isMobile
                 ? {
                     "grid grid-cols-1 md:grid-cols-3 gap-x-[16px] gap-y-[16px] md:px-[16px]":
