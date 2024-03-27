@@ -21,6 +21,11 @@ export const sections: Section[] = [
     orientation: "vertical",
   },
   {
+    slug: "aura-tv",
+    name: "Aura TV",
+    orientation: "vertical",
+  },
+  {
     slug: "mi-vida-en-series",
     name: "Mi Vida en Series",
     orientation: "horizontal",
