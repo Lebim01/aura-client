@@ -6,6 +6,11 @@ type Section = {
 
 export const sections: Section[] = [
   {
+    slug: "aura-tv",
+    name: "Aura TV",
+    orientation: "vertical",
+  },
+  {
     slug: "mi-aura",
     name: "Mi Aura",
     orientation: "vertical",
