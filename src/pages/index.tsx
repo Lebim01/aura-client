@@ -2,7 +2,6 @@
 import Footer from "@/components/common/Footer";
 import DesktopLayout from "@/components/common/DesktopLayout";
 import VideoCaroussel from "@/components/dashboard/components/Sections/VideoCaroussel";
-import useIsMobile from "@/hooks/useIsMobile";
 import AuthProvider from "@/components/common/ProtectAuth";
 import { sections } from "@/utils/sections";
 import { GetServerSideProps } from "next";
