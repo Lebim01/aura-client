@@ -32,7 +32,7 @@ export const navigationOptions = [
     hide: false,
   },
   {
-    url: "/convocatoria",
+    url: "/premios",
     title: "Premios Aura",
     icon: "/icons/paper.svg",
     iconactive: "/icons/paper-active.svg",
