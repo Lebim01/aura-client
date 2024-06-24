@@ -31,6 +31,15 @@ export const navigationOptions = [
     size: 14,
     hide: false,
   },
+  {
+    url: "/convocatoria",
+    title: "Premios Aura",
+    icon: "/icons/paper.svg",
+    iconactive: "/icons/paper-active.svg",
+    size: 14,
+    hide: false,
+    hideMobile: true
+  },
 ];
 const Footer = () => {
   const router = useRouter();

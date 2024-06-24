@@ -37,14 +37,14 @@ const DesktopNavigationButtons = () => {
             </Link>
           ))}
       </div>
-      <div>
+      {/* <div>
         <Link
           href="/convocatoria"
           className="text-xs text-neutral-300 underline"
         >
           Convocatoria
         </Link>
-      </div>
+      </div> */}
       <div>
         <Link
           href="/terms-conditions"
