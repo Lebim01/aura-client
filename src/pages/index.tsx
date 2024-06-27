@@ -47,11 +47,11 @@ export default function Dashboard({ sections, isMobile }: Props) {
                   width={0}
                   height={62}
                   sizes="100vw"
-                  style={{ width: "100%", height: 82 }}
+                  style={{ width: "100%", height: 102 }}
                   alt=""
                   className={classNamesCustom("select-none object-cover")}
                 />
-                <div className="absolute top-0 left-0 h-full w-full" style={{ background: "linear-gradient(90deg, rgba(56,56,56,0.9) 0%, rgba(32,26,26,0.8) 100%)" }}></div>
+                <div className="absolute top-0 left-0 h-full w-full" style={{ background: "linear-gradient(90deg, rgba(56,56,56,0.9) 0%, rgba(32,26,26,0.8) 0%)" }}></div>
                 <label className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-sm hover:cursor-pointer">
                   Premios Aura
                 </label>
