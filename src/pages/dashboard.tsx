@@ -14,6 +14,7 @@ import CategoryFilters from "@/components/dashboard/components/filters/CategoryF
 import SearchInput from "@/components/dashboard/components/filters/SearchInput";
 import HLSPlayer from "@/components/common/HLSPlayer";
 import { classNamesCustom } from "@/utils/classes";
+import CategoryItem from "@/components/dashboard/components/filters/components/CategoryItem";
 
 type Props = {
   sections: Section[];
@@ -34,6 +35,15 @@ export default function Dashboard({ sections, isMobile }: Props) {
         {isMobile && (
           <div className="flex flex-col space-y-[16px]">
             <SearchInput />
+            <CategoryItem
+              label="Premios Aura"
+              value="premiosaura"
+              image="/premio.jpg"
+              bg={{
+                background:
+                  "linear-gradient(90deg, rgba(56,56,56,0.9) 0%, rgba(32,26,26,0.8) 100%)",
+              }}
+            />
             <CategoryFilters />
           </div>
         )}

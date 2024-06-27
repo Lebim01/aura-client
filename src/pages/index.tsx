@@ -13,6 +13,7 @@ import CategoryFilters from "@/components/dashboard/components/filters/CategoryF
 import SearchInput from "@/components/dashboard/components/filters/SearchInput";
 import HLSPlayer from "@/components/common/HLSPlayer";
 import { classNamesCustom } from "@/utils/classes";
+import CategoryItem from "@/components/dashboard/components/filters/components/CategoryItem";
 
 type Props = {
   sections: Section[];
@@ -33,6 +34,29 @@ export default function Dashboard({ sections, isMobile }: Props) {
         {isMobile && (
           <div className="flex flex-col space-y-[16px]">
             <SearchInput />
+            <Link href="/premios">
+              <div
+                className={classNamesCustom(
+                  "rounded-[6px] border border-transparent md:hover:scale-105 transition-transform duration-200 ease-in-out cursor-pointer relative overflow-hidden select-none hover:cursor-pointer",
+
+                )}
+
+              >
+                <Image
+                  src="/premio.jpg"
+                  width={0}
+                  height={62}
+                  sizes="100vw"
+                  style={{ width: "100%", height: 82 }}
+                  alt=""
+                  className={classNamesCustom("select-none object-cover")}
+                />
+                <div className="absolute top-0 left-0 h-full w-full" style={{ background: "linear-gradient(90deg, rgba(56,56,56,0.9) 0%, rgba(32,26,26,0.8) 100%)" }}></div>
+                <label className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-sm hover:cursor-pointer">
+                  Premios Aura
+                </label>
+              </div>
+            </Link>
             <CategoryFilters />
           </div>
         )}
