@@ -5,7 +5,6 @@ import { useSwipeable } from "react-swipeable";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
-import { sections } from "@/utils/sections";
 import { useVideos } from "@/context/VideosContext";
 import { Video } from "@/types/video";
 import VideoController from "@/components/discovery/VideoController";
@@ -30,7 +29,7 @@ const HeaderMobile = () => {
   );
 };
 
-const VerticalSliderVideos: FC = (props) => {
+const VerticalSliderVideos: FC = () => {
   const { position, setSwipeIndex } = useSwipeVideos();
   const { videos, fetchMore, markWatched, hasMore } = useVideos();
   const { status } = useSession();
@@ -81,19 +80,13 @@ const VerticalSliderVideos: FC = (props) => {
   return (
     <>
       {/*<HeaderMobile />*/}
-      <div
-        {...handlers}
-        className={"overflow-hidden relative w-full z-10"}
-      >
+      <div {...handlers} className={"overflow-hidden relative w-full z-10"}>
         {videos.map((video: Video, i: number) => (
           <Fragment key={video.id}>
             <VideoController
               Component={VideoMobile}
               videoUrl={video.hsl}
-              videoOrientation={
-                sections.find((r) => r.slug == video.section)?.orientation ??
-                "vertical"
-              }
+              videoOrientation={video.orientation ?? "vertical"}
               videoIndex={i}
               layout="mobile"
               likes={video.likes}

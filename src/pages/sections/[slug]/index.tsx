@@ -7,16 +7,19 @@ import VideosContextProvider from "@/context/VideosContext";
 import { GetServerSideProps } from "next";
 import { FC } from "react";
 import { useRouter } from "next/router";
+import { getSection } from "@/services/sections";
+import { Section } from "@/utils/sections";
 
 type Props = {
   isMobile: boolean;
+  section: Section;
 };
 
-const ImageViewer: FC<Props> = ({ isMobile }) => {
+const SectionSlug: FC<Props> = ({ isMobile, section }) => {
   const router = useRouter();
   const slug = router.query?.slug || "";
   const { width } = useWindowSize();
-  console.log("el slug es", slug);
+
   return (
     <AuthProvider>
       <DesktopLayout isMobile={isMobile}>
@@ -42,7 +45,7 @@ const ImageViewer: FC<Props> = ({ isMobile }) => {
   );
 };
 
-export default ImageViewer;
+export default SectionSlug;
 
 export const getServerSideProps = (async (context) => {
   const userAgent = context.req.headers["user-agent"] as string;
@@ -52,5 +55,7 @@ export const getServerSideProps = (async (context) => {
     )
   );
 
-  return { props: { isMobile } };
+  const section = await getSection(context.query?.slug as string);
+
+  return { props: { isMobile, section } };
 }) satisfies GetServerSideProps<Props>;

@@ -10,7 +10,7 @@ import { FC } from "react";
 
 type Props = {
   isMobile: boolean;
-}
+};
 
 const ImageViewer: FC<Props> = ({ isMobile }) => {
   const { width } = useWindowSize();

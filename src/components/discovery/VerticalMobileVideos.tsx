@@ -7,7 +7,6 @@ import Image from "next/image";
 import VideoController from "./VideoController";
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
-import { sections } from "@/utils/sections";
 import { useVideos } from "@/context/VideosContext";
 import { Video } from "@/types/video";
 
@@ -29,7 +28,7 @@ const HeaderMobile = () => {
   );
 };
 
-const VerticalSliderVideos: FC = (props) => {
+const VerticalSliderVideos: FC = () => {
   const { position, setSwipeIndex } = useSwipeVideos();
   const { videos, fetchMore, markWatched, hasMore } = useVideos();
   const { status } = useSession();
@@ -89,10 +88,7 @@ const VerticalSliderVideos: FC = (props) => {
             <VideoController
               Component={VideoMobile}
               videoUrl={video.hsl}
-              videoOrientation={
-                sections.find((r) => r.slug == video.section)?.orientation ??
-                "vertical"
-              }
+              videoOrientation={video.orientation ?? "vertical"}
               videoIndex={i}
               layout="mobile"
               likes={video.likes}

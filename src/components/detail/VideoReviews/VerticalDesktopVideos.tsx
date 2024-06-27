@@ -3,7 +3,6 @@ import { FC, Fragment, useEffect } from "react";
 import useSwipeVideos from "@/store/useSwipeVideos";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
-import { sections } from "@/utils/sections";
 import { useVideos } from "@/context/VideosContext";
 import LoadingDots from "@/components/common/LoadingDots";
 import VideoController from "@/components/discovery/VideoController";
@@ -50,10 +49,7 @@ const VerticalDesktopVideos: FC = () => {
         <Fragment key={video.id}>
           <VideoController
             videoUrl={video.hsl}
-            videoOrientation={
-              sections.find((r) => r.slug == video.section)?.orientation ??
-              "vertical"
-            }
+            videoOrientation={video.orientation ?? "vertical"}
             videoIndex={i}
             Component={VideoDesktop}
             layout="desktop"
