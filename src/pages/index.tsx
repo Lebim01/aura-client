@@ -67,7 +67,7 @@ export default function Dashboard({ sections, isMobile }: Props) {
             .map(({ name, slug, videos }, index) => (
               <VideoCaroussel
                 key={slug}
-                videos={videos.slice(0, isMobile ? 2 : 3).map((v) => v.hsl)}
+                videos={videos.slice(0, isMobile ? 3 : 3).map((v) => v.hsl)}
                 title={name}
                 sectionId={slug}
               />
