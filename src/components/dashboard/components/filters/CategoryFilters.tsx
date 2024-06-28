@@ -129,11 +129,11 @@ const platforms = [
     name: "disney+",
     logo_url: "/icons/disney+.png",
   },
-  {
+  /*{
     id: "f3ae6bb1-6142-49ee-bd00-0bc82b90929b",
     name: "star+",
     logo_url: "/icons/starplus.jpg",
-  },
+  },*/
   {
     id: "2db6b8b5-4d5e-4b41-88c2-46aa67f16aa1",
     name: "vix",
