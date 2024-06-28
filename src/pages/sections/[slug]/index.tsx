@@ -7,50 +7,55 @@ import VideosContextProvider from "@/context/VideosContext";
 import { GetServerSideProps } from "next";
 import { FC } from "react";
 import { useRouter } from "next/router";
+import { getSection } from "@/services/sections";
+import { Section } from "@/utils/sections";
 
 type Props = {
-    isMobile: boolean;
+  isMobile: boolean;
+  section: Section;
 };
 
-const ImageViewer: FC<Props> = ({ isMobile }) => {
-    const router = useRouter()
-    const slug = router.query?.slug || ""
-    const { width } = useWindowSize();
-    console.log("el slug es", slug)
-    return (
-        <AuthProvider>
-            <DesktopLayout isMobile={isMobile}>
-                <VideosContextProvider url={"/dashboard/section/" + slug}>
-                    <div
-                        id="discovery-container"
-                        className="fixed md:relative w-full max-h-screen md:overflow-y-auto hidescroll"
-                    >
-                        {(width || 0) < 768 && (
-                            <div className="md:hidden">
-                                <VerticalMobileVideos />
-                            </div>
-                        )}
-                        {(width || 0) >= 768 && (
-                            <div className="hidden md:block">
-                                <VerticalDesktopVideos />
-                            </div>
-                        )}
-                    </div>
-                </VideosContextProvider>
-            </DesktopLayout>
-        </AuthProvider>
-    );
+const SectionSlug: FC<Props> = ({ isMobile, section }) => {
+  const router = useRouter();
+  const slug = router.query?.slug || "";
+  const { width } = useWindowSize();
+
+  return (
+    <AuthProvider>
+      <DesktopLayout isMobile={isMobile}>
+        <VideosContextProvider url={"/dashboard/section/" + slug}>
+          <div
+            id="discovery-container"
+            className="fixed md:relative w-full max-h-screen md:overflow-y-auto hidescroll"
+          >
+            {(width || 0) < 768 && (
+              <div className="md:hidden">
+                <VerticalMobileVideos />
+              </div>
+            )}
+            {(width || 0) >= 768 && (
+              <div className="hidden md:block">
+                <VerticalDesktopVideos />
+              </div>
+            )}
+          </div>
+        </VideosContextProvider>
+      </DesktopLayout>
+    </AuthProvider>
+  );
 };
 
-export default ImageViewer;
+export default SectionSlug;
 
 export const getServerSideProps = (async (context) => {
-    const userAgent = context.req.headers["user-agent"] as string;
-    const isMobile = Boolean(
-        userAgent.match(
-            /Android|BlackBerry|iPhone|iPad|iPod|Opera Mini|IEMobile|WPDesktop/i
-        )
-    );
+  const userAgent = context.req.headers["user-agent"] as string;
+  const isMobile = Boolean(
+    userAgent.match(
+      /Android|BlackBerry|iPhone|iPad|iPod|Opera Mini|IEMobile|WPDesktop/i
+    )
+  );
 
-    return { props: { isMobile } };
+  const section = await getSection(context.query?.slug as string);
+
+  return { props: { isMobile, section } };
 }) satisfies GetServerSideProps<Props>;

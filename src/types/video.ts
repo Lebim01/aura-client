@@ -9,4 +9,5 @@ export interface Video {
   likes: number;
   comments: number;
   section: string;
+  orientation?: "vertical" | "horizontal";
 }

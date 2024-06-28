@@ -2,9 +2,7 @@
 import Footer from "@/components/common/Footer";
 import DesktopLayout from "@/components/common/DesktopLayout";
 import VideoCaroussel from "@/components/dashboard/components/Sections/VideoCaroussel";
-import useIsMobile from "@/hooks/useIsMobile";
 import AuthProvider from "@/components/common/ProtectAuth";
-import { sections } from "@/utils/sections";
 import { GetServerSideProps } from "next";
 import { VideoDashboardResponse, getVideosSection } from "@/services/dashboard";
 import Link from "next/link";
@@ -15,6 +13,7 @@ import SearchInput from "@/components/dashboard/components/filters/SearchInput";
 import HLSPlayer from "@/components/common/HLSPlayer";
 import { classNamesCustom } from "@/utils/classes";
 import CategoryItem from "@/components/dashboard/components/filters/components/CategoryItem";
+import { getSections } from "@/services/sections";
 
 type Props = {
   sections: Section[];
@@ -119,6 +118,7 @@ export const getServerSideProps = (async (context) => {
     )
   );
 
+  const sections = await getSections();
   const sections_with_videos = [];
   for (const sec of sections) {
     sections_with_videos.push({
