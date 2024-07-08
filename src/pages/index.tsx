@@ -40,7 +40,7 @@ export default function Dashboard({ sections, isMobile }: Props) {
                 )}
               >
                 <Image
-                  src="/premio.jpg"
+                  src="/bgganadores.jpeg"
                   width={0}
                   height={62}
                   sizes="100vw"
@@ -56,7 +56,7 @@ export default function Dashboard({ sections, isMobile }: Props) {
                   }}
                 ></div>
                 <label className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-sm hover:cursor-pointer">
-                  Premios Aura
+                  Premios Auras
                 </label>
               </div>
             </Link>

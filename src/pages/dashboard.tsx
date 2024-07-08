@@ -37,7 +37,7 @@ export default function Dashboard({ sections, isMobile }: Props) {
             <CategoryItem
               label="Premios Aura"
               value="premiosaura"
-              image="/premio.jpg"
+              image="/bgganadores.jpeg"
               bg={{
                 background:
                   "linear-gradient(90deg, rgba(56,56,56,0.9) 0%, rgba(32,26,26,0.8) 100%)",

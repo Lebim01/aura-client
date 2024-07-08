@@ -9,17 +9,15 @@ const ConoceTuAura = () => {
     return (
         <AuthProvider>
             <DesktopLayout isMobile={isMobile}>
-                <iframe
-                    className="overflow-hidden"
-                    width="640px"
-                    height="100%"
-                    src="https://forms.office.com/Pages/ResponsePage.aspx?id=l2uNDV3gDEa2tRm30CD0esf0BTfcyMJCm01Oia24wEZUNlRIMVlPTlMwRkEzODRPQU05WlowU0ZSNC4u&embed=true"
-                    style={{ border: "none", maxWidth: "100%", maxHeight: "100%" }}
-                    allowFullScreen
-                ></iframe>
+                <iframe 
+                className="md:w-[940px] w-[600px]"
+               
+                height="800px" 
+                src="https://forms.office.com/Pages/ResponsePage.aspx?id=l2uNDV3gDEa2tRm30CD0esf0BTfcyMJCm01Oia24wEZURURQNlJQQlFEOEkzNThaSVlUTEtINlBQVS4u&embed=true" 
+                > </iframe>
             </DesktopLayout>
             <Footer />
-        </AuthProvider>
+        </AuthProvider >
     )
 }
 

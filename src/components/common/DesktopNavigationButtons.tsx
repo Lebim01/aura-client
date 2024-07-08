@@ -63,7 +63,7 @@ const DesktopNavigationButtons = () => {
 
         >
           <Image
-            src="/premio.jpg"
+            src="/bgganadores.jpeg"
             width={0}
             height={62}
             sizes="100vw"
