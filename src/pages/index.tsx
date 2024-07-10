@@ -33,7 +33,7 @@ export default function Dashboard({ sections, isMobile }: Props) {
         {isMobile && (
           <div className="flex flex-col space-y-[16px]">
             <SearchInput />
-            <Link href="/premios">
+            <Link href="/premios" legacyBehavior >
               <div
                 className={
                   "rounded-[6px] border border-transparent md:hover:scale-105 transition-transform duration-200 ease-in-out cursor-pointer relative overflow-hidden select-none hover:cursor-pointer"
@@ -44,18 +44,12 @@ export default function Dashboard({ sections, isMobile }: Props) {
                   width={0}
                   height={102}
                   sizes="100vw"
-                  style={{ width: "100%", height: "20vh" }}
+                  style={{ width: "100%", height: "20vh", minHeight: "20vh" }}
                   alt=""
-                  className={"object-cover"}
+                  className={"object-cover contrast-125"}
                 />
-                <div
-                  className="absolute top-0 left-0 h-full w-full"
-                  style={{
-                    background:
-                      "linear-gradient(90deg, rgba(56,56,56,0.9) 0%, rgba(32,26,26,0.8) 0%)",
-                  }}
-                ></div>
-                <label className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-sm hover:cursor-pointer">
+                <div className="absolute top-0 left-0 h-full w-full bg-gray-900/60" />
+                <label className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 hover:cursor-pointer text-xl font-bold drop-shadow-md text-shadow-sm shadow-gray-600">
                   Premios Auras
                 </label>
               </div>
