@@ -33,13 +33,13 @@ export default function Dashboard({ sections, isMobile }: Props) {
         {isMobile && (
           <div className="flex flex-col space-y-[16px]">
             <SearchInput />
-            <a href="/premios">
+            <Link href="/premios">
               <div
                 className={classNamesCustom(
                   "rounded-[6px] border border-transparent md:hover:scale-105 transition-transform duration-200 ease-in-out cursor-pointer relative overflow-hidden select-none hover:cursor-pointer"
                 )}
               >
-                <Image
+                <img
                   src="/bgganadores.jpeg"
                   width={0}
                   height={62}
@@ -59,7 +59,7 @@ export default function Dashboard({ sections, isMobile }: Props) {
                   Premios Auras
                 </label>
               </div>
-            </a>
+            </Link>
             <CategoryFilters />
           </div>
         )}
