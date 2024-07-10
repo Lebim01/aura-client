@@ -35,18 +35,18 @@ export default function Dashboard({ sections, isMobile }: Props) {
             <SearchInput />
             <Link href="/premios">
               <div
-                className={classNamesCustom(
+                className={
                   "rounded-[6px] border border-transparent md:hover:scale-105 transition-transform duration-200 ease-in-out cursor-pointer relative overflow-hidden select-none hover:cursor-pointer"
-                )}
+                }
               >
                 <img
                   src="/bgganadores.jpeg"
                   width={0}
-                  height={62}
+                  height={102}
                   sizes="100vw"
-                  style={{ width: "100%", height: 102 }}
+                  style={{ width: "100%", height: "20vh" }}
                   alt=""
-                  className={classNamesCustom("select-none object-cover")}
+                  className={"object-cover"}
                 />
                 <div
                   className="absolute top-0 left-0 h-full w-full"
