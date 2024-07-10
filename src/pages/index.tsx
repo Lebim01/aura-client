@@ -1,3 +1,5 @@
+/* eslint-disable @next/next/no-img-element */
+/* eslint-disable @next/next/no-html-link-for-pages */
 "use client";
 import Footer from "@/components/common/Footer";
 import DesktopLayout from "@/components/common/DesktopLayout";
@@ -33,10 +35,10 @@ export default function Dashboard({ sections, isMobile }: Props) {
         {isMobile && (
           <div className="flex flex-col space-y-[16px]">
             <SearchInput />
-            <Link href="/premios" legacyBehavior >
+            <a href="/premios">
               <div
                 className={
-                  "rounded-[6px] border border-transparent md:hover:scale-105 transition-transform duration-200 ease-in-out cursor-pointer relative overflow-hidden select-none hover:cursor-pointer"
+                  "rounded-[6px] border border-transparent md:hover:scale-105 transition-transform duration-200 ease-in-out relative overflow-hidden hover:cursor-pointer"
                 }
               >
                 <img
@@ -44,7 +46,7 @@ export default function Dashboard({ sections, isMobile }: Props) {
                   width={0}
                   height={102}
                   sizes="100vw"
-                  style={{ width: "100%", height: "20vh", minHeight: "20vh" }}
+                  style={{ width: "100%", height: 150 }}
                   alt=""
                   className={"object-cover contrast-125"}
                 />
@@ -53,7 +55,7 @@ export default function Dashboard({ sections, isMobile }: Props) {
                   Premios Auras
                 </label>
               </div>
-            </Link>
+            </a>
             <CategoryFilters />
           </div>
         )}
