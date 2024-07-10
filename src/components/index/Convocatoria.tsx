@@ -222,7 +222,7 @@ const Convocatoria: FC<Props> = ({ isMobile }) => {
 
               <h3 className="block my-[14px] font-bold">Premio Leyenda</h3>
               <p className="block my-[14px]">Reconocimiento otorgado a una personalidad de la industria audiovisual que por su trabajo y trayectoria ha permanecido en la mente y gusto del público siendo piedra angular de las próximas generaciones.</p>
-              <p className="block my-[14px]">Eugenio Derbéz (Ganador)</p>
+              <p className="block my-[14px] font-bold">Eugenio Derbéz (Ganador)</p>
 
               <p className="block my-[14px]">Los premios Aura se llevaron a cabo el 3 de julio en Ciudad de México.</p>
               <p className="block my-[14px]">Los Premios Aura 2024 son presentados por Coca Cola sin azúcar, CTT, Tequila José Cuervo Tradicional, KIA y TotalPlay</p>
