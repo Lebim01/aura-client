@@ -186,8 +186,8 @@ const Convocatoria: FC<Props> = ({ isMobile }) => {
               <ul className="block my-[14px] list-disc pl-6">
                 <li className="flex items-center gap-2">
                   <span className="font-bold">Las Pelotaris 1926</span>
-                  <span className="bg-yellow-400 w-auto px-2 py-1 gap-2 inline-flex rounded-md">Ganadora</span>
-                </li>
+                  <span className="bg-yellow-400 w-auto px-2 py-1 gap-2 inline-flex rounded-md">Ganador</span>
+                </li>z
                 <li>Ojitos de Huevo</li>
                 <li>División Palermo</li>
                 <li>El Encargado</li>
