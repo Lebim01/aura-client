@@ -184,7 +184,10 @@ const Convocatoria: FC<Props> = ({ isMobile }) => {
               <h3 className="block my-[14px] font-bold">Mejor piloto</h3>
               <p className="block my-[14px]">En esta categoría se premia al mejor episodio que da inicio a una serie de drama, comedia o documental, las series nominadas son:</p>
               <ul className="block my-[14px] list-disc pl-6">
-                <li>Las Pelotaris 1926</li>
+                <li className="flex items-center gap-2">
+                  <span className="font-bold">Las Pelotaris 1926</span>
+                  <span className="bg-yellow-400 w-auto px-2 py-1 gap-2 inline-flex rounded-md">Ganador</span>
+                </li>z
                 <li>Ojitos de Huevo</li>
                 <li>División Palermo</li>
                 <li>El Encargado</li>
