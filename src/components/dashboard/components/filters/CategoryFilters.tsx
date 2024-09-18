@@ -167,7 +167,7 @@ const CategoryFilters = () => {
             <span className="font-[600] leading-[150%] text-[14px]">
               ¿Qué quieres ver hoy?
             </span>
-            <small>(Eligé un categoria + una plataforma)</small>
+            <small>(Elige un categoría + una plataforma)</small>
             <div className="w-full flex justify-between">
               <div className="grid grid-cols-3 gap-[8px] w-full">
                 {options.map((item: any, index: number) => {

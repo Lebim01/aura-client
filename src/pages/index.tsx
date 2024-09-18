@@ -52,7 +52,7 @@ export default function Dashboard({ sections, isMobile }: Props) {
                 />
                 <div className="absolute top-0 left-0 h-full w-full bg-gray-900/60" />
                 <label className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 hover:cursor-pointer text-xl font-bold drop-shadow-md text-shadow-sm shadow-gray-600">
-                  Premios Auras
+                  PREMIOS AURA
                 </label>
               </div>
             </a>
